@@ -1,0 +1,70 @@
+
+/home/jabez/Projects/qcsp-aux/yql-platform/convex/_generated/api.js
+  1:1  warning  Unused eslint-disable directive (no problems were reported)
+
+/home/jabez/Projects/qcsp-aux/yql-platform/convex/_generated/dataModel.d.ts
+  1:1  warning  Unused eslint-disable directive (no problems were reported)
+
+/home/jabez/Projects/qcsp-aux/yql-platform/convex/_generated/server.d.ts
+  1:1  warning  Unused eslint-disable directive (no problems were reported)
+
+/home/jabez/Projects/qcsp-aux/yql-platform/convex/_generated/server.js
+  1:1  warning  Unused eslint-disable directive (no problems were reported)
+
+/home/jabez/Projects/qcsp-aux/yql-platform/src/core/pages/AdminFormsPage.tsx
+  20:13  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/home/jabez/Projects/qcsp-aux/yql-platform/src/core/pages/AdminFormsPage.tsx:20:13
+  18 |     useEffect(() => {
+  19 |         if (form) {
+> 20 |             setTitle(form.title);
+     |             ^^^^^^^^ Avoid calling setState() directly within an effect
+  21 |             setDescription(form.description || "");
+  22 |             setFields(form.fields);
+  23 |         } else {  react-hooks/set-state-in-effect
+
+/home/jabez/Projects/qcsp-aux/yql-platform/src/core/pages/GlobalCalendarPage.tsx
+  18:17  error  React Hook "useMemo" is called conditionally. React Hooks must be called in the exact same order in every component render                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   react-hooks/rules-of-hooks
+  18:31  error  Error: Cannot call impure function during render
+
+`Date.now` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+/home/jabez/Projects/qcsp-aux/yql-platform/src/core/pages/GlobalCalendarPage.tsx:18:31
+  16 |     }
+  17 |
+> 18 |     const now = useMemo(() => Date.now(), []);
+     |                               ^^^^^^^^^^ Cannot call impure function
+  19 |
+  20 |     const upcomingEvents = events
+  21 |         .filter((e: any) => e.endTime > now - 24 * 60 * 60 * 1000) // Keep events from the last 24 hours  react-hooks/purity
+
+/home/jabez/Projects/qcsp-aux/yql-platform/src/core/pages/ReviewerEvaluationsPage.tsx
+  33:13  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/home/jabez/Projects/qcsp-aux/yql-platform/src/core/pages/ReviewerEvaluationsPage.tsx:33:13
+  31 |             const mappedScores: Record<string, number> = {};
+  32 |             myEvaluation.scores.forEach(s => mappedScores[s.criterionName] = s.score);
+> 33 |             setScores(mappedScores);
+     |             ^^^^^^^^^ Avoid calling setState() directly within an effect
+  34 |             setFeedback(myEvaluation.feedback || "");
+  35 |         } else {
+  36 |             setScores({});  react-hooks/set-state-in-effect
+
+/home/jabez/Projects/qcsp-aux/yql-platform/src/core/providers/AuthProvider.tsx
+  67:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+✖ 9 problems (4 errors, 5 warnings)
+  0 errors and 4 warnings potentially fixable with the `--fix` option.
+
