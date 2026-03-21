@@ -1,22 +1,23 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuthContext } from "../../providers/AuthProvider";
-import type { Role, StaffSubRole } from "../../providers/AuthProvider";
+import type { Role, SpecialRole } from "../../../../convex/roleHierarchy";
+import { hasMinRole } from "../../../../convex/roleHierarchy";
 import { Loader2 } from "lucide-react";
+import UnauthorizedPage from "../../pages/UnauthorizedPage";
 
 interface RoleGuardProps {
     children: React.ReactNode;
-    allowedRoles?: Role[];
-    allowedSubRoles?: StaffSubRole[];
-    disallowedSubRoles?: StaffSubRole[];
-    fallbackUrl?: string;
+    /** Minimum primary role required (hierarchy-based). */
+    minRole?: Role;
+    allowedSpecialRoles?: SpecialRole[];
+    disallowedSpecialRoles?: SpecialRole[];
 }
 
 export function RoleGuard({
     children,
-    allowedRoles,
-    allowedSubRoles,
-    disallowedSubRoles,
-    fallbackUrl = "/dashboard"
+    minRole,
+    allowedSpecialRoles,
+    disallowedSpecialRoles,
 }: RoleGuardProps) {
     const { user, isLoading, isAuthenticated } = useAuthContext();
     const location = useLocation();
@@ -34,25 +35,27 @@ export function RoleGuard({
     }
 
     if (!user) {
-        // Edge case if user profile failed to load despite being authenticated
         return <Navigate to="/login" replace />;
     }
 
-    // Check generic role
-    if (allowedRoles && !allowedRoles.includes(user.role)) {
-        return <Navigate to={fallbackUrl} replace />;
+    // Check primary role via hierarchy
+    if (minRole && !hasMinRole(user.role as Role, minRole)) {
+        return <UnauthorizedPage />;
     }
 
-    // Check subRole if specified (usually applies to Staff)
-    if (allowedSubRoles) {
-        if (!user.staffSubRole || !allowedSubRoles.includes(user.staffSubRole)) {
-            return <Navigate to={fallbackUrl} replace />;
+    // Check special roles — user must have at least one of the allowed special roles
+    if (allowedSpecialRoles) {
+        const hasAllowed = allowedSpecialRoles.some((r) => user.specialRoles?.includes(r));
+        if (!hasAllowed) {
+            return <UnauthorizedPage />;
         }
     }
 
-    if (disallowedSubRoles && user.staffSubRole) {
-        if (disallowedSubRoles.includes(user.staffSubRole)) {
-            return <Navigate to={fallbackUrl} replace />;
+    // Deny if user holds any of the disallowed special roles
+    if (disallowedSpecialRoles) {
+        const hasDisallowed = disallowedSpecialRoles.some((r) => user.specialRoles?.includes(r));
+        if (hasDisallowed) {
+            return <UnauthorizedPage />;
         }
     }
 

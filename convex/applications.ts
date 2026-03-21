@@ -1,5 +1,8 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
+import { requireAdmin, requireReviewer, requireUser } from "./accessControl";
+import { isStaff as checkStaff } from "./roleHierarchy";
+import type { Role } from "./roleHierarchy";
 
 export const getApplicationsForUser = query({
     args: { userId: v.id("users") },
@@ -54,15 +57,9 @@ export const createApplication = mutation({
         cohortId: v.id("cohorts"),
     },
     handler: async (ctx, args) => {
-        const identity = await ctx.auth.getUserIdentity();
-        if (!identity) throw new Error("Unauthenticated");
+        const user = await requireUser(ctx);
 
-        const user = await ctx.db
-            .query("users")
-            .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
-            .first();
-
-        if (!user || (user.role === "Applicant" && user._id !== args.userId)) {
+        if (!checkStaff(user.role as Role) && user._id !== args.userId) {
             throw new Error("Unauthorized: Cannot create application for another user");
         }
 
@@ -101,17 +98,7 @@ export const updateApplicationStatus = mutation({
         ),
     },
     handler: async (ctx, args) => {
-        const identity = await ctx.auth.getUserIdentity();
-        if (!identity) throw new Error("Unauthenticated");
-
-        const user = await ctx.db
-            .query("users")
-            .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
-            .first();
-
-        if (!user || user.role === "Applicant" || (user.role === "Staff" && user.staffSubRole !== "Reviewer")) {
-            throw new Error("Unauthorized: Only Admins or Reviewers can update status");
-        }
+        await requireReviewer(ctx);
 
         return await ctx.db.patch(args.applicationId, {
             status: args.status,
@@ -125,17 +112,7 @@ export const assignReviewer = mutation({
         reviewerId: v.id("users"),
     },
     handler: async (ctx, args) => {
-        const identity = await ctx.auth.getUserIdentity();
-        if (!identity) throw new Error("Unauthenticated");
-
-        const user = await ctx.db
-            .query("users")
-            .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
-            .first();
-
-        if (!user || user.role !== "Admin") {
-            throw new Error("Unauthorized: Only Admins can assign reviewers");
-        }
+        await requireAdmin(ctx);
 
         return await ctx.db.patch(args.applicationId, {
             assignedReviewerId: args.reviewerId,

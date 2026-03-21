@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
-import { Edit2, Trash2, ArrowUp, ArrowDown, FileText } from "lucide-react";
+import { FileText, ArrowUp, ArrowDown, Edit2, Trash2 } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { Input } from "../components/ui/Input";
+import { PageHeader } from "../components/ui/PageHeader";
 
 export default function AdminOnboardingPage() {
     const modules = useQuery(api.onboarding.getModules);
@@ -78,8 +79,10 @@ export default function AdminOnboardingPage() {
 
     return (
         <div className="max-w-7xl mx-auto space-y-8">
-            <h1 className="text-4xl font-display font-extrabold text-brand-blueDark">Onboarding CMS</h1>
-            <p className="text-brand-darkBlue/70 mt-2 font-medium">Create and manage content modules for new Staff onboarding.</p>
+            <PageHeader
+                title="Onboarding CMS"
+                subtitle="Create and manage content modules for new Staff onboarding."
+            />
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* List of Modules */}
@@ -93,7 +96,7 @@ export default function AdminOnboardingPage() {
                         </div>
                     ) : (
                         modules.map((mod: any, idx: number) => (
-                            <div key={mod._id} className="bg-white border-2 border-brand-blueDark shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] rounded-tl-xl rounded-br-xl p-5 flex flex-col gap-2 transition-all hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(57,103,153,1)]">
+                            <div key={mod._id} className="bg-white border-2 border-brand-blueDark shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] rounded-tl-xl rounded-br-xl p-5 flex flex-col gap-2 transition-all hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(10,22,48,0.3)]">
                                 <div className="flex justify-between items-start gap-4">
                                     <div className="flex-1">
                                         <h3 className="font-display font-extrabold text-lg text-brand-blueDark">{mod.title}</h3>

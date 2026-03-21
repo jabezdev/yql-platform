@@ -11,7 +11,7 @@ import Footer from "../components/landing/Footer";
 
 export default function LandingPage() {
     return (
-        <div className="min-h-screen bg-gray-50 font-sans text-gray-900">
+        <div className="min-h-screen bg-brand-bgLight font-sans text-brand-blueDark">
             <Navbar />
 
             <main>

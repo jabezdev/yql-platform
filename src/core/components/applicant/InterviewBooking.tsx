@@ -2,10 +2,12 @@ import { useState } from "react";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import type { Id } from "../../../../convex/_generated/dataModel";
+import { useToast } from "../../providers/ToastProvider";
 import { format } from "date-fns";
 import { CalendarDays, Clock } from "lucide-react";
 
 export default function InterviewBooking({ applicationId }: { applicationId: Id<"applications"> }) {
+    const { toast } = useToast();
     const slots = useQuery(api.interviews.getAllAvailableSlots) || [];
     const myInterviews = useQuery(api.interviews.getInterviewsForApplication, { applicationId }) || [];
     const bookSlot = useMutation(api.interviews.bookInterviewSlot);
@@ -19,14 +21,11 @@ export default function InterviewBooking({ applicationId }: { applicationId: Id<
         if (!selectedSlotId) return;
         setIsBooking(true);
         try {
-            await bookSlot({
-                applicationId,
-                availabilityId: selectedSlotId
-            });
-            alert("Interview successfully scheduled!");
+            await bookSlot({ applicationId, availabilityId: selectedSlotId });
+            toast("Interview successfully scheduled!", "success");
         } catch (e) {
             console.error(e);
-            alert("Failed to book interview. Please try another slot.");
+            toast("Failed to book interview. Please try another slot.", "error");
         } finally {
             setIsBooking(false);
         }

@@ -2,10 +2,10 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { useConvexAuth, useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
+import type { Role, SpecialRole } from "../../../convex/roleHierarchy";
 
 /* eslint-disable react-refresh/only-export-components */
-export type Role = "Applicant" | "Staff" | "Admin";
-export type StaffSubRole = "Regular" | "Reviewer" | "Alumni";
+export type { Role, SpecialRole };
 
 export interface UserProfile {
     _id: Id<"users">;
@@ -14,11 +14,10 @@ export interface UserProfile {
     email: string;
     name: string;
     role: Role;
-    staffSubRole?: StaffSubRole;
+    specialRoles?: SpecialRole[];
     bio?: string;
-    favoriteShape?: "circle" | "square" | "triangle" | "hexagon";
-    favoriteColor?: string;
-    techStackIcon?: string;
+    profileChip?: string;
+    profileChipUrl?: string | null;
     recommitmentStatus?: "pending" | "accepted" | "declined";
 }
 

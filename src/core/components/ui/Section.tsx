@@ -13,7 +13,7 @@ export function Section({
     className = '',
     variant = 'white',
 }: SectionProps) {
-    const bgStyles = variant === 'gray' ? 'bg-gray-100' : 'bg-white';
+    const bgStyles = variant === 'gray' ? 'bg-brand-bgLight' : 'bg-white';
 
     return (
         <section

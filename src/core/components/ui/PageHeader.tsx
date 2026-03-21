@@ -4,10 +4,15 @@ import { type ReactNode } from 'react';
 // Page Header Component
 // ============================================
 
+type HeaderVariant = 'card' | 'ghost';
+type HeaderSize = 'sm' | 'lg';
+
 interface PageHeaderProps {
     title: string;
     subtitle?: string;
     action?: ReactNode;
+    variant?: HeaderVariant;
+    size?: HeaderSize;
     className?: string;
 }
 
@@ -15,21 +20,34 @@ export function PageHeader({
     title,
     subtitle,
     action,
+    variant = 'card',
+    size = 'lg',
     className = '',
 }: PageHeaderProps) {
+    const isCard = variant === 'card';
+    const isLarge = size === 'lg';
+
+    const containerStyles = isCard
+        ? `bg-white border-2 border-brand-blueDark shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] rounded-tl-2xl rounded-br-2xl p-6 sm:p-8 flex flex-col justify-center ${isLarge ? 'min-h-[160px]' : 'min-h-[110px]'}`
+        : 'py-2';
+
+    const titleStyles = isLarge
+        ? 'text-4xl sm:text-5xl font-extrabold font-display leading-tight text-brand-blueDark'
+        : 'text-2xl md:text-3xl font-display font-extrabold text-brand-blueDark';
+
+    const subStyles = isLarge
+        ? 'text-brand-darkBlue/70 mt-2 font-medium text-lg'
+        : 'text-brand-darkBlue/70 mt-1 font-medium';
+
     return (
-        <div className={`mb-8 ${className}`}>
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div>
-                    <h1 className="text-2xl md:text-3xl font-bold text-brand-blueDark">
-                        {title}
-                    </h1>
-                    {subtitle && (
-                        <p className="text-gray-500 mt-1">{subtitle}</p>
-                    )}
+        <div className={`${containerStyles} ${className} mb-8`}>
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div className="flex flex-col">
+                    <h1 className={titleStyles}>{title}</h1>
+                    {subtitle && <p className={subStyles}>{subtitle}</p>}
                 </div>
                 {action && (
-                    <div className="flex items-center gap-3">
+                    <div className="flex flex-wrap items-center gap-3 shrink-0">
                         {action}
                     </div>
                 )}

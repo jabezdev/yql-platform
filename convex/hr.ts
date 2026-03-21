@@ -1,5 +1,8 @@
 import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
+import { requireAdmin, requireUser } from "./accessControl";
+import { isStaff as checkStaff } from "./roleHierarchy";
+import type { Role } from "./roleHierarchy";
 
 /**
  * Fetch all Staff and Admins for the HR Directory.
@@ -7,17 +10,9 @@ import { v } from "convex/values";
 export const getAllStaff = query({
     args: {},
     handler: async (ctx) => {
-        // Find everyone with role "Staff" or "Admin"
-        const staff = await ctx.db
-            .query("users")
-            .withIndex("by_role", (q) => q.eq("role", "Staff"))
-            .collect();
-        const admins = await ctx.db
-            .query("users")
-            .withIndex("by_role", (q) => q.eq("role", "Admin"))
-            .collect();
-
-        return [...staff, ...admins];
+        // Fetch all users and filter in-memory as Convex doesn't support $ne index yet
+        const users = await ctx.db.query("users").collect();
+        return users.filter(u => u.role !== "Applicant");
     },
 });
 
@@ -27,25 +22,15 @@ export const getAllStaff = query({
 export const updateStaffRole = mutation({
     args: {
         userId: v.id("users"),
-        role: v.optional(v.union(v.literal("Applicant"), v.literal("Staff"), v.literal("Admin"))),
-        staffSubRole: v.optional(v.union(v.literal("Regular"), v.literal("Reviewer"), v.literal("Alumni"))),
+        role: v.optional(v.union(v.literal("Super Admin"), v.literal("T1"), v.literal("T2"), v.literal("T3"), v.literal("T4"), v.literal("T5"), v.literal("Applicant"))),
+        specialRoles: v.optional(v.array(v.union(v.literal("Alumni"), v.literal("Evaluator")))),
     },
     handler: async (ctx, args) => {
-        const identity = await ctx.auth.getUserIdentity();
-        if (!identity) throw new Error("Unauthenticated");
-
-        const admin = await ctx.db
-            .query("users")
-            .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
-            .first();
-
-        if (!admin || admin.role !== "Admin") {
-            throw new Error("Unauthorized");
-        }
+        await requireAdmin(ctx);
 
         const updates: any = {};
         if (args.role !== undefined) updates.role = args.role;
-        if (args.staffSubRole !== undefined) updates.staffSubRole = args.staffSubRole;
+        if (args.specialRoles !== undefined) updates.specialRoles = args.specialRoles;
 
         await ctx.db.patch(args.userId, updates);
     },
@@ -74,21 +59,15 @@ export const respondToRecommitment = mutation({
         response: v.union(v.literal("accepted"), v.literal("declined")),
     },
     handler: async (ctx, args) => {
-        const identity = await ctx.auth.getUserIdentity();
-        if (!identity) throw new Error("Unauthenticated");
-
-        const user = await ctx.db
-            .query("users")
-            .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
-            .first();
-
-        if (!user || user.role !== "Staff") {
-            throw new Error("Unauthorized");
-        }
+        const user = await requireUser(ctx);
+        if (!checkStaff(user.role as Role)) throw new Error("Unauthorized");
 
         const updates: any = { recommitmentStatus: args.response };
         if (args.response === "declined") {
-            updates.staffSubRole = "Alumni";
+            const currentRoles = user.specialRoles || [];
+            if (!currentRoles.includes("Alumni")) {
+                updates.specialRoles = [...currentRoles, "Alumni"];
+            }
         }
 
         await ctx.db.patch(user._id, updates);
@@ -103,26 +82,14 @@ export const respondToRecommitment = mutation({
 export const triggerRecommitmentCycle = mutation({
     args: {},
     handler: async (ctx) => {
-        const identity = await ctx.auth.getUserIdentity();
-        if (!identity) throw new Error("Unauthenticated");
+        await requireAdmin(ctx);
 
-        const admin = await ctx.db
-            .query("users")
-            .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
-            .first();
-
-        if (!admin || admin.role !== "Admin") {
-            throw new Error("Unauthorized");
-        }
-
-        const staff = await ctx.db
-            .query("users")
-            .withIndex("by_role", (q) => q.eq("role", "Staff"))
-            .collect();
+        const users = await ctx.db.query("users").collect();
+        const staff = users.filter(u => u.role !== "Applicant");
 
         for (const s of staff) {
             // Only prompt those who are not already Alumni
-            if (s.staffSubRole !== "Alumni") {
+            if (!s.specialRoles?.includes("Alumni")) {
                 await ctx.db.patch(s._id, { recommitmentStatus: "pending" });
             }
         }
@@ -136,17 +103,7 @@ export const triggerRecommitmentCycle = mutation({
 export const endRecommitmentCycle = mutation({
     args: {},
     handler: async (ctx) => {
-        const identity = await ctx.auth.getUserIdentity();
-        if (!identity) throw new Error("Unauthenticated");
-
-        const admin = await ctx.db
-            .query("users")
-            .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
-            .first();
-
-        if (!admin || admin.role !== "Admin") {
-            throw new Error("Unauthorized");
-        }
+        await requireAdmin(ctx);
 
         const pendingStaff = await ctx.db
             .query("users")
@@ -154,10 +111,12 @@ export const endRecommitmentCycle = mutation({
             .collect();
 
         for (const s of pendingStaff) {
-            await ctx.db.patch(s._id, {
-                recommitmentStatus: "declined", // Or keep pending or cleared, but let's say "declined" implicitly
-                staffSubRole: "Alumni",
-            });
+            const currentRoles = s.specialRoles || [];
+            const updates: any = { recommitmentStatus: "declined" };
+            if (!currentRoles.includes("Alumni")) {
+                updates.specialRoles = [...currentRoles, "Alumni"];
+            }
+            await ctx.db.patch(s._id, updates);
         }
     },
 });

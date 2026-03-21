@@ -1,41 +1,42 @@
 import { query } from "./_generated/server";
 import { v } from "convex/values";
+import { requireAdmin, requireStaff } from "./accessControl";
 
 export const getDashboardStats = query({
     args: {},
     handler: async (ctx) => {
-        const identity = await ctx.auth.getUserIdentity();
-        if (!identity) throw new Error("Unauthenticated");
+        await requireAdmin(ctx);
 
-        const admin = await ctx.db
-            .query("users")
-            .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
-            .first();
-
-        if (!admin || admin.role !== "Admin") {
-            throw new Error("Unauthorized: Only Admins can view stats");
-        }
-
-        // Get total users
         const users = await ctx.db.query("users").collect();
-        const totalUsers = users.length;
+        const staffUsers = users.filter(u => u.role !== "Applicant");
+        const totalStaff = staffUsers.length;
 
-        // Get active cohorts
         const activeCohorts = await ctx.db
             .query("cohorts")
             .withIndex("by_status", (q) => q.eq("status", "active"))
             .collect();
 
-        // Get pending applications (anything not accepted, rejected, or withdrawn)
         const allApplications = await ctx.db.query("applications").collect();
         const pendingApplications = allApplications.filter(
             app => !["accepted", "rejected", "withdrawn"].includes(app.status)
         ).length;
 
+        const pendingHRSubmissions = await ctx.db
+            .query("hrFormSubmissions")
+            .withIndex("by_status", (q) => q.eq("status", "pending"))
+            .collect();
+
+        const openTasks = await ctx.db
+            .query("openTasks")
+            .withIndex("by_status", (q) => q.eq("status", "open"))
+            .collect();
+
         return {
-            totalUsers,
+            totalStaff,
             activeCohorts: activeCohorts.length,
-            pendingApplications
+            pendingApplications,
+            pendingHRSubmissions: pendingHRSubmissions.length,
+            openTasks: openTasks.length,
         };
     },
 });
@@ -43,18 +44,7 @@ export const getDashboardStats = query({
 export const getAllUsers = query({
     args: {},
     handler: async (ctx) => {
-        const identity = await ctx.auth.getUserIdentity();
-        if (!identity) return [];
-
-        const admin = await ctx.db
-            .query("users")
-            .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
-            .first();
-
-        if (!admin || admin.role !== "Admin") {
-            return [];
-        }
-
+        await requireAdmin(ctx);
         return await ctx.db.query("users").collect();
     }
 });
@@ -62,18 +52,8 @@ export const getAllUsers = query({
 export const getExpandedApplicationsForCohort = query({
     args: { cohortId: v.id("cohorts") },
     handler: async (ctx, args) => {
-        const identity = await ctx.auth.getUserIdentity();
-        if (!identity) return [];
-
-        const admin = await ctx.db
-            .query("users")
-            .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
-            .first();
-
-        // Admins and Reviewers can see it. Let's allow Staff too just in case.
-        if (!admin || admin.role === "Applicant") {
-            return [];
-        }
+        // Safe for Admins and Reviewers/Staff
+        await requireStaff(ctx);
 
         const apps = await ctx.db
             .query("applications")

@@ -1,5 +1,8 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
+import { requireAdmin, requireUser } from "./accessControl";
+import { isStaff as checkStaff } from "./roleHierarchy";
+import type { Role } from "./roleHierarchy";
 
 export const getFormForCohort = query({
     args: { cohortId: v.id("cohorts") },
@@ -28,17 +31,7 @@ export const createOrUpdateForm = mutation({
         ),
     },
     handler: async (ctx, args) => {
-        const identity = await ctx.auth.getUserIdentity();
-        if (!identity) throw new Error("Unauthenticated");
-
-        const user = await ctx.db
-            .query("users")
-            .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
-            .first();
-
-        if (!user || user.role !== "Admin") {
-            throw new Error("Unauthorized: Only Admins can manage forms");
-        }
+        await requireAdmin(ctx);
 
         if (args.formId) {
             return await ctx.db.patch(args.formId, {
@@ -69,20 +62,12 @@ export const submitResponse = mutation({
         ),
     },
     handler: async (ctx, args) => {
-        const identity = await ctx.auth.getUserIdentity();
-        if (!identity) throw new Error("Unauthenticated");
-
-        const user = await ctx.db
-            .query("users")
-            .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
-            .first();
-
-        if (!user) throw new Error("Unauthorized");
+        const user = await requireUser(ctx);
 
         const application = await ctx.db.get(args.applicationId);
         if (!application) throw new Error("Application not found");
 
-        if (user.role === "Applicant" && application.userId !== user._id) {
+        if (!checkStaff(user.role as Role) && application.userId !== user._id) {
             throw new Error("Unauthorized: Cannot submit response for another user's application");
         }
 

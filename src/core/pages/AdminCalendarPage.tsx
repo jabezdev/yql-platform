@@ -4,6 +4,7 @@ import { api } from "../../../convex/_generated/api";
 import { format } from "date-fns";
 import { Plus, Edit2, Trash2, Calendar as CalendarIcon, Clock, Users } from "lucide-react";
 import { Button } from "../components/ui/Button";
+import { PageHeader } from "../components/ui/PageHeader";
 
 export default function AdminCalendarPage() {
     const events = useQuery(api.calendar.getEvents, { includePrivate: true });
@@ -93,14 +94,10 @@ export default function AdminCalendarPage() {
 
     return (
         <div className="max-w-7xl mx-auto space-y-8">
-            <div className="flex flex-col md:flex-row justify-between md:items-center bg-white p-6 sm:p-8 rounded-tl-2xl rounded-br-2xl border-2 border-brand-blueDark shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] gap-4">
-                <div>
-                    <h1 className="text-4xl sm:text-5xl font-extrabold font-display leading-tight text-brand-blueDark">
-                        Calendar Management
-                    </h1>
-                    <p className="text-brand-darkBlue/70 mt-2 font-medium">Schedule cohort events, workshops, and milestones.</p>
-                </div>
-            </div>
+            <PageHeader
+                title="Calendar Management"
+                subtitle="Schedule cohort events, workshops, and milestones."
+            />
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* Event Form */}
@@ -133,6 +130,7 @@ export default function AdminCalendarPage() {
                                     style={{ backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%231B3B5C' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 7l5 5 5-5'/%3e%3c/svg%3e")`, backgroundPosition: 'right 0.75rem center', backgroundRepeat: 'no-repeat', backgroundSize: '1.5em 1.5em' }}
                                 >
                                     <option value="workshop">Workshop</option>
+                                    <option value="meeting">Team Meeting</option>
                                     <option value="interview">Interview Period</option>
                                     <option value="milestone">Milestone</option>
                                     <option value="social">Social Event</option>
@@ -216,7 +214,8 @@ export default function AdminCalendarPage() {
                         sortedEvents.map((event) => {
                             const badgeConfig: Record<string, { bg: string, text: string, border: string }> = {
                                 workshop: { bg: "bg-brand-blue/10", text: "text-brand-blueDark", border: "border-brand-blueDark/20" },
-                                interview: { bg: "bg-brand-purple/10", text: "text-brand-blueDark", border: "border-brand-blueDark/20" }, // Assuming brand-purple is a desired color, actually default to brand-blue if missing
+                                meeting: { bg: "bg-brand-wine/10", text: "text-brand-wine", border: "border-brand-wine/20" },
+                                interview: { bg: "bg-purple-100", text: "text-purple-700", border: "border-purple-200" },
                                 milestone: { bg: "bg-brand-green/20", text: "text-brand-blueDark", border: "border-brand-blueDark/20" },
                                 social: { bg: "bg-brand-yellow/20", text: "text-brand-blueDark", border: "border-brand-blueDark/20" },
                             };
@@ -224,7 +223,7 @@ export default function AdminCalendarPage() {
                             const badge = badgeConfig[event.type || "workshop"] || badgeConfig.workshop;
 
                             return (
-                                <div key={event._id} className="bg-white border-2 border-brand-blueDark rounded-tl-xl rounded-br-xl shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(57,103,153,1)] transition-all relative overflow-hidden flex flex-col sm:flex-row gap-4 justify-between p-5">
+                                <div key={event._id} className="bg-white border-2 border-brand-blueDark rounded-tl-xl rounded-br-xl shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(10,22,48,0.3)] transition-all relative overflow-hidden flex flex-col sm:flex-row gap-4 justify-between p-5">
                                     <div className={`absolute top-0 left-0 bottom-0 w-2 ${event.isPrivate ? "bg-brand-wine" : "bg-brand-blue"}`} />
                                     <div className="flex-1 min-w-0 pl-3">
                                         <div className="flex items-center gap-2 mb-2">

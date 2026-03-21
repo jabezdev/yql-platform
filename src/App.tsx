@@ -1,5 +1,7 @@
+import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { Authenticated, Unauthenticated } from "convex/react";
+import { Authenticated, Unauthenticated, useConvexAuth } from "convex/react";
+import { PageErrorBoundary } from "./core/components/ui/PageErrorBoundary";
 
 // Auth & Pages
 import LoginPage from "./core/pages/LoginPage";
@@ -7,85 +9,152 @@ import RegisterPage from "./core/pages/RegisterPage";
 import LandingPage from "./core/pages/LandingPage";
 
 import { AuthProvider, useAuthContext } from "./core/providers/AuthProvider";
+import { ToastProvider } from "./core/providers/ToastProvider";
 import { RoleGuard } from "./core/components/ui/RoleGuard";
 
 import WorkspaceLayout from "./core/layouts/WorkspaceLayout";
+import ChatLayout from "./core/layouts/ChatLayout";
 import { getPrimaryWorkspacePath } from "./core/constants/navigation";
 
 import AdmissionsPortal from "./core/pages/AdmissionsPortal";
-import RecruitmentDesk from "./core/pages/RecruitmentDesk";
-import OperationsHQ from "./core/pages/OperationsHQ";
+import DashboardPage from "./core/pages/DashboardPage";
+import WeeklyHubPage from "./core/pages/WeeklyHubPage";
 import AdminControlRoom from "./core/pages/AdminControlRoom";
+import AdminRolesPage from "./core/pages/AdminRolesPage";
+import AdminFormsPage from "./core/pages/AdminFormsPage";
+import AdminCalendarPage from "./core/pages/AdminCalendarPage";
+import AdminOnboardingPage from "./core/pages/AdminOnboardingPage";
+import AdminCohortsPage from "./core/pages/AdminCohortsPage";
+import AdminRubricPage from "./core/pages/AdminRubricPage";
+import AdminFormBuilderPage from "./core/pages/AdminFormBuilderPage";
+import MyAvailabilityPage from "./core/pages/MyAvailabilityPage";
 import StaffOnboardingPage from "./core/pages/StaffOnboardingPage";
 import GlobalCalendarPage from "./core/pages/GlobalCalendarPage";
 import DirectoryPage from "./core/pages/DirectoryPage";
+import ResourceLibraryPage from "./core/pages/ResourceLibraryPage";
+import Quantum101Page from "./core/pages/Quantum101Page";
+import AboutPage from "./core/pages/AboutPage";
+import VolunteerMatrixPage from "./core/pages/VolunteerMatrixPage";
+import ChatPage from "./core/pages/ChatPage";
 
 function RootRedirector() {
   const { user } = useAuthContext();
   if (!user) return <Navigate to="/login" replace />;
-  const target = getPrimaryWorkspacePath(user.role, user.staffSubRole);
+  const target = getPrimaryWorkspacePath(user.role);
   return <Navigate to={target} replace />;
+}
+
+function AuthLoadingScreen() {
+  return (
+    <div className="h-screen w-screen flex items-center justify-center bg-brand-bgLight">
+      <div className="flex flex-col items-center gap-3">
+        <div className="w-10 h-10 rounded-tl-2xl rounded-br-2xl bg-brand-blue border-4 border-brand-blueDark animate-pulse" />
+        <p className="text-sm font-semibold text-brand-blueDark/50 tracking-wide">Loading…</p>
+      </div>
+    </div>
+  );
+}
+
+// Blocks the entire route tree while Convex/Clerk auth is resolving.
+// Prevents a white screen on slow networks (common on mobile).
+// Times out after 5 s so non-localhost dev access (e.g. phone via LAN IP)
+// doesn't hang forever when Clerk cookies are scoped to localhost.
+function AuthGate({ children }: { children: React.ReactNode }) {
+  const { isLoading } = useConvexAuth();
+  const [timedOut, setTimedOut] = useState(false);
+
+  useEffect(() => {
+    if (!isLoading) return;
+    const id = setTimeout(() => setTimedOut(true), 5000);
+    return () => clearTimeout(id);
+  }, [isLoading]);
+
+  if (isLoading && !timedOut) return <AuthLoadingScreen />;
+  return <>{children}</>;
 }
 
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          {/* Public Routes */}
-          <Route path="/login/*" element={
-            <>
-              <Authenticated><RootRedirector /></Authenticated>
-              <Unauthenticated><LoginPage /></Unauthenticated>
-            </>
-          } />
-          <Route path="/register/*" element={
-            <>
-              <Authenticated><RootRedirector /></Authenticated>
-              <Unauthenticated><RegisterPage /></Unauthenticated>
-            </>
-          } />
-          <Route path="/" element={<LandingPage />} />
+      <ToastProvider>
+        <BrowserRouter>
+          <PageErrorBoundary>
+            <AuthGate>
+              <Routes>
+            {/* Public Routes */}
+            <Route path="/login/*" element={
+              <>
+                <Authenticated><RootRedirector /></Authenticated>
+                <Unauthenticated><LoginPage /></Unauthenticated>
+              </>
+            } />
+            <Route path="/register/*" element={
+              <>
+                <Authenticated><RootRedirector /></Authenticated>
+                <Unauthenticated><RegisterPage /></Unauthenticated>
+              </>
+            } />
+            <Route path="/" element={<LandingPage />} />
 
-          {/* Root Redirectors */}
-          <Route path="/dashboard" element={<RootRedirector />} />
-          <Route path="/workspace" element={<RootRedirector />} />
+            {/* Staff-only workspace routes */}
+            <Route path="/dashboard" element={<Authenticated><RoleGuard minRole="T5"><WorkspaceLayout /></RoleGuard></Authenticated>}>
+              <Route index element={<DashboardPage />} />
+            </Route>
+            <Route path="/weekly-hub" element={<Authenticated><RoleGuard minRole="T5"><WorkspaceLayout /></RoleGuard></Authenticated>}>
+              <Route index element={<WeeklyHubPage />} />
+            </Route>
 
-          {/* Admissions Workspace - Applicants Only */}
-          <Route path="/admissions" element={<RoleGuard allowedRoles={["Applicant"]}><WorkspaceLayout /></RoleGuard>}>
-            <Route index element={<AdmissionsPortal />} />
-          </Route>
+            {/* All authenticated users */}
+            <Route element={<RoleGuard><WorkspaceLayout /></RoleGuard>}>
+              <Route path="/calendar" element={<GlobalCalendarPage />} />
+              <Route path="/admissions" element={<AdmissionsPortal />} />
+              <Route path="/directory" element={<DirectoryPage />} />
+              <Route path="/about" element={<AboutPage />} />
+            </Route>
 
-          {/* Recruitment Workspace - Staff(Reviewer) & Admins */}
-          <Route path="/recruitment" element={<RoleGuard allowedRoles={["Staff", "Admin"]} disallowedSubRoles={["Alumni"]}><WorkspaceLayout /></RoleGuard>}>
-            <Route index element={<RecruitmentDesk />} />
-          </Route>
+            {/* Staff workspace routes */}
+            <Route element={<RoleGuard minRole="T5"><WorkspaceLayout /></RoleGuard>}>
+              <Route path="/availability" element={<MyAvailabilityPage />} />
+              <Route path="/hr" element={<AdminFormsPage />} />
+              <Route path="/resources" element={<ResourceLibraryPage />} />
+              <Route path="/quantum-101" element={<Quantum101Page />} />
+              <Route path="/matrix" element={<VolunteerMatrixPage />} />
+              <Route path="/onboarding" element={<StaffOnboardingPage />} />
+              <Route path="/evaluations" element={<AdminControlRoom />} />
+            </Route>
 
-          {/* Operations Workspace - Staff & Admins (No Alumni) */}
-          <Route path="/operations" element={<RoleGuard allowedRoles={["Staff", "Admin"]} disallowedSubRoles={["Alumni"]}><WorkspaceLayout /></RoleGuard>}>
-            <Route index element={<OperationsHQ />} />
-            <Route path="hq" element={<OperationsHQ />} />
-            <Route path="calendar" element={<GlobalCalendarPage />} />
-            <Route path="onboarding" element={<StaffOnboardingPage />} />
-          </Route>
+            {/* Management routes (T3+) */}
+            <Route element={<RoleGuard minRole="T3"><WorkspaceLayout /></RoleGuard>}>
+              <Route path="/team" element={<AdminRolesPage />} />
+              <Route path="/roles" element={<AdminRolesPage />} />
+            </Route>
 
-          {/* Network Workspace - Accessible by all authenticated users */}
-          <Route path="/network" element={<RoleGuard><WorkspaceLayout /></RoleGuard>}>
-            <Route index element={<DirectoryPage />} />
-            <Route path="directory" element={<DirectoryPage />} />
-          </Route>
+            {/* Admin-only routes (T2+) */}
+            <Route element={<RoleGuard minRole="T2"><WorkspaceLayout /></RoleGuard>}>
+              <Route path="/admin/calendar" element={<AdminCalendarPage />} />
+              <Route path="/admin/onboarding" element={<AdminOnboardingPage />} />
+              <Route path="/admin/cohorts" element={<AdminCohortsPage />} />
+              <Route path="/admin/rubrics" element={<AdminRubricPage />} />
+              <Route path="/admin/app-forms" element={<AdminFormBuilderPage />} />
+            </Route>
 
-          {/* Admin Control Room - Admins Only */}
-          <Route path="/admin" element={<RoleGuard allowedRoles={["Admin"]}><WorkspaceLayout /></RoleGuard>}>
-            <Route index element={<AdminControlRoom />} />
-          </Route>
+            {/* Chat — own layout, staff+ */}
+            <Route path="/chat" element={<Authenticated><RoleGuard minRole="T5"><ChatLayout /></RoleGuard></Authenticated>}>
+              <Route index element={<ChatPage />} />
+              <Route path=":channelId" element={<ChatPage />} />
+              <Route path=":channelId/thread/:messageId" element={<ChatPage />} />
+            </Route>
 
-          {/* Fallback */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </BrowserRouter>
+              {/* Fallback */}
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </AuthGate>
+          </PageErrorBoundary>
+        </BrowserRouter>
+      </ToastProvider>
     </AuthProvider>
   );
 }
+
 
 export default App;

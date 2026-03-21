@@ -1,5 +1,8 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
+import { requireReviewer, requireUser } from "./accessControl";
+import { isAdmin as checkAdmin, isStaff as checkStaff } from "./roleHierarchy";
+import type { Role } from "./roleHierarchy";
 
 export const getInterviewsForApplication = query({
     args: { applicationId: v.id("applications") },
@@ -29,17 +32,7 @@ export const scheduleInterview = mutation({
         endTime: v.number(),
     },
     handler: async (ctx, args) => {
-        const identity = await ctx.auth.getUserIdentity();
-        if (!identity) throw new Error("Unauthenticated");
-
-        const user = await ctx.db
-            .query("users")
-            .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
-            .first();
-
-        if (!user || user.role === "Applicant" || (user.role === "Staff" && user.staffSubRole !== "Reviewer")) {
-            throw new Error("Unauthorized");
-        }
+        await requireReviewer(ctx);
 
         return await ctx.db.insert("interviews", {
             applicationId: args.applicationId,
@@ -57,17 +50,7 @@ export const updateInterviewNotes = mutation({
         notes: v.string(),
     },
     handler: async (ctx, args) => {
-        const identity = await ctx.auth.getUserIdentity();
-        if (!identity) throw new Error("Unauthenticated");
-
-        const user = await ctx.db
-            .query("users")
-            .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
-            .first();
-
-        if (!user || user.role === "Applicant" || (user.role === "Staff" && user.staffSubRole !== "Reviewer")) {
-            throw new Error("Unauthorized");
-        }
+        await requireReviewer(ctx);
 
         return await ctx.db.patch(args.interviewId, {
             notes: args.notes,
@@ -81,17 +64,7 @@ export const updateInterviewStatus = mutation({
         status: v.union(v.literal("scheduled"), v.literal("completed"), v.literal("cancelled")),
     },
     handler: async (ctx, args) => {
-        const identity = await ctx.auth.getUserIdentity();
-        if (!identity) throw new Error("Unauthenticated");
-
-        const user = await ctx.db
-            .query("users")
-            .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
-            .first();
-
-        if (!user || user.role === "Applicant" || (user.role === "Staff" && user.staffSubRole !== "Reviewer")) {
-            throw new Error("Unauthorized");
-        }
+        await requireReviewer(ctx);
 
         return await ctx.db.patch(args.interviewId, {
             status: args.status,
@@ -106,19 +79,10 @@ export const addAvailability = mutation({
         endTime: v.number(),
     },
     handler: async (ctx, args) => {
-        const identity = await ctx.auth.getUserIdentity();
-        if (!identity) throw new Error("Unauthenticated");
+        const user = await requireReviewer(ctx);
 
-        const user = await ctx.db
-            .query("users")
-            .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
-            .first();
-
-        if (!user || user.role === "Applicant" || (user.role === "Staff" && user.staffSubRole !== "Reviewer")) {
-            throw new Error("Unauthorized");
-        }
-
-        if (args.reviewerId !== user._id && user.role !== "Admin") {
+        const isAdminUser = checkAdmin(user.role as Role);
+        if (args.reviewerId !== user._id && !isAdminUser) {
             throw new Error("Unauthorized: Cannot add availability for another reviewer");
         }
 
@@ -136,21 +100,12 @@ export const removeAvailability = mutation({
         availabilityId: v.id("reviewerAvailabilities"),
     },
     handler: async (ctx, args) => {
-        const identity = await ctx.auth.getUserIdentity();
-        if (!identity) throw new Error("Unauthenticated");
-
-        const user = await ctx.db
-            .query("users")
-            .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
-            .first();
-
-        if (!user || user.role === "Applicant" || (user.role === "Staff" && user.staffSubRole !== "Reviewer")) {
-            throw new Error("Unauthorized");
-        }
+        const user = await requireReviewer(ctx);
 
         const slot = await ctx.db.get(args.availabilityId);
         if (slot) {
-            if (slot.reviewerId !== user._id && user.role !== "Admin") {
+            const isAdminUser = checkAdmin(user.role as Role);
+            if (slot.reviewerId !== user._id && !isAdminUser) {
                 throw new Error("Unauthorized");
             }
             if (!slot.isBooked) {
@@ -191,20 +146,10 @@ export const bookInterviewSlot = mutation({
         availabilityId: v.id("reviewerAvailabilities"),
     },
     handler: async (ctx, args) => {
-        const identity = await ctx.auth.getUserIdentity();
-        if (!identity) throw new Error("Unauthenticated");
-
-        const user = await ctx.db
-            .query("users")
-            .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
-            .first();
-
-        if (!user) {
-            throw new Error("Unauthorized");
-        }
+        const user = await requireUser(ctx);
 
         const application = await ctx.db.get(args.applicationId);
-        if (!application || (user.role === "Applicant" && application.userId !== user._id)) {
+        if (!application || (!checkStaff(user.role as Role) && application.userId !== user._id)) {
             throw new Error("Unauthorized");
         }
 

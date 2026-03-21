@@ -30,8 +30,8 @@ export default function Hero() {
                 className="absolute inset-0"
                 style={{
                     background: `
-                        radial-gradient(circle at 10% 20%, rgba(240, 242, 245, 1) 0%, rgba(220, 225, 230, 0.4) 90%),
-                        linear-gradient(120deg, #f5f6f8 0%, #e8eef4 100%)
+                        radial-gradient(circle at 10% 20%, rgba(245, 246, 248, 1) 0%, rgba(220, 230, 242, 0.5) 90%),
+                        linear-gradient(120deg, #f5f6f8 0%, #e0eaf5 100%)
                     `
                 }}
             />
@@ -118,17 +118,17 @@ export default function Hero() {
                 <div className="max-w-4xl mx-auto py-20 relative">
                     {/* Main Heading */}
                     {/* Main Heading (Swapped Emphasis) */}
-                    <h1 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight leading-tight text-brand-blueDark font-sans">
+                    <h1 className="text-3xl md:text-5xl font-display font-extrabold mb-4 tracking-tight leading-tight text-brand-blueDark">
                         Join our Team, Be a
                     </h1>
 
                     {/* Subheading (Swapped Emphasis - Now Larger) */}
-                    <p className="text-5xl md:text-7xl mb-12 font-bold tracking-tight text-brand-wine">
+                    <p className="text-5xl md:text-7xl mb-12 font-display font-extrabold tracking-tight text-brand-wine">
                         Young Quantum Leader
                     </p>
 
                     {/* Description */}
-                    <p className="text-lg md:text-xl text-brand-darkBlue/80 max-w-2xl mx-auto mb-12 leading-relaxed font-medium">
+                    <p className="text-lg md:text-xl text-brand-blueDark/70 max-w-2xl mx-auto mb-12 leading-relaxed font-medium">
                         Join the premier youth leadership program by the Quantum Computing
                         Society of the Philippines. Lead, innovate, and inspire the next
                         generation of quantum pioneers.

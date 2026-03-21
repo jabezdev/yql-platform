@@ -3,13 +3,18 @@ import { useQuery, useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
 import { useAuthContext } from "../providers/AuthProvider";
+import { useToast } from "../providers/ToastProvider";
 import { FileUp, Send, CheckCircle2, Clock, CalendarDays, Activity } from "lucide-react";
+import { format, isPast } from "date-fns";
 import InterviewBooking from "../components/applicant/InterviewBooking";
 import { Button } from "../components/ui/Button";
+import { PageHeader } from "../components/ui/PageHeader";
 
 export default function AdmissionsPortal() {
     const { user } = useAuthContext();
+    const { toast } = useToast();
     const availableCohorts = useQuery(api.cohorts.getAvailable) || [];
+    const allCohorts = useQuery(api.cohorts.getAll) || [];
     const myApplications = useQuery(api.applications.getApplicationsForUser, user ? { userId: user._id as Id<"users"> } : "skip") || [];
 
     const latestApplication = myApplications[myApplications.length - 1];
@@ -43,7 +48,7 @@ export default function AdmissionsPortal() {
             handleValueChange(fieldId, storageId);
         } catch (err) {
             console.error("Upload failed", err);
-            alert("File upload failed. Please try again.");
+            toast("File upload failed. Please try again.", "error");
         } finally {
             setUploadingFields(prev => ({ ...prev, [fieldId]: false }));
         }
@@ -63,12 +68,12 @@ export default function AdmissionsPortal() {
             const responses = Object.entries(formValues).map(([fieldId, value]) => ({ fieldId, value }));
             await submitResponse({ applicationId, formId: form!._id, responses });
 
-            alert("Application submitted successfully!");
+            toast("Application submitted successfully!", "success");
             setSelectedCohortId("");
             setFormValues({});
         } catch (error) {
             console.error("Failed to submit application", error);
-            alert("Failed to submit. Please try again.");
+            toast("Failed to submit. Please try again.", "error");
         } finally {
             setIsSubmitting(false);
         }
@@ -94,16 +99,18 @@ export default function AdmissionsPortal() {
 
     const currentStepIndex = getStepIndex(latestApplication?.status);
 
+    // Determine which cohort to show dates for
+    const displayCohort = latestApplication
+        ? allCohorts.find(c => c._id === latestApplication.cohortId)
+        : (allCohorts.find(c => c.status === "active") ?? availableCohorts[0] ?? null);
+
     return (
         <div className="max-w-7xl mx-auto space-y-8">
-            <header className="flex flex-col md:flex-row md:items-center justify-between bg-white p-6 sm:p-8 rounded-tl-2xl rounded-br-2xl border-2 border-brand-blueDark shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] gap-4 mb-8">
-                <div>
-                    <h1 className="text-4xl sm:text-5xl font-extrabold font-display leading-tight text-brand-blueDark">
-                        Admissions Portal
-                    </h1>
-                    <p className="text-brand-darkBlue/70 mt-2 font-medium">Track your application pipeline and next steps.</p>
-                </div>
-            </header>
+            <PageHeader
+                title="Admissions Portal"
+                subtitle="Track your application pipeline and next steps."
+                className="mb-8"
+            />
 
             {/* PIPELINE TRACKER */}
             {latestApplication && (
@@ -206,7 +213,7 @@ export default function AdmissionsPortal() {
                                             </div>
                                         ))}
                                         <div className="pt-4 border-t-2 border-brand-blueDark/10">
-                                            <Button type="submit" disabled={isSubmitting} variant="geometric-primary" className="w-full py-4 text-lg justify-center disabled:opacity-50 disabled:shadow-[4px_4px_0px_0px_rgba(57,103,153,1)] disabled:translate-y-0 disabled:translate-x-0">
+                                            <Button type="submit" disabled={isSubmitting} variant="geometric-primary" className="w-full py-4 text-lg justify-center disabled:opacity-50 disabled:shadow-[4px_4px_0px_0px_rgba(10,22,48,0.45)] disabled:translate-y-0 disabled:translate-x-0">
                                                 {isSubmitting ? "Submitting..." : <><Send size={18} strokeWidth={2.5} className="mr-2" /> Submit Application</>}
                                             </Button>
                                         </div>
@@ -271,11 +278,32 @@ export default function AdmissionsPortal() {
                             <h3 className="font-display font-extrabold mb-5 text-brand-blueDark flex items-center gap-2 relative z-10 text-lg">
                                 <CalendarDays className="text-brand-yellow" size={20} /> Important Dates
                             </h3>
-                            <div className="space-y-4 relative z-10">
-                                <div className="border-l-4 border-brand-yellow pl-4 py-2 bg-gradient-to-r from-brand-yellow/10 to-transparent rounded-r-lg">
-                                    <p className="text-[10px] font-extrabold text-brand-blueDark/60 uppercase tracking-widest mb-1">Soon</p>
-                                    <p className="text-base font-bold text-brand-blueDark">Review decisions out</p>
-                                </div>
+                            <div className="space-y-3 relative z-10">
+                                {!displayCohort ? (
+                                    <p className="text-sm text-brand-blueDark/40 italic font-medium">No upcoming cohorts at this time. Check back soon.</p>
+                                ) : (
+                                    <>
+                                        {displayCohort.name && (
+                                            <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/40 mb-2">{displayCohort.name}</p>
+                                        )}
+                                        <div className="border-l-4 border-brand-blue pl-4 py-2 bg-gradient-to-r from-brand-blue/5 to-transparent rounded-r-lg">
+                                            <p className="text-[10px] font-extrabold text-brand-blueDark/50 uppercase tracking-widest mb-1">Applications Close</p>
+                                            <p className="text-sm font-bold text-brand-blueDark">
+                                                {isPast(displayCohort.applicationEndDate)
+                                                    ? <span className="text-brand-red">Closed</span>
+                                                    : format(displayCohort.applicationEndDate, "MMMM d, yyyy")}
+                                            </p>
+                                        </div>
+                                        <div className="border-l-4 border-brand-green pl-4 py-2 bg-gradient-to-r from-brand-green/5 to-transparent rounded-r-lg">
+                                            <p className="text-[10px] font-extrabold text-brand-blueDark/50 uppercase tracking-widest mb-1">Term Begins</p>
+                                            <p className="text-sm font-bold text-brand-blueDark">{format(displayCohort.termStartDate, "MMMM d, yyyy")}</p>
+                                        </div>
+                                        <div className="border-l-4 border-brand-yellow pl-4 py-2 bg-gradient-to-r from-brand-yellow/10 to-transparent rounded-r-lg">
+                                            <p className="text-[10px] font-extrabold text-brand-blueDark/50 uppercase tracking-widest mb-1">Term Ends</p>
+                                            <p className="text-sm font-bold text-brand-blueDark">{format(displayCohort.termEndDate, "MMMM d, yyyy")}</p>
+                                        </div>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </div>

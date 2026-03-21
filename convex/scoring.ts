@@ -1,5 +1,8 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
+import { requireAdmin, requireReviewer } from "./accessControl";
+import { isAdmin as checkAdmin } from "./roleHierarchy";
+import type { Role } from "./roleHierarchy";
 
 export const getRubric = query({
     args: {
@@ -28,17 +31,7 @@ export const saveRubric = mutation({
         ),
     },
     handler: async (ctx, args) => {
-        const identity = await ctx.auth.getUserIdentity();
-        if (!identity) throw new Error("Unauthenticated");
-
-        const user = await ctx.db
-            .query("users")
-            .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
-            .first();
-
-        if (!user || user.role !== "Admin") {
-            throw new Error("Unauthorized: Only Admins can edit rubrics");
-        }
+        await requireAdmin(ctx);
 
         if (args.rubricId) {
             return await ctx.db.patch(args.rubricId, {
@@ -67,20 +60,10 @@ export const saveEvaluation = mutation({
         feedback: v.optional(v.string()),
     },
     handler: async (ctx, args) => {
-        const identity = await ctx.auth.getUserIdentity();
-        if (!identity) throw new Error("Unauthenticated");
+        const user = await requireReviewer(ctx);
 
-        const user = await ctx.db
-            .query("users")
-            .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
-            .first();
-
-        if (!user || user.role === "Applicant" || (user.role === "Staff" && user.staffSubRole !== "Reviewer")) {
-            throw new Error("Unauthorized");
-        }
-
-        if (args.reviewerId !== user._id && user.role !== "Admin") {
-            throw new Error("Unauthorized");
+        if (args.reviewerId !== user._id && !checkAdmin(user.role as Role)) {
+            throw new Error("Unauthorized: Cannot save evaluation for another reviewer");
         }
 
         // Check for existing evaluation

@@ -5,7 +5,7 @@ interface ProfileCardProps {
         name: string;
         email: string;
         role: string;
-        staffSubRole?: string;
+        specialRoles?: string[];
         bio?: string;
         favoriteShape?: "circle" | "square" | "triangle" | "hexagon";
         favoriteColor?: string;
@@ -71,7 +71,7 @@ export function ProfileCard({ user }: ProfileCardProps) {
                 <div className="text-center mt-4">
                     <h2 className="text-xl font-bold text-gray-900">{user.name}</h2>
                     <p className="text-sm text-gray-500 font-medium">
-                        {user.staffSubRole ? `${user.role} - ${user.staffSubRole}` : user.role}
+                        {user.specialRoles?.length ? `${user.role} · ${user.specialRoles.join(", ")}` : user.role}
                     </p>
                 </div>
 

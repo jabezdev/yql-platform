@@ -9,26 +9,38 @@
 
 :root {
     /* Brand Colors - Good Weather Theme */
-    --color-light-blue: #60a5fa;   /* Fresh Sky Blue */
-    --color-dark-blue: #2563eb;    /* Deep Ocean Blue */
-    --color-blue: #3b82f6;         /* Standard Blue */
-    --color-blue-dark: #1e40af;    /* Navy */
-    --color-yellow: #fcd34d;       /* Sunshine */
-    --color-wine: #ef4444;         /* Alert/Action */
-    --color-gray: #9ca3af;         /* Neutral Gray */
-    --color-green: #10b981;        /* Success */
-    
+    --color-light-blue: #60a5fa;
+    /* Fresh Sky Blue */
+    --color-dark-blue: #2563eb;
+    /* Deep Ocean Blue */
+    --color-blue: #3b82f6;
+    /* Standard Blue */
+    --color-blue-dark: #1e40af;
+    /* Navy */
+    --color-yellow: #fcd34d;
+    /* Sunshine */
+    --color-wine: #ef4444;
+    /* Alert/Action */
+    --color-gray: #9ca3af;
+    /* Neutral Gray */
+    --color-green: #10b981;
+    /* Success */
+
     /* Backgrounds */
-    --color-bg-light: #f0f9ff;     /* Very light blue tint */
+    --color-bg-light: #f0f9ff;
+    /* Very light blue tint */
     --color-bg: #ffffff;
     --color-bg-subtle: #f8fafc;
     --color-bg-muted: #e2e8f0;
-    
+
     /* Text Colors */
-    --color-text: #0f172a;         /* Slate 900 */
-    --color-text-muted: #64748b;   /* Slate 500 */
-    --color-text-light: #94a3b8;   /* Slate 400 */
-    
+    --color-text: #0f172a;
+    /* Slate 900 */
+    --color-text-muted: #64748b;
+    /* Slate 500 */
+    --color-text-light: #94a3b8;
+    /* Slate 400 */
+
     /* Borders */
     --color-border: #e2e8f0;
     --color-border-strong: #cbd5e1;
@@ -45,7 +57,7 @@
     --radius-xl: 1rem;
     --radius-2xl: 1.5rem;
     --radius-full: 9999px;
-    
+
     /* Shadows */
     --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
     --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
@@ -248,5 +260,109 @@ nav::-webkit-scrollbar {
 
     .text-brand-wine {
         color: var(--color-wine);
+    }
+
+    /* Custom Prose for Markdown & Editor */
+    .prose-custom {
+        @apply text-brand-blueDark leading-tight text-sm;
+    }
+
+    .prose-custom h1 {
+        @apply text-lg font-black mb-1 mt-2 text-brand-blueDark tracking-tight;
+    }
+
+    .prose-custom h2 {
+        @apply text-sm font-black mb-1 mt-1.5 text-brand-blueDark/80 tracking-tight;
+    }
+
+    .prose-custom p {
+        @apply mb-1.5;
+    }
+
+    .prose-custom ul {
+        @apply list-disc pl-4 mb-1.5 space-y-0;
+    }
+
+    .prose-custom ol {
+        @apply list-decimal pl-4 mb-1.5 space-y-0;
+    }
+
+    .prose-custom li {
+        @apply leading-tight;
+    }
+
+    .prose-custom b,
+    .prose-custom strong {
+        @apply font-bold text-brand-blueDark;
+    }
+
+    .prose-custom i,
+    .prose-custom em {
+        @apply italic opacity-90;
+    }
+
+    .prose-custom u {
+        @apply underline decoration-brand-blue/30 underline-offset-2;
+    }
+
+    .prose-custom del {
+        @apply line-through text-brand-blueDark/30;
+    }
+
+    /* Tiptap-specific overrides */
+    .tiptap p.is-editor-empty:first-child::before {
+        content: attr(data-placeholder);
+        float: left;
+        color: #94a3b8;
+        pointer-events: none;
+        height: 0;
+    }
+
+    .tiptap h1:first-child,
+    .tiptap h2:first-child,
+    .tiptap p:first-child {
+        margin-top: 0;
+    }
+
+    /* Ensure the editor content area stretches and scrolls correctly */
+    .rich-text-editor .ProseMirror {
+        min-height: 0 !important;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Hide scrollbar while preserving scroll functionality */
+    .no-scrollbar {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE/Edge */
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+        display: none; /* Chrome/Safari/Opera */
+    }
+
+    /* Custom scrollbar for chat panels */
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(10, 22, 48, 0.15);
+        border-radius: 2px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: rgba(10, 22, 48, 0.25);
+    }
+
+    .custom-scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(10, 22, 48, 0.15) transparent;
     }
 }

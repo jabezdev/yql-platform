@@ -27,7 +27,7 @@ type ButtonProps = ButtonAsButton | ButtonAsLink;
 
 const variantStyles: Record<ButtonVariant, string> = {
     primary:
-        'bg-brand-blueDark text-white font-bold hover:bg-brand-darkBlue shadow-[3px_3px_0px_0px_rgba(57,103,153,1)] hover:shadow-[4px_4px_0px_0px_rgba(57,103,153,1)] hover:-translate-y-[1px] hover:-translate-x-[1px] active:shadow-none active:translate-y-[3px] active:translate-x-[3px] rounded-tl-xl rounded-br-xl border-2 border-brand-blueDark',
+        'bg-brand-blueDark text-white font-bold hover:bg-brand-darkBlue shadow-[3px_3px_0px_0px_rgba(10,22,48,0.55)] hover:shadow-[4px_4px_0px_0px_rgba(10,22,48,0.55)] hover:-translate-y-[1px] hover:-translate-x-[1px] active:shadow-none active:translate-y-[3px] active:translate-x-[3px] rounded-tl-xl rounded-br-xl border-2 border-brand-blueDark',
     secondary:
         'bg-white text-brand-blueDark font-bold hover:bg-gray-50 shadow-[3px_3px_0px_0px_rgba(57,103,153,0.3)] hover:shadow-[4px_4px_0px_0px_rgba(57,103,153,0.3)] hover:-translate-y-[1px] hover:-translate-x-[1px] active:shadow-none active:translate-y-[3px] active:translate-x-[3px] rounded-tl-xl rounded-br-xl border-2 border-brand-blueDark',
     ghost:
@@ -35,7 +35,7 @@ const variantStyles: Record<ButtonVariant, string> = {
     white:
         'bg-white text-brand-blueDark font-bold hover:bg-gray-50 border-2 border-transparent rounded-tl-xl rounded-br-xl shadow-[3px_3px_0px_0px_rgba(0,0,0,0.1)]',
     'geometric-primary':
-        'bg-brand-blueDark text-white font-bold hover:bg-brand-darkBlue shadow-[4px_4px_0px_0px_rgba(57,103,153,1)] hover:shadow-[6px_6px_0px_0px_rgba(57,103,153,1)] hover:-translate-y-[2px] hover:-translate-x-[2px] active:shadow-none active:translate-y-[4px] active:translate-x-[4px] rounded-tl-2xl rounded-br-2xl border-2 border-brand-blueDark',
+        'bg-brand-blueDark text-white font-bold hover:bg-brand-darkBlue shadow-[4px_4px_0px_0px_rgba(10,22,48,0.55)] hover:shadow-[6px_6px_0px_0px_rgba(10,22,48,0.55)] hover:-translate-y-[2px] hover:-translate-x-[2px] active:shadow-none active:translate-y-[4px] active:translate-x-[4px] rounded-tl-2xl rounded-br-2xl border-2 border-brand-blueDark',
     'geometric-secondary':
         'bg-white text-brand-blueDark font-bold border-2 border-brand-blueDark hover:bg-brand-bgLight shadow-[4px_4px_0px_0px_rgba(57,103,153,0.2)] hover:shadow-[6px_6px_0px_0px_rgba(57,103,153,0.2)] hover:-translate-y-[2px] hover:-translate-x-[2px] active:shadow-none active:translate-y-[4px] active:translate-x-[4px] rounded-tl-2xl rounded-br-2xl',
     outline:

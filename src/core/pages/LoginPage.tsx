@@ -34,7 +34,7 @@ export default function LoginPage() {
                         signUpUrl="/register"
                         appearance={{
                             elements: {
-                                card: "shadow-[8px_8px_0px_0px_rgba(57,103,153,1)] border-4 border-brand-blueDark bg-white rounded-none p-8",
+                                card: "shadow-[8px_8px_0px_0px_rgba(10,22,48,0.4)] border-4 border-brand-blueDark bg-white rounded-none p-8",
                                 headerTitle: "hidden",
                                 headerSubtitle: "hidden",
                                 formButtonPrimary: "bg-brand-blueDark hover:bg-brand-blue text-white font-bold py-3 px-4 rounded-none border-2 border-transparent hover:border-brand-blueDark shadow-[4px_4px_0px_0px_rgba(188,89,79,1)] transition-all active:translate-y-1 active:translate-x-1 active:shadow-none",

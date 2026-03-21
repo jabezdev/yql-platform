@@ -35,7 +35,7 @@ export default function Navbar() {
                         <a
                             key={link.name}
                             href={link.href}
-                            className="text-brand-darkBlue hover:text-brand-wine transition-colors text-sm font-medium"
+                            className="text-brand-blueDark hover:text-brand-wine transition-colors text-sm font-display font-bold"
                         >
                             {link.name}
                         </a>
@@ -62,12 +62,12 @@ export default function Navbar() {
 
             {/* Mobile Menu */}
             {isOpen && (
-                <div className="md:hidden absolute top-full left-0 w-full bg-white border-t border-gray-200 p-6 flex flex-col space-y-4 shadow-lg">
+                <div className="md:hidden absolute top-full left-0 w-full bg-brand-bgLight border-t-2 border-brand-blueDark p-6 flex flex-col space-y-4 shadow-[0px_4px_0px_0px_rgba(57,103,153,0.15)]">
                     {NAV_LINKS.map((link) => (
                         <a
                             key={link.name}
                             href={link.href}
-                            className="text-brand-darkBlue hover:text-brand-wine text-lg font-medium"
+                            className="text-brand-blueDark hover:text-brand-wine text-lg font-display font-bold"
                             onClick={closeMenu}
                         >
                             {link.name}

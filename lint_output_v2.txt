@@ -1,0 +1,32 @@
+$ eslint .
+
+/home/jabez/Projects/qcsp-aux/yql-platform/convex/_generated/api.js
+  1:1  warning  Unused eslint-disable directive (no problems were reported)
+
+/home/jabez/Projects/qcsp-aux/yql-platform/convex/_generated/dataModel.d.ts
+  1:1  warning  Unused eslint-disable directive (no problems were reported)
+
+/home/jabez/Projects/qcsp-aux/yql-platform/convex/_generated/server.d.ts
+  1:1  warning  Unused eslint-disable directive (no problems were reported)
+
+/home/jabez/Projects/qcsp-aux/yql-platform/convex/_generated/server.js
+  1:1  warning  Unused eslint-disable directive (no problems were reported)
+
+/home/jabez/Projects/qcsp-aux/yql-platform/src/core/pages/GlobalCalendarPage.tsx
+  159:31  error  Error: Cannot call impure function during render
+
+`Date.now` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+/home/jabez/Projects/qcsp-aux/yql-platform/src/core/pages/GlobalCalendarPage.tsx:159:31
+  157 | function ListView({ events }: { events: any[] }) {
+  158 |     const [selectedEvent, setSelectedEvent] = useState<any | null>(null);
+> 159 |     const now = useMemo(() => Date.now(), []);
+      |                               ^^^^^^^^^^ Cannot call impure function
+  160 |     const upcoming = useMemo(() =>
+  161 |         [...events].filter(e => e.endTime > now - 86400000).sort((a, b) => a.startTime - b.startTime),
+  162 |         [events, now]);  react-hooks/purity
+
+✖ 5 problems (1 error, 4 warnings)
+  0 errors and 4 warnings potentially fixable with the `--fix` option.
+
+error: script "lint" exited with code 1
