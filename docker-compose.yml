@@ -1,0 +1,19 @@
+services:
+  web:
+    build:
+      context: .
+      args:
+        # Values are read from your shell environment or a .env file in this directory.
+        # Copy .env.local → .env and fill in production values before building.
+        VITE_CONVEX_URL: ${VITE_CONVEX_URL}
+        VITE_CLERK_PUBLISHABLE_KEY: ${VITE_CLERK_PUBLISHABLE_KEY}
+        VITE_CONVEX_SITE_URL: ${VITE_CONVEX_SITE_URL}
+    ports:
+      - "${PORT:-3000}:80"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s

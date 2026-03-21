@@ -1,0 +1,28 @@
+# Dependencies — reinstalled inside the build container
+node_modules
+package-lock.json
+
+# Build output — created fresh inside the build container
+dist
+
+# Local environment files — secrets must be passed as build args, never baked
+# into the image via .env files committed or copied into the build context
+.env
+.env.local
+.env.*.local
+
+# Git history
+.git
+.gitignore
+
+# Dev / planning docs — not needed in the image
+CHAT_PLAN.md
+CHAT_PLAN2.md
+DESIGN.md
+planning/
+convex_rules.txt
+lint_output*.txt
+eslint_errors.txt
+
+# Test artefacts
+coverage/
