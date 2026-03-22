@@ -33,13 +33,13 @@ export function ChatSidebar() {
     return (
         <div className="flex flex-col h-full w-full bg-white">
             {/* Tab switcher */}
-            <div className="flex gap-1 p-3 border-b-2 border-brand-blueDark/8 shrink-0">
+            <div className="flex gap-1 p-3 border-b-2 border-brand-blue/8 shrink-0">
                 <button
                     onClick={() => setSidebarTab("channels")}
                     className={`flex-1 text-xs font-bold py-1.5 rounded-lg transition-all ${
                         sidebarTab === "channels"
-                            ? "bg-brand-blueDark text-white shadow-[2px_2px_0px_0px_rgba(10,22,48,0.25)]"
-                            : "text-brand-blueDark/50 hover:bg-brand-bgLight"
+                            ? "bg-brand-blue text-white shadow-[2px_2px_0px_0px_rgba(10,22,48,0.25)]"
+                            : "text-brand-blue/50 hover:bg-brand-bgLight"
                     }`}
                 >
                     Channels
@@ -48,13 +48,13 @@ export function ChatSidebar() {
                     onClick={() => setSidebarTab("direct")}
                     className={`flex-1 text-xs font-bold py-1.5 rounded-lg transition-all relative ${
                         sidebarTab === "direct"
-                            ? "bg-brand-blueDark text-white shadow-[2px_2px_0px_0px_rgba(10,22,48,0.25)]"
-                            : "text-brand-blueDark/50 hover:bg-brand-bgLight"
+                            ? "bg-brand-blue text-white shadow-[2px_2px_0px_0px_rgba(10,22,48,0.25)]"
+                            : "text-brand-blue/50 hover:bg-brand-bgLight"
                     }`}
                 >
                     Direct
                     {sidebarTab !== "direct" && totalUnread > 0 && (
-                        <span className="absolute -top-1 -right-1 w-4 h-4 bg-brand-blue text-white text-[9px] font-bold rounded-full flex items-center justify-center">
+                        <span className="absolute -top-1 -right-1 w-4 h-4 bg-brand-lightBlue text-white text-[10px] font-bold rounded-full flex items-center justify-center">
                             {totalUnread > 9 ? "9+" : totalUnread}
                         </span>
                     )}
@@ -65,13 +65,13 @@ export function ChatSidebar() {
             {sidebarTab === "channels" && (
                 <div className="flex-1 overflow-y-auto custom-scrollbar py-2 flex flex-col gap-1">
                     <div className="flex items-center justify-between px-3 py-1">
-                        <span className="text-[10px] font-extrabold text-brand-blueDark/30 uppercase tracking-widest">
+                        <span className="text-[10px] font-extrabold text-brand-blue/30 uppercase tracking-widest">
                             Channels
                         </span>
                         <button
                             title="Create channel"
                             onClick={() => setCreateModal({ open: true })}
-                            className="p-0.5 text-brand-blueDark/30 hover:text-brand-blue transition-colors rounded"
+                            className="p-0.5 text-brand-blue/30 hover:text-brand-lightBlue transition-colors rounded"
                         >
                             <Plus size={14} />
                         </button>

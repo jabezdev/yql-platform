@@ -16,6 +16,7 @@ import { ChannelSettingsPanel } from "../components/chat/panels/ChannelSettingsP
 import { BookmarksPanel } from "../components/chat/panels/BookmarksPanel";
 import { useState } from "react";
 import type { Id } from "../../../convex/_generated/dataModel";
+import { useChatNotificationWatcher } from "../hooks/useNotifications";
 
 function RightPanelContent() {
     const { rightPanel, setRightPanel, activeThreadMessageId } = useChatContext();
@@ -66,13 +67,13 @@ function RightPanelContent() {
 
     return (
         <div className="w-full lg:w-80 flex-shrink-0 bg-white flex flex-col min-h-0">
-            <div className="flex items-center justify-between px-4 py-3 border-b-2 border-brand-blueDark/8 shrink-0">
-                <h3 className="text-sm font-bold text-brand-blueDark">
+            <div className="flex items-center justify-between px-4 py-3 border-b-2 border-brand-blue/8 shrink-0">
+                <h3 className="text-sm font-bold text-brand-blue">
                     {titles[rightPanel] ?? rightPanel}
                 </h3>
                 <button
                     onClick={() => setRightPanel(null)}
-                    className="p-1.5 rounded-lg text-brand-blueDark/40 hover:bg-brand-bgLight hover:text-brand-blueDark transition-colors"
+                    className="p-1.5 rounded-lg text-brand-blue/40 hover:bg-brand-bgLight hover:text-brand-blue transition-colors"
                 >
                     <X size={14} />
                 </button>
@@ -86,6 +87,7 @@ function ChatLayoutInner() {
     const { user, isLoading } = useAuthContext();
     const { user: clerkUser } = useUser();
     const [isProfileOpen, setIsProfileOpen] = useState(false);
+    useChatNotificationWatcher();
     const { rightPanel, mobileView, setMobileView } = useChatContext();
     const { channelId } = useParams<{ channelId: string }>();
 
@@ -97,7 +99,7 @@ function ChatLayoutInner() {
     if (isLoading) {
         return (
             <div className="h-screen flex items-center justify-center bg-brand-bgLight">
-                <Loader2 className="animate-spin text-brand-blue" />
+                <Loader2 className="animate-spin text-brand-lightBlue" />
             </div>
         );
     }
@@ -109,13 +111,13 @@ function ChatLayoutInner() {
         <div className="flex flex-col h-[100dvh] bg-brand-bgLight overflow-hidden">
 
             {/* ── Top bar ──────────────────────────────────────────────── */}
-            <div className="flex-shrink-0 h-11 bg-white border-b-2 border-brand-blueDark/8 flex items-center justify-between px-4 z-30">
+            <div className="flex-shrink-0 h-11 bg-white border-b-2 border-brand-blue/8 flex items-center justify-between px-4 z-30">
 
                 {/* Left: contextual navigation */}
                 {/* Desktop: always show "← Workspace" link */}
                 <Link
-                    to="/dashboard"
-                    className="hidden lg:flex items-center gap-1.5 text-xs font-bold text-brand-blueDark/50 hover:text-brand-blueDark transition-colors"
+                    to="/dashboard/overview"
+                    className="hidden lg:flex items-center gap-1.5 text-xs font-bold text-brand-blue/50 hover:text-brand-blue transition-colors"
                 >
                     <ArrowLeft size={13} />
                     Workspace
@@ -126,9 +128,9 @@ function ChatLayoutInner() {
                     onClick={() => {
                         if (mobileView === "panel") setMobileView("conversation");
                         else if (mobileView === "conversation") setMobileView("sidebar");
-                        else window.location.href = "/dashboard";
+                        else window.location.href = "/dashboard/overview";
                     }}
-                    className="flex lg:hidden items-center gap-1.5 text-xs font-bold text-brand-blueDark/50 active:text-brand-blueDark transition-colors"
+                    className="flex lg:hidden items-center gap-1.5 text-xs font-bold text-brand-blue/50 active:text-brand-blue transition-colors"
                 >
                     <ArrowLeft size={13} />
                     {mobileView === "panel" ? "Back" : mobileView === "conversation" ? "Channels" : "Workspace"}
@@ -145,7 +147,7 @@ function ChatLayoutInner() {
                     className="flex items-center gap-2 hover:opacity-80 transition-opacity"
                 >
                     <UserAvatar name={user.name} imageUrl={clerkUser?.imageUrl} size="xs" />
-                    <span className="text-xs font-bold text-brand-blueDark hidden sm:block">{user.name}</span>
+                    <span className="text-xs font-bold text-brand-blue hidden sm:block">{user.name}</span>
                 </button>
             </div>
 
@@ -156,7 +158,7 @@ function ChatLayoutInner() {
                 <div className={`
                     ${mobileView === "sidebar" ? "flex" : "hidden"} lg:flex
                     flex-col flex-shrink-0 w-full lg:w-72
-                    border-r-2 border-brand-blueDark/8
+                    border-r-2 border-brand-blue/8
                 `}>
                     <ChatSidebar />
                 </div>
@@ -173,7 +175,7 @@ function ChatLayoutInner() {
                 <div className={`
                     ${(rightPanel && mobileView === "panel") ? "flex" : "hidden"} lg:flex
                     flex-col flex-shrink-0 w-full lg:w-80
-                    lg:border-l-2 border-brand-blueDark/8
+                    lg:border-l-2 border-brand-blue/8
                 `}>
                     <RightPanelContent />
                 </div>

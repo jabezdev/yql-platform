@@ -30,7 +30,7 @@ export default function PdfViewer({ url, title = "PDF Document", className = "" 
             {/* Loading State */}
             {isLoading && !hasError && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-50 z-0">
-                    <Loader2 className="animate-spin text-brand-blue mb-4" size={32} />
+                    <Loader2 className="animate-spin text-brand-lightBlue mb-4" size={32} />
                     <p className="text-gray-500 font-medium">Loading Document...</p>
                 </div>
             )}
@@ -39,7 +39,7 @@ export default function PdfViewer({ url, title = "PDF Document", className = "" 
             {hasError && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-50 z-0">
                     <p className="text-gray-500 font-medium mb-2">Failed to load document.</p>
-                    <a href={url} target="_blank" rel="noopener noreferrer" className="text-brand-blue hover:underline">
+                    <a href={url} target="_blank" rel="noopener noreferrer" className="text-brand-lightBlue hover:underline">
                         Try opening directly
                     </a>
                 </div>

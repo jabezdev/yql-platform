@@ -33,7 +33,7 @@ const rubricSchema = z.object({
 });
 
 const INPUT_CLS =
-    "w-full p-2.5 bg-brand-bgLight border-2 border-brand-blueDark/20 rounded-lg focus:border-brand-blueDark outline-none font-medium text-brand-blueDark text-sm transition-colors";
+    "w-full p-2.5 bg-brand-bgLight border-2 border-brand-blue/20 rounded-lg focus:border-brand-blue outline-none font-medium text-brand-blue text-sm transition-colors";
 
 function CriterionRow({
     criterion,
@@ -49,9 +49,9 @@ function CriterionRow({
     error?: Partial<Record<keyof Criterion, string>>;
 }) {
     return (
-        <div className="bg-brand-bgLight/50 border-2 border-brand-blueDark/10 rounded-xl p-4 space-y-3 group">
+        <div className="bg-brand-bgLight/50 border-2 border-brand-blue/10 rounded-xl p-4 space-y-3 group">
             <div className="flex items-center justify-between mb-1">
-                <span className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/40">
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/40">
                     Criterion {index + 1}
                 </span>
                 <button
@@ -64,7 +64,7 @@ function CriterionRow({
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-[1fr_1fr_100px] gap-3">
                 <div>
-                    <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/50 mb-1">
+                    <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/50 mb-1">
                         Name *
                     </label>
                     <input
@@ -76,7 +76,7 @@ function CriterionRow({
                     {error?.name && <p className="text-xs text-brand-red mt-1">{error.name}</p>}
                 </div>
                 <div>
-                    <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/50 mb-1">
+                    <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/50 mb-1">
                         Description *
                     </label>
                     <input
@@ -88,7 +88,7 @@ function CriterionRow({
                     {error?.description && <p className="text-xs text-brand-red mt-1">{error.description}</p>}
                 </div>
                 <div>
-                    <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/50 mb-1">
+                    <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/50 mb-1">
                         Max Score *
                     </label>
                     <input
@@ -206,9 +206,9 @@ export default function AdminRubricPage() {
             />
 
             {/* Cohort + Round Selector */}
-            <div className="bg-white border-2 border-brand-blueDark rounded-tl-2xl rounded-br-2xl shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] p-6 space-y-5">
+            <div className="bg-white border-2 border-brand-blue rounded-tl-2xl rounded-br-2xl shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] p-6 space-y-5">
                 <div>
-                    <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/50 mb-2">
+                    <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/50 mb-2">
                         Select Cohort *
                     </label>
                     <select
@@ -230,7 +230,7 @@ export default function AdminRubricPage() {
 
                 {selectedCohortId && (
                     <div>
-                        <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/50 mb-2">
+                        <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/50 mb-2">
                             Round
                         </label>
                         <div className="flex flex-wrap gap-2">
@@ -244,8 +244,8 @@ export default function AdminRubricPage() {
                                     }}
                                     className={`px-4 py-2 text-sm font-bold rounded-lg border-2 transition-all ${
                                         selectedRound === r.value
-                                            ? "bg-brand-yellow text-brand-blueDark border-brand-yellow shadow-[3px_3px_0px_0px_rgba(0,0,0,0.12)]"
-                                            : "bg-white text-brand-blueDark border-brand-blueDark/20 hover:border-brand-blueDark/50"
+                                            ? "bg-brand-yellow text-brand-blue border-brand-yellow shadow-[3px_3px_0px_0px_rgba(0,0,0,0.12)]"
+                                            : "bg-white text-brand-blue border-brand-blue/20 hover:border-brand-blue/50"
                                     }`}
                                 >
                                     {r.label}
@@ -261,23 +261,23 @@ export default function AdminRubricPage() {
                 <form onSubmit={handleSave} className="space-y-6">
                     <div className="flex items-center justify-between">
                         <div>
-                            <h2 className="font-display font-extrabold text-brand-blueDark text-lg flex items-center gap-2">
-                                <SlidersHorizontal size={18} className="text-brand-blue" />
+                            <h2 className="font-display font-extrabold text-brand-blue text-lg flex items-center gap-2">
+                                <SlidersHorizontal size={18} className="text-brand-lightBlue" />
                                 Scoring Criteria
-                                <span className="text-brand-blue/60 font-bold text-sm ml-1">
+                                <span className="text-brand-lightBlue/60 font-bold text-sm ml-1">
                                     — {selectedCohort?.name} / {ROUNDS.find((r) => r.value === selectedRound)?.label}
                                 </span>
                             </h2>
                             {existingRubric ? (
                                 <p className="text-xs text-brand-green font-bold mt-1">Rubric exists — editing will overwrite.</p>
                             ) : (
-                                <p className="text-xs text-brand-blueDark/40 font-medium mt-1">No rubric yet for this round. Define one below.</p>
+                                <p className="text-xs text-brand-blue/40 font-medium mt-1">No rubric yet for this round. Define one below.</p>
                             )}
                         </div>
                         <div className="flex items-center gap-3">
                             <div className="text-right">
-                                <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/40">Total</p>
-                                <p className="text-2xl font-display font-extrabold text-brand-blueDark">{totalMaxScore} pts</p>
+                                <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/40">Total</p>
+                                <p className="text-2xl font-display font-extrabold text-brand-blue">{totalMaxScore} pts</p>
                             </div>
                         </div>
                     </div>
@@ -299,7 +299,7 @@ export default function AdminRubricPage() {
                         <button
                             type="button"
                             onClick={handleAddCriterion}
-                            className="flex items-center gap-2 px-4 py-2.5 bg-brand-bgLight text-brand-blueDark text-sm font-bold border-2 border-brand-blueDark/20 rounded-xl hover:border-brand-blueDark/40 transition-colors"
+                            className="flex items-center gap-2 px-4 py-2.5 bg-brand-bgLight text-brand-blue text-sm font-bold border-2 border-brand-blue/20 rounded-xl hover:border-brand-blue/40 transition-colors"
                         >
                             <Plus size={16} /> Add Criterion
                         </button>
@@ -307,7 +307,7 @@ export default function AdminRubricPage() {
                         <button
                             type="submit"
                             disabled={saving}
-                            className="flex items-center gap-2 px-6 py-2.5 bg-brand-blue text-white font-bold rounded-xl border-2 border-brand-blueDark hover:-translate-y-0.5 transition-transform shadow-[4px_4px_0px_0px_rgba(10,22,48,0.45)] disabled:opacity-50"
+                            className="flex items-center gap-2 px-6 py-2.5 bg-brand-lightBlue text-white font-bold rounded-xl border-2 border-brand-blue hover:-translate-y-0.5 transition-transform shadow-[4px_4px_0px_0px_rgba(10,22,48,0.45)] disabled:opacity-50"
                         >
                             <Save size={16} />
                             {saving ? "Saving..." : "Save Rubric"}
@@ -317,10 +317,10 @@ export default function AdminRubricPage() {
             )}
 
             {!selectedCohortId && cohorts.length === 0 && (
-                <div className="bg-white border-2 border-dashed border-brand-blueDark/20 rounded-2xl p-12 text-center">
-                    <SlidersHorizontal size={40} className="mx-auto text-brand-blueDark/20 mb-4" />
-                    <p className="font-display font-extrabold text-brand-blueDark/40 text-lg">No cohorts exist yet</p>
-                    <p className="text-sm text-brand-blueDark/30 mt-1">Create a cohort first, then define rubrics for its evaluation rounds.</p>
+                <div className="bg-white border-2 border-dashed border-brand-blue/20 rounded-2xl p-12 text-center">
+                    <SlidersHorizontal size={40} className="mx-auto text-brand-blue/20 mb-4" />
+                    <p className="font-display font-extrabold text-brand-blue/40 text-lg">No cohorts exist yet</p>
+                    <p className="text-sm text-brand-blue/30 mt-1">Create a cohort first, then define rubrics for its evaluation rounds.</p>
                 </div>
             )}
         </div>

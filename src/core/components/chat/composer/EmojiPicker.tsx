@@ -28,7 +28,7 @@ export function EmojiPicker({ onSelect, onClose }: EmojiPickerProps) {
     return (
         <div
             ref={ref}
-            className="absolute z-50 bg-white border-2 border-brand-blueDark/10 rounded-tl-xl rounded-br-xl shadow-[4px_4px_0px_0px_rgba(10,22,48,0.10)] p-2 flex flex-col gap-1"
+            className="absolute z-50 bg-white border-2 border-brand-blue/10 rounded-tl-xl rounded-br-xl shadow-[4px_4px_0px_0px_rgba(10,22,48,0.10)] p-2 flex flex-col gap-1"
         >
             {EMOJI_ROWS.map((row, ri) => (
                 <div key={ri} className="flex gap-0.5">

@@ -63,11 +63,11 @@ export function PollComposer({ channelId, threadRootMessageId, onClose }: PollCo
     };
 
     return (
-        <div className="mb-2 border-2 border-brand-blue/20 rounded-tl-xl rounded-br-xl bg-white overflow-hidden">
+        <div className="mb-2 border-2 border-brand-lightBlue/20 rounded-tl-xl rounded-br-xl bg-white overflow-hidden">
             {/* Header */}
-            <div className="flex items-center justify-between px-3 py-2.5 border-b border-brand-blueDark/8 bg-brand-bgLight/60">
-                <span className="text-xs font-bold text-brand-blueDark">Create Poll</span>
-                <button onClick={onClose} className="p-1 rounded text-brand-blueDark/40 hover:text-brand-blueDark transition-colors">
+            <div className="flex items-center justify-between px-3 py-2.5 border-b border-brand-blue/8 bg-brand-bgLight/60">
+                <span className="text-xs font-bold text-brand-blue">Create Poll</span>
+                <button onClick={onClose} className="p-1 rounded text-brand-blue/40 hover:text-brand-blue transition-colors">
                     <X size={13} />
                 </button>
             </div>
@@ -75,7 +75,7 @@ export function PollComposer({ channelId, threadRootMessageId, onClose }: PollCo
             <div className="p-3 flex flex-col gap-3">
                 {/* Question */}
                 <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-wider text-brand-blueDark/40 mb-1">
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-brand-blue/40 mb-1">
                         Question
                     </label>
                     <input
@@ -83,31 +83,31 @@ export function PollComposer({ channelId, threadRootMessageId, onClose }: PollCo
                         value={question}
                         onChange={(e) => setQuestion(e.target.value)}
                         placeholder="Ask a question..."
-                        className="w-full text-sm text-brand-blueDark placeholder-brand-blueDark/30 border-2 border-brand-blueDark/12 rounded-tl-lg rounded-br-lg px-3 py-2 outline-none focus:border-brand-blue/40 transition-colors"
+                        className="w-full text-sm text-brand-blue placeholder-brand-blue/30 border-2 border-brand-blue/12 rounded-tl-lg rounded-br-lg px-3 py-2 outline-none focus:border-brand-lightBlue/40 transition-colors"
                     />
                 </div>
 
                 {/* Options */}
                 <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-wider text-brand-blueDark/40 mb-1">
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-brand-blue/40 mb-1">
                         Options
                     </label>
                     <div className="flex flex-col gap-1.5">
                         {options.map((opt, i) => (
                             <div key={opt.uid} className="flex items-center gap-1.5">
-                                <span className="text-[10px] font-bold text-brand-blueDark/30 w-4 text-center flex-shrink-0">
+                                <span className="text-[10px] font-bold text-brand-blue/30 w-4 text-center flex-shrink-0">
                                     {i + 1}
                                 </span>
                                 <input
                                     value={opt.text}
                                     onChange={(e) => setOption(opt.uid, e.target.value)}
                                     placeholder={`Option ${i + 1}`}
-                                    className="flex-1 text-xs text-brand-blueDark placeholder-brand-blueDark/25 border-2 border-brand-blueDark/10 rounded-lg px-2.5 py-1.5 outline-none focus:border-brand-blue/35 transition-colors"
+                                    className="flex-1 text-xs text-brand-blue placeholder-brand-blue/25 border-2 border-brand-blue/10 rounded-lg px-2.5 py-1.5 outline-none focus:border-brand-lightBlue/35 transition-colors"
                                 />
                                 {options.length > 2 && (
                                     <button
                                         onClick={() => removeOption(opt.uid)}
-                                        className="p-1 text-brand-blueDark/25 hover:text-red-500 transition-colors flex-shrink-0"
+                                        className="p-1 text-brand-blue/25 hover:text-red-500 transition-colors flex-shrink-0"
                                     >
                                         <Trash2 size={12} />
                                     </button>
@@ -117,7 +117,7 @@ export function PollComposer({ channelId, threadRootMessageId, onClose }: PollCo
                         {options.length < 8 && (
                             <button
                                 onClick={addOption}
-                                className="flex items-center gap-1.5 text-[11px] font-medium text-brand-blue/60 hover:text-brand-blue transition-colors pl-6 mt-0.5"
+                                className="flex items-center gap-1.5 text-[11px] font-medium text-brand-lightBlue/60 hover:text-brand-lightBlue transition-colors pl-6 mt-0.5"
                             >
                                 <Plus size={12} />
                                 Add option
@@ -135,7 +135,7 @@ export function PollComposer({ channelId, threadRootMessageId, onClose }: PollCo
                             onChange={(e) => setAllowMultiple(e.target.checked)}
                             className="rounded"
                         />
-                        <span className="text-xs text-brand-blueDark/60">Multiple choices</span>
+                        <span className="text-xs text-brand-blue/60">Multiple choices</span>
                     </label>
                     <label className="flex items-center gap-1.5 cursor-pointer">
                         <input
@@ -144,7 +144,7 @@ export function PollComposer({ channelId, threadRootMessageId, onClose }: PollCo
                             onChange={(e) => setIsAnonymous(e.target.checked)}
                             className="rounded"
                         />
-                        <span className="text-xs text-brand-blueDark/60">Anonymous</span>
+                        <span className="text-xs text-brand-blue/60">Anonymous</span>
                     </label>
                 </div>
 
@@ -152,7 +152,7 @@ export function PollComposer({ channelId, threadRootMessageId, onClose }: PollCo
                 <button
                     onClick={handleSubmit}
                     disabled={submitting}
-                    className="self-end flex items-center gap-1.5 px-3 py-1.5 bg-brand-blue text-white text-xs font-bold rounded-tl-lg rounded-br-lg hover:bg-brand-blue/85 transition-colors disabled:opacity-50"
+                    className="self-end flex items-center gap-1.5 px-3 py-1.5 bg-brand-lightBlue text-white text-xs font-bold rounded-tl-lg rounded-br-lg hover:bg-brand-lightBlue/85 transition-colors disabled:opacity-50"
                 >
                     {submitting ? "Creating…" : "Create Poll"}
                 </button>

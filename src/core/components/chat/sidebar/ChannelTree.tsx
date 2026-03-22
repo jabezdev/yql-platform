@@ -34,7 +34,7 @@ export function ChannelTree({
                 {[68, 82, 55, 74].map((w, i) => (
                     <div
                         key={i}
-                        className="h-7 bg-brand-blueDark/5 rounded-lg animate-pulse"
+                        className="h-7 bg-brand-blue/5 rounded-lg animate-pulse"
                         style={{ width: `${w}%` }}
                     />
                 ))}
@@ -50,15 +50,15 @@ export function ChannelTree({
     if (displayNodes.length === 0) {
         if (isFiltering) {
             return (
-                <p className="text-xs text-brand-blueDark/30 text-center py-4 px-3 italic">
+                <p className="text-xs text-brand-blue/30 text-center py-4 px-3 italic">
                     No channels match &ldquo;{filterText}&rdquo;
                 </p>
             );
         }
         return (
-            <p className="text-xs text-brand-blueDark/30 text-center py-6 font-medium px-3">
+            <p className="text-xs text-brand-blue/30 text-center py-6 font-medium px-3">
                 No channels yet.{" "}
-                <button onClick={onCreateRoot} className="text-brand-blue hover:underline">
+                <button onClick={onCreateRoot} className="text-brand-lightBlue hover:underline">
                     Create one
                 </button>
             </p>

@@ -2,6 +2,8 @@ import { useMutation, useQuery } from "convex/react";
 import { api } from "../../../../../convex/_generated/api";
 import { PollResultsBar } from "./PollResultsBar";
 import { useAuthContext } from "../../../providers/AuthProvider";
+import { isManager } from "../../../constants/roles";
+import type { Role } from "../../../constants/roles";
 import { Lock, BarChart2 } from "lucide-react";
 import type { Doc } from "../../../../../convex/_generated/dataModel";
 
@@ -17,11 +19,7 @@ export function PollDisplay({ poll }: PollDisplayProps) {
 
     const isClosed = !!poll.closedAt;
     const isCreator = user?._id === poll.createdBy;
-    const isManager =
-        user?.role === "T1" ||
-        user?.role === "T2" ||
-        user?.role === "T3" ||
-        user?.role === "Super Admin";
+    const canManage = user ? isManager(user.role as Role) : false;
 
     const myVotes = pollData?.myVotes ?? [];
     const voteCounts = pollData?.voteCounts ?? {};
@@ -38,26 +36,26 @@ export function PollDisplay({ poll }: PollDisplayProps) {
     };
 
     return (
-        <div className="mt-2 border-2 border-brand-blueDark/10 rounded-tl-xl rounded-br-xl overflow-hidden max-w-sm">
+        <div className="mt-2 border-2 border-brand-blue/10 rounded-tl-xl rounded-br-xl overflow-hidden max-w-sm">
             {/* Header */}
             <div className="flex items-start gap-2 px-3 pt-3 pb-2">
-                <BarChart2 size={15} className="text-brand-blue flex-shrink-0 mt-0.5" />
+                <BarChart2 size={15} className="text-brand-lightBlue flex-shrink-0 mt-0.5" />
                 <div className="flex-1 min-w-0">
-                    <p className="text-sm font-bold text-brand-blueDark leading-snug">
+                    <p className="text-sm font-bold text-brand-blue leading-snug">
                         {poll.question}
                     </p>
                     <div className="flex items-center gap-2 mt-0.5">
                         {isClosed ? (
-                            <span className="flex items-center gap-1 text-[10px] font-semibold text-red-500">
+                            <span className="flex items-center gap-1 text-[10px] font-semibold text-brand-red">
                                 <Lock size={9} /> Closed
                             </span>
                         ) : (
-                            <span className="text-[10px] text-brand-blueDark/35">
+                            <span className="text-[10px] text-brand-blue/35">
                                 {poll.allowMultipleVotes ? "Multiple choices allowed" : "Pick one"}
                                 {poll.isAnonymous && " · Anonymous"}
                             </span>
                         )}
-                        <span className="text-[10px] text-brand-blueDark/30">
+                        <span className="text-[10px] text-brand-blue/30">
                             {totalVotes} {totalVotes === 1 ? "vote" : "votes"}
                         </span>
                     </div>
@@ -80,11 +78,11 @@ export function PollDisplay({ poll }: PollDisplayProps) {
             </div>
 
             {/* Footer: close button for creator / manager */}
-            {!isClosed && (isCreator || isManager) && (
+            {!isClosed && (isCreator || canManage) && (
                 <div className="px-3 pb-2.5">
                     <button
                         onClick={handleClose}
-                        className="text-[10px] text-brand-blueDark/35 hover:text-red-500 transition-colors font-medium"
+                        className="text-[10px] text-brand-blue/35 hover:text-red-500 transition-colors font-medium"
                     >
                         Close poll
                     </button>

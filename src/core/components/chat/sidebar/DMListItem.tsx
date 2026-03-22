@@ -51,14 +51,14 @@ export function DMListItem({ channel }: DMListItemProps) {
             to={`/chat/${channel._id}`}
             className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-tl-lg rounded-br-lg text-left transition-colors ${
                 isActive
-                    ? "bg-brand-blue/10 text-brand-blueDark"
-                    : "text-brand-blueDark/70 hover:bg-brand-blueDark/[0.04] hover:text-brand-blueDark"
+                    ? "bg-brand-lightBlue/10 text-brand-blue"
+                    : "text-brand-blue/70 hover:bg-brand-blue/[0.04] hover:text-brand-blue"
             }`}
         >
             {/* Avatar */}
             <div className="relative flex-shrink-0">
                 {channel.type === "group_dm" ? (
-                    <div className="w-8 h-8 bg-brand-yellow/60 border-2 border-brand-blueDark/20 rounded-tl-lg rounded-br-lg flex items-center justify-center text-xs font-bold text-brand-blueDark">
+                    <div className="w-8 h-8 bg-brand-yellow/60 border-2 border-brand-blue/20 rounded-tl-lg rounded-br-lg flex items-center justify-center text-xs font-bold text-brand-blue">
                         {channel.participants.length}
                     </div>
                 ) : (
@@ -71,13 +71,13 @@ export function DMListItem({ channel }: DMListItemProps) {
                 <div className="flex items-center justify-between gap-1">
                     <span
                         className={`text-sm truncate ${
-                            unread > 0 ? "font-semibold text-brand-blueDark" : "font-medium"
+                            unread > 0 ? "font-semibold text-brand-blue" : "font-medium"
                         }`}
                     >
                         {displayName}
                     </span>
                     {timeAgo && (
-                        <span className="text-[10px] text-brand-blueDark/35 flex-shrink-0">
+                        <span className="text-[10px] text-brand-blue/35 flex-shrink-0">
                             {timeAgo}
                         </span>
                     )}
@@ -85,7 +85,7 @@ export function DMListItem({ channel }: DMListItemProps) {
                 <div className="flex items-center justify-between gap-1">
                     <p
                         className={`text-xs truncate ${
-                            unread > 0 ? "text-brand-blueDark/70" : "text-brand-blueDark/40"
+                            unread > 0 ? "text-brand-blue/70" : "text-brand-blue/40"
                         }`}
                     >
                         {lastPreview}

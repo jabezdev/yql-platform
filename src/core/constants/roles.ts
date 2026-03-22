@@ -24,10 +24,10 @@ export const STAFF_ROLES: Role[] = (Object.entries(ROLE_RANK) as [Role, number][
 
 export const ROLE_BADGE_COLORS: Record<Role, string> = {
     "Super Admin": "bg-brand-wine/10 text-brand-wine border-brand-wine/30",
-    T1: "bg-brand-yellow/20 text-brand-blueDark border-brand-yellow/40",
-    T2: "bg-brand-blue/10 text-brand-blueDark border-brand-blue/30",
-    T3: "bg-brand-green/10 text-brand-blueDark border-brand-green/30",
-    T4: "bg-brand-bgLight text-brand-blueDark border-brand-blueDark/20",
-    T5: "bg-brand-bgLight text-brand-blueDark/60 border-brand-blueDark/10",
+    T1: "bg-brand-yellow/20 text-brand-blue border-brand-yellow/40",
+    T2: "bg-brand-lightBlue/10 text-brand-blue border-brand-lightBlue/30",
+    T3: "bg-brand-green/10 text-brand-blue border-brand-green/30",
+    T4: "bg-brand-bgLight text-brand-blue border-brand-blue/20",
+    T5: "bg-brand-bgLight text-brand-blue/60 border-brand-blue/10",
     Applicant: "bg-gray-100 text-gray-600 border-gray-200",
 };

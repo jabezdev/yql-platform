@@ -47,15 +47,15 @@ export function MoveMessageModal({ messageId, currentChannelId, onClose }: MoveM
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-brand-blueDark/30 backdrop-blur-sm">
-            <div className="bg-white rounded-tl-2xl rounded-br-2xl shadow-[6px_6px_0px_0px_rgba(10,22,48,0.15)] w-[420px] max-h-[80vh] flex flex-col overflow-hidden border-2 border-brand-blueDark/10">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-brand-blue/30 backdrop-blur-sm">
+            <div className="bg-white rounded-tl-2xl rounded-br-2xl shadow-[6px_6px_0px_0px_rgba(10,22,48,0.15)] w-[420px] max-h-[80vh] flex flex-col overflow-hidden border-2 border-brand-blue/10">
                 {/* Header */}
-                <div className="flex items-center justify-between px-5 py-4 border-b-2 border-brand-blueDark/8 shrink-0">
+                <div className="flex items-center justify-between px-5 py-4 border-b-2 border-brand-blue/8 shrink-0">
                     <div className="flex items-center gap-2">
-                        <MoveRight size={15} className="text-brand-blue" />
-                        <h2 className="text-sm font-bold text-brand-blueDark">Move Message</h2>
+                        <MoveRight size={15} className="text-brand-lightBlue" />
+                        <h2 className="text-sm font-bold text-brand-blue">Move Message</h2>
                     </div>
-                    <button onClick={onClose} className="p-1.5 rounded-lg text-brand-blueDark/40 hover:bg-brand-bgLight transition-colors">
+                    <button onClick={onClose} className="p-1.5 rounded-lg text-brand-blue/40 hover:bg-brand-bgLight transition-colors">
                         <X size={14} />
                     </button>
                 </div>
@@ -63,9 +63,9 @@ export function MoveMessageModal({ messageId, currentChannelId, onClose }: MoveM
                 {/* Channel list */}
                 <div className="flex-1 overflow-y-auto custom-scrollbar p-3">
                     {!channelTree ? (
-                        <div className="flex justify-center py-6"><Loader2 size={18} className="animate-spin text-brand-blue/50" /></div>
+                        <div className="flex justify-center py-6"><Loader2 size={18} className="animate-spin text-brand-lightBlue/50" /></div>
                     ) : flatChannels.length === 0 ? (
-                        <p className="text-xs text-brand-blueDark/35 text-center py-4">No other channels available</p>
+                        <p className="text-xs text-brand-blue/35 text-center py-4">No other channels available</p>
                     ) : (
                         <div className="flex flex-col gap-0.5">
                             {flatChannels.map((ch) => (
@@ -74,16 +74,16 @@ export function MoveMessageModal({ messageId, currentChannelId, onClose }: MoveM
                                     onClick={() => setSelected(ch._id)}
                                     className={`flex items-center gap-2.5 w-full px-3 py-2.5 rounded-tl-lg rounded-br-lg text-left transition-all border-2 ${
                                         selected === ch._id
-                                            ? "border-brand-blue/50 bg-brand-blue/5"
+                                            ? "border-brand-lightBlue/50 bg-brand-lightBlue/5"
                                             : "border-transparent hover:bg-brand-bgLight"
                                     }`}
                                 >
                                     {ch.icon ? (
                                         <span className="text-sm">{ch.icon}</span>
                                     ) : (
-                                        <Hash size={13} className="text-brand-blueDark/35 flex-shrink-0" />
+                                        <Hash size={13} className="text-brand-blue/35 flex-shrink-0" />
                                     )}
-                                    <span className="text-xs font-medium text-brand-blueDark">{ch.name}</span>
+                                    <span className="text-xs font-medium text-brand-blue">{ch.name}</span>
                                 </button>
                             ))}
                         </div>
@@ -91,21 +91,21 @@ export function MoveMessageModal({ messageId, currentChannelId, onClose }: MoveM
                 </div>
 
                 {/* Reason + confirm */}
-                <div className="px-4 py-3 border-t-2 border-brand-blueDark/8 shrink-0 space-y-2.5">
+                <div className="px-4 py-3 border-t-2 border-brand-blue/8 shrink-0 space-y-2.5">
                     <input
                         value={reason}
                         onChange={(e) => setReason(e.target.value)}
                         placeholder="Reason (optional)"
-                        className="w-full text-xs text-brand-blueDark border-2 border-brand-blueDark/10 rounded-lg px-3 py-2 outline-none focus:border-brand-blue/30 transition-colors"
+                        className="w-full text-xs text-brand-blue border-2 border-brand-blue/10 rounded-lg px-3 py-2 outline-none focus:border-brand-lightBlue/30 transition-colors"
                     />
                     <div className="flex items-center justify-end gap-2">
-                        <button onClick={onClose} className="px-3 py-1.5 text-xs font-medium text-brand-blueDark/50 hover:text-brand-blueDark transition-colors">
+                        <button onClick={onClose} className="px-3 py-1.5 text-xs font-medium text-brand-blue/50 hover:text-brand-blue transition-colors">
                             Cancel
                         </button>
                         <button
                             onClick={handleMove}
                             disabled={!selected || moving}
-                            className="flex items-center gap-1.5 px-4 py-1.5 bg-brand-blueDark text-white text-xs font-bold rounded-tl-lg rounded-br-lg hover:bg-brand-blue transition-colors disabled:opacity-40"
+                            className="flex items-center gap-1.5 px-4 py-1.5 bg-brand-blue text-white text-xs font-bold rounded-tl-lg rounded-br-lg hover:bg-brand-lightBlue transition-colors disabled:opacity-40"
                         >
                             {moving ? <Loader2 size={12} className="animate-spin" /> : <MoveRight size={12} />}
                             Move

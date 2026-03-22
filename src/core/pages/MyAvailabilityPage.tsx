@@ -70,7 +70,7 @@ export default function MyAvailabilityPage() {
     const openCount = availabilities.filter(s => !s.isBooked).length;
 
     const inputCls =
-        "w-full p-2.5 bg-brand-bgLight border-2 border-brand-blueDark/20 rounded-lg focus:border-brand-blueDark outline-none font-medium text-brand-blueDark text-sm transition-colors";
+        "w-full p-2.5 bg-brand-bgLight border-2 border-brand-blue/20 rounded-lg focus:border-brand-blue outline-none font-medium text-brand-blue text-sm transition-colors";
 
     return (
         <div className="w-full space-y-8 pb-12">
@@ -81,13 +81,13 @@ export default function MyAvailabilityPage() {
 
             {/* Stats */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                <div className="bg-white border-2 border-brand-blueDark/10 rounded-xl p-4 flex items-center gap-3">
-                    <div className="w-9 h-9 bg-brand-blue/10 rounded-lg flex items-center justify-center shrink-0">
-                        <CalendarDays size={18} className="text-brand-blue" />
+                <div className="bg-white border-2 border-brand-blue/10 rounded-xl p-4 flex items-center gap-3">
+                    <div className="w-9 h-9 bg-brand-lightBlue/10 rounded-lg flex items-center justify-center shrink-0">
+                        <CalendarDays size={18} className="text-brand-lightBlue" />
                     </div>
                     <div>
-                        <p className="text-2xl font-display font-extrabold text-brand-blueDark">{openCount}</p>
-                        <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/40">Open Slots</p>
+                        <p className="text-2xl font-display font-extrabold text-brand-blue">{openCount}</p>
+                        <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/40">Open Slots</p>
                     </div>
                 </div>
                 <div className="bg-white border-2 border-brand-green/20 rounded-xl p-4 flex items-center gap-3">
@@ -95,30 +95,30 @@ export default function MyAvailabilityPage() {
                         <CheckCircle2 size={18} className="text-brand-green" />
                     </div>
                     <div>
-                        <p className="text-2xl font-display font-extrabold text-brand-blueDark">{bookedCount}</p>
-                        <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/40">Booked</p>
+                        <p className="text-2xl font-display font-extrabold text-brand-blue">{bookedCount}</p>
+                        <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/40">Booked</p>
                     </div>
                 </div>
-                <div className="bg-white border-2 border-brand-blueDark/10 rounded-xl p-4 flex items-center gap-3">
-                    <div className="w-9 h-9 bg-brand-blueDark/5 rounded-lg flex items-center justify-center shrink-0">
-                        <Clock size={18} className="text-brand-blueDark/60" />
+                <div className="bg-white border-2 border-brand-blue/10 rounded-xl p-4 flex items-center gap-3">
+                    <div className="w-9 h-9 bg-brand-blue/5 rounded-lg flex items-center justify-center shrink-0">
+                        <Clock size={18} className="text-brand-blue/60" />
                     </div>
                     <div>
-                        <p className="text-2xl font-display font-extrabold text-brand-blueDark">{upcoming.length}</p>
-                        <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/40">Upcoming Days</p>
+                        <p className="text-2xl font-display font-extrabold text-brand-blue">{upcoming.length}</p>
+                        <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/40">Upcoming Days</p>
                     </div>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-8">
                 {/* Add Slot Form */}
-                <div className="bg-white border-2 border-brand-blueDark rounded-tl-2xl rounded-br-2xl shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] p-6 h-fit sticky top-8">
-                    <h2 className="font-display font-extrabold text-brand-blueDark text-lg flex items-center gap-2 mb-6">
-                        <Plus size={18} className="text-brand-blue" /> Add Timeslot
+                <div className="bg-white border-2 border-brand-blue rounded-tl-2xl rounded-br-2xl shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] p-6 h-fit sticky top-8">
+                    <h2 className="font-display font-extrabold text-brand-blue text-lg flex items-center gap-2 mb-6">
+                        <Plus size={18} className="text-brand-lightBlue" /> Add Timeslot
                     </h2>
                     <form onSubmit={handleAdd} className="space-y-4">
                         <div>
-                            <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/50 mb-1">Date</label>
+                            <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/50 mb-1">Date</label>
                             <input
                                 type="date"
                                 value={date}
@@ -129,7 +129,7 @@ export default function MyAvailabilityPage() {
                         </div>
                         <div className="grid grid-cols-2 gap-3">
                             <div>
-                                <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/50 mb-1">Start</label>
+                                <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/50 mb-1">Start</label>
                                 <input
                                     type="time"
                                     value={startTime}
@@ -138,7 +138,7 @@ export default function MyAvailabilityPage() {
                                 />
                             </div>
                             <div>
-                                <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/50 mb-1">End</label>
+                                <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/50 mb-1">End</label>
                                 <input
                                     type="time"
                                     value={endTime}
@@ -150,7 +150,7 @@ export default function MyAvailabilityPage() {
                         <button
                             type="submit"
                             disabled={adding}
-                            className="w-full flex items-center justify-center gap-2 py-3 bg-brand-blue text-white font-bold rounded-xl border-2 border-brand-blueDark hover:-translate-y-0.5 transition-transform shadow-[4px_4px_0px_0px_rgba(10,22,48,0.45)] disabled:opacity-50"
+                            className="w-full flex items-center justify-center gap-2 py-3 bg-brand-lightBlue text-white font-bold rounded-xl border-2 border-brand-blue hover:-translate-y-0.5 transition-transform shadow-[4px_4px_0px_0px_rgba(10,22,48,0.45)] disabled:opacity-50"
                         >
                             <Plus size={16} /> {adding ? "Adding..." : "Add Slot"}
                         </button>
@@ -160,14 +160,14 @@ export default function MyAvailabilityPage() {
                 {/* Slot List */}
                 <div className="space-y-6">
                     {upcoming.length === 0 ? (
-                        <div className="bg-white border-2 border-dashed border-brand-blueDark/20 rounded-2xl p-12 text-center">
-                            <CalendarDays size={40} className="mx-auto text-brand-blueDark/20 mb-4" />
-                            <p className="font-display font-extrabold text-brand-blueDark/40 text-lg">No upcoming slots</p>
-                            <p className="text-sm text-brand-blueDark/30 mt-1">Add timeslots on the left to make yourself available for interviews.</p>
+                        <div className="bg-white border-2 border-dashed border-brand-blue/20 rounded-2xl p-12 text-center">
+                            <CalendarDays size={40} className="mx-auto text-brand-blue/20 mb-4" />
+                            <p className="font-display font-extrabold text-brand-blue/40 text-lg">No upcoming slots</p>
+                            <p className="text-sm text-brand-blue/30 mt-1">Add timeslots on the left to make yourself available for interviews.</p>
                         </div>
                     ) : upcoming.map(([day, slots]) => (
                         <div key={day}>
-                            <h3 className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/40 mb-3">
+                            <h3 className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/40 mb-3">
                                 {format(new Date(day), "EEEE, MMMM d, yyyy")}
                             </h3>
                             <div className="space-y-2">
@@ -177,16 +177,16 @@ export default function MyAvailabilityPage() {
                                         className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all ${
                                             slot.isBooked
                                                 ? "bg-brand-green/5 border-brand-green/30"
-                                                : "bg-white border-brand-blueDark/10 hover:border-brand-blueDark/20"
+                                                : "bg-white border-brand-blue/10 hover:border-brand-blue/20"
                                         }`}
                                     >
                                         <div className="flex items-center gap-3">
-                                            <div className={`w-2 h-8 rounded-full ${slot.isBooked ? "bg-brand-green" : "bg-brand-blue/30"}`} />
+                                            <div className={`w-2 h-8 rounded-full ${slot.isBooked ? "bg-brand-green" : "bg-brand-lightBlue/30"}`} />
                                             <div>
-                                                <p className="font-bold text-brand-blueDark text-sm">
+                                                <p className="font-bold text-brand-blue text-sm">
                                                     {format(slot.startTime, "h:mm a")} — {format(slot.endTime, "h:mm a")}
                                                 </p>
-                                                <p className={`text-[10px] font-extrabold uppercase tracking-widest mt-0.5 ${slot.isBooked ? "text-brand-green" : "text-brand-blueDark/30"}`}>
+                                                <p className={`text-[10px] font-extrabold uppercase tracking-widest mt-0.5 ${slot.isBooked ? "text-brand-green" : "text-brand-blue/30"}`}>
                                                     {slot.isBooked ? "Booked by Applicant" : "Available"}
                                                 </p>
                                             </div>
@@ -194,7 +194,7 @@ export default function MyAvailabilityPage() {
                                         {!slot.isBooked && (
                                             <button
                                                 onClick={() => handleRemove(slot._id)}
-                                                className="p-2 text-brand-blueDark/30 hover:text-brand-red hover:bg-brand-red/10 rounded-lg transition-all"
+                                                className="p-2 text-brand-blue/30 hover:text-brand-red hover:bg-brand-red/10 rounded-lg transition-all"
                                                 title="Remove slot"
                                             >
                                                 <Trash2 size={16} />

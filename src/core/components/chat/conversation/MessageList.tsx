@@ -16,6 +16,9 @@ interface MessageListProps {
 export function MessageList({ channelId }: MessageListProps) {
     const bottomRef = useRef<HTMLDivElement>(null);
     const listRef = useRef<HTMLDivElement>(null);
+    // Track scroll height before loadMore so we can restore position after prepend.
+    const prevScrollHeight = useRef<number>(0);
+    const isLoadingMore = useRef(false);
 
     const { results, status, loadMore } = usePaginatedQuery(
         api.chatMessages.listMessages,
@@ -26,16 +29,39 @@ export function MessageList({ channelId }: MessageListProps) {
     // Reverse for chronological order (query returns desc)
     const messages = [...results].reverse();
 
-    // Scroll to bottom on new messages
+    // The ID of the chronologically newest message (last in the array).
+    const lastMessageId = messages.at(-1)?._id;
+
+    // Scroll to bottom only when a genuinely new message arrives at the tail —
+    // NOT when historical messages are prepended via loadMore.
     useEffect(() => {
+        if (!lastMessageId) return;
         bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, [results.length]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [lastMessageId]);
+
+    // After loadMore resolves (status flips from "LoadingMore"), restore the
+    // scroll position so the view doesn't jump to the top.
+    useEffect(() => {
+        if (status === "LoadingMore") {
+            isLoadingMore.current = true;
+        } else if (isLoadingMore.current) {
+            isLoadingMore.current = false;
+            const el = listRef.current;
+            if (el) {
+                // Scroll down by however much content was prepended.
+                el.scrollTop = el.scrollHeight - prevScrollHeight.current;
+            }
+        }
+    }, [status]);
 
     // Load more on scroll to top
     const handleScroll = () => {
         const el = listRef.current;
         if (!el) return;
         if (el.scrollTop < 100 && status === "CanLoadMore") {
+            // Capture scroll height before the new items are added.
+            prevScrollHeight.current = el.scrollHeight;
             loadMore(50);
         }
     };
@@ -49,13 +75,13 @@ export function MessageList({ channelId }: MessageListProps) {
             {/* Load more spinner */}
             {status === "LoadingMore" && (
                 <div className="flex justify-center py-4">
-                    <Loader2 size={18} className="animate-spin text-brand-blue/50" />
+                    <Loader2 size={18} className="animate-spin text-brand-lightBlue/50" />
                 </div>
             )}
 
             {/* Empty state */}
             {status !== "LoadingFirstPage" && messages.length === 0 && (
-                <div className="flex flex-col items-center justify-center h-full gap-2 text-brand-blueDark/30">
+                <div className="flex flex-col items-center justify-center h-full gap-2 text-brand-blue/30">
                     <span className="text-4xl">💬</span>
                     <p className="text-sm font-medium">No messages yet. Say something!</p>
                 </div>
@@ -64,7 +90,7 @@ export function MessageList({ channelId }: MessageListProps) {
             {/* Loading first page */}
             {status === "LoadingFirstPage" && (
                 <div className="flex justify-center items-center h-full">
-                    <Loader2 size={24} className="animate-spin text-brand-blue/50" />
+                    <Loader2 size={24} className="animate-spin text-brand-lightBlue/50" />
                 </div>
             )}
 

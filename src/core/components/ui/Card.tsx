@@ -10,9 +10,9 @@ interface CardProps {
 }
 
 const variantStyles: Record<CardVariant, string> = {
-    minimal: 'bg-white border border-gray-200 shadow-sm',
-    subtle: 'bg-gray-100',
-    bordered: 'bg-white border border-gray-300 shadow-sm',
+    minimal: 'bg-white border-2 border-brand-blue/15 shadow-[2px_2px_0px_0px_rgba(57,103,153,0.10)]',
+    subtle: 'bg-brand-bgLight border-2 border-brand-blue/10',
+    bordered: 'bg-white border-2 border-brand-blue shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)]',
 };
 
 export function Card({
@@ -21,9 +21,9 @@ export function Card({
     variant = 'minimal',
     interactive = false,
 }: CardProps) {
-    const baseStyles = 'rounded-xl overflow-hidden';
+    const baseStyles = 'rounded-tl-xl rounded-br-xl overflow-hidden';
     const interactiveStyles = interactive
-        ? 'hover:border-gray-400 hover:shadow-md transition-all duration-300'
+        ? 'hover:border-brand-blue/40 hover:shadow-[6px_6px_0px_0px_rgba(57,103,153,0.15)] hover:-translate-y-[2px] hover:-translate-x-[2px] transition-all duration-200 cursor-pointer'
         : '';
 
     return (

@@ -80,7 +80,7 @@ export function MessageComposer({
         ],
         editorProps: {
             attributes: {
-                class: "outline-none min-h-[40px] max-h-32 sm:max-h-48 overflow-y-auto custom-scrollbar text-sm text-brand-blueDark leading-relaxed py-2.5 px-3 [&_p]:m-0 [&_p+p]:mt-1 [&_strong]:font-bold [&_em]:italic [&_code]:bg-brand-blueDark/8 [&_code]:px-1 [&_code]:rounded [&_code]:font-mono [&_code]:text-xs [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_.mention]:bg-brand-blue/10 [&_.mention]:text-brand-blue [&_.mention]:font-semibold [&_.mention]:px-1 [&_.mention]:rounded [&_a]:text-brand-blue [&_a]:underline",
+                class: "outline-none min-h-[40px] max-h-32 sm:max-h-48 overflow-y-auto custom-scrollbar text-sm text-brand-blue leading-relaxed py-2.5 px-3 [&_p]:m-0 [&_p+p]:mt-1 [&_strong]:font-bold [&_em]:italic [&_code]:bg-brand-blue/8 [&_code]:px-1 [&_code]:rounded [&_code]:font-mono [&_code]:text-xs [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_.mention]:bg-brand-lightBlue/10 [&_.mention]:text-brand-lightBlue [&_.mention]:font-semibold [&_.mention]:px-1 [&_.mention]:rounded [&_a]:text-brand-lightBlue [&_a]:underline",
             },
             handleKeyDown: (_view, event) => {
                 if (event.key === "Enter" && !event.shiftKey) {
@@ -175,8 +175,8 @@ export function MessageComposer({
 
     if (canSend === false) {
         return (
-            <div className="px-4 py-3 border-t-2 border-brand-blueDark/8">
-                <p className="text-xs text-center text-brand-blueDark/35 font-medium">
+            <div className="px-4 py-3 border-t-2 border-brand-blue/8">
+                <p className="text-xs text-center text-brand-blue/35 font-medium">
                     You don't have permission to send messages in this channel.
                 </p>
             </div>
@@ -186,8 +186,8 @@ export function MessageComposer({
     const btnClass = (active = false) =>
         `p-1.5 rounded-lg transition-colors ${
             active
-                ? "bg-brand-blue/15 text-brand-blue"
-                : "text-brand-blueDark/35 hover:bg-brand-bgLight hover:text-brand-blueDark"
+                ? "bg-brand-lightBlue/15 text-brand-lightBlue"
+                : "text-brand-blue/35 hover:bg-brand-bgLight hover:text-brand-blue"
         }`;
 
     return (
@@ -201,9 +201,9 @@ export function MessageComposer({
                 />
             )}
 
-            <div className="border-2 border-brand-blueDark/15 rounded-tl-xl rounded-br-xl focus-within:border-brand-blueDark/40 transition-colors bg-white shadow-[1px_1px_0px_0px_rgba(10,22,48,0.06)]">
+            <div className="border-2 border-brand-blue/15 rounded-tl-xl rounded-br-xl focus-within:border-brand-blue/40 transition-colors bg-white shadow-[1px_1px_0px_0px_rgba(10,22,48,0.06)]">
                 {/* Toolbar — horizontally scrollable on mobile so all buttons remain accessible */}
-                <div className="flex items-center gap-0.5 px-2 pt-1.5 pb-1 border-b border-brand-blueDark/6 overflow-x-auto no-scrollbar">
+                <div className="flex items-center gap-0.5 px-2 pt-1.5 pb-1 border-b border-brand-blue/6 overflow-x-auto no-scrollbar">
                     <button type="button" title="Bold (⌘B)" onClick={() => editor?.chain().focus().toggleBold().run()} className={btnClass(editor?.isActive("bold"))}>
                         <Bold size={13} />
                     </button>
@@ -217,7 +217,7 @@ export function MessageComposer({
                         <List size={13} />
                     </button>
 
-                    <div className="w-px h-4 bg-brand-blueDark/8 mx-1" />
+                    <div className="w-px h-4 bg-brand-blue/8 mx-1" />
 
                     <button type="button" title="Attach image or file" onClick={() => fileInputRef.current?.click()} className={btnClass()}>
                         <ImagePlus size={13} />
@@ -249,16 +249,16 @@ export function MessageComposer({
 
                 {/* Send row */}
                 <div className="flex items-center justify-between px-2 pb-1.5 pt-1">
-                    <span className="hidden sm:block text-[10px] text-brand-blueDark/25 font-medium">
+                    <span className="hidden sm:block text-[10px] text-brand-blue/25 font-medium">
                         Enter to send · Shift+Enter for newline · @ to mention
                     </span>
-                    <span className="block sm:hidden text-[10px] text-brand-blueDark/25 font-medium">
+                    <span className="block sm:hidden text-[10px] text-brand-blue/25 font-medium">
                         @ to mention
                     </span>
                     <button
                         type="button"
                         onClick={handleSend}
-                        className="flex items-center gap-1.5 px-3 py-1.5 bg-brand-blueDark text-white text-xs font-bold rounded-tl-lg rounded-br-lg hover:bg-brand-blue transition-colors shadow-[2px_2px_0px_0px_rgba(10,22,48,0.25)] active:translate-y-px active:shadow-none"
+                        className="flex items-center gap-1.5 px-3 py-1.5 bg-brand-blue text-white text-xs font-bold rounded-tl-lg rounded-br-lg hover:bg-brand-lightBlue transition-colors shadow-[2px_2px_0px_0px_rgba(10,22,48,0.25)] active:translate-y-px active:shadow-none"
                     >
                         <Send size={12} />
                         Send

@@ -49,15 +49,15 @@ export function AvailabilityDrawer({ user, isOpen, onClose }: Props) {
 
     return (
         <div className="fixed inset-0 z-50 flex justify-end bg-gray-900/50 backdrop-blur-sm">
-            <div className="w-full max-w-md bg-white border-l-4 border-brand-blueDark h-full shadow-[-12px_0px_0px_0px_rgba(37,99,235,0.2)] flex flex-col animate-in slide-in-from-right duration-300">
+            <div className="w-full max-w-md bg-white border-l-4 border-brand-blue h-full shadow-[-12px_0px_0px_0px_rgba(37,99,235,0.2)] flex flex-col animate-in slide-in-from-right duration-300">
                 {/* Header */}
-                <div className="p-6 border-b-2 border-brand-blueDark flex justify-between items-center bg-brand-bgLight shrink-0">
+                <div className="p-6 border-b-2 border-brand-blue flex justify-between items-center bg-brand-bgLight shrink-0">
                     <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 bg-brand-bgLight border-2 border-brand-blueDark rounded-lg flex items-center justify-center">
-                            <CalendarDays size={16} className="text-brand-blueDark" />
+                        <div className="w-8 h-8 bg-brand-bgLight border-2 border-brand-blue rounded-lg flex items-center justify-center">
+                            <CalendarDays size={16} className="text-brand-blue" />
                         </div>
                         <div>
-                            <h3 className="text-xl font-display font-extrabold text-brand-blueDark">My Availability</h3>
+                            <h3 className="text-xl font-display font-extrabold text-brand-blue">My Availability</h3>
                             <p className="text-sm font-medium text-brand-darkBlue/70 mt-0.5">Manage interview slots</p>
                         </div>
                     </div>
@@ -67,27 +67,27 @@ export function AvailabilityDrawer({ user, isOpen, onClose }: Props) {
                 </div>
 
                 {/* Add Slot Form */}
-                <div className="p-6 bg-white border-b-2 border-brand-blueDark/10 shrink-0">
-                    <h4 className="text-sm font-bold text-brand-blueDark mb-4">Add Timeslot</h4>
+                <div className="p-6 bg-white border-b-2 border-brand-blue/10 shrink-0">
+                    <h4 className="text-sm font-bold text-brand-blue mb-4">Add Timeslot</h4>
                     <div className="space-y-4">
                         <div>
-                            <label className="block text-[10px] font-extrabold text-brand-blueDark/50 uppercase tracking-widest mb-1">Date</label>
+                            <label className="block text-[10px] font-extrabold text-brand-blue/50 uppercase tracking-widest mb-1">Date</label>
                             <input
                                 type="date"
                                 value={selectedDate}
                                 onChange={e => setSelectedDate(e.target.value)}
                                 min={new Date().toISOString().split("T")[0]}
-                                className="w-full p-2.5 bg-brand-bgLight/50 border-2 border-brand-blueDark/20 rounded-lg focus:border-brand-blueDark outline-none text-sm font-bold text-brand-blueDark"
+                                className="w-full p-2.5 bg-brand-bgLight/50 border-2 border-brand-blue/20 rounded-lg focus:border-brand-blue outline-none text-sm font-bold text-brand-blue"
                             />
                         </div>
                         <div className="grid grid-cols-2 gap-3">
                             <div>
-                                <label className="block text-[10px] font-extrabold text-brand-blueDark/50 uppercase tracking-widest mb-1">Start</label>
-                                <input type="time" value={startTime} onChange={e => setStartTime(e.target.value)} className="w-full p-2.5 bg-brand-bgLight/50 border-2 border-brand-blueDark/20 rounded-lg focus:border-brand-blueDark outline-none text-sm font-bold text-brand-blueDark" />
+                                <label className="block text-[10px] font-extrabold text-brand-blue/50 uppercase tracking-widest mb-1">Start</label>
+                                <input type="time" value={startTime} onChange={e => setStartTime(e.target.value)} className="w-full p-2.5 bg-brand-bgLight/50 border-2 border-brand-blue/20 rounded-lg focus:border-brand-blue outline-none text-sm font-bold text-brand-blue" />
                             </div>
                             <div>
-                                <label className="block text-[10px] font-extrabold text-brand-blueDark/50 uppercase tracking-widest mb-1">End</label>
-                                <input type="time" value={endTime} onChange={e => setEndTime(e.target.value)} className="w-full p-2.5 bg-brand-bgLight/50 border-2 border-brand-blueDark/20 rounded-lg focus:border-brand-blueDark outline-none text-sm font-bold text-brand-blueDark" />
+                                <label className="block text-[10px] font-extrabold text-brand-blue/50 uppercase tracking-widest mb-1">End</label>
+                                <input type="time" value={endTime} onChange={e => setEndTime(e.target.value)} className="w-full p-2.5 bg-brand-bgLight/50 border-2 border-brand-blue/20 rounded-lg focus:border-brand-blue outline-none text-sm font-bold text-brand-blue" />
                             </div>
                         </div>
                         <Button onClick={handleAddSlot} variant="geometric-primary" className="w-full flex items-center justify-center gap-2 py-3">
@@ -98,22 +98,22 @@ export function AvailabilityDrawer({ user, isOpen, onClose }: Props) {
 
                 {/* Slot List */}
                 <div className="flex-1 overflow-y-auto p-6 bg-white custom-scrollbar">
-                    <h4 className="text-sm font-bold text-brand-blueDark mb-4">Upcoming Schedule</h4>
+                    <h4 className="text-sm font-bold text-brand-blue mb-4">Upcoming Schedule</h4>
                     {Object.keys(groupedSlots).length === 0 ? (
-                        <div className="text-center py-10 px-4 bg-white rounded-xl border-2 border-dashed border-brand-blueDark/20">
-                            <p className="text-sm font-bold text-brand-blueDark/50">No slots defined</p>
+                        <div className="text-center py-10 px-4 bg-white rounded-xl border-2 border-dashed border-brand-blue/20">
+                            <p className="text-sm font-bold text-brand-blue/50">No slots defined</p>
                             <p className="text-xs text-brand-darkBlue/70 mt-1 font-medium">Add timeslots above to get booked.</p>
                         </div>
                     ) : (
                         <div className="space-y-6">
                             {Object.entries(groupedSlots).sort(([a], [b]) => a.localeCompare(b)).map(([date, slots]) => (
                                 <div key={date}>
-                                    <h5 className="text-[10px] font-extrabold text-brand-blueDark/50 uppercase tracking-widest mb-2">{date}</h5>
+                                    <h5 className="text-[10px] font-extrabold text-brand-blue/50 uppercase tracking-widest mb-2">{date}</h5>
                                     <div className="space-y-2">
                                         {slots.sort((a, b) => a.startTime - b.startTime).map(slot => (
-                                            <div key={slot._id} className={`flex items-center justify-between p-3 rounded-lg border-2 transition-all ${slot.isBooked ? "bg-brand-bgLight border-brand-green/30" : "bg-white border-brand-blueDark/10"}`}>
+                                            <div key={slot._id} className={`flex items-center justify-between p-3 rounded-lg border-2 transition-all ${slot.isBooked ? "bg-brand-bgLight border-brand-green/30" : "bg-white border-brand-blue/10"}`}>
                                                 <div>
-                                                    <div className="font-bold text-brand-blueDark">
+                                                    <div className="font-bold text-brand-blue">
                                                         {new Date(slot.startTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} — {new Date(slot.endTime).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                                                     </div>
                                                     <div className={`text-xs mt-0.5 font-bold ${slot.isBooked ? "text-brand-green" : "text-brand-darkBlue/50"}`}>
@@ -123,7 +123,7 @@ export function AvailabilityDrawer({ user, isOpen, onClose }: Props) {
                                                 {!slot.isBooked && (
                                                     <button
                                                         onClick={() => removeAvailability({ availabilityId: slot._id })}
-                                                        className="p-2 text-brand-blueDark/40 hover:text-brand-red hover:bg-brand-red/10 rounded-md transition-colors"
+                                                        className="p-2 text-brand-blue/40 hover:text-brand-red hover:bg-brand-red/10 rounded-md transition-colors"
                                                         title="Remove slot"
                                                     >
                                                         <Trash2 size={16} />

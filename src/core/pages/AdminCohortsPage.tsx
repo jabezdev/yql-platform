@@ -21,7 +21,7 @@ interface CohortDoc {
 }
 
 const STATUS_STYLES: Record<CohortStatus, string> = {
-    upcoming: "bg-brand-blue/10 text-brand-blue border-brand-blue/30",
+    upcoming: "bg-brand-lightBlue/10 text-brand-lightBlue border-brand-lightBlue/30",
     active: "bg-brand-green/10 text-brand-green border-brand-green/30",
     past: "bg-gray-100 text-gray-500 border-gray-200",
 };
@@ -151,19 +151,19 @@ function CohortModal({
     };
 
     const inputCls =
-        "w-full p-2.5 bg-brand-bgLight border-2 border-brand-blueDark/20 rounded-lg focus:border-brand-blueDark outline-none font-medium text-brand-blueDark text-sm transition-colors";
-    const labelCls = "block text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/50 mb-1";
+        "w-full p-2.5 bg-brand-bgLight border-2 border-brand-blue/20 rounded-lg focus:border-brand-blue outline-none font-medium text-brand-blue text-sm transition-colors";
+    const labelCls = "block text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/50 mb-1";
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <div className="absolute inset-0 bg-brand-blueDark/60 backdrop-blur-sm" onClick={onClose} />
-            <div className="relative w-full max-w-xl bg-white border-2 border-brand-blueDark rounded-tl-2xl rounded-br-2xl shadow-[8px_8px_0px_0px_rgba(10,22,48,0.3)] overflow-hidden">
-                <div className="flex items-center justify-between p-5 border-b-2 border-brand-blueDark bg-brand-blue/5">
-                    <h2 className="font-display font-extrabold text-lg text-brand-blueDark">
+            <div className="absolute inset-0 bg-brand-blue/60 backdrop-blur-sm" onClick={onClose} />
+            <div className="relative w-full max-w-xl bg-white border-2 border-brand-blue rounded-tl-2xl rounded-br-2xl shadow-[8px_8px_0px_0px_rgba(10,22,48,0.3)] overflow-hidden">
+                <div className="flex items-center justify-between p-5 border-b-2 border-brand-blue bg-brand-lightBlue/5">
+                    <h2 className="font-display font-extrabold text-lg text-brand-blue">
                         {cohort ? "Edit Cohort" : "New Cohort"}
                     </h2>
-                    <button onClick={onClose} className="p-1.5 hover:bg-brand-blueDark/10 rounded-lg transition-colors">
-                        <X size={18} className="text-brand-blueDark" />
+                    <button onClick={onClose} className="p-1.5 hover:bg-brand-blue/10 rounded-lg transition-colors">
+                        <X size={18} className="text-brand-blue" />
                     </button>
                 </div>
 
@@ -238,11 +238,11 @@ function CohortModal({
                         </div>
                     </div>
 
-                    <div className="pt-4 border-t-2 border-brand-blueDark/10">
+                    <div className="pt-4 border-t-2 border-brand-blue/10">
                         <button
                             type="submit"
                             disabled={saving}
-                            className="w-full flex items-center justify-center gap-2 py-3 bg-brand-blue text-white font-bold rounded-lg border-2 border-brand-blueDark hover:-translate-y-0.5 transition-transform shadow-[4px_4px_0px_0px_rgba(10,22,48,0.45)] disabled:opacity-50"
+                            className="w-full flex items-center justify-center gap-2 py-3 bg-brand-lightBlue text-white font-bold rounded-lg border-2 border-brand-blue hover:-translate-y-0.5 transition-transform shadow-[4px_4px_0px_0px_rgba(10,22,48,0.45)] disabled:opacity-50"
                         >
                             <CheckCircle2 size={16} />
                             {saving ? "Saving..." : cohort ? "Save Changes" : "Create Cohort"}
@@ -284,7 +284,7 @@ export default function AdminCohortsPage() {
     const addBtn = (
         <button
             onClick={openCreate}
-            className="flex items-center gap-2 px-4 py-2 bg-brand-blue text-white text-sm font-bold border-2 border-brand-blueDark rounded-lg hover:-translate-y-0.5 transition-transform shadow-[4px_4px_0px_0px_rgba(10,22,48,0.45)]"
+            className="flex items-center gap-2 px-4 py-2 bg-brand-lightBlue text-white text-sm font-bold border-2 border-brand-blue rounded-lg hover:-translate-y-0.5 transition-transform shadow-[4px_4px_0px_0px_rgba(10,22,48,0.45)]"
         >
             <Plus size={14} /> New Cohort
         </button>
@@ -307,13 +307,13 @@ export default function AdminCohortsPage() {
             />
 
             {cohorts.length === 0 && (
-                <div className="bg-white border-2 border-dashed border-brand-blueDark/20 rounded-2xl p-12 text-center">
-                    <Users size={40} className="mx-auto text-brand-blueDark/20 mb-4" />
-                    <p className="font-display font-extrabold text-brand-blueDark/40 text-lg">No cohorts yet</p>
-                    <p className="text-sm text-brand-blueDark/30 mt-1">Create your first cohort to start the recruitment pipeline.</p>
+                <div className="bg-white border-2 border-dashed border-brand-blue/20 rounded-2xl p-12 text-center">
+                    <Users size={40} className="mx-auto text-brand-blue/20 mb-4" />
+                    <p className="font-display font-extrabold text-brand-blue/40 text-lg">No cohorts yet</p>
+                    <p className="text-sm text-brand-blue/30 mt-1">Create your first cohort to start the recruitment pipeline.</p>
                     <button
                         onClick={openCreate}
-                        className="mt-6 flex items-center gap-2 mx-auto px-5 py-2.5 bg-brand-blue text-white font-bold rounded-lg border-2 border-brand-blueDark hover:-translate-y-0.5 transition-transform shadow-[4px_4px_0px_0px_rgba(10,22,48,0.45)]"
+                        className="mt-6 flex items-center gap-2 mx-auto px-5 py-2.5 bg-brand-lightBlue text-white font-bold rounded-lg border-2 border-brand-blue hover:-translate-y-0.5 transition-transform shadow-[4px_4px_0px_0px_rgba(10,22,48,0.45)]"
                     >
                         <Plus size={16} /> Create First Cohort
                     </button>
@@ -324,23 +324,23 @@ export default function AdminCohortsPage() {
                 if (grouped[status].length === 0) return null;
                 return (
                     <div key={status}>
-                        <h2 className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/40 mb-3">
+                        <h2 className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/40 mb-3">
                             {status === "active" ? "Active" : status === "upcoming" ? "Upcoming" : "Past"}
                         </h2>
                         <div className="space-y-3">
                             {grouped[status].map((cohort) => (
                                 <div
                                     key={cohort._id}
-                                    className="bg-white border-2 border-brand-blueDark/10 rounded-2xl p-5 hover:border-brand-blueDark/20 transition-colors flex flex-col sm:flex-row sm:items-center gap-4"
+                                    className="bg-white border-2 border-brand-blue/10 rounded-2xl p-5 hover:border-brand-blue/20 transition-colors flex flex-col sm:flex-row sm:items-center gap-4"
                                 >
                                     <div className="flex-1 min-w-0">
                                         <div className="flex items-center gap-3 mb-2">
-                                            <h3 className="font-display font-extrabold text-brand-blueDark text-lg">{cohort.name}</h3>
+                                            <h3 className="font-display font-extrabold text-brand-blue text-lg">{cohort.name}</h3>
                                             <span className={`text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 border rounded-lg ${STATUS_STYLES[cohort.status]}`}>
                                                 {cohort.status}
                                             </span>
                                         </div>
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-medium text-brand-blueDark/60">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-medium text-brand-blue/60">
                                             <div className="flex items-center gap-1.5">
                                                 <Calendar size={12} className="shrink-0" />
                                                 <span>
@@ -358,7 +358,7 @@ export default function AdminCohortsPage() {
                                     <div className="flex items-center gap-2 shrink-0">
                                         <button
                                             onClick={() => openEdit(cohort)}
-                                            className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-brand-blue bg-brand-blue/5 hover:bg-brand-blue/10 border border-brand-blue/20 rounded-lg transition-colors"
+                                            className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-brand-lightBlue bg-brand-lightBlue/5 hover:bg-brand-lightBlue/10 border border-brand-lightBlue/20 rounded-lg transition-colors"
                                         >
                                             <Pencil size={13} /> Edit
                                         </button>

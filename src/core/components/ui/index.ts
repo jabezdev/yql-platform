@@ -12,5 +12,6 @@ export { GeometricBorder } from './GeometricBorder';
 export { default as GeometricPattern } from './GeometricPattern';
 
 // Dashboard components
-export { DashboardCard, StatCard, DashboardSectionTitle } from './DashboardCard';
+export { DashboardCard, InfoCard, StatCard, DashboardSectionTitle } from './DashboardCard';
+export { DateInput, TimeInput, DateTimeInput, DateRangeInput, TimeSlotPicker } from './DateTimePicker';
 export { PageHeader, DashboardPage, StatusBadge, EmptyState } from './PageHeader';

@@ -47,7 +47,7 @@ export function ChannelTreeItem({
                     {hasChildren && (
                         <button
                             onClick={() => setExpanded(!expanded)}
-                            className="w-4 h-4 flex items-center justify-center text-brand-blueDark/25 hover:text-brand-blueDark/50 transition-colors"
+                            className="w-4 h-4 flex items-center justify-center text-brand-blue/25 hover:text-brand-blue/50 transition-colors"
                         >
                             {expanded ? <ChevronDown size={12} /> : <ChevronRight size={12} />}
                         </button>
@@ -59,13 +59,13 @@ export function ChannelTreeItem({
                     to={`/chat/${node._id}`}
                     className={`flex-1 flex items-center gap-1.5 px-2 py-1.5 rounded-lg transition-all text-xs min-w-0 ${
                         isActive
-                            ? "bg-brand-blueDark text-white font-semibold shadow-[1px_1px_0px_0px_rgba(10,22,48,0.3)]"
-                            : "text-brand-blueDark/65 hover:bg-brand-blueDark/[0.06] hover:text-brand-blueDark font-medium"
+                            ? "bg-brand-blue text-white font-semibold shadow-[1px_1px_0px_0px_rgba(10,22,48,0.3)]"
+                            : "text-brand-blue/65 hover:bg-brand-blue/[0.06] hover:text-brand-blue font-medium"
                     }`}
                 >
                     <Hash
                         size={11}
-                        className={`flex-shrink-0 ${isActive ? "text-brand-yellow" : "text-brand-blueDark/30"}`}
+                        className={`flex-shrink-0 ${isActive ? "text-brand-yellow" : "text-brand-blue/30"}`}
                     />
                     <span className="flex-1 truncate">
                         {node.icon && <span className="mr-0.5">{node.icon}</span>}
@@ -79,7 +79,7 @@ export function ChannelTreeItem({
                     <button
                         onClick={() => onCreateChild(node._id, node.type)}
                         title={`Add sub-channel under ${node.name}`}
-                        className="w-5 h-5 flex items-center justify-center rounded text-brand-blueDark/25 hover:text-brand-blue hover:bg-brand-blue/[0.08] transition-colors flex-shrink-0"
+                        className="w-5 h-5 flex items-center justify-center rounded text-brand-blue/25 hover:text-brand-lightBlue hover:bg-brand-lightBlue/[0.08] transition-colors flex-shrink-0"
                     >
                         <Plus size={11} />
                     </button>

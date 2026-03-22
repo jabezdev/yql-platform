@@ -69,30 +69,30 @@ export const MentionList = forwardRef<
 
     if (props.items.length === 0) {
         return (
-            <div className="bg-white border-2 border-brand-blueDark/10 rounded-tl-xl rounded-br-xl shadow-[2px_2px_0px_0px_rgba(10,22,48,0.10)] px-3 py-2 text-xs text-brand-blueDark/40">
+            <div className="bg-white border-2 border-brand-blue/10 rounded-tl-xl rounded-br-xl shadow-[2px_2px_0px_0px_rgba(10,22,48,0.10)] px-3 py-2 text-xs text-brand-blue/40">
                 No members found
             </div>
         );
     }
 
     return (
-        <div className="bg-white border-2 border-brand-blueDark/10 rounded-tl-xl rounded-br-xl shadow-[2px_2px_0px_0px_rgba(10,22,48,0.10)] overflow-hidden min-w-[160px] max-w-[240px]">
+        <div className="bg-white border-2 border-brand-blue/10 rounded-tl-xl rounded-br-xl shadow-[2px_2px_0px_0px_rgba(10,22,48,0.10)] overflow-hidden min-w-[160px] max-w-[240px]">
             {props.items.map((item, i) => (
                 <button
                     key={item._id}
                     onClick={() => selectItem(i)}
                     className={`w-full flex items-center gap-2 px-3 py-2 text-left transition-colors ${
                         i === selectedIndex
-                            ? "bg-brand-blue/8 text-brand-blueDark"
-                            : "text-brand-blueDark hover:bg-brand-bgLight"
+                            ? "bg-brand-lightBlue/8 text-brand-blue"
+                            : "text-brand-blue hover:bg-brand-bgLight"
                     }`}
                 >
-                    <div className="w-5 h-5 rounded-md bg-brand-yellow border border-brand-blueDark/20 flex items-center justify-center text-[9px] font-bold text-brand-blueDark flex-shrink-0">
+                    <div className="w-5 h-5 rounded-md bg-brand-yellow border border-brand-blue/20 flex items-center justify-center text-[10px] font-bold text-brand-blue flex-shrink-0">
                         {item.name.charAt(0).toUpperCase()}
                     </div>
                     <div className="min-w-0">
                         <p className="text-xs font-medium truncate">{item.name}</p>
-                        <p className="text-[10px] text-brand-blueDark/40 truncate">{item.role}</p>
+                        <p className="text-[10px] text-brand-blue/40 truncate">{item.role}</p>
                     </div>
                 </button>
             ))}

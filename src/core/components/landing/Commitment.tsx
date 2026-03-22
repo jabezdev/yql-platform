@@ -20,7 +20,7 @@ export default function Commitment() {
     ];
 
     return (
-        <Section id="commitment">
+        <Section variant="gray" id="commitment">
             <Container>
                 <div className="grid lg:grid-cols-2 gap-16">
                     <div>
@@ -29,10 +29,10 @@ export default function Commitment() {
                             {commitments.map((item, index) => (
                                 <div
                                     key={index}
-                                    className="flex flex-col gap-3 p-5 bg-white border-2 border-brand-blueDark/30 rounded-tl-xl rounded-br-xl shadow-[3px_3px_0px_0px_rgba(57,103,153,0.1)] hover:border-brand-blueDark hover:shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] transition-all duration-200"
+                                    className="flex flex-col gap-3 p-5 bg-white border-2 border-brand-blue/30 rounded-tl-xl rounded-br-xl shadow-[3px_3px_0px_0px_rgba(57,103,153,0.1)] hover:border-brand-blue hover:shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] transition-all duration-200"
                                 >
-                                    <item.icon className="text-brand-blueDark w-8 h-8" />
-                                    <span className="font-bold text-brand-blueDark font-display">{item.text}</span>
+                                    <item.icon className="text-brand-blue w-8 h-8" />
+                                    <span className="font-bold text-brand-blue font-display">{item.text}</span>
                                 </div>
                             ))}
                         </div>
@@ -40,7 +40,7 @@ export default function Commitment() {
 
                     <div>
                         <SectionTitle centered={false}>Growth Pathways</SectionTitle>
-                        <div className="bg-brand-blueDark text-white p-8 rounded-tl-2xl rounded-br-2xl shadow-[6px_6px_0px_0px_rgba(57,103,153,0.3)] relative overflow-hidden">
+                        <div className="bg-brand-blue text-white p-8 rounded-tl-2xl rounded-br-2xl shadow-[6px_6px_0px_0px_rgba(57,103,153,0.3)] relative overflow-hidden">
                             {/* Geometric corner decoration */}
                             <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-bl-full" />
                             <div className="absolute bottom-0 left-0 w-16 h-16 bg-brand-yellow/10 rounded-tr-full" />

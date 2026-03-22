@@ -24,12 +24,20 @@ export default {
           dark: '#111827',
         },
         brand: {
-          lightBlue: '#3986c0',
-          darkBlue: '#396798',
-          blue: '#3d8ccb',
-          blueDark: '#396799',
+          // ── 3-token blue scale ──────────────────────────────
+          // darkBlue  (#2f567f) → hover/press on brand-blue surfaces
+          // blue      (#396799) → PRIMARY: all text, borders, active fills
+          // lightBlue (#3d8ccb) → secondary: icons, links, subtle fills
+          // ────────────────────────────────────────────────────
+          darkBlue: '#2f567f',
+          blue: '#396799',
+          lightBlue: '#3d8ccb',
           yellow: '#fed432',
           wine: '#bc594f',
+          // true error/danger colour, distinct from wine
+          red: '#ef4444',
+          // success / positive indicator states
+          green: '#10b981',
           gray: '#97abc4',
           bgLight: '#f5f6f8',
         }

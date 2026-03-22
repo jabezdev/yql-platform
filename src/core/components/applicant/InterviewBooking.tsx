@@ -56,8 +56,8 @@ export default function InterviewBooking({ applicationId }: { applicationId: Id<
     }, {});
 
     return (
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-brand-blue/30">
-            <h3 className="text-xl font-semibold mb-2 flex items-center gap-2 text-brand-blue">
+        <div className="bg-white p-6 rounded-lg shadow-sm border border-brand-lightBlue/30">
+            <h3 className="text-xl font-semibold mb-2 flex items-center gap-2 text-brand-lightBlue">
                 <Clock size={24} />
                 Action Required: Book Your Interview
             </h3>
@@ -86,8 +86,8 @@ export default function InterviewBooking({ applicationId }: { applicationId: Id<
                                                 key={slot._id}
                                                 onClick={() => setSelectedSlotId(slot._id)}
                                                 className={`px-4 py-2 border rounded transition-colors text-sm font-medium ${selectedSlotId === slot._id
-                                                        ? 'bg-brand-blue text-white border-brand-blue'
-                                                        : 'bg-white text-gray-700 hover:border-brand-blue hover:text-brand-blue'
+                                                        ? 'bg-brand-lightBlue text-white border-brand-lightBlue'
+                                                        : 'bg-white text-gray-700 hover:border-brand-lightBlue hover:text-brand-lightBlue'
                                                     }`}
                                             >
                                                 {format(new Date(slot.startTime), 'h:mm a')}
@@ -101,7 +101,7 @@ export default function InterviewBooking({ applicationId }: { applicationId: Id<
                         <button
                             onClick={handleBook}
                             disabled={!selectedSlotId || isBooking}
-                            className="px-6 py-2 bg-brand-blue text-white font-medium rounded hover:bg-blue-600 disabled:opacity-50 transition-colors"
+                            className="px-6 py-2 bg-brand-lightBlue text-white font-medium rounded hover:bg-blue-600 disabled:opacity-50 transition-colors"
                         >
                             {isBooking ? 'Booking...' : 'Confirm Booking'}
                         </button>

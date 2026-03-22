@@ -19,13 +19,13 @@ export function TypingIndicator({ channelId }: TypingIndicatorProps) {
             : `${names[0]} and ${names.length - 1} others are typing…`;
 
     return (
-        <div className="flex items-center gap-1.5 px-4 py-1 text-[11px] text-brand-blueDark/40 font-medium shrink-0">
+        <div className="flex items-center gap-1.5 px-4 py-1 text-[11px] text-brand-blue/40 font-medium shrink-0">
             {/* Three bouncing dots */}
             <span className="flex items-center gap-0.5">
                 {[0, 1, 2].map((i) => (
                     <span
                         key={i}
-                        className="inline-block w-1 h-1 rounded-full bg-brand-blueDark/35 animate-bounce"
+                        className="inline-block w-1 h-1 rounded-full bg-brand-blue/35 animate-bounce"
                         style={{ animationDelay: `${i * 0.15}s` }}
                     />
                 ))}

@@ -21,7 +21,7 @@ export default function LoginPage() {
                     <h2 className="text-4xl font-display font-extrabold text-brand-darkBlue">
                         Welcome Back
                     </h2>
-                    <p className="mt-2 text-md text-brand-gray font-medium">
+                    <p className="mt-2 text-base text-brand-gray font-medium">
                         Sign in to access your dashboard
                     </p>
                 </div>
@@ -30,24 +30,24 @@ export default function LoginPage() {
                     <SignIn
                         routing="path"
                         path="/login"
-                        fallbackRedirectUrl="/dashboard"
+                        fallbackRedirectUrl="/dashboard/overview"
                         signUpUrl="/register"
                         appearance={{
                             elements: {
-                                card: "shadow-[8px_8px_0px_0px_rgba(10,22,48,0.4)] border-4 border-brand-blueDark bg-white rounded-none p-8",
+                                card: "shadow-[8px_8px_0px_0px_rgba(10,22,48,0.4)] border-4 border-brand-blue bg-white rounded-none p-8",
                                 headerTitle: "hidden",
                                 headerSubtitle: "hidden",
-                                formButtonPrimary: "bg-brand-blueDark hover:bg-brand-blue text-white font-bold py-3 px-4 rounded-none border-2 border-transparent hover:border-brand-blueDark shadow-[4px_4px_0px_0px_rgba(188,89,79,1)] transition-all active:translate-y-1 active:translate-x-1 active:shadow-none",
-                                formFieldInput: "rounded-none border-2 border-brand-gray/30 focus:ring-brand-blue focus:border-brand-blue bg-brand-bgLight py-3",
+                                formButtonPrimary: "bg-brand-blue hover:bg-brand-lightBlue text-white font-bold py-3 px-4 rounded-none border-2 border-transparent hover:border-brand-blue shadow-[4px_4px_0px_0px_rgba(188,89,79,1)] transition-all active:translate-y-1 active:translate-x-1 active:shadow-none",
+                                formFieldInput: "rounded-none border-2 border-brand-gray/30 focus:ring-brand-lightBlue focus:border-brand-lightBlue bg-brand-bgLight py-3",
                                 formFieldLabel: "text-brand-darkBlue font-medium mb-1",
                                 dividerLine: "bg-brand-gray/20",
                                 dividerText: "text-brand-gray font-medium",
-                                socialButtonsBlockButton: "rounded-none border-2 border-brand-gray/30 hover:border-brand-blueDark hover:bg-brand-bgLight transition-colors py-3 shadow-[2px_2px_0px_0px_rgba(57,103,153,0.2)]",
+                                socialButtonsBlockButton: "rounded-none border-2 border-brand-gray/30 hover:border-brand-blue hover:bg-brand-bgLight transition-colors py-3 shadow-[2px_2px_0px_0px_rgba(57,103,153,0.2)]",
                                 socialButtonsBlockButtonText: "text-brand-darkBlue font-bold",
                                 footerActionLink: "text-brand-wine hover:text-brand-wine/80 font-bold hover:underline",
                                 footer: "bg-white",
-                                identityPreviewEditButtonIcon: "text-brand-blueDark",
-                                formFieldSuccessText: "text-green-600",
+                                identityPreviewEditButtonIcon: "text-brand-blue",
+                                formFieldSuccessText: "text-brand-green",
                                 formFieldErrorText: "text-brand-red",
                                 internal_bpxf07: "hidden" // Hides the "Secured by Clerk" badge
                             }

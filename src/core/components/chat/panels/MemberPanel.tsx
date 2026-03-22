@@ -12,8 +12,8 @@ interface MemberPanelProps {
 
 const roleIcon = (role: "owner" | "admin" | "member") => {
     if (role === "owner") return <Crown size={11} className="text-brand-yellow" />;
-    if (role === "admin") return <Shield size={11} className="text-brand-blue/60" />;
-    return <User size={11} className="text-brand-blueDark/25" />;
+    if (role === "admin") return <Shield size={11} className="text-brand-lightBlue/60" />;
+    return <User size={11} className="text-brand-blue/25" />;
 };
 
 export function MemberPanel({ channelId }: MemberPanelProps) {
@@ -47,7 +47,7 @@ export function MemberPanel({ channelId }: MemberPanelProps) {
     if (!members) {
         return (
             <div className="flex justify-center py-6">
-                <Loader2 size={18} className="animate-spin text-brand-blue/50" />
+                <Loader2 size={18} className="animate-spin text-brand-lightBlue/50" />
             </div>
         );
     }
@@ -56,25 +56,25 @@ export function MemberPanel({ channelId }: MemberPanelProps) {
         <div className="flex flex-col flex-1 min-h-0">
             {/* Invite section (managers only) */}
             {isManager && (
-                <div className="px-3 py-2.5 border-b border-brand-blueDark/8 shrink-0">
+                <div className="px-3 py-2.5 border-b border-brand-blue/8 shrink-0">
                     {!showInvite ? (
                         <button
                             onClick={() => setShowInvite(true)}
-                            className="flex items-center gap-2 w-full text-xs font-medium text-brand-blue hover:text-brand-blue/80 transition-colors"
+                            className="flex items-center gap-2 w-full text-xs font-medium text-brand-lightBlue hover:text-brand-lightBlue/80 transition-colors"
                         >
                             <UserPlus size={13} />
                             Add members
                         </button>
                     ) : (
                         <div>
-                            <div className="flex items-center gap-2 bg-brand-bgLight border-2 border-brand-blueDark/10 rounded-lg px-2.5 py-1.5 focus-within:border-brand-blue/30 mb-2">
-                                <Search size={12} className="text-brand-blueDark/30 flex-shrink-0" />
+                            <div className="flex items-center gap-2 bg-brand-bgLight border-2 border-brand-blue/10 rounded-lg px-2.5 py-1.5 focus-within:border-brand-lightBlue/30 mb-2">
+                                <Search size={12} className="text-brand-blue/30 flex-shrink-0" />
                                 <input
                                     autoFocus
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
                                     placeholder="Find people..."
-                                    className="flex-1 bg-transparent text-xs text-brand-blueDark placeholder-brand-blueDark/30 outline-none"
+                                    className="flex-1 bg-transparent text-xs text-brand-blue placeholder-brand-blue/30 outline-none"
                                 />
                             </div>
                             <div className="max-h-36 overflow-y-auto custom-scrollbar">
@@ -87,21 +87,21 @@ export function MemberPanel({ channelId }: MemberPanelProps) {
                                     >
                                         <UserAvatar name={u.name} size="xs" />
                                         <div className="flex-1 min-w-0 text-left">
-                                            <p className="text-xs font-medium text-brand-blueDark truncate">{u.name}</p>
-                                            <p className="text-[10px] text-brand-blueDark/40">{u.role}</p>
+                                            <p className="text-xs font-medium text-brand-blue truncate">{u.name}</p>
+                                            <p className="text-[10px] text-brand-blue/40">{u.role}</p>
                                         </div>
-                                        <UserPlus size={12} className="text-brand-blue/50 flex-shrink-0" />
+                                        <UserPlus size={12} className="text-brand-lightBlue/50 flex-shrink-0" />
                                     </button>
                                 ))}
                                 {inviteable.length === 0 && (
-                                    <p className="text-xs text-brand-blueDark/35 text-center py-2">
+                                    <p className="text-xs text-brand-blue/35 text-center py-2">
                                         {search ? "No matches" : "Everyone is already a member"}
                                     </p>
                                 )}
                             </div>
                             <button
                                 onClick={() => { setShowInvite(false); setSearch(""); }}
-                                className="mt-1 text-[11px] text-brand-blueDark/35 hover:text-brand-blueDark transition-colors"
+                                className="mt-1 text-[11px] text-brand-blue/35 hover:text-brand-blue transition-colors"
                             >
                                 Done
                             </button>
@@ -112,7 +112,7 @@ export function MemberPanel({ channelId }: MemberPanelProps) {
 
             {/* Member list */}
             <div className="flex-1 overflow-y-auto custom-scrollbar px-3 py-2">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-brand-blueDark/35 mb-2">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-brand-blue/35 mb-2">
                     {members.length} Member{members.length !== 1 ? "s" : ""}
                 </p>
                 <div className="flex flex-col gap-0.5">
@@ -120,10 +120,10 @@ export function MemberPanel({ channelId }: MemberPanelProps) {
                         <div key={m._id} className="flex items-center gap-2.5 px-1 py-1.5 rounded-lg hover:bg-brand-bgLight transition-colors">
                             <UserAvatar name={m.user?.name ?? "?"} size="sm" />
                             <div className="flex-1 min-w-0">
-                                <p className="text-xs font-medium text-brand-blueDark truncate">
+                                <p className="text-xs font-medium text-brand-blue truncate">
                                     {m.user?.name ?? "Unknown"}
                                 </p>
-                                <p className="text-[10px] text-brand-blueDark/40">{m.user?.role ?? ""}</p>
+                                <p className="text-[10px] text-brand-blue/40">{m.user?.role ?? ""}</p>
                             </div>
                             <span className="flex-shrink-0">{roleIcon(m.role)}</span>
                         </div>

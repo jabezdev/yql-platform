@@ -27,7 +27,7 @@ export function InlineEditComposer({ messageId, initialBody, onDone }: InlineEdi
         content,
         editorProps: {
             attributes: {
-                class: "outline-none text-sm text-brand-blueDark leading-relaxed py-2 px-3 [&_p]:m-0 [&_strong]:font-bold [&_em]:italic [&_code]:bg-brand-blueDark/8 [&_code]:px-1 [&_code]:rounded [&_code]:font-mono [&_code]:text-xs",
+                class: "outline-none text-sm text-brand-blue leading-relaxed py-2 px-3 [&_p]:m-0 [&_strong]:font-bold [&_em]:italic [&_code]:bg-brand-blue/8 [&_code]:px-1 [&_code]:rounded [&_code]:font-mono [&_code]:text-xs",
             },
         },
         immediatelyRender: false,
@@ -63,13 +63,13 @@ export function InlineEditComposer({ messageId, initialBody, onDone }: InlineEdi
     }, [handleSave, onDone]);
 
     return (
-        <div className="border-2 border-brand-blue/30 rounded-tl-lg rounded-br-lg bg-white overflow-hidden">
+        <div className="border-2 border-brand-lightBlue/30 rounded-tl-lg rounded-br-lg bg-white overflow-hidden">
             <EditorContent editor={editor} />
-            <div className="flex items-center gap-1.5 px-2 py-1 border-t border-brand-blueDark/6 bg-brand-bgLight/50">
-                <span className="text-[10px] text-brand-blueDark/30 flex-1">Enter to save · Esc to cancel</span>
+            <div className="flex items-center gap-1.5 px-2 py-1 border-t border-brand-blue/6 bg-brand-bgLight/50">
+                <span className="text-[10px] text-brand-blue/30 flex-1">Enter to save · Esc to cancel</span>
                 <button
                     onClick={onDone}
-                    className="p-1 rounded text-brand-blueDark/40 hover:text-brand-blueDark transition-colors"
+                    className="p-1 rounded text-brand-blue/40 hover:text-brand-blue transition-colors"
                     title="Cancel"
                 >
                     <X size={12} />

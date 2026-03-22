@@ -16,7 +16,7 @@ const TIER_DESCRIPTIONS: Partial<Record<Role, string>> = {
 
 const MISSION_POINTS = [
     {
-        icon: <Target size={22} className="text-brand-blue" />,
+        icon: <Target size={22} className="text-brand-lightBlue" />,
         title: "Our Mission",
         body: "To cultivate the next generation of quantum computing professionals through hands-on research, industry exposure, and community-driven learning.",
     },
@@ -51,12 +51,12 @@ export default function AboutPage() {
             {/* Mission cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {MISSION_POINTS.map(point => (
-                    <div key={point.title} className="bg-white border-2 border-brand-blueDark rounded-tl-2xl rounded-br-2xl shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] p-5 space-y-3">
-                        <div className="w-10 h-10 bg-brand-bgLight border-2 border-brand-blueDark/20 rounded-tl-lg rounded-br-lg flex items-center justify-center">
+                    <div key={point.title} className="bg-white border-2 border-brand-blue rounded-tl-2xl rounded-br-2xl shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] p-5 space-y-3">
+                        <div className="w-10 h-10 bg-brand-bgLight border-2 border-brand-blue/20 rounded-tl-lg rounded-br-lg flex items-center justify-center">
                             {point.icon}
                         </div>
-                        <h3 className="font-display font-extrabold text-brand-blueDark text-lg">{point.title}</h3>
-                        <p className="text-sm text-brand-blueDark/70 font-medium leading-relaxed">{point.body}</p>
+                        <h3 className="font-display font-extrabold text-brand-blue text-lg">{point.title}</h3>
+                        <p className="text-sm text-brand-blue/70 font-medium leading-relaxed">{point.body}</p>
                     </div>
                 ))}
             </div>
@@ -64,10 +64,10 @@ export default function AboutPage() {
             {/* Team structure */}
             <div>
                 <div className="flex items-center gap-3 mb-5">
-                    <div className="w-8 h-8 bg-brand-yellow/20 border-2 border-brand-blueDark rounded-tl-lg rounded-br-lg flex items-center justify-center">
-                        <Users size={16} className="text-brand-blueDark" />
+                    <div className="w-8 h-8 bg-brand-yellow/20 border-2 border-brand-blue rounded-tl-lg rounded-br-lg flex items-center justify-center">
+                        <Users size={16} className="text-brand-blue" />
                     </div>
-                    <h2 className="text-xl font-display font-extrabold text-brand-blueDark">Our Team</h2>
+                    <h2 className="text-xl font-display font-extrabold text-brand-blue">Our Team</h2>
                 </div>
 
                 <div className="space-y-4">
@@ -77,16 +77,16 @@ export default function AboutPage() {
                         const displayMembers = members ?? [];
 
                         return (
-                            <div key={role} className="bg-white border-2 border-brand-blueDark rounded-tl-xl rounded-br-xl overflow-hidden shadow-[3px_3px_0px_0px_rgba(57,103,153,0.1)]">
-                                <div className="flex items-center justify-between p-4 border-b-2 border-brand-blueDark/10 bg-brand-bgLight/50">
+                            <div key={role} className="bg-white border-2 border-brand-blue rounded-tl-xl rounded-br-xl overflow-hidden shadow-[3px_3px_0px_0px_rgba(57,103,153,0.1)]">
+                                <div className="flex items-center justify-between p-4 border-b-2 border-brand-blue/10 bg-brand-bgLight/50">
                                     <div>
                                         <span className={`inline-block text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded border ${ROLE_BADGE_COLORS[role]}`}>
                                             {role}
                                         </span>
-                                        <p className="text-xs font-medium text-brand-blueDark/50 mt-1.5">{TIER_DESCRIPTIONS[role]}</p>
+                                        <p className="text-xs font-medium text-brand-blue/50 mt-1.5">{TIER_DESCRIPTIONS[role]}</p>
                                     </div>
                                     {!isLoading && (
-                                        <span className="text-xs font-extrabold text-brand-blueDark/30 uppercase tracking-widest">
+                                        <span className="text-xs font-extrabold text-brand-blue/30 uppercase tracking-widest">
                                             {displayMembers.length} member{displayMembers.length !== 1 ? "s" : ""}
                                         </span>
                                     )}
@@ -97,20 +97,20 @@ export default function AboutPage() {
                                             {[...Array(3)].map((_, i) => <div key={i} className="h-7 w-24 bg-brand-bgLight rounded-lg" />)}
                                         </div>
                                     ) : displayMembers.length === 0 ? (
-                                        <p className="text-xs text-brand-blueDark/30 italic font-medium py-1 px-2">No members at this tier.</p>
+                                        <p className="text-xs text-brand-blue/30 italic font-medium py-1 px-2">No members at this tier.</p>
                                     ) : (
                                         <div className="flex flex-wrap gap-2">
                                             {displayMembers.map((m: any) => (
                                                 <div
                                                     key={m._id}
-                                                    className="flex items-center gap-2 px-3 py-1.5 bg-brand-bgLight border border-brand-blueDark/10 rounded-lg"
+                                                    className="flex items-center gap-2 px-3 py-1.5 bg-brand-bgLight border border-brand-blue/10 rounded-lg"
                                                 >
-                                                    <div className="w-5 h-5 rounded bg-brand-yellow/30 border border-brand-blueDark/20 flex items-center justify-center text-[10px] font-extrabold text-brand-blueDark shrink-0">
+                                                    <div className="w-5 h-5 rounded bg-brand-yellow/30 border border-brand-blue/20 flex items-center justify-center text-[10px] font-extrabold text-brand-blue shrink-0">
                                                         {m.name.charAt(0)}
                                                     </div>
-                                                    <span className="text-xs font-bold text-brand-blueDark">{m.name}</span>
+                                                    <span className="text-xs font-bold text-brand-blue">{m.name}</span>
                                                     {m.specialRoles?.includes("Alumni") && (
-                                                        <span className="text-[9px] font-extrabold uppercase tracking-widest text-brand-blueDark/30">(Alumni)</span>
+                                                        <span className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/30">(Alumni)</span>
                                                     )}
                                                 </div>
                                             ))}

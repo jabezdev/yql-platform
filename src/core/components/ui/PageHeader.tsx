@@ -28,19 +28,19 @@ export function PageHeader({
     const isLarge = size === 'lg';
 
     const containerStyles = isCard
-        ? `bg-white border-2 border-brand-blueDark shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] rounded-tl-2xl rounded-br-2xl p-6 sm:p-8 flex flex-col justify-center ${isLarge ? 'min-h-[160px]' : 'min-h-[110px]'}`
+        ? `bg-white border-2 border-brand-blue shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] rounded-tl-2xl rounded-br-2xl p-6 sm:p-8 flex flex-col justify-center ${isLarge ? 'min-h-[130px]' : 'min-h-[96px]'}`
         : 'py-2';
 
     const titleStyles = isLarge
-        ? 'text-4xl sm:text-5xl font-extrabold font-display leading-tight text-brand-blueDark'
-        : 'text-2xl md:text-3xl font-display font-extrabold text-brand-blueDark';
+        ? 'text-4xl sm:text-5xl font-extrabold font-display leading-tight text-brand-blue'
+        : 'text-2xl md:text-3xl font-display font-extrabold text-brand-blue';
 
     const subStyles = isLarge
         ? 'text-brand-darkBlue/70 mt-2 font-medium text-lg'
         : 'text-brand-darkBlue/70 mt-1 font-medium';
 
     return (
-        <div className={`${containerStyles} ${className} mb-8`}>
+        <div className={`${containerStyles} ${className}`}>
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div className="flex flex-col">
                     <h1 className={titleStyles}>{title}</h1>
@@ -89,18 +89,18 @@ interface StatusBadgeProps {
 }
 
 const badgeStyles: Record<BadgeVariant, string> = {
-    success: 'bg-emerald-100 text-emerald-700 border-emerald-200',
-    warning: 'bg-amber-100 text-amber-700 border-amber-200',
-    error: 'bg-red-100 text-red-700 border-red-200',
-    info: 'bg-blue-100 text-brand-blue border-blue-200',
-    neutral: 'bg-gray-100 text-gray-600 border-gray-200',
+    success: 'bg-brand-green/10 text-brand-green border-brand-green/30',
+    warning: 'bg-brand-yellow/20 text-brand-blue border-brand-yellow/40',
+    error: 'bg-brand-red/10 text-brand-red border-brand-red/30',
+    info: 'bg-brand-lightBlue/10 text-brand-lightBlue border-brand-lightBlue/30',
+    neutral: 'bg-brand-bgLight text-brand-blue/60 border-brand-blue/15',
 };
 
 export function StatusBadge({ status, variant = 'neutral', size = 'sm' }: StatusBadgeProps) {
-    const sizeStyles = size === 'sm' ? 'px-2 py-0.5 text-xs' : 'px-3 py-1 text-sm';
+    const sizeStyles = size === 'sm' ? 'px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-widest' : 'px-3 py-1 text-xs font-bold uppercase tracking-wider';
 
     return (
-        <span className={`inline-flex items-center gap-1 font-medium rounded-full border ${badgeStyles[variant]} ${sizeStyles}`}>
+        <span className={`inline-flex items-center gap-1 rounded-sm border ${badgeStyles[variant]} ${sizeStyles}`}>
             {status}
         </span>
     );
@@ -121,13 +121,13 @@ export function EmptyState({ icon: Icon, title, description, action }: EmptyStat
     return (
         <div className="text-center py-12 px-6">
             {Icon && (
-                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Icon size={28} className="text-gray-400" />
+                <div className="w-16 h-16 bg-brand-yellow/20 border-2 border-brand-blue/15 rounded-tl-2xl rounded-br-2xl flex items-center justify-center mx-auto mb-4">
+                    <Icon size={28} className="text-brand-blue/50" />
                 </div>
             )}
-            <h3 className="text-lg font-semibold text-gray-700 mb-1">{title}</h3>
+            <h3 className="text-lg font-display font-extrabold text-brand-blue mb-1">{title}</h3>
             {description && (
-                <p className="text-sm text-gray-500 max-w-sm mx-auto">{description}</p>
+                <p className="text-sm font-medium text-brand-blue/50 max-w-sm mx-auto">{description}</p>
             )}
             {action && <div className="mt-4">{action}</div>}
         </div>

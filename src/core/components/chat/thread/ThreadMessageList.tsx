@@ -41,18 +41,18 @@ export function ThreadMessageList({ rootMessageId }: ThreadMessageListProps) {
         >
             {status === "LoadingMore" && (
                 <div className="flex justify-center py-2">
-                    <Loader2 size={16} className="animate-spin text-brand-blue/50" />
+                    <Loader2 size={16} className="animate-spin text-brand-lightBlue/50" />
                 </div>
             )}
 
             {status === "LoadingFirstPage" && (
                 <div className="flex justify-center py-4">
-                    <Loader2 size={18} className="animate-spin text-brand-blue/50" />
+                    <Loader2 size={18} className="animate-spin text-brand-lightBlue/50" />
                 </div>
             )}
 
             {status !== "LoadingFirstPage" && results.length === 0 && (
-                <div className="flex flex-col items-center justify-center h-24 gap-1 text-brand-blueDark/30">
+                <div className="flex flex-col items-center justify-center h-24 gap-1 text-brand-blue/30">
                     <p className="text-xs font-medium">No replies yet. Start the thread!</p>
                 </div>
             )}

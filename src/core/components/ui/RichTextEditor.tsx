@@ -23,12 +23,12 @@ const MenuBar = ({ editor }: { editor: any }) => {
 
     const btnClass = (isActive: boolean) =>
         `p-1.5 rounded transition-colors ${isActive
-            ? "bg-brand-blue text-white"
-            : "hover:bg-brand-blue/10 text-brand-blueDark/60 hover:text-brand-blue"
+            ? "bg-brand-lightBlue text-white"
+            : "hover:bg-brand-lightBlue/10 text-brand-blue/60 hover:text-brand-lightBlue"
         }`;
 
     return (
-        <div className="flex items-center gap-1 p-1 bg-brand-bgLight border-2 border-brand-blueDark/10 rounded-t-lg border-b-0 sticky top-0 z-10 shrink-0">
+        <div className="flex items-center gap-1 p-1 bg-brand-bgLight border-2 border-brand-blue/10 rounded-t-lg border-b-0 sticky top-0 z-10 shrink-0">
             <button
                 type="button"
                 onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
@@ -54,7 +54,7 @@ const MenuBar = ({ editor }: { editor: any }) => {
                 <Type size={14} />
             </button>
 
-            <div className="w-px h-4 bg-brand-blueDark/10 mx-1" />
+            <div className="w-px h-4 bg-brand-blue/10 mx-1" />
 
             <button
                 type="button"
@@ -89,7 +89,7 @@ const MenuBar = ({ editor }: { editor: any }) => {
                 <Strikethrough size={14} />
             </button>
 
-            <div className="w-px h-4 bg-brand-blueDark/10 mx-1" />
+            <div className="w-px h-4 bg-brand-blue/10 mx-1" />
 
             <button
                 type="button"
@@ -130,7 +130,7 @@ export function RichTextEditor({ content, onChange, placeholder, className = "",
         },
         editorProps: {
             attributes: {
-                class: `prose-custom outline-none p-4 w-full bg-brand-bgLight border-2 border-brand-blueDark/20 rounded-b-lg focus-within:border-brand-blueDark transition-colors overflow-y-auto custom-scrollbar ${editorClassName || "min-h-[200px] h-full"}`,
+                class: `prose-custom outline-none p-4 w-full bg-brand-bgLight border-2 border-brand-blue/20 rounded-b-lg focus-within:border-brand-blue transition-colors overflow-y-auto custom-scrollbar ${editorClassName || "min-h-[200px] h-full"}`,
             },
         },
     });

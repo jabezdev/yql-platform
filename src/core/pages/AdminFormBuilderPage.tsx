@@ -25,7 +25,7 @@ const FIELD_TYPES: { value: FieldType; label: string; description: string }[] = 
 ];
 
 const INPUT_CLS =
-    "w-full p-2.5 bg-brand-bgLight border-2 border-brand-blueDark/20 rounded-lg focus:border-brand-blueDark outline-none font-medium text-brand-blueDark text-sm transition-colors";
+    "w-full p-2.5 bg-brand-bgLight border-2 border-brand-blue/20 rounded-lg focus:border-brand-blue outline-none font-medium text-brand-blue text-sm transition-colors";
 
 function generateId() {
     return `field_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
@@ -64,7 +64,7 @@ function FieldEditor({
     const needsOptions = field.type === "select" || field.type === "multiselect";
 
     return (
-        <div className="bg-white border-2 border-brand-blueDark/10 rounded-2xl p-5 group hover:border-brand-blueDark/20 transition-colors">
+        <div className="bg-white border-2 border-brand-blue/10 rounded-2xl p-5 group hover:border-brand-blue/20 transition-colors">
             <div className="flex items-start gap-3">
                 {/* Reorder controls */}
                 <div className="flex flex-col gap-1 pt-1 shrink-0">
@@ -72,16 +72,16 @@ function FieldEditor({
                         type="button"
                         onClick={onMoveUp}
                         disabled={index === 0}
-                        className="p-1 text-brand-blueDark/30 hover:text-brand-blueDark disabled:opacity-20 transition-colors"
+                        className="p-1 text-brand-blue/30 hover:text-brand-blue disabled:opacity-20 transition-colors"
                     >
                         <ChevronUp size={14} />
                     </button>
-                    <span className="text-[10px] font-extrabold text-brand-blueDark/30 text-center">{index + 1}</span>
+                    <span className="text-[10px] font-extrabold text-brand-blue/30 text-center">{index + 1}</span>
                     <button
                         type="button"
                         onClick={onMoveDown}
                         disabled={index === total - 1}
-                        className="p-1 text-brand-blueDark/30 hover:text-brand-blueDark disabled:opacity-20 transition-colors"
+                        className="p-1 text-brand-blue/30 hover:text-brand-blue disabled:opacity-20 transition-colors"
                     >
                         <ChevronDown size={14} />
                     </button>
@@ -90,7 +90,7 @@ function FieldEditor({
                 <div className="flex-1 space-y-4">
                     <div className="grid grid-cols-1 sm:grid-cols-[1fr_180px_auto] gap-3 items-start">
                         <div>
-                            <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/50 mb-1">
+                            <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/50 mb-1">
                                 Question Label *
                             </label>
                             <input
@@ -101,7 +101,7 @@ function FieldEditor({
                             />
                         </div>
                         <div>
-                            <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/50 mb-1">
+                            <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/50 mb-1">
                                 Type
                             </label>
                             <select
@@ -124,22 +124,22 @@ function FieldEditor({
                                     type="checkbox"
                                     checked={field.required}
                                     onChange={(e) => onChange({ ...field, required: e.target.checked })}
-                                    className="w-4 h-4 rounded border-2 border-brand-blueDark/30"
+                                    className="w-4 h-4 rounded border-2 border-brand-blue/30"
                                 />
-                                <span className="text-xs font-bold text-brand-blueDark">Required</span>
+                                <span className="text-xs font-bold text-brand-blue">Required</span>
                             </label>
                         </div>
                     </div>
 
                     {needsOptions && (
                         <div>
-                            <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/50 mb-2">
+                            <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/50 mb-2">
                                 Options
                             </label>
                             <div className="space-y-2 mb-2">
                                 {(field.options ?? []).map((opt, i) => (
-                                    <div key={i} className="flex items-center gap-2 bg-brand-bgLight px-3 py-2 rounded-lg border border-brand-blueDark/10">
-                                        <span className="flex-1 text-sm font-medium text-brand-blueDark">{opt}</span>
+                                    <div key={i} className="flex items-center gap-2 bg-brand-bgLight px-3 py-2 rounded-lg border border-brand-blue/10">
+                                        <span className="flex-1 text-sm font-medium text-brand-blue">{opt}</span>
                                         <button
                                             type="button"
                                             onClick={() => removeOption(i)}
@@ -163,7 +163,7 @@ function FieldEditor({
                                 <button
                                     type="button"
                                     onClick={addOption}
-                                    className="px-3 py-2 bg-brand-blue/10 text-brand-blueDark border-2 border-brand-blue/20 rounded-lg hover:bg-brand-blue/20 transition-colors font-bold text-sm"
+                                    className="px-3 py-2 bg-brand-lightBlue/10 text-brand-blue border-2 border-brand-lightBlue/20 rounded-lg hover:bg-brand-lightBlue/20 transition-colors font-bold text-sm"
                                 >
                                     Add
                                 </button>
@@ -275,8 +275,8 @@ export default function AdminFormBuilderPage() {
             />
 
             {/* Cohort Selector */}
-            <div className="bg-white border-2 border-brand-blueDark rounded-tl-2xl rounded-br-2xl shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] p-6">
-                <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/50 mb-2">
+            <div className="bg-white border-2 border-brand-blue rounded-tl-2xl rounded-br-2xl shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] p-6">
+                <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/50 mb-2">
                     Select Cohort *
                 </label>
                 <select
@@ -295,7 +295,7 @@ export default function AdminFormBuilderPage() {
                     ))}
                 </select>
                 {selectedCohortId && existingForm !== undefined && (
-                    <p className={`text-xs font-bold mt-2 ${existingForm ? "text-brand-green" : "text-brand-blueDark/40"}`}>
+                    <p className={`text-xs font-bold mt-2 ${existingForm ? "text-brand-green" : "text-brand-blue/40"}`}>
                         {existingForm ? "Existing form loaded — saving will overwrite." : "No form yet — you're creating a new one."}
                     </p>
                 )}
@@ -305,12 +305,12 @@ export default function AdminFormBuilderPage() {
             {selectedCohortId && (
                 <form onSubmit={handleSave} className="space-y-6">
                     {/* Form metadata */}
-                    <div className="bg-white border-2 border-brand-blueDark/10 rounded-2xl p-6 space-y-4">
-                        <h2 className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/50">
+                    <div className="bg-white border-2 border-brand-blue/10 rounded-2xl p-6 space-y-4">
+                        <h2 className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/50">
                             Form Details
                         </h2>
                         <div>
-                            <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/50 mb-1">
+                            <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/50 mb-1">
                                 Form Title *
                             </label>
                             <input
@@ -321,7 +321,7 @@ export default function AdminFormBuilderPage() {
                             />
                         </div>
                         <div>
-                            <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/50 mb-1">
+                            <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/50 mb-1">
                                 Description
                             </label>
                             <textarea
@@ -337,11 +337,11 @@ export default function AdminFormBuilderPage() {
                     {/* Fields */}
                     <div>
                         <div className="flex items-center justify-between mb-4">
-                            <h2 className="font-display font-extrabold text-brand-blueDark flex items-center gap-2">
-                                <FileText size={18} className="text-brand-blue" />
+                            <h2 className="font-display font-extrabold text-brand-blue flex items-center gap-2">
+                                <FileText size={18} className="text-brand-lightBlue" />
                                 Questions
                                 {fields.length > 0 && (
-                                    <span className="bg-brand-blueDark text-white text-[10px] font-bold px-2 py-0.5 rounded-sm">
+                                    <span className="bg-brand-blue text-white text-[10px] font-bold px-2 py-0.5 rounded-sm">
                                         {fields.length}
                                     </span>
                                 )}
@@ -349,10 +349,10 @@ export default function AdminFormBuilderPage() {
                         </div>
 
                         {fields.length === 0 ? (
-                            <div className="bg-white border-2 border-dashed border-brand-blueDark/20 rounded-2xl p-10 text-center">
-                                <FileText size={36} className="mx-auto text-brand-blueDark/20 mb-3" />
-                                <p className="font-display font-extrabold text-brand-blueDark/40">No questions yet</p>
-                                <p className="text-sm text-brand-blueDark/30 mt-1">Add your first question below.</p>
+                            <div className="bg-white border-2 border-dashed border-brand-blue/20 rounded-2xl p-10 text-center">
+                                <FileText size={36} className="mx-auto text-brand-blue/20 mb-3" />
+                                <p className="font-display font-extrabold text-brand-blue/40">No questions yet</p>
+                                <p className="text-sm text-brand-blue/30 mt-1">Add your first question below.</p>
                             </div>
                         ) : (
                             <div className="space-y-3">
@@ -374,17 +374,17 @@ export default function AdminFormBuilderPage() {
                         <button
                             type="button"
                             onClick={addField}
-                            className="mt-4 flex items-center gap-2 px-4 py-2.5 text-sm font-bold text-brand-blueDark bg-brand-bgLight border-2 border-brand-blueDark/20 rounded-xl hover:border-brand-blueDark/40 transition-colors"
+                            className="mt-4 flex items-center gap-2 px-4 py-2.5 text-sm font-bold text-brand-blue bg-brand-bgLight border-2 border-brand-blue/20 rounded-xl hover:border-brand-blue/40 transition-colors"
                         >
                             <Plus size={16} /> Add Question
                         </button>
                     </div>
 
-                    <div className="flex justify-end border-t-2 border-brand-blueDark/10 pt-6">
+                    <div className="flex justify-end border-t-2 border-brand-blue/10 pt-6">
                         <button
                             type="submit"
                             disabled={saving}
-                            className="flex items-center gap-2 px-8 py-3 bg-brand-blue text-white font-bold rounded-xl border-2 border-brand-blueDark hover:-translate-y-0.5 transition-transform shadow-[4px_4px_0px_0px_rgba(10,22,48,0.45)] disabled:opacity-50"
+                            className="flex items-center gap-2 px-8 py-3 bg-brand-lightBlue text-white font-bold rounded-xl border-2 border-brand-blue hover:-translate-y-0.5 transition-transform shadow-[4px_4px_0px_0px_rgba(10,22,48,0.45)] disabled:opacity-50"
                         >
                             <Save size={18} />
                             {saving ? "Saving..." : "Save Form"}
@@ -394,10 +394,10 @@ export default function AdminFormBuilderPage() {
             )}
 
             {!selectedCohortId && cohorts.length === 0 && (
-                <div className="bg-white border-2 border-dashed border-brand-blueDark/20 rounded-2xl p-12 text-center">
-                    <FileText size={40} className="mx-auto text-brand-blueDark/20 mb-4" />
-                    <p className="font-display font-extrabold text-brand-blueDark/40 text-lg">No cohorts yet</p>
-                    <p className="text-sm text-brand-blueDark/30 mt-1">Create a cohort first, then build its application form.</p>
+                <div className="bg-white border-2 border-dashed border-brand-blue/20 rounded-2xl p-12 text-center">
+                    <FileText size={40} className="mx-auto text-brand-blue/20 mb-4" />
+                    <p className="font-display font-extrabold text-brand-blue/40 text-lg">No cohorts yet</p>
+                    <p className="text-sm text-brand-blue/30 mt-1">Create a cohort first, then build its application form.</p>
                 </div>
             )}
         </div>

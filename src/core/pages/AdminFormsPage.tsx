@@ -39,9 +39,9 @@ const HR_FORMS: HRForm[] = [
         title: "Leave of Absence",
         description: "Request time off for personal, medical, or other reasons.",
         icon: UserMinus,
-        color: "text-brand-blue",
-        bg: "bg-brand-blue/10",
-        border: "border-brand-blue/30",
+        color: "text-brand-lightBlue",
+        bg: "bg-brand-lightBlue/10",
+        border: "border-brand-lightBlue/30",
         fields: [
             { id: "leave_type", label: "Leave Type", type: "select", required: true, options: ["Personal", "Medical", "Family Emergency", "Academic", "Other"] },
             { id: "start_date", label: "Start Date", type: "date", required: true },
@@ -100,9 +100,9 @@ const HR_FORMS: HRForm[] = [
         title: "Peer Evaluation",
         description: "Provide feedback on a fellow team member's performance.",
         icon: Users,
-        color: "text-brand-blue",
-        bg: "bg-brand-blue/10",
-        border: "border-brand-blue/30",
+        color: "text-brand-lightBlue",
+        bg: "bg-brand-lightBlue/10",
+        border: "border-brand-lightBlue/30",
         fields: [
             { id: "evaluatee", label: "Who are you evaluating?", type: "text", required: true, placeholder: "Name of the team member" },
             { id: "collaboration", label: "Collaboration & Teamwork", type: "select", required: true, options: ["1 – Needs Improvement", "2 – Below Expectations", "3 – Meets Expectations", "4 – Exceeds Expectations", "5 – Outstanding"] },
@@ -161,10 +161,10 @@ const HR_FORMS: HRForm[] = [
 ];
 
 function FormField({ field, value, onChange }: { field: FormField; value: string; onChange: (v: string) => void }) {
-    const base = "w-full p-2.5 bg-brand-bgLight border-2 border-brand-blueDark/20 rounded-lg focus:border-brand-blueDark outline-none font-medium text-brand-blueDark text-sm transition-colors";
+    const base = "w-full p-2.5 bg-brand-bgLight border-2 border-brand-blue/20 rounded-lg focus:border-brand-blue outline-none font-medium text-brand-blue text-sm transition-colors";
     return (
         <div>
-            <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/50 mb-1">
+            <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/50 mb-1">
                 {field.label} {field.required && <span className="text-brand-red normal-case tracking-normal">*</span>}
             </label>
             {field.type === "textarea" ? (
@@ -208,22 +208,22 @@ function FormModal({ form, onClose }: { form: HRForm; onClose: () => void }) {
 
     return (
         <div className="absolute inset-0 z-50 flex items-center justify-center p-4 min-h-full">
-            <div className="absolute inset-0 bg-brand-blueDark/60 backdrop-blur-sm" onClick={onClose} />
-            <div className="relative w-full max-w-2xl max-h-[95%] bg-white border-2 border-brand-blueDark rounded-tl-2xl rounded-br-2xl shadow-[8px_8px_0px_0px_rgba(10,22,48,0.3)] flex flex-col overflow-hidden">
+            <div className="absolute inset-0 bg-brand-blue/60 backdrop-blur-sm" onClick={onClose} />
+            <div className="relative w-full max-w-2xl max-h-[95%] bg-white border-2 border-brand-blue rounded-tl-2xl rounded-br-2xl shadow-[8px_8px_0px_0px_rgba(10,22,48,0.3)] flex flex-col overflow-hidden">
                 {/* Header */}
-                <div className={`p-5 border-b-2 border-brand-blueDark ${form.bg} shrink-0`}>
+                <div className={`p-5 border-b-2 border-brand-blue ${form.bg} shrink-0`}>
                     <div className="flex items-start justify-between gap-4">
                         <div className="flex items-center gap-3">
                             <div className={`w-10 h-10 rounded-xl flex items-center justify-center border-2 ${form.border} bg-white`}>
                                 <Icon size={18} className={form.color} />
                             </div>
                             <div>
-                                <h2 className="font-display font-extrabold text-lg text-brand-blueDark">{form.title}</h2>
-                                <p className="text-xs text-brand-blueDark/60 font-medium">{form.description}</p>
+                                <h2 className="font-display font-extrabold text-lg text-brand-blue">{form.title}</h2>
+                                <p className="text-xs text-brand-blue/60 font-medium">{form.description}</p>
                             </div>
                         </div>
-                        <button onClick={onClose} className="p-1.5 hover:bg-brand-blueDark/10 rounded-lg transition-colors shrink-0">
-                            <X size={18} className="text-brand-blueDark" />
+                        <button onClick={onClose} className="p-1.5 hover:bg-brand-blue/10 rounded-lg transition-colors shrink-0">
+                            <X size={18} className="text-brand-blue" />
                         </button>
                     </div>
                 </div>
@@ -235,9 +235,9 @@ function FormModal({ form, onClose }: { form: HRForm; onClose: () => void }) {
                             <div className="w-16 h-16 mx-auto bg-brand-green/10 rounded-full flex items-center justify-center mb-4 border-2 border-brand-green/30">
                                 <CheckCircle2 size={28} className="text-brand-green" />
                             </div>
-                            <h3 className="text-xl font-display font-extrabold text-brand-blueDark mb-2">Form Submitted</h3>
-                            <p className="text-sm text-brand-blueDark/60 font-medium">Your {form.title} has been submitted and will be reviewed by the admin team.</p>
-                            <button onClick={onClose} className="mt-6 px-6 py-2.5 bg-brand-blueDark text-white font-bold rounded-lg border-2 border-brand-blueDark hover:-translate-y-0.5 transition-transform shadow-[4px_4px_0px_0px_rgba(10,22,48,0.45)]">
+                            <h3 className="text-xl font-display font-extrabold text-brand-blue mb-2">Form Submitted</h3>
+                            <p className="text-sm text-brand-blue/60 font-medium">Your {form.title} has been submitted and will be reviewed by the admin team.</p>
+                            <button onClick={onClose} className="mt-6 px-6 py-2.5 bg-brand-blue text-white font-bold rounded-lg border-2 border-brand-blue hover:-translate-y-0.5 transition-transform shadow-[4px_4px_0px_0px_rgba(10,22,48,0.45)]">
                                 Close
                             </button>
                         </div>
@@ -251,8 +251,8 @@ function FormModal({ form, onClose }: { form: HRForm; onClose: () => void }) {
                                     onChange={v => setValues(prev => ({ ...prev, [field.id]: v }))}
                                 />
                             ))}
-                            <div className="pt-4 border-t-2 border-brand-blueDark/10">
-                                <button type="submit" disabled={submitting} className="w-full flex items-center justify-center gap-2 py-3 bg-brand-blue text-white font-bold rounded-lg border-2 border-brand-blueDark hover:-translate-y-0.5 transition-transform shadow-[4px_4px_0px_0px_rgba(10,22,48,0.45)] disabled:opacity-50">
+                            <div className="pt-4 border-t-2 border-brand-blue/10">
+                                <button type="submit" disabled={submitting} className="w-full flex items-center justify-center gap-2 py-3 bg-brand-lightBlue text-white font-bold rounded-lg border-2 border-brand-blue hover:-translate-y-0.5 transition-transform shadow-[4px_4px_0px_0px_rgba(10,22,48,0.45)] disabled:opacity-50">
                                     <Send size={16} /> {submitting ? "Submitting..." : "Submit Form"}
                                 </button>
                             </div>
@@ -295,11 +295,11 @@ export default function AdminFormsPage() {
             />
 
             {/* Info Banner */}
-            <div className="bg-brand-blue/5 border-2 border-brand-blue/20 rounded-xl p-4 flex items-start gap-3">
-                <FileText size={18} className="text-brand-blue mt-0.5 shrink-0" />
+            <div className="bg-brand-lightBlue/5 border-2 border-brand-lightBlue/20 rounded-xl p-4 flex items-start gap-3">
+                <FileText size={18} className="text-brand-lightBlue mt-0.5 shrink-0" />
                 <div>
-                    <p className="text-sm font-bold text-brand-blueDark">All submissions are confidential</p>
-                    <p className="text-xs text-brand-blueDark/60 font-medium mt-0.5">Forms are reviewed by the admin team. Responses are handled with care and discretion.</p>
+                    <p className="text-sm font-bold text-brand-blue">All submissions are confidential</p>
+                    <p className="text-xs text-brand-blue/60 font-medium mt-0.5">Forms are reviewed by the admin team. Responses are handled with care and discretion.</p>
                 </div>
             </div>
 
@@ -311,17 +311,17 @@ export default function AdminFormsPage() {
                         <button
                             key={form.id}
                             onClick={() => setSelectedForm(form)}
-                            className="group bg-white border-2 border-brand-blueDark rounded-tl-2xl rounded-br-2xl p-5 shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] hover:shadow-[8px_8px_0px_0px_rgba(10,22,48,0.3)] hover:-translate-y-1.5 transition-all text-left flex flex-col gap-4"
+                            className="group bg-white border-2 border-brand-blue rounded-tl-2xl rounded-br-2xl p-5 shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] hover:shadow-[8px_8px_0px_0px_rgba(10,22,48,0.3)] hover:-translate-y-1.5 transition-all text-left flex flex-col gap-4"
                         >
                             <div className="flex items-center justify-between">
                                 <div className={`w-11 h-11 rounded-xl border-2 ${form.border} ${form.bg} flex items-center justify-center group-hover:scale-110 transition-transform`}>
                                     <Icon size={20} className={form.color} />
                                 </div>
-                                <ChevronRight size={18} className="text-brand-blueDark/20 group-hover:text-brand-blueDark group-hover:translate-x-1 transition-all" />
+                                <ChevronRight size={18} className="text-brand-blue/20 group-hover:text-brand-blue group-hover:translate-x-1 transition-all" />
                             </div>
                             <div>
-                                <h3 className="font-display font-extrabold text-brand-blueDark text-base leading-tight">{form.title}</h3>
-                                <p className="text-xs text-brand-blueDark/60 font-medium mt-1 leading-relaxed">{form.description}</p>
+                                <h3 className="font-display font-extrabold text-brand-blue text-base leading-tight">{form.title}</h3>
+                                <p className="text-xs text-brand-blue/60 font-medium mt-1 leading-relaxed">{form.description}</p>
                             </div>
                         </button>
                     );
@@ -331,7 +331,7 @@ export default function AdminFormsPage() {
             {/* My Submission History */}
             {mySubmissions.length > 0 && (
                 <div>
-                    <h2 className="flex items-center gap-2 text-base font-display font-extrabold text-brand-blueDark mb-4">
+                    <h2 className="flex items-center gap-2 text-base font-display font-extrabold text-brand-blue mb-4">
                         <History size={18} /> My Recent Submissions
                     </h2>
                     <div className="space-y-2">
@@ -339,13 +339,13 @@ export default function AdminFormsPage() {
                             const form = HR_FORMS.find(f => f.id === s.formId);
                             const Icon = form?.icon ?? FileText;
                             return (
-                                <div key={s._id} className="bg-white border-2 border-brand-blueDark/10 rounded-xl px-4 py-3 flex items-center gap-4 hover:border-brand-blueDark/20 transition-colors">
+                                <div key={s._id} className="bg-white border-2 border-brand-blue/10 rounded-xl px-4 py-3 flex items-center gap-4 hover:border-brand-blue/20 transition-colors">
                                     <div className={`w-9 h-9 rounded-lg border-2 ${form?.border ?? "border-gray-200"} ${form?.bg ?? "bg-gray-50"} flex items-center justify-center shrink-0`}>
                                         <Icon size={16} className={form?.color ?? "text-gray-500"} />
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                        <p className="text-sm font-bold text-brand-blueDark truncate">{form?.title ?? s.formId.replace(/_/g, " ")}</p>
-                                        <p className="text-xs text-brand-blueDark/40 font-medium flex items-center gap-1 mt-0.5">
+                                        <p className="text-sm font-bold text-brand-blue truncate">{form?.title ?? s.formId.replace(/_/g, " ")}</p>
+                                        <p className="text-xs text-brand-blue/40 font-medium flex items-center gap-1 mt-0.5">
                                             <Clock size={11} /> {format(s.createdAt, "MMM d, yyyy 'at' h:mm a")}
                                         </p>
                                     </div>
@@ -373,17 +373,17 @@ function ManageSubmissionsModal({ onClose }: { onClose: () => void }) {
 
     return (
         <div className="absolute inset-0 z-50 flex items-center justify-center p-4 min-h-full">
-            <div className="absolute inset-0 bg-brand-blueDark/60 backdrop-blur-sm" onClick={onClose} />
-            <div className="relative w-full max-w-5xl h-[90%] bg-brand-bgLight border-2 border-brand-blueDark rounded-tl-2xl rounded-br-2xl shadow-[8px_8px_0px_0px_rgba(10,22,48,0.3)] flex flex-col overflow-hidden">
-                <div className="flex items-center justify-between p-5 border-b-2 border-brand-blueDark bg-white shrink-0">
+            <div className="absolute inset-0 bg-brand-blue/60 backdrop-blur-sm" onClick={onClose} />
+            <div className="relative w-full max-w-5xl h-[90%] bg-brand-bgLight border-2 border-brand-blue rounded-tl-2xl rounded-br-2xl shadow-[8px_8px_0px_0px_rgba(10,22,48,0.3)] flex flex-col overflow-hidden">
+                <div className="flex items-center justify-between p-5 border-b-2 border-brand-blue bg-white shrink-0">
                     <div className="flex items-center gap-4">
-                        <h2 className="font-display font-extrabold text-xl text-brand-blueDark">HR Form Submissions</h2>
-                        <div className="flex bg-brand-bgLight p-1 rounded-lg border border-brand-blueDark/10">
+                        <h2 className="font-display font-extrabold text-xl text-brand-blue">HR Form Submissions</h2>
+                        <div className="flex bg-brand-bgLight p-1 rounded-lg border border-brand-blue/10">
                             {(["pending", "reviewed", "archived"] as const).map(s => (
                                 <button
                                     key={s}
                                     onClick={() => setStatusFilter(s)}
-                                    className={`px-3 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-widest transition-all ${statusFilter === s ? "bg-brand-blueDark text-white" : "text-brand-blueDark/50 hover:text-brand-blueDark"}`}
+                                    className={`px-3 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-widest transition-all ${statusFilter === s ? "bg-brand-blue text-white" : "text-brand-blue/50 hover:text-brand-blue"}`}
                                 >
                                     {s}
                                 </button>
@@ -391,29 +391,29 @@ function ManageSubmissionsModal({ onClose }: { onClose: () => void }) {
                         </div>
                     </div>
                     <button onClick={onClose} className="p-2 hover:bg-brand-bgLight rounded-lg transition-colors">
-                        <X size={20} className="text-brand-blueDark" />
+                        <X size={20} className="text-brand-blue" />
                     </button>
                 </div>
 
                 <div className="flex-1 overflow-hidden flex">
                     {/* Sidebar / List */}
-                    <div className="w-1/3 border-r-2 border-brand-blueDark/10 flex flex-col bg-white">
+                    <div className="w-1/3 border-r-2 border-brand-blue/10 flex flex-col bg-white">
                         <div className="flex-1 overflow-y-auto custom-scrollbar p-3 space-y-2">
                             {!submissions ? (
-                                <p className="text-center py-8 text-xs text-brand-blueDark/40">Loading...</p>
+                                <p className="text-center py-8 text-xs text-brand-blue/40">Loading...</p>
                             ) : submissions.length === 0 ? (
-                                <p className="text-center py-8 text-xs text-brand-blueDark/40 font-medium italic">No submissions found.</p>
+                                <p className="text-center py-8 text-xs text-brand-blue/40 font-medium italic">No submissions found.</p>
                             ) : submissions.map(s => (
                                 <button
                                     key={s._id}
                                     onClick={() => setSelectedSubmission(s)}
-                                    className={`w-full text-left p-3 rounded-xl border-2 transition-all ${selectedSubmission?._id === s._id ? "bg-brand-blue/5 border-brand-blue shadow-[3px_3px_0px_0px_rgba(57,103,153,0.2)]" : "bg-white border-brand-blueDark/5 hover:border-brand-blueDark/20"}`}
+                                    className={`w-full text-left p-3 rounded-xl border-2 transition-all ${selectedSubmission?._id === s._id ? "bg-brand-lightBlue/5 border-brand-lightBlue shadow-[3px_3px_0px_0px_rgba(57,103,153,0.2)]" : "bg-white border-brand-blue/5 hover:border-brand-blue/20"}`}
                                 >
                                     <div className="flex justify-between items-start mb-1">
-                                        <p className="text-[10px] font-extrabold text-brand-blue uppercase tracking-tight">{s.formId.replace(/_/g, " ")}</p>
-                                        <p className="text-[9px] font-medium text-brand-blueDark/40">{format(s.createdAt, "MMM d, h:mm a")}</p>
+                                        <p className="text-[10px] font-extrabold text-brand-lightBlue uppercase tracking-tight">{s.formId.replace(/_/g, " ")}</p>
+                                        <p className="text-[10px] font-medium text-brand-blue/40">{format(s.createdAt, "MMM d, h:mm a")}</p>
                                     </div>
-                                    <p className="text-sm font-bold text-brand-blueDark truncate">{s.userName}</p>
+                                    <p className="text-sm font-bold text-brand-blue truncate">{s.userName}</p>
                                 </button>
                             ))}
                         </div>
@@ -425,13 +425,13 @@ function ManageSubmissionsModal({ onClose }: { onClose: () => void }) {
                             <div className="max-w-2xl mx-auto space-y-6">
                                 <div className="flex justify-between items-start">
                                     <div>
-                                        <h3 className="text-2xl font-display font-extrabold text-brand-blueDark">{selectedSubmission.userName}</h3>
-                                        <p className="text-sm font-medium text-brand-blueDark/60">{selectedSubmission.email}</p>
+                                        <h3 className="text-2xl font-display font-extrabold text-brand-blue">{selectedSubmission.userName}</h3>
+                                        <p className="text-sm font-medium text-brand-blue/60">{selectedSubmission.email}</p>
                                         <div className="flex items-center gap-3 mt-4">
-                                            <span className="text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 bg-brand-blueDark text-white rounded-lg">
+                                            <span className="text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 bg-brand-blue text-white rounded-lg">
                                                 {selectedSubmission.formId.replace(/_/g, " ")}
                                             </span>
-                                            <span className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/40">
+                                            <span className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/40">
                                                 Submitted {format(selectedSubmission.createdAt, "PPP 'at' p")}
                                             </span>
                                         </div>
@@ -443,26 +443,26 @@ function ManageSubmissionsModal({ onClose }: { onClose: () => void }) {
                                             </button>
                                         )}
                                         {selectedSubmission.status !== "archived" && (
-                                            <button onClick={() => updateStatus({ submissionId: selectedSubmission._id, status: "archived" })} className="flex items-center gap-1.5 px-3 py-2 bg-brand-bgLight hover:bg-brand-blueDark/10 text-brand-blueDark/60 text-xs font-bold border border-brand-blueDark/20 rounded-lg transition-colors">
+                                            <button onClick={() => updateStatus({ submissionId: selectedSubmission._id, status: "archived" })} className="flex items-center gap-1.5 px-3 py-2 bg-brand-bgLight hover:bg-brand-blue/10 text-brand-blue/60 text-xs font-bold border border-brand-blue/20 rounded-lg transition-colors">
                                                 <Archive size={14} /> Archive
                                             </button>
                                         )}
                                     </div>
                                 </div>
 
-                                <div className="bg-white border-2 border-brand-blueDark rounded-2xl p-6 shadow-[4px_4px_0px_0px_rgba(10,22,48,0.45)]">
+                                <div className="bg-white border-2 border-brand-blue rounded-2xl p-6 shadow-[4px_4px_0px_0px_rgba(10,22,48,0.45)]">
                                     <div className="space-y-6">
                                         {Object.entries(selectedSubmission.responses).map(([key, val]: [string, any]) => (
                                             <div key={key}>
-                                                <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/40 mb-1">{key.replace(/_/g, " ")}</label>
-                                                <p className="text-sm font-medium text-brand-blueDark leading-relaxed">{val || <span className="italic text-brand-blueDark/20">Empty</span>}</p>
+                                                <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/40 mb-1">{key.replace(/_/g, " ")}</label>
+                                                <p className="text-sm font-medium text-brand-blue leading-relaxed">{val || <span className="italic text-brand-blue/20">Empty</span>}</p>
                                             </div>
                                         ))}
                                     </div>
                                 </div>
                             </div>
                         ) : (
-                            <div className="h-full flex flex-col items-center justify-center text-brand-blueDark/20 italic">
+                            <div className="h-full flex flex-col items-center justify-center text-brand-blue/20 italic">
                                 <FileText size={48} className="mb-4 opacity-5" />
                                 <p>Select a submission to view details</p>
                             </div>

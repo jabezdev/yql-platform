@@ -118,17 +118,17 @@ export default function Hero() {
                 <div className="max-w-4xl mx-auto py-20 relative">
                     {/* Main Heading */}
                     {/* Main Heading (Swapped Emphasis) */}
-                    <h1 className="text-3xl md:text-5xl font-display font-extrabold mb-4 tracking-tight leading-tight text-brand-blueDark">
+                    <h1 className="text-3xl md:text-5xl font-display font-extrabold mb-4 tracking-tight leading-tight text-brand-blue">
                         Join our Team, Be a
                     </h1>
 
                     {/* Subheading (Swapped Emphasis - Now Larger) */}
-                    <p className="text-5xl md:text-7xl mb-12 font-display font-extrabold tracking-tight text-brand-wine">
+                    <h2 className="text-5xl md:text-7xl mb-12 font-display font-extrabold tracking-tight text-brand-wine">
                         Young Quantum Leader
-                    </p>
+                    </h2>
 
                     {/* Description */}
-                    <p className="text-lg md:text-xl text-brand-blueDark/70 max-w-2xl mx-auto mb-12 leading-relaxed font-medium">
+                    <p className="text-lg md:text-xl text-brand-blue/70 max-w-2xl mx-auto mb-12 leading-relaxed font-medium">
                         Join the premier youth leadership program by the Quantum Computing
                         Society of the Philippines. Lead, innovate, and inspire the next
                         generation of quantum pioneers.

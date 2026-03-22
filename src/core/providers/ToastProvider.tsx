@@ -35,13 +35,13 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
     const icons: Record<ToastType, React.ReactNode> = {
         success: <CheckCircle2 size={18} className="text-brand-green shrink-0" strokeWidth={2.5} />,
         error: <XCircle size={18} className="text-brand-red shrink-0" strokeWidth={2.5} />,
-        info: <Info size={18} className="text-brand-blue shrink-0" strokeWidth={2.5} />,
+        info: <Info size={18} className="text-brand-lightBlue shrink-0" strokeWidth={2.5} />,
     };
 
     const borderColors: Record<ToastType, string> = {
         success: "border-brand-green/50",
         error: "border-brand-red/50",
-        info: "border-brand-blueDark/20",
+        info: "border-brand-blue/20",
     };
 
     return (
@@ -54,10 +54,10 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
                         className={`pointer-events-auto flex items-center gap-3 bg-white border-2 ${borderColors[t.type]} rounded-tl-xl rounded-br-xl shadow-[4px_4px_0px_0px_rgba(57,103,153,0.25)] px-4 py-3 min-w-[280px] max-w-sm animate-in slide-in-from-right-6 duration-200`}
                     >
                         {icons[t.type]}
-                        <span className="flex-1 text-sm font-bold text-brand-blueDark leading-snug">{t.message}</span>
+                        <span className="flex-1 text-sm font-bold text-brand-blue leading-snug">{t.message}</span>
                         <button
                             onClick={() => dismiss(t.id)}
-                            className="p-1 text-brand-blueDark/30 hover:text-brand-blueDark transition-colors rounded"
+                            className="p-1 text-brand-blue/30 hover:text-brand-blue transition-colors rounded"
                         >
                             <X size={14} />
                         </button>

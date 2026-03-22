@@ -25,7 +25,7 @@ export function RoleGuard({
     if (isLoading) {
         return (
             <div className="h-screen w-full flex items-center justify-center">
-                <Loader2 className="animate-spin text-brand-blue" />
+                <Loader2 className="animate-spin text-brand-lightBlue" />
             </div>
         );
     }

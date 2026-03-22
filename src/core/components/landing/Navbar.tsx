@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useConvexAuth } from "convex/react";
@@ -7,14 +7,21 @@ import { NAV_LINKS } from '../../constants';
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
     const navigate = useNavigate();
     const { isAuthenticated } = useConvexAuth();
+
+    useEffect(() => {
+        const onScroll = () => setScrolled(window.scrollY > 8);
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
 
     const handleAuthClick = () => {
         if (!isAuthenticated) {
             navigate('/login');
         } else {
-            navigate('/dashboard');
+            navigate('/dashboard/overview');
         }
     };
 
@@ -22,10 +29,10 @@ export default function Navbar() {
 
     return (
         <nav
-            className="fixed w-full z-50 h-[72px] flex items-center bg-white border-b-4 border-brand-blueDark transition-all duration-300"
+            className={`fixed w-full z-50 h-[72px] flex items-center bg-white border-b-4 border-brand-blue transition-all duration-300 ${scrolled ? 'shadow-[0px_4px_0px_0px_rgba(57,103,153,0.12)]' : ''}`}
         >
             <Container className="flex justify-between items-center w-full">
-                <a href="#" className="flex items-center gap-2">
+                <a href="/" className="flex items-center gap-2">
                     <img src="/YQL_LOGO.svg" alt="YQL Logo" className="h-10 w-auto" />
                 </a>
 
@@ -35,7 +42,7 @@ export default function Navbar() {
                         <a
                             key={link.name}
                             href={link.href}
-                            className="text-brand-blueDark hover:text-brand-wine transition-colors text-sm font-display font-bold"
+                            className="text-brand-blue hover:text-brand-wine transition-colors text-sm font-display font-bold"
                         >
                             {link.name}
                         </a>
@@ -52,7 +59,7 @@ export default function Navbar() {
 
                 {/* Mobile Menu Button */}
                 <button
-                    className="md:hidden text-brand-blueDark"
+                    className="md:hidden text-brand-blue"
                     onClick={() => setIsOpen(!isOpen)}
                     aria-label={isOpen ? 'Close menu' : 'Open menu'}
                 >
@@ -62,12 +69,12 @@ export default function Navbar() {
 
             {/* Mobile Menu */}
             {isOpen && (
-                <div className="md:hidden absolute top-full left-0 w-full bg-brand-bgLight border-t-2 border-brand-blueDark p-6 flex flex-col space-y-4 shadow-[0px_4px_0px_0px_rgba(57,103,153,0.15)]">
+                <div className="md:hidden absolute top-full left-0 w-full bg-brand-bgLight border-t-2 border-brand-blue p-6 flex flex-col space-y-4 shadow-[0px_4px_0px_0px_rgba(57,103,153,0.15)]">
                     {NAV_LINKS.map((link) => (
                         <a
                             key={link.name}
                             href={link.href}
-                            className="text-brand-blueDark hover:text-brand-wine text-lg font-display font-bold"
+                            className="text-brand-blue hover:text-brand-wine text-lg font-display font-bold"
                             onClick={closeMenu}
                         >
                             {link.name}

@@ -1,45 +1,75 @@
-import { useEditor, EditorContent } from "@tiptap/react";
+import { useMemo } from "react";
+import { generateHTML } from "@tiptap/core";
 import StarterKit from "@tiptap/starter-kit";
 import Mention from "@tiptap/extension-mention";
+import xss from "xss";
 
 interface MessageBodyProps {
     body: string; // TipTap JSON string
     isDeleted?: boolean;
 }
 
-export function MessageBody({ body, isDeleted }: MessageBodyProps) {
-    const content = (() => {
-        try {
-            return JSON.parse(body);
-        } catch {
-            return body;
-        }
-    })();
+// Shared extension list — same schema used when composing, so serialisation is accurate.
+const EXTENSIONS = [
+    StarterKit.configure({ link: false }),
+    Mention.configure({ HTMLAttributes: { class: "mention" } }),
+];
 
-    const editor = useEditor({
-        extensions: [
-            StarterKit,
-            Mention.configure({
-                HTMLAttributes: { class: "mention" },
-            }),
-        ],
-        content,
-        editable: false,
-        immediatelyRender: false,
-    });
+// Strict allowlist: only the tags TipTap's StarterKit + Mention can produce.
+const XSS_OPTIONS: xss.IWhiteList = {
+    p: [],
+    strong: [],
+    em: [],
+    s: [],
+    u: [],
+    code: ["class"],
+    pre: [],
+    blockquote: [],
+    ul: ["class"],
+    ol: ["class"],
+    li: [],
+    h1: [], h2: [], h3: [], h4: [],
+    a: ["href", "class", "target", "rel"],
+    span: ["class"],
+    br: [],
+    hr: [],
+};
+
+const BODY_CLASSES =
+    "text-sm text-brand-blue leading-relaxed " +
+    "[&_p]:mb-0.5 [&_p:last-child]:mb-0 " +
+    "[&_strong]:font-bold [&_em]:italic " +
+    "[&_code]:bg-brand-blue/8 [&_code]:px-1 [&_code]:rounded [&_code]:font-mono [&_code]:text-xs " +
+    "[&_pre]:bg-brand-blue/8 [&_pre]:p-2 [&_pre]:rounded [&_pre]:text-xs [&_pre]:overflow-x-auto " +
+    "[&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 " +
+    "[&_blockquote]:border-l-2 [&_blockquote]:border-brand-lightBlue/30 [&_blockquote]:pl-3 [&_blockquote]:italic [&_blockquote]:text-brand-blue/60 " +
+    "[&_.mention]:bg-brand-lightBlue/10 [&_.mention]:text-brand-lightBlue [&_.mention]:font-semibold [&_.mention]:px-1 [&_.mention]:rounded " +
+    "[&_a]:text-brand-lightBlue [&_a]:underline";
+
+export function MessageBody({ body, isDeleted }: MessageBodyProps) {
+    const html = useMemo(() => {
+        try {
+            const doc = JSON.parse(body);
+            const raw = generateHTML(doc, EXTENSIONS);
+            return xss(raw, { whiteList: XSS_OPTIONS });
+        } catch {
+            // Body is plain text (legacy or error case) — escape and display as-is
+            return xss(body, { whiteList: {} });
+        }
+    }, [body]);
 
     if (isDeleted) {
         return (
-            <p className="text-sm text-brand-blueDark/35 italic select-none">
+            <p className="text-sm text-brand-blue/35 italic select-none">
                 This message was deleted.
             </p>
         );
     }
 
     return (
-        <EditorContent
-            editor={editor}
-            className="message-body text-sm text-brand-blueDark leading-relaxed [&_.ProseMirror]:outline-none [&_.ProseMirror_p]:mb-0.5 [&_.ProseMirror_p:last-child]:mb-0 [&_.ProseMirror_strong]:font-bold [&_.ProseMirror_em]:italic [&_.ProseMirror_code]:bg-brand-blueDark/8 [&_.ProseMirror_code]:px-1 [&_.ProseMirror_code]:rounded [&_.ProseMirror_code]:font-mono [&_.ProseMirror_code]:text-xs [&_.ProseMirror_ul]:list-disc [&_.ProseMirror_ul]:pl-5 [&_.ProseMirror_ol]:list-decimal [&_.ProseMirror_ol]:pl-5 [&_.mention]:bg-brand-blue/10 [&_.mention]:text-brand-blue [&_.mention]:font-semibold [&_.mention]:px-1 [&_.mention]:rounded"
+        <div
+            dangerouslySetInnerHTML={{ __html: html }}
+            className={BODY_CLASSES}
         />
     );
 }

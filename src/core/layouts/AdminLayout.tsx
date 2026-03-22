@@ -22,7 +22,7 @@ export default function AdminLayout() {
             />
 
             {/* Admin Navigation Sidebar/Tabs Wrapper */}
-            <div className="bg-white rounded-tl-2xl rounded-br-2xl border-2 border-brand-blueDark shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] shrink-0 overflow-hidden">
+            <div className="bg-white rounded-tl-2xl rounded-br-2xl border-2 border-brand-blue shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] shrink-0 overflow-hidden">
                 <div className="bg-brand-bgLight/30 px-4 md:px-8 py-2 overflow-x-auto custom-scrollbar">
                     <nav className="flex items-center gap-2 min-w-max">
                         {tabs.map((tab) => {
@@ -33,11 +33,11 @@ export default function AdminLayout() {
                                     key={tab.id}
                                     to={tab.href}
                                     className={`flex items-center gap-2 px-6 py-3 text-sm font-bold transition-all border-b-4 ${isActive
-                                        ? "text-brand-blue border-brand-blue bg-white"
-                                        : "text-brand-darkBlue/60 border-transparent hover:text-brand-blue hover:bg-white/50"
+                                        ? "text-brand-lightBlue border-brand-lightBlue bg-white"
+                                        : "text-brand-darkBlue/60 border-transparent hover:text-brand-lightBlue hover:bg-white/50"
                                         }`}
                                 >
-                                    <Icon size={18} className={isActive ? "text-brand-blue" : "text-brand-blueDark/40"} strokeWidth={isActive ? 2.5 : 2} />
+                                    <Icon size={18} className={isActive ? "text-brand-lightBlue" : "text-brand-blue/40"} strokeWidth={isActive ? 2.5 : 2} />
                                     {tab.label}
                                 </Link>
                             );

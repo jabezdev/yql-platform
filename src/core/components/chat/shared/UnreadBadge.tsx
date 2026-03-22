@@ -10,14 +10,14 @@ export function UnreadBadge({ count, max = 99, variant = "count" }: UnreadBadgeP
 
     if (variant === "dot") {
         return (
-            <span className="w-2 h-2 rounded-full bg-brand-blue flex-shrink-0" />
+            <span className="w-2 h-2 rounded-full bg-brand-lightBlue flex-shrink-0" />
         );
     }
 
     const display = count > max ? `${max}+` : String(count);
 
     return (
-        <span className="min-w-[18px] h-[18px] bg-brand-blue text-white text-[10px] font-bold rounded-full flex items-center justify-center px-1 leading-none flex-shrink-0">
+        <span className="min-w-[18px] h-[18px] bg-brand-lightBlue text-white text-[10px] font-bold rounded-full flex items-center justify-center px-1 leading-none flex-shrink-0">
             {display}
         </span>
     );

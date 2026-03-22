@@ -32,13 +32,13 @@ export default function AdminControlRoom() {
             </div>
 
             {/* Tab bar */}
-            <div className="flex gap-1 p-1 bg-brand-bgLight border border-brand-blueDark/15 rounded-xl w-fit shrink-0">
+            <div className="flex gap-1 p-1 bg-brand-bgLight border border-brand-blue/15 rounded-tl-xl rounded-br-xl w-fit shrink-0">
                 {canSeePipeline && (
                     <button
                         onClick={() => setActiveTab("pipeline")}
-                        className={`px-6 py-2 rounded-lg font-bold text-sm transition-all flex items-center gap-2 ${activeTab === "pipeline"
-                            ? "bg-brand-yellow text-brand-blueDark shadow-[3px_3px_0px_0px_rgba(0,0,0,0.12)]"
-                            : "text-brand-blueDark/50 hover:text-brand-blueDark hover:bg-white"
+                        className={`px-6 py-2 rounded-tl-lg rounded-br-lg font-bold text-sm transition-all flex items-center gap-2 ${activeTab === "pipeline"
+                            ? "bg-brand-blue text-white"
+                            : "text-brand-blue/50 hover:text-brand-blue hover:bg-white"
                             }`}
                     >
                         <Activity size={16} /> Recruitment Pipeline
@@ -47,9 +47,9 @@ export default function AdminControlRoom() {
                 {canSeeQueue && (
                     <button
                         onClick={() => setActiveTab("queue")}
-                        className={`px-6 py-2 rounded-lg font-bold text-sm transition-all flex items-center gap-2 ${activeTab === "queue"
-                            ? "bg-brand-yellow text-brand-blueDark shadow-[3px_3px_0px_0px_rgba(0,0,0,0.12)]"
-                            : "text-brand-blueDark/50 hover:text-brand-blueDark hover:bg-white"
+                        className={`px-6 py-2 rounded-tl-lg rounded-br-lg font-bold text-sm transition-all flex items-center gap-2 ${activeTab === "queue"
+                            ? "bg-brand-blue text-white"
+                            : "text-brand-blue/50 hover:text-brand-blue hover:bg-white"
                             }`}
                     >
                         <CheckSquare size={16} /> Evaluations Queue

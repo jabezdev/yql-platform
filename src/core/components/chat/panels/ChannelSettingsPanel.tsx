@@ -45,7 +45,7 @@ export function ChannelSettingsPanel({ channelId }: ChannelSettingsPanelProps) {
     if (!channel) {
         return (
             <div className="flex justify-center py-6">
-                <Loader2 size={18} className="animate-spin text-brand-blue/50" />
+                <Loader2 size={18} className="animate-spin text-brand-lightBlue/50" />
             </div>
         );
     }
@@ -83,20 +83,20 @@ export function ChannelSettingsPanel({ channelId }: ChannelSettingsPanelProps) {
             <div className="p-4 flex flex-col gap-4">
                 {/* Channel name */}
                 <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-wider text-brand-blueDark/40 mb-1.5">
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-brand-blue/40 mb-1.5">
                         Channel Name
                     </label>
                     <input
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         disabled={!isManager}
-                        className="w-full text-sm text-brand-blueDark border-2 border-brand-blueDark/12 rounded-tl-lg rounded-br-lg px-3 py-2 outline-none focus:border-brand-blue/40 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full text-sm text-brand-blue border-2 border-brand-blue/12 rounded-tl-lg rounded-br-lg px-3 py-2 outline-none focus:border-brand-lightBlue/40 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                 </div>
 
                 {/* Icon */}
                 <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-wider text-brand-blueDark/40 mb-1.5">
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-brand-blue/40 mb-1.5">
                         Icon (emoji)
                     </label>
                     <input
@@ -105,13 +105,13 @@ export function ChannelSettingsPanel({ channelId }: ChannelSettingsPanelProps) {
                         disabled={!isManager}
                         placeholder="e.g. 🚀"
                         maxLength={4}
-                        className="w-24 text-sm text-brand-blueDark border-2 border-brand-blueDark/12 rounded-tl-lg rounded-br-lg px-3 py-2 outline-none focus:border-brand-blue/40 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-center"
+                        className="w-24 text-sm text-brand-blue border-2 border-brand-blue/12 rounded-tl-lg rounded-br-lg px-3 py-2 outline-none focus:border-brand-lightBlue/40 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-center"
                     />
                 </div>
 
                 {/* Topic */}
                 <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-wider text-brand-blueDark/40 mb-1.5">
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-brand-blue/40 mb-1.5">
                         Topic
                     </label>
                     <input
@@ -119,14 +119,14 @@ export function ChannelSettingsPanel({ channelId }: ChannelSettingsPanelProps) {
                         onChange={(e) => setTopic(e.target.value)}
                         disabled={!isManager}
                         placeholder="What's this channel about?"
-                        className="w-full text-sm text-brand-blueDark border-2 border-brand-blueDark/12 rounded-tl-lg rounded-br-lg px-3 py-2 outline-none focus:border-brand-blue/40 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full text-sm text-brand-blue border-2 border-brand-blue/12 rounded-tl-lg rounded-br-lg px-3 py-2 outline-none focus:border-brand-lightBlue/40 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                 </div>
 
                 {/* Info */}
-                <div className="text-[11px] text-brand-blueDark/35 space-y-0.5">
-                    <p>Type: <span className="font-medium text-brand-blueDark/50">{channel.type}</span></p>
-                    <p>Created: <span className="font-medium text-brand-blueDark/50">{new Date(channel._creationTime).toLocaleDateString()}</span></p>
+                <div className="text-[11px] text-brand-blue/35 space-y-0.5">
+                    <p>Type: <span className="font-medium text-brand-blue/50">{channel.type}</span></p>
+                    <p>Created: <span className="font-medium text-brand-blue/50">{new Date(channel._creationTime).toLocaleDateString()}</span></p>
                 </div>
 
                 {isManager && (
@@ -134,13 +134,13 @@ export function ChannelSettingsPanel({ channelId }: ChannelSettingsPanelProps) {
                         <button
                             onClick={handleSave}
                             disabled={saving}
-                            className="flex items-center justify-center gap-2 w-full py-2 bg-brand-blueDark text-white text-xs font-bold rounded-tl-lg rounded-br-lg hover:bg-brand-blue transition-colors disabled:opacity-50"
+                            className="flex items-center justify-center gap-2 w-full py-2 bg-brand-blue text-white text-xs font-bold rounded-tl-lg rounded-br-lg hover:bg-brand-lightBlue transition-colors disabled:opacity-50"
                         >
                             {saving ? <Loader2 size={13} className="animate-spin" /> : <Save size={13} />}
                             Save Changes
                         </button>
 
-                        <div className="border-t-2 border-brand-blueDark/6 pt-3">
+                        <div className="border-t-2 border-brand-blue/6 pt-3">
                             <button
                                 onClick={handleArchive}
                                 disabled={archiving || !!channel.isArchived}

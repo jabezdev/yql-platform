@@ -49,7 +49,7 @@ export const navigationGroups: NavigationGroup[] = [
             {
                 id: "dashboard",
                 title: "Dashboard",
-                href: "/dashboard",
+                href: "/dashboard/overview",
                 icon: LayoutDashboard,
                 minRole: "T5",
             },
@@ -63,21 +63,21 @@ export const navigationGroups: NavigationGroup[] = [
             {
                 id: "weekly-hub",
                 title: "Weekly Hub",
-                href: "/weekly-hub",
+                href: "/dashboard/weekly-hub",
                 icon: ClipboardList,
                 minRole: "T5",
             },
             {
                 id: "hr-forms",
                 title: "HR Forms",
-                href: "/hr",
+                href: "/dashboard/hr",
                 icon: ClipboardCheck,
                 minRole: "T5",
             },
             {
                 id: "calendar",
                 title: "Calendar",
-                href: "/calendar",
+                href: "/dashboard/calendar",
                 icon: Calendar,
                 minRole: "Applicant",
             }
@@ -90,21 +90,21 @@ export const navigationGroups: NavigationGroup[] = [
             {
                 id: "admissions",
                 title: "Admissions",
-                href: "/admissions",
+                href: "/dashboard/admissions",
                 icon: UserPlus,
                 minRole: "Applicant",
             },
             {
                 id: "evaluations",
                 title: "Applicant Evaluation",
-                href: "/evaluations",
+                href: "/dashboard/evaluations",
                 icon: CheckSquare,
                 minRole: "T5",
             },
             {
                 id: "my-availability",
                 title: "My Availability",
-                href: "/availability",
+                href: "/dashboard/availability",
                 icon: CalendarPlus,
                 minRole: "T5",
                 specialRoles: ["Evaluator"],
@@ -118,21 +118,21 @@ export const navigationGroups: NavigationGroup[] = [
             {
                 id: "onboarding-modules",
                 title: "Onboarding",
-                href: "/onboarding",
+                href: "/dashboard/onboarding",
                 icon: BookOpen,
                 minRole: "T5",
             },
             {
                 id: "resource-library",
                 title: "Resource Library",
-                href: "/resources",
+                href: "/dashboard/resources",
                 icon: Globe,
                 minRole: "T5",
             },
             {
                 id: "quantum-101",
                 title: "Quantum 101",
-                href: "/quantum-101",
+                href: "/dashboard/quantum-101",
                 icon: Database,
                 minRole: "T5",
             }
@@ -145,21 +145,21 @@ export const navigationGroups: NavigationGroup[] = [
             {
                 id: "about",
                 title: "About the Org",
-                href: "/about",
+                href: "/dashboard/about",
                 icon: Info,
                 minRole: "Applicant",
             },
             {
                 id: "volunteer-matrix",
                 title: "Volunteer Matrix",
-                href: "/matrix",
+                href: "/dashboard/matrix",
                 icon: Activity,
                 minRole: "T5",
             },
             {
                 id: "volunteer-directory",
                 title: "Volunteer Directory",
-                href: "/directory",
+                href: "/dashboard/directory",
                 icon: Users,
                 minRole: "T5",
             }
@@ -172,49 +172,49 @@ export const navigationGroups: NavigationGroup[] = [
             {
                 id: "team-management",
                 title: "Team Management",
-                href: "/team",
+                href: "/dashboard/team",
                 icon: Settings,
                 minRole: "T3",
             },
             {
                 id: "admin-cohorts",
                 title: "Manage Cohorts",
-                href: "/admin/cohorts",
+                href: "/dashboard/admin/cohorts",
                 icon: Layers,
                 minRole: "T2",
             },
             {
                 id: "admin-rubrics",
                 title: "Rubric Builder",
-                href: "/admin/rubrics",
+                href: "/dashboard/admin/rubrics",
                 icon: SlidersHorizontal,
                 minRole: "T2",
             },
             {
                 id: "admin-app-forms",
                 title: "Application Forms",
-                href: "/admin/app-forms",
+                href: "/dashboard/admin/app-forms",
                 icon: FormInput,
                 minRole: "T2",
             },
             {
                 id: "admin-calendar",
                 title: "Manage Calendar",
-                href: "/admin/calendar",
+                href: "/dashboard/admin/calendar",
                 icon: CalendarCog,
                 minRole: "T2",
             },
             {
                 id: "admin-onboarding",
                 title: "Manage Onboarding",
-                href: "/admin/onboarding",
+                href: "/dashboard/admin/onboarding",
                 icon: GraduationCap,
                 minRole: "T2",
             },
             {
                 id: "roles-permissions",
                 title: "Roles & Permissions",
-                href: "/roles",
+                href: "/dashboard/roles",
                 icon: ShieldCheck,
                 minRole: "Super Admin",
             }
@@ -275,7 +275,6 @@ export function getAccessibleGroups(
 }
 
 export function getPrimaryWorkspacePath(role: Role): string {
-    if (hasMinRole(role, "T2")) return "/dashboard";
-    if (role === "Applicant") return "/admissions";
-    return "/dashboard";
+    if (role === "Applicant") return "/dashboard/admissions";
+    return "/dashboard/overview";
 }

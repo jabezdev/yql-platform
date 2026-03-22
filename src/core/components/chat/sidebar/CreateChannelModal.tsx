@@ -135,16 +135,16 @@ export function CreateChannelModal({
 
     return (
         <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-brand-blueDark/40 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-brand-blue/40 backdrop-blur-sm"
             onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
         >
-            <div className="w-full max-w-md mx-4 bg-white border-2 border-brand-blueDark/15 rounded-tl-2xl rounded-br-2xl shadow-[6px_6px_0px_0px_rgba(10,22,48,0.12)]">
+            <div className="w-full max-w-md mx-4 bg-white border-2 border-brand-blue/15 rounded-tl-2xl rounded-br-2xl shadow-[6px_6px_0px_0px_rgba(10,22,48,0.12)]">
                 {/* Header */}
-                <div className="flex items-center justify-between px-5 py-4 border-b-2 border-brand-blueDark/8">
-                    <h2 className="text-sm font-bold text-brand-blueDark">Create Channel</h2>
+                <div className="flex items-center justify-between px-5 py-4 border-b-2 border-brand-blue/8">
+                    <h2 className="text-sm font-bold text-brand-blue">Create Channel</h2>
                     <button
                         onClick={onClose}
-                        className="p-1 rounded-lg text-brand-blueDark/40 hover:text-brand-blueDark hover:bg-brand-bgLight transition-colors"
+                        className="p-1 rounded-lg text-brand-blue/40 hover:text-brand-blue hover:bg-brand-bgLight transition-colors"
                     >
                         <X size={16} />
                     </button>
@@ -153,7 +153,7 @@ export function CreateChannelModal({
                 <div className="p-5 space-y-4">
                     {/* Type selector */}
                     <div>
-                        <label className="block text-[11px] font-bold text-brand-blueDark/50 uppercase tracking-wider mb-1.5">
+                        <label className="block text-[11px] font-bold text-brand-blue/50 uppercase tracking-wider mb-1.5">
                             Type
                         </label>
                         <div className="grid grid-cols-2 gap-1.5">
@@ -163,12 +163,12 @@ export function CreateChannelModal({
                                     onClick={() => handleTypeChange(t)}
                                     className={`px-3 py-2 rounded-lg border-2 text-left transition-all ${
                                         type === t
-                                            ? "border-brand-blue bg-brand-blue/5 text-brand-blueDark"
-                                            : "border-brand-blueDark/10 text-brand-blueDark/50 hover:border-brand-blue/30"
+                                            ? "border-brand-lightBlue bg-brand-lightBlue/5 text-brand-blue"
+                                            : "border-brand-blue/10 text-brand-blue/50 hover:border-brand-lightBlue/30"
                                     }`}
                                 >
                                     <div className="text-xs font-semibold">{TYPE_LABELS[t]}</div>
-                                    <div className="text-[10px] text-brand-blueDark/40 mt-0.5 leading-tight">
+                                    <div className="text-[10px] text-brand-blue/40 mt-0.5 leading-tight">
                                         {TYPE_DESCRIPTIONS[t]}
                                     </div>
                                 </button>
@@ -179,13 +179,13 @@ export function CreateChannelModal({
                     {/* Parent picker */}
                     {needsParent && (
                         <div>
-                            <label className="block text-[11px] font-bold text-brand-blueDark/50 uppercase tracking-wider mb-1.5">
-                                Parent <span className="text-brand-blue">*</span>
+                            <label className="block text-[11px] font-bold text-brand-blue/50 uppercase tracking-wider mb-1.5">
+                                Parent <span className="text-brand-lightBlue">*</span>
                             </label>
                             {channelTree === undefined ? (
-                                <div className="h-9 bg-brand-blueDark/5 rounded-lg animate-pulse" />
+                                <div className="h-9 bg-brand-blue/5 rounded-lg animate-pulse" />
                             ) : parentOptions.length === 0 ? (
-                                <p className="text-xs text-brand-blueDark/40 italic py-1">
+                                <p className="text-xs text-brand-blue/40 italic py-1">
                                     No valid parent channels exist yet. Create a{" "}
                                     {type === "group" ? "sub-channel" : "channel"} first.
                                 </p>
@@ -195,7 +195,7 @@ export function CreateChannelModal({
                                     onChange={(e) =>
                                         setParentId(e.target.value as Id<"chatChannels"> | "")
                                     }
-                                    className="w-full text-sm px-3 py-2 border-2 border-brand-blueDark/10 rounded-lg outline-none focus:border-brand-blue/50 text-brand-blueDark bg-white"
+                                    className="w-full text-sm px-3 py-2 border-2 border-brand-blue/10 rounded-lg outline-none focus:border-brand-lightBlue/50 text-brand-blue bg-white"
                                 >
                                     <option value="">Select parent…</option>
                                     {parentOptions.map((c) => (
@@ -211,13 +211,13 @@ export function CreateChannelModal({
 
                     {/* Name */}
                     <div>
-                        <label className="block text-[11px] font-bold text-brand-blueDark/50 uppercase tracking-wider mb-1.5">
-                            Name <span className="text-brand-blue">*</span>
+                        <label className="block text-[11px] font-bold text-brand-blue/50 uppercase tracking-wider mb-1.5">
+                            Name <span className="text-brand-lightBlue">*</span>
                         </label>
                         <div className="relative">
                             <Hash
                                 size={13}
-                                className="absolute left-3 top-1/2 -translate-y-1/2 text-brand-blueDark/30 pointer-events-none"
+                                className="absolute left-3 top-1/2 -translate-y-1/2 text-brand-blue/30 pointer-events-none"
                             />
                             <input
                                 autoFocus
@@ -228,16 +228,16 @@ export function CreateChannelModal({
                                     if (e.key === "Escape") onClose();
                                 }}
                                 placeholder="channel-name"
-                                className="w-full pl-8 pr-3 py-2 text-sm border-2 border-brand-blueDark/10 rounded-lg outline-none focus:border-brand-blue/50 text-brand-blueDark"
+                                className="w-full pl-8 pr-3 py-2 text-sm border-2 border-brand-blue/10 rounded-lg outline-none focus:border-brand-lightBlue/50 text-brand-blue"
                             />
                         </div>
                     </div>
 
                     {/* Icon */}
                     <div>
-                        <label className="block text-[11px] font-bold text-brand-blueDark/50 uppercase tracking-wider mb-1.5">
+                        <label className="block text-[11px] font-bold text-brand-blue/50 uppercase tracking-wider mb-1.5">
                             Icon{" "}
-                            <span className="text-brand-blueDark/30 font-normal normal-case">
+                            <span className="text-brand-blue/30 font-normal normal-case">
                                 (optional emoji)
                             </span>
                         </label>
@@ -246,15 +246,15 @@ export function CreateChannelModal({
                             onChange={(e) => setIcon(e.target.value)}
                             placeholder="🔵"
                             maxLength={4}
-                            className="w-20 text-center text-lg px-3 py-1.5 border-2 border-brand-blueDark/10 rounded-lg outline-none focus:border-brand-blue/50"
+                            className="w-20 text-center text-lg px-3 py-1.5 border-2 border-brand-blue/10 rounded-lg outline-none focus:border-brand-lightBlue/50"
                         />
                     </div>
 
                     {/* Description */}
                     <div>
-                        <label className="block text-[11px] font-bold text-brand-blueDark/50 uppercase tracking-wider mb-1.5">
+                        <label className="block text-[11px] font-bold text-brand-blue/50 uppercase tracking-wider mb-1.5">
                             Description{" "}
-                            <span className="text-brand-blueDark/30 font-normal normal-case">
+                            <span className="text-brand-blue/30 font-normal normal-case">
                                 (optional)
                             </span>
                         </label>
@@ -263,7 +263,7 @@ export function CreateChannelModal({
                             onChange={(e) => setDescription(e.target.value)}
                             placeholder="What's this channel about?"
                             rows={2}
-                            className="w-full px-3 py-2 text-sm border-2 border-brand-blueDark/10 rounded-lg outline-none focus:border-brand-blue/50 text-brand-blueDark resize-none"
+                            className="w-full px-3 py-2 text-sm border-2 border-brand-blue/10 rounded-lg outline-none focus:border-brand-lightBlue/50 text-brand-blue resize-none"
                         />
                     </div>
 
@@ -274,14 +274,14 @@ export function CreateChannelModal({
                 <div className="flex gap-2 px-5 pb-5">
                     <button
                         onClick={onClose}
-                        className="flex-1 py-2 text-xs font-bold text-brand-blueDark/50 hover:text-brand-blueDark border-2 border-brand-blueDark/10 rounded-lg transition-colors"
+                        className="flex-1 py-2 text-xs font-bold text-brand-blue/50 hover:text-brand-blue border-2 border-brand-blue/10 rounded-lg transition-colors"
                     >
                         Cancel
                     </button>
                     <button
                         onClick={handleSubmit}
                         disabled={submitting || !name.trim() || (needsParent && !parentId)}
-                        className="flex-1 py-2 text-xs font-bold bg-brand-blueDark text-white rounded-lg hover:bg-brand-blue transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="flex-1 py-2 text-xs font-bold bg-brand-blue text-white rounded-lg hover:bg-brand-lightBlue transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {submitting ? "Creating…" : "Create"}
                     </button>

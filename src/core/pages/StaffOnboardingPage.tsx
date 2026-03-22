@@ -58,16 +58,16 @@ export default function StaffOnboardingPage() {
             <div className="flex flex-col lg:flex-row gap-8">
                 {/* Sidebar Navigation */}
                 <div className="w-full lg:w-1/3 shrink-0">
-                    <div className="bg-white border-2 border-brand-blueDark shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] rounded-tl-2xl rounded-br-2xl p-6 sticky top-8">
-                        <h2 className="text-2xl font-display font-extrabold text-brand-blueDark mb-6">Course Outline</h2>
+                    <div className="bg-white border-2 border-brand-blue shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] rounded-tl-2xl rounded-br-2xl p-6 sticky top-8">
+                        <h2 className="text-2xl font-display font-extrabold text-brand-blue mb-6">Course Outline</h2>
 
                         <div className="mb-6">
-                            <div className="flex justify-between text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/50 mb-2">
+                            <div className="flex justify-between text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/50 mb-2">
                                 <span>Overall Progress</span>
                                 <span>{overallProgress}%</span>
                             </div>
-                            <div className="w-full bg-brand-blueDark/10 rounded-sm h-3 border border-brand-blueDark/20">
-                                <div className="bg-brand-green h-full rounded-sm transition-all duration-500 border border-brand-blueDark/20 shadow-[2px_2px_0px_0px_rgba(57,103,153,0.1)]" style={{ width: `${overallProgress}%` }}></div>
+                            <div className="w-full bg-brand-blue/10 rounded-sm h-3 border border-brand-blue/20">
+                                <div className="bg-brand-green h-full rounded-sm transition-all duration-500 border border-brand-blue/20 shadow-[2px_2px_0px_0px_rgba(57,103,153,0.1)]" style={{ width: `${overallProgress}%` }}></div>
                             </div>
                         </div>
 
@@ -80,8 +80,8 @@ export default function StaffOnboardingPage() {
                                         key={mod._id}
                                         onClick={() => setCurrentIndex(idx)}
                                         className={`w-full text-left px-4 py-3 rounded-lg flex items-center gap-4 transition-all border-2 ${isActive
-                                            ? "bg-brand-yellow/20 border-brand-blueDark shadow-[2px_2px_0px_0px_rgba(57,103,153,0.3)] text-brand-blueDark hover:-translate-y-0.5 hover:shadow-[2px_4px_0px_0px_rgba(57,103,153,0.5)]"
-                                            : "bg-white hover:bg-brand-bgLight/50 border-brand-blueDark/10 text-brand-darkBlue hover:border-brand-blueDark/30"
+                                            ? "bg-brand-yellow/20 border-brand-blue shadow-[2px_2px_0px_0px_rgba(57,103,153,0.3)] text-brand-blue hover:-translate-y-0.5 hover:shadow-[2px_4px_0px_0px_rgba(57,103,153,0.5)]"
+                                            : "bg-white hover:bg-brand-bgLight/50 border-brand-blue/10 text-brand-darkBlue hover:border-brand-blue/30"
                                             }`}
                                     >
                                         {completed ? (
@@ -89,13 +89,13 @@ export default function StaffOnboardingPage() {
                                                 <CheckCircle2 className="w-4 h-4 text-brand-green" />
                                             </div>
                                         ) : (
-                                            <div className={`w-6 h-6 rounded border-2 shrink-0 ${isActive ? 'border-brand-blueDark' : 'border-brand-blueDark/20'}`} />
+                                            <div className={`w-6 h-6 rounded border-2 shrink-0 ${isActive ? 'border-brand-blue' : 'border-brand-blue/20'}`} />
                                         )}
                                         <div className="overflow-hidden flex-1">
                                             <p className="font-bold text-sm truncate">{mod.title}</p>
                                             {mod.isRequired && <p className="text-[10px] text-brand-red mt-0.5 font-extrabold uppercase tracking-widest">Required</p>}
                                         </div>
-                                        {isActive && <ChevronRight className="w-4 h-4 text-brand-blueDark opacity-50 shrink-0" />}
+                                        {isActive && <ChevronRight className="w-4 h-4 text-brand-blue opacity-50 shrink-0" />}
                                     </button>
                                 );
                             })}
@@ -105,12 +105,12 @@ export default function StaffOnboardingPage() {
 
                 {/* Main Content Area */}
                 <div className="flex-1 w-full min-w-0">
-                    <div className="bg-white border-2 border-brand-blueDark shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] rounded-tl-2xl rounded-br-2xl p-8 lg:p-12">
+                    <div className="bg-white border-2 border-brand-blue shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] rounded-tl-2xl rounded-br-2xl p-8 lg:p-12">
                         <div className="mb-10">
-                            <div className="flex items-center gap-2 text-[10px] text-brand-blueDark/50 font-extrabold mb-3 uppercase tracking-widest bg-brand-bgLight/50 px-3 py-1 rounded-sm border border-brand-blueDark/10 w-fit">
+                            <div className="flex items-center gap-2 text-[10px] text-brand-blue/50 font-extrabold mb-3 uppercase tracking-widest bg-brand-bgLight/50 px-3 py-1 rounded-sm border border-brand-blue/10 w-fit">
                                 Module {currentIndex + 1} of {modules.length}
                             </div>
-                            <h1 className="text-5xl font-extrabold font-display text-brand-blueDark mb-6 leading-tight max-w-3xl">{currentModule.title}</h1>
+                            <h1 className="text-5xl font-extrabold font-display text-brand-blue mb-6 leading-tight max-w-3xl">{currentModule.title}</h1>
                             {currentModule.description && (
                                 <p className="text-lg text-brand-darkBlue/80 mb-6 border-l-4 border-brand-yellow pl-5 py-2 font-medium bg-brand-yellow/5 rounded-r-lg max-w-3xl leading-relaxed">
                                     {currentModule.description}
@@ -118,13 +118,13 @@ export default function StaffOnboardingPage() {
                             )}
                         </div>
 
-                        <div className="prose prose-brand max-w-none text-brand-darkBlue/80 prose-headings:font-display prose-headings:text-brand-blueDark prose-a:text-brand-blue prose-a:font-bold prose-strong:text-brand-blueDark prose-strong:font-extrabold prose-code:text-brand-red prose-code:bg-brand-bgLight/50 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:border border-brand-blueDark/10">
+                        <div className="prose prose-brand max-w-none text-brand-darkBlue/80 prose-headings:font-display prose-headings:text-brand-blue prose-a:text-brand-lightBlue prose-a:font-bold prose-strong:text-brand-blue prose-strong:font-extrabold prose-code:text-brand-red prose-code:bg-brand-bgLight/50 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:border border-brand-blue/10">
                             <ReactMarkdown remarkPlugins={[remarkGfm]}>
                                 {currentModule.content}
                             </ReactMarkdown>
                         </div>
 
-                        <div className="mt-16 pt-8 border-t-2 border-brand-blueDark/10 flex flex-col sm:flex-row items-center justify-between gap-6">
+                        <div className="mt-16 pt-8 border-t-2 border-brand-blue/10 flex flex-col sm:flex-row items-center justify-between gap-6">
                             <Button
                                 variant="geometric-secondary"
                                 onClick={() => setCurrentIndex(prev => prev - 1)}

@@ -36,6 +36,7 @@ import Quantum101Page from "./core/pages/Quantum101Page";
 import AboutPage from "./core/pages/AboutPage";
 import VolunteerMatrixPage from "./core/pages/VolunteerMatrixPage";
 import ChatPage from "./core/pages/ChatPage";
+import BrandingPage from "./core/pages/BrandingPage";
 
 function RootRedirector() {
   const { user } = useAuthContext();
@@ -48,17 +49,16 @@ function AuthLoadingScreen() {
   return (
     <div className="h-screen w-screen flex items-center justify-center bg-brand-bgLight">
       <div className="flex flex-col items-center gap-3">
-        <div className="w-10 h-10 rounded-tl-2xl rounded-br-2xl bg-brand-blue border-4 border-brand-blueDark animate-pulse" />
-        <p className="text-sm font-semibold text-brand-blueDark/50 tracking-wide">Loading…</p>
+        <div className="w-10 h-10 rounded-tl-2xl rounded-br-2xl bg-brand-lightBlue border-4 border-brand-blue animate-pulse" />
+        <p className="text-sm font-semibold text-brand-blue/50 tracking-wide">Loading…</p>
       </div>
     </div>
   );
 }
 
 // Blocks the entire route tree while Convex/Clerk auth is resolving.
-// Prevents a white screen on slow networks (common on mobile).
-// Times out after 5 s so non-localhost dev access (e.g. phone via LAN IP)
-// doesn't hang forever when Clerk cookies are scoped to localhost.
+// Times out after 5 s so non-localhost dev access (phone on LAN)
+// doesn't hang when Clerk cookies are scoped to localhost.
 function AuthGate({ children }: { children: React.ReactNode }) {
   const { isLoading } = useConvexAuth();
   const [timedOut, setTimedOut] = useState(false);
@@ -81,80 +81,75 @@ function App() {
           <PageErrorBoundary>
             <AuthGate>
               <Routes>
-            {/* Public Routes */}
-            <Route path="/login/*" element={
-              <>
-                <Authenticated><RootRedirector /></Authenticated>
-                <Unauthenticated><LoginPage /></Unauthenticated>
-              </>
-            } />
-            <Route path="/register/*" element={
-              <>
-                <Authenticated><RootRedirector /></Authenticated>
-                <Unauthenticated><RegisterPage /></Unauthenticated>
-              </>
-            } />
-            <Route path="/" element={<LandingPage />} />
+                {/* Public routes */}
+                <Route path="/login/*" element={
+                  <>
+                    <Authenticated><RootRedirector /></Authenticated>
+                    <Unauthenticated><LoginPage /></Unauthenticated>
+                  </>
+                } />
+                <Route path="/register/*" element={
+                  <>
+                    <Authenticated><RootRedirector /></Authenticated>
+                    <Unauthenticated><RegisterPage /></Unauthenticated>
+                  </>
+                } />
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/branding" element={<BrandingPage />} />
 
-            {/* Staff-only workspace routes */}
-            <Route path="/dashboard" element={<Authenticated><RoleGuard minRole="T5"><WorkspaceLayout /></RoleGuard></Authenticated>}>
-              <Route index element={<DashboardPage />} />
-            </Route>
-            <Route path="/weekly-hub" element={<Authenticated><RoleGuard minRole="T5"><WorkspaceLayout /></RoleGuard></Authenticated>}>
-              <Route index element={<WeeklyHubPage />} />
-            </Route>
+                {/* Chat — own full-screen layout, staff+ */}
+                <Route path="/chat" element={
+                  <Authenticated><RoleGuard minRole="T5"><ChatLayout /></RoleGuard></Authenticated>
+                }>
+                  <Route index element={<ChatPage />} />
+                  <Route path=":channelId" element={<ChatPage />} />
+                  <Route path=":channelId/thread/:messageId" element={<ChatPage />} />
+                </Route>
 
-            {/* All authenticated users */}
-            <Route element={<RoleGuard><WorkspaceLayout /></RoleGuard>}>
-              <Route path="/calendar" element={<GlobalCalendarPage />} />
-              <Route path="/admissions" element={<AdmissionsPortal />} />
-              <Route path="/directory" element={<DirectoryPage />} />
-              <Route path="/about" element={<AboutPage />} />
-            </Route>
+                {/* Dashboard workspace — single WorkspaceLayout, per-page role gates */}
+                <Route path="/dashboard" element={
+                  <Authenticated><WorkspaceLayout /></Authenticated>
+                }>
+                  <Route index element={<Navigate to="overview" replace />} />
 
-            {/* Staff workspace routes */}
-            <Route element={<RoleGuard minRole="T5"><WorkspaceLayout /></RoleGuard>}>
-              <Route path="/availability" element={<MyAvailabilityPage />} />
-              <Route path="/hr" element={<AdminFormsPage />} />
-              <Route path="/resources" element={<ResourceLibraryPage />} />
-              <Route path="/quantum-101" element={<Quantum101Page />} />
-              <Route path="/matrix" element={<VolunteerMatrixPage />} />
-              <Route path="/onboarding" element={<StaffOnboardingPage />} />
-              <Route path="/evaluations" element={<AdminControlRoom />} />
-            </Route>
+                  {/* All authenticated users */}
+                  <Route path="calendar" element={<GlobalCalendarPage />} />
+                  <Route path="admissions" element={<AdmissionsPortal />} />
+                  <Route path="directory" element={<DirectoryPage />} />
+                  <Route path="about" element={<AboutPage />} />
 
-            {/* Management routes (T3+) */}
-            <Route element={<RoleGuard minRole="T3"><WorkspaceLayout /></RoleGuard>}>
-              <Route path="/team" element={<AdminRolesPage />} />
-              <Route path="/roles" element={<AdminRolesPage />} />
-            </Route>
+                  {/* Staff (T5+) */}
+                  <Route path="overview" element={<RoleGuard minRole="T5"><DashboardPage /></RoleGuard>} />
+                  <Route path="weekly-hub" element={<RoleGuard minRole="T5"><WeeklyHubPage /></RoleGuard>} />
+                  <Route path="hr" element={<RoleGuard minRole="T5"><AdminFormsPage /></RoleGuard>} />
+                  <Route path="resources" element={<RoleGuard minRole="T5"><ResourceLibraryPage /></RoleGuard>} />
+                  <Route path="quantum-101" element={<RoleGuard minRole="T5"><Quantum101Page /></RoleGuard>} />
+                  <Route path="matrix" element={<RoleGuard minRole="T5"><VolunteerMatrixPage /></RoleGuard>} />
+                  <Route path="onboarding" element={<RoleGuard minRole="T5"><StaffOnboardingPage /></RoleGuard>} />
+                  <Route path="evaluations" element={<RoleGuard minRole="T5"><AdminControlRoom /></RoleGuard>} />
+                  <Route path="availability" element={<RoleGuard minRole="T5"><MyAvailabilityPage /></RoleGuard>} />
 
-            {/* Admin-only routes (T2+) */}
-            <Route element={<RoleGuard minRole="T2"><WorkspaceLayout /></RoleGuard>}>
-              <Route path="/admin/calendar" element={<AdminCalendarPage />} />
-              <Route path="/admin/onboarding" element={<AdminOnboardingPage />} />
-              <Route path="/admin/cohorts" element={<AdminCohortsPage />} />
-              <Route path="/admin/rubrics" element={<AdminRubricPage />} />
-              <Route path="/admin/app-forms" element={<AdminFormBuilderPage />} />
-            </Route>
+                  {/* Management (T3+) */}
+                  <Route path="team" element={<RoleGuard minRole="T3"><AdminRolesPage /></RoleGuard>} />
+                  <Route path="roles" element={<RoleGuard minRole="T3"><AdminRolesPage /></RoleGuard>} />
 
-            {/* Chat — own layout, staff+ */}
-            <Route path="/chat" element={<Authenticated><RoleGuard minRole="T5"><ChatLayout /></RoleGuard></Authenticated>}>
-              <Route index element={<ChatPage />} />
-              <Route path=":channelId" element={<ChatPage />} />
-              <Route path=":channelId/thread/:messageId" element={<ChatPage />} />
-            </Route>
+                  {/* Admin (T2+) */}
+                  <Route path="admin/calendar" element={<RoleGuard minRole="T2"><AdminCalendarPage /></RoleGuard>} />
+                  <Route path="admin/onboarding" element={<RoleGuard minRole="T2"><AdminOnboardingPage /></RoleGuard>} />
+                  <Route path="admin/cohorts" element={<RoleGuard minRole="T2"><AdminCohortsPage /></RoleGuard>} />
+                  <Route path="admin/rubrics" element={<RoleGuard minRole="T2"><AdminRubricPage /></RoleGuard>} />
+                  <Route path="admin/app-forms" element={<RoleGuard minRole="T2"><AdminFormBuilderPage /></RoleGuard>} />
+                </Route>
 
-              {/* Fallback */}
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </AuthGate>
+                {/* Fallback */}
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </AuthGate>
           </PageErrorBoundary>
         </BrowserRouter>
       </ToastProvider>
     </AuthProvider>
   );
 }
-
 
 export default App;

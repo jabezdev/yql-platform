@@ -78,21 +78,21 @@ export function ProfileSlideover({ isOpen, onClose, user }: ProfileSlideoverProp
         <div className="fixed inset-0 z-50 flex justify-end">
             {/* Backdrop */}
             <div
-                className="absolute inset-0 bg-brand-blueDark/70 backdrop-blur-sm"
+                className="absolute inset-0 bg-brand-blue/70 backdrop-blur-sm"
                 onClick={onClose}
             />
 
             {/* Panel */}
             <div
-                className="relative w-full max-w-sm bg-white h-full border-l-4 border-brand-blueDark shadow-[-8px_0px_0px_0px_rgba(10,22,48,0.2)] flex flex-col animate-in slide-in-from-right duration-300"
+                className="relative w-full max-w-sm bg-white h-full border-l-4 border-brand-blue shadow-[-8px_0px_0px_0px_rgba(10,22,48,0.2)] flex flex-col animate-in slide-in-from-right duration-300"
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* ── Header ── */}
                 <div className="flex items-center justify-between px-6 py-5 border-b-2 border-gray-100 shrink-0">
-                    <span className="text-xs font-extrabold uppercase tracking-widest text-brand-blueDark/50">Your Profile</span>
+                    <span className="text-xs font-extrabold uppercase tracking-widest text-brand-blue/50">Your Profile</span>
                     <button
                         onClick={onClose}
-                        className="w-8 h-8 flex items-center justify-center rounded-lg border-2 border-brand-blueDark/20 text-brand-blueDark hover:bg-brand-bgLight hover:border-brand-blueDark transition-all"
+                        className="w-8 h-8 flex items-center justify-center rounded-lg border-2 border-brand-blue/20 text-brand-blue hover:bg-brand-bgLight hover:border-brand-blue transition-all"
                     >
                         <X size={16} strokeWidth={2.5} />
                     </button>
@@ -107,18 +107,18 @@ export function ProfileSlideover({ isOpen, onClose, user }: ProfileSlideoverProp
                             <img
                                 src={avatarUrl}
                                 alt={user.name}
-                                className="w-14 h-14 rounded-tl-xl rounded-br-xl object-cover border-2 border-brand-blueDark shadow-[2px_2px_0px_0px_rgba(10,22,48,0.25)] flex-shrink-0"
+                                className="w-14 h-14 rounded-tl-xl rounded-br-xl object-cover border-2 border-brand-blue shadow-[2px_2px_0px_0px_rgba(10,22,48,0.25)] flex-shrink-0"
                             />
                         ) : (
-                            <div className="w-14 h-14 bg-brand-yellow border-2 border-brand-blueDark rounded-tl-xl rounded-br-xl flex items-center justify-center text-brand-blueDark font-extrabold text-2xl shadow-[2px_2px_0px_0px_rgba(10,22,48,0.25)] flex-shrink-0">
+                            <div className="w-14 h-14 bg-brand-yellow border-2 border-brand-blue rounded-tl-xl rounded-br-xl flex items-center justify-center text-brand-blue font-extrabold text-2xl shadow-[2px_2px_0px_0px_rgba(10,22,48,0.25)] flex-shrink-0">
                                 {user.name.charAt(0)}
                             </div>
                         )}
                         <div className="min-w-0">
-                            <p className="font-display font-extrabold text-brand-blueDark text-lg leading-tight truncate">{user.name}</p>
-                            <p className="text-xs font-bold text-brand-blue mt-0.5">{displayRole}</p>
+                            <p className="font-display font-extrabold text-brand-blue text-lg leading-tight truncate">{user.name}</p>
+                            <p className="text-xs font-bold text-brand-lightBlue mt-0.5">{displayRole}</p>
                             {displaySpecial && (
-                                <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/70 mt-0.5">{displaySpecial}</p>
+                                <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-lightBlue/70 mt-0.5">{displaySpecial}</p>
                             )}
                             <p className="text-xs text-brand-darkBlue/50 font-medium mt-1 truncate">{user.email}</p>
                         </div>
@@ -127,7 +127,7 @@ export function ProfileSlideover({ isOpen, onClose, user }: ProfileSlideoverProp
                     {/* Profile Chip */}
                     <div className="px-6 py-6 border-b-2 border-gray-100 space-y-4">
                         <div>
-                            <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/50 mb-1">Profile Chip</p>
+                            <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/50 mb-1">Profile Chip</p>
                             <p className="text-xs text-brand-darkBlue/60 font-medium">
                                 Upload a 3:1 horizontal image — your personal card design shown on the Network page.
                             </p>
@@ -135,7 +135,7 @@ export function ProfileSlideover({ isOpen, onClose, user }: ProfileSlideoverProp
 
                         {/* Chip preview */}
                         <div
-                            className="w-full aspect-[3/1] rounded-tl-xl rounded-br-xl border-2 border-dashed border-brand-blueDark/30 overflow-hidden bg-brand-bgLight flex items-center justify-center cursor-pointer hover:border-brand-blueDark transition-colors group relative"
+                            className="w-full aspect-[3/1] rounded-tl-xl rounded-br-xl border-2 border-dashed border-brand-blue/30 overflow-hidden bg-brand-bgLight flex items-center justify-center cursor-pointer hover:border-brand-blue transition-colors group relative"
                             onClick={() => fileInputRef.current?.click()}
                         >
                             {chipPreview ? (
@@ -145,12 +145,12 @@ export function ProfileSlideover({ isOpen, onClose, user }: ProfileSlideoverProp
                                         alt="Profile chip"
                                         className="w-full h-full object-cover"
                                     />
-                                    <div className="absolute inset-0 bg-brand-blueDark/0 group-hover:bg-brand-blueDark/40 transition-all flex items-center justify-center">
+                                    <div className="absolute inset-0 bg-brand-blue/0 group-hover:bg-brand-blue/40 transition-all flex items-center justify-center">
                                         <Upload size={24} className="text-white opacity-0 group-hover:opacity-100 transition-opacity" />
                                     </div>
                                 </>
                             ) : (
-                                <div className="flex flex-col items-center gap-2 text-brand-blueDark/30 group-hover:text-brand-blue transition-colors">
+                                <div className="flex flex-col items-center gap-2 text-brand-blue/30 group-hover:text-brand-lightBlue transition-colors">
                                     <ImageIcon size={28} />
                                     <span className="text-xs font-bold">Click to upload</span>
                                 </div>
@@ -166,7 +166,7 @@ export function ProfileSlideover({ isOpen, onClose, user }: ProfileSlideoverProp
                         <button
                             type="button"
                             onClick={() => fileInputRef.current?.click()}
-                            className="w-full flex items-center justify-center gap-2 py-2.5 border-2 border-brand-blueDark/20 rounded-lg text-sm font-bold text-brand-blueDark hover:bg-brand-bgLight hover:border-brand-blueDark transition-all"
+                            className="w-full flex items-center justify-center gap-2 py-2.5 border-2 border-brand-blue/20 rounded-lg text-sm font-bold text-brand-blue hover:bg-brand-bgLight hover:border-brand-blue transition-all"
                         >
                             <Upload size={15} />
                             {chipPreview ? "Replace image" : "Upload image"}
@@ -175,14 +175,14 @@ export function ProfileSlideover({ isOpen, onClose, user }: ProfileSlideoverProp
 
                     {/* Bio */}
                     <div className="px-6 py-6 border-b-2 border-gray-100 space-y-3">
-                        <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blueDark/50">About</p>
+                        <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/50">About</p>
                         <textarea
                             value={bio}
                             onChange={(e) => setBio(e.target.value)}
                             placeholder="Tell the team a little about yourself..."
                             rows={4}
                             maxLength={200}
-                            className="w-full px-4 py-3 bg-brand-bgLight/60 border-2 border-brand-blueDark/20 focus:border-brand-blueDark rounded-lg text-sm font-medium text-brand-blueDark placeholder:text-brand-blueDark/30 focus:outline-none focus:ring-0 transition-colors resize-none"
+                            className="w-full px-4 py-3 bg-brand-bgLight/60 border-2 border-brand-blue/20 focus:border-brand-blue rounded-lg text-sm font-medium text-brand-blue placeholder:text-brand-blue/30 focus:outline-none focus:ring-0 transition-colors resize-none"
                         />
                         <p className="text-right text-xs text-brand-darkBlue/40 font-medium">{bio.length}/200</p>
                     </div>
@@ -192,7 +192,7 @@ export function ProfileSlideover({ isOpen, onClose, user }: ProfileSlideoverProp
                         <button
                             onClick={handleSave}
                             disabled={saving}
-                            className="w-full flex items-center justify-center gap-2 py-3 bg-brand-blueDark text-white font-bold rounded-tl-xl rounded-br-xl border-2 border-brand-blueDark shadow-[3px_3px_0px_0px_rgba(10,22,48,0.45)] hover:-translate-y-0.5 hover:shadow-[4px_4px_0px_0px_rgba(10,22,48,0.45)] active:translate-y-[3px] active:shadow-none transition-all disabled:opacity-60"
+                            className="w-full flex items-center justify-center gap-2 py-3 bg-brand-blue text-white font-bold rounded-tl-xl rounded-br-xl border-2 border-brand-blue shadow-[3px_3px_0px_0px_rgba(10,22,48,0.45)] hover:-translate-y-0.5 hover:shadow-[4px_4px_0px_0px_rgba(10,22,48,0.45)] active:translate-y-[3px] active:shadow-none transition-all disabled:opacity-60"
                         >
                             {saving ? (
                                 <><Loader2 size={16} className="animate-spin" /> Saving…</>

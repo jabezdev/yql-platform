@@ -18,14 +18,14 @@ export function ThreadPanel({ rootMessageId }: ThreadPanelProps) {
     if (rootMessage === undefined) {
         return (
             <div className="flex items-center justify-center flex-1">
-                <Loader2 size={18} className="animate-spin text-brand-blue/50" />
+                <Loader2 size={18} className="animate-spin text-brand-lightBlue/50" />
             </div>
         );
     }
 
     if (rootMessage === null) {
         return (
-            <div className="flex items-center justify-center flex-1 text-brand-blueDark/30 text-sm">
+            <div className="flex items-center justify-center flex-1 text-brand-blue/30 text-sm">
                 Message not found.
             </div>
         );
@@ -37,13 +37,13 @@ export function ThreadPanel({ rootMessageId }: ThreadPanelProps) {
     return (
         <div className="flex flex-col flex-1 min-h-0">
             {/* Original message */}
-            <div className="px-4 py-3 border-b-2 border-brand-blueDark/8 shrink-0 bg-brand-bgLight/50">
+            <div className="px-4 py-3 border-b-2 border-brand-blue/8 shrink-0 bg-brand-bgLight/50">
                 <div className="flex gap-2.5">
                     <UserAvatar name={authorName} size="sm" />
                     <div className="flex-1 min-w-0">
                         <div className="flex items-baseline gap-2 mb-0.5">
-                            <span className="text-xs font-bold text-brand-blueDark">{authorName}</span>
-                            <span className="text-[10px] text-brand-blueDark/35">
+                            <span className="text-xs font-bold text-brand-blue">{authorName}</span>
+                            <span className="text-[10px] text-brand-blue/35">
                                 {format(new Date(rootMessage._creationTime), "h:mm a")}
                             </span>
                         </div>
@@ -51,7 +51,7 @@ export function ThreadPanel({ rootMessageId }: ThreadPanelProps) {
                     </div>
                 </div>
                 {replyCount > 0 && (
-                    <div className="flex items-center gap-1 mt-2 text-[10px] text-brand-blue/60 font-medium">
+                    <div className="flex items-center gap-1 mt-2 text-[10px] text-brand-lightBlue/60 font-medium">
                         <MessageSquare size={11} />
                         {replyCount} {replyCount === 1 ? "reply" : "replies"}
                     </div>

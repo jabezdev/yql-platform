@@ -22,19 +22,19 @@ export function SearchPanel({ channelId }: SearchPanelProps) {
     return (
         <div className="flex flex-col flex-1 min-h-0">
             {/* Search input */}
-            <div className="px-3 py-2.5 border-b border-brand-blueDark/8 shrink-0">
-                <div className="flex items-center gap-2 bg-brand-bgLight border-2 border-brand-blueDark/10 rounded-tl-lg rounded-br-lg px-2.5 py-1.5 focus-within:border-brand-blue/30 transition-colors">
-                    <Search size={13} className="text-brand-blueDark/30 flex-shrink-0" />
+            <div className="px-3 py-2.5 border-b border-brand-blue/8 shrink-0">
+                <div className="flex items-center gap-2 bg-brand-bgLight border-2 border-brand-blue/10 rounded-tl-lg rounded-br-lg px-2.5 py-1.5 focus-within:border-brand-lightBlue/30 transition-colors">
+                    <Search size={13} className="text-brand-blue/30 flex-shrink-0" />
                     <input
                         autoFocus
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                         placeholder="Search messages..."
-                        className="flex-1 bg-transparent text-xs text-brand-blueDark placeholder-brand-blueDark/30 outline-none"
+                        className="flex-1 bg-transparent text-xs text-brand-blue placeholder-brand-blue/30 outline-none"
                     />
                 </div>
                 {query.trim().length > 0 && query.trim().length < 2 && (
-                    <p className="text-[10px] text-brand-blueDark/30 mt-1 pl-1">
+                    <p className="text-[10px] text-brand-blue/30 mt-1 pl-1">
                         Type at least 2 characters
                     </p>
                 )}
@@ -44,19 +44,19 @@ export function SearchPanel({ channelId }: SearchPanelProps) {
             <div className="flex-1 overflow-y-auto custom-scrollbar">
                 {results === undefined && query.trim().length >= 2 && (
                     <div className="flex justify-center py-6">
-                        <Loader2 size={16} className="animate-spin text-brand-blue/50" />
+                        <Loader2 size={16} className="animate-spin text-brand-lightBlue/50" />
                     </div>
                 )}
 
                 {results !== undefined && results.length === 0 && query.trim().length >= 2 && (
-                    <div className="flex flex-col items-center justify-center gap-2 py-8 text-brand-blueDark/25 px-4">
+                    <div className="flex flex-col items-center justify-center gap-2 py-8 text-brand-blue/25 px-4">
                         <Search size={24} strokeWidth={1.5} />
                         <p className="text-xs font-medium text-center">No messages found</p>
                     </div>
                 )}
 
                 {query.trim().length < 2 && (
-                    <div className="flex flex-col items-center justify-center gap-2 py-8 text-brand-blueDark/20 px-4">
+                    <div className="flex flex-col items-center justify-center gap-2 py-8 text-brand-blue/20 px-4">
                         <Search size={24} strokeWidth={1.5} />
                         <p className="text-xs text-center">Search messages in this channel</p>
                     </div>
@@ -65,16 +65,16 @@ export function SearchPanel({ channelId }: SearchPanelProps) {
                 {results && results.map((msg) => (
                     <div
                         key={msg._id}
-                        className="px-4 py-3 border-b border-brand-blueDark/6 hover:bg-brand-bgLight/60 transition-colors"
+                        className="px-4 py-3 border-b border-brand-blue/6 hover:bg-brand-bgLight/60 transition-colors"
                     >
                         <div className="flex items-start gap-2">
                             <UserAvatar name={msg.author?.name ?? "?"} size="sm" />
                             <div className="flex-1 min-w-0">
                                 <div className="flex items-baseline gap-2 mb-0.5">
-                                    <span className="text-xs font-bold text-brand-blueDark">
+                                    <span className="text-xs font-bold text-brand-blue">
                                         {msg.author?.name ?? "Unknown"}
                                     </span>
-                                    <span className="text-[10px] text-brand-blueDark/35">
+                                    <span className="text-[10px] text-brand-blue/35">
                                         {format(new Date(msg._creationTime), "MMM d, h:mm a")}
                                     </span>
                                 </div>

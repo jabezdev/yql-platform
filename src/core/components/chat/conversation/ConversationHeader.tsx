@@ -29,8 +29,8 @@ export function ConversationHeader({ channelId }: ConversationHeaderProps) {
             onClick={() => { toggleRightPanel(panel); setShowOverflow(false); }}
             className={`p-2 rounded-lg transition-colors ${extraClass} ${
                 rightPanel === panel
-                    ? "bg-brand-blue/15 text-brand-blue"
-                    : "text-brand-blueDark/40 hover:bg-brand-bgLight hover:text-brand-blueDark"
+                    ? "bg-brand-lightBlue/15 text-brand-lightBlue"
+                    : "text-brand-blue/40 hover:bg-brand-bgLight hover:text-brand-blue"
             }`}
         >
             <Icon size={16} />
@@ -38,26 +38,26 @@ export function ConversationHeader({ channelId }: ConversationHeaderProps) {
     );
 
     return (
-        <div className="flex items-center justify-between px-3 lg:px-4 py-2.5 border-b-2 border-brand-blueDark/8 bg-white shrink-0 gap-2">
+        <div className="flex items-center justify-between px-3 lg:px-4 py-2.5 border-b-2 border-brand-blue/8 bg-white shrink-0 gap-2">
             {/* Left: channel info */}
             <div className="flex items-center gap-2 min-w-0">
                 {!isDM ? (
-                    <Hash size={16} className="text-brand-blueDark/40 flex-shrink-0" />
+                    <Hash size={16} className="text-brand-blue/40 flex-shrink-0" />
                 ) : (
-                    <MessageSquare size={16} className="text-brand-blueDark/40 flex-shrink-0" />
+                    <MessageSquare size={16} className="text-brand-blue/40 flex-shrink-0" />
                 )}
                 <div className="min-w-0">
-                    <h2 className="text-sm font-bold text-brand-blueDark truncate">
+                    <h2 className="text-sm font-bold text-brand-blue truncate">
                         {channel.icon && <span className="mr-1">{channel.icon}</span>}
                         {channel.name}
                     </h2>
                     {channel.topic && (
-                        <p className="hidden sm:block text-[11px] text-brand-blueDark/45 truncate">
+                        <p className="hidden sm:block text-[11px] text-brand-blue/45 truncate">
                             {channel.topic}
                         </p>
                     )}
                 </div>
-                <span className="hidden md:block text-[11px] text-brand-blueDark/30 font-medium flex-shrink-0">
+                <span className="hidden md:block text-[11px] text-brand-blue/30 font-medium flex-shrink-0">
                     {channel.memberCount} members
                 </span>
             </div>
@@ -82,15 +82,15 @@ export function ConversationHeader({ channelId }: ConversationHeaderProps) {
                         onClick={() => setShowOverflow((v) => !v)}
                         className={`p-2 rounded-lg transition-colors ${
                             showOverflow
-                                ? "bg-brand-blue/15 text-brand-blue"
-                                : "text-brand-blueDark/40 hover:bg-brand-bgLight hover:text-brand-blueDark"
+                                ? "bg-brand-lightBlue/15 text-brand-lightBlue"
+                                : "text-brand-blue/40 hover:bg-brand-bgLight hover:text-brand-blue"
                         }`}
                     >
                         <MoreHorizontal size={16} />
                     </button>
 
                     {showOverflow && (
-                        <div className="absolute right-0 top-full mt-1 bg-white border-2 border-brand-blueDark/10 rounded-tl-xl rounded-br-xl shadow-[3px_3px_0px_0px_rgba(10,22,48,0.08)] z-40 py-1 min-w-[160px]">
+                        <div className="absolute right-0 top-full mt-1 bg-white border-2 border-brand-blue/10 rounded-tl-xl rounded-br-xl shadow-[3px_3px_0px_0px_rgba(10,22,48,0.08)] z-40 py-1 min-w-[160px]">
                             {[
                                 { panel: "pins" as const, Icon: Pin, label: "Pinned messages" },
                                 { panel: "bookmarks" as const, Icon: Bookmark, label: "Bookmarks" },
@@ -101,8 +101,8 @@ export function ConversationHeader({ channelId }: ConversationHeaderProps) {
                                     onClick={() => { toggleRightPanel(panel); setShowOverflow(false); }}
                                     className={`w-full flex items-center gap-2.5 px-3 py-2 text-sm transition-colors ${
                                         rightPanel === panel
-                                            ? "text-brand-blue bg-brand-blue/5"
-                                            : "text-brand-blueDark/70 hover:bg-brand-bgLight"
+                                            ? "text-brand-lightBlue bg-brand-lightBlue/5"
+                                            : "text-brand-blue/70 hover:bg-brand-bgLight"
                                     }`}
                                 >
                                     <Icon size={14} />

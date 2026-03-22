@@ -27,7 +27,7 @@ export function ConversationView() {
 
     if (!typedChannelId) {
         return (
-            <div className="flex-1 flex flex-col items-center justify-center gap-3 text-brand-blueDark/25">
+            <div className="flex-1 flex flex-col items-center justify-center gap-3 text-brand-blue/25">
                 <Hash size={40} strokeWidth={1.5} />
                 <p className="text-sm font-medium">Select a channel to start chatting</p>
             </div>

@@ -19,7 +19,7 @@ export function SystemMessage({ message }: SystemMessageProps) {
     const icon = message.systemType ? (systemIcons[message.systemType] ?? <Info size={13} />) : <Info size={13} />;
 
     return (
-        <div className="flex items-center gap-2 py-1 px-4 text-[12px] text-brand-blueDark/40 font-medium select-none">
+        <div className="flex items-center gap-2 py-1 px-4 text-[12px] text-brand-blue/40 font-medium select-none">
             <span className="opacity-60">{icon}</span>
             <span>{message.bodyPlainText}</span>
         </div>
