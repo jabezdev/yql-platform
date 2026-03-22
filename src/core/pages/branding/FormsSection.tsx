@@ -31,6 +31,11 @@ export default function FormsSection() {
     const [rangeStart, setRangeStart] = useState('2026-04-01');
     const [rangeEnd, setRangeEnd] = useState('2026-04-30');
     const [slot, setSlot] = useState('10:00 AM');
+    // Dark date / time state
+    const [darkDateVal, setDarkDateVal] = useState('2026-04-05');
+    const [darkTimeVal, setDarkTimeVal] = useState('14:00');
+    const [darkRangeStart, setDarkRangeStart] = useState('2026-04-01');
+    const [darkRangeEnd, setDarkRangeEnd] = useState('2026-04-30');
 
     const ALL_SLOTS = ['9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '1:00 PM', '1:30 PM', '2:00 PM'];
     const BOOKED_SLOTS = ['9:30 AM', '10:30 AM', '1:00 PM'];
@@ -151,8 +156,7 @@ export default function FormsSection() {
             {/* ── Date and Time ── */}
             <Meta>Date &amp; Time Inputs</Meta>
             <Callout>
-                Use <strong>DateInput</strong> / <strong>TimeInput</strong> for single fields, <strong>DateTimeInput</strong> for a combined pair, <strong>DateRangeInput</strong> for spans, and <strong>TimeSlotPicker</strong> for interview or booking flows.
-                All inputs share the standard border-2 / focus ring style. Icons are decorative — always include a visible label.
+                All date and time inputs use portal-rendered custom popovers — calendar and clock render into <code className="font-mono text-[10px] bg-brand-blue/8 px-1 rounded">document.body</code> via <code className="font-mono text-[10px] bg-brand-blue/8 px-1 rounded">createPortal</code> so they're never clipped. Every field also accepts manual text entry — type a date (<code className="font-mono text-[10px] bg-brand-blue/8 px-1 rounded">Apr 5, 2026</code> · <code className="font-mono text-[10px] bg-brand-blue/8 px-1 rounded">04/05/2026</code> · <code className="font-mono text-[10px] bg-brand-blue/8 px-1 rounded">2026-04-05</code>) or time (<code className="font-mono text-[10px] bg-brand-blue/8 px-1 rounded">2:30 PM</code> · <code className="font-mono text-[10px] bg-brand-blue/8 px-1 rounded">14:30</code>) and press Enter or blur to commit.
             </Callout>
 
             <Grid cols={2} className="mb-5">
@@ -173,7 +177,7 @@ export default function FormsSection() {
                         onTimeChange={setDtTime}
                     />
                     <div className="mt-4">
-                        <Meta>DateRangeInput</Meta>
+                        <Meta>DateRangeInput — shared calendar</Meta>
                         <DateRangeInput
                             label="Cohort window"
                             startValue={rangeStart}
@@ -181,7 +185,35 @@ export default function FormsSection() {
                             onStartChange={setRangeStart}
                             onEndChange={setRangeEnd}
                         />
+                        <p className="text-[10px] text-brand-blue/45 mt-2 leading-relaxed">
+                            Click start → click end on one calendar. Focuses the correct phase automatically.
+                        </p>
                     </div>
+                </Box>
+            </Grid>
+
+            {/* Dark mode date/time */}
+            <Grid cols={2} className="mb-5">
+                <Box dark>
+                    <Meta light>DateInput + TimeInput — dark</Meta>
+                    <div className="space-y-4">
+                        <DateInput dark label="Interview Date" value={darkDateVal} onChange={setDarkDateVal} />
+                        <TimeInput dark label="Start Time" value={darkTimeVal} onChange={setDarkTimeVal} />
+                    </div>
+                </Box>
+                <Box dark>
+                    <Meta light>DateRangeInput — dark</Meta>
+                    <DateRangeInput
+                        dark
+                        label="Cohort window"
+                        startValue={darkRangeStart}
+                        endValue={darkRangeEnd}
+                        onStartChange={setDarkRangeStart}
+                        onEndChange={setDarkRangeEnd}
+                    />
+                    <p className="text-[10px] text-white/40 mt-2 leading-relaxed">
+                        Dark popovers: <code className="font-mono bg-white/10 px-1 rounded">bg-brand-blue</code> · selected uses <code className="font-mono bg-white/10 px-1 rounded">bg-brand-yellow text-brand-blue</code>. Range fill: <code className="font-mono bg-white/10 px-1 rounded">bg-brand-yellow/15</code>.
+                    </p>
                 </Box>
             </Grid>
 
