@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {
     User, ArrowRight, Mail, Calendar, Users,
     Edit3, MessageSquare, Upload, ImageIcon,
-    LogOut, Save, Check, X, MapPin, Link2,
+    LogOut, Save, Check, X,
 } from 'lucide-react';
 import { Section, Meta, Callout } from './shared';
 

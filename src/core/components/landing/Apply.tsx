@@ -35,7 +35,7 @@ export default function Apply() {
                                     <div className="md:hidden absolute top-12 left-1/2 w-0.5 h-full bg-brand-blue/20 transform -translate-x-1/2" />
                                 )}
 
-                                <div className="w-12 h-12 rounded-full bg-white border-4 border-brand-blue flex items-center justify-center font-display font-extrabold text-brand-blue relative z-10 shadow-[3px_3px_0px_0px_rgba(57,103,153,0.2)] mb-4">
+                                <div className="w-12 h-12 rounded-tl-xl rounded-br-xl bg-white border-2 border-brand-blue flex items-center justify-center font-display font-extrabold text-brand-blue relative z-10 shadow-[3px_3px_0px_0px_rgba(57,103,153,0.15)] mb-4">
                                     {index + 1}
                                 </div>
 

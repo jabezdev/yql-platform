@@ -55,7 +55,7 @@ export function MoveMessageModal({ messageId, currentChannelId, onClose }: MoveM
                         <MoveRight size={15} className="text-brand-lightBlue" />
                         <h2 className="text-sm font-bold text-brand-blue">Move Message</h2>
                     </div>
-                    <button onClick={onClose} className="p-1.5 rounded-lg text-brand-blue/40 hover:bg-brand-bgLight transition-colors">
+                    <button onClick={onClose} className="p-1.5 rounded-tl-lg rounded-br-lg text-brand-blue/40 hover:bg-brand-bgLight transition-colors">
                         <X size={14} />
                     </button>
                 </div>
@@ -96,7 +96,7 @@ export function MoveMessageModal({ messageId, currentChannelId, onClose }: MoveM
                         value={reason}
                         onChange={(e) => setReason(e.target.value)}
                         placeholder="Reason (optional)"
-                        className="w-full text-xs text-brand-blue border-2 border-brand-blue/10 rounded-lg px-3 py-2 outline-none focus:border-brand-lightBlue/30 transition-colors"
+                        className="w-full text-xs text-brand-blue border-2 border-brand-blue/10 rounded-tl-lg rounded-br-lg px-3 py-2 outline-none focus:border-brand-lightBlue/30 transition-colors"
                     />
                     <div className="flex items-center justify-end gap-2">
                         <button onClick={onClose} className="px-3 py-1.5 text-xs font-medium text-brand-blue/50 hover:text-brand-blue transition-colors">

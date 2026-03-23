@@ -57,7 +57,7 @@ export function ChannelTreeItem({
                 {/* Channel link */}
                 <Link
                     to={`/chat/${node._id}`}
-                    className={`flex-1 flex items-center gap-1.5 px-2 py-1.5 rounded-lg transition-all text-xs min-w-0 ${
+                    className={`flex-1 flex items-center gap-1.5 px-2 py-1.5 rounded-tl-lg rounded-br-lg transition-all text-xs min-w-0 ${
                         isActive
                             ? "bg-brand-blue text-white font-semibold shadow-[1px_1px_0px_0px_rgba(10,22,48,0.3)]"
                             : "text-brand-blue/65 hover:bg-brand-blue/[0.06] hover:text-brand-blue font-medium"
@@ -79,7 +79,7 @@ export function ChannelTreeItem({
                     <button
                         onClick={() => onCreateChild(node._id, node.type)}
                         title={`Add sub-channel under ${node.name}`}
-                        className="w-5 h-5 flex items-center justify-center rounded text-brand-blue/25 hover:text-brand-lightBlue hover:bg-brand-lightBlue/[0.08] transition-colors flex-shrink-0"
+                        className="w-5 h-5 flex items-center justify-center rounded-tl-md rounded-br-md text-brand-blue/25 hover:text-brand-lightBlue hover:bg-brand-lightBlue/[0.08] transition-colors flex-shrink-0"
                     >
                         <Plus size={11} />
                     </button>

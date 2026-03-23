@@ -67,7 +67,7 @@ export function MemberPanel({ channelId }: MemberPanelProps) {
                         </button>
                     ) : (
                         <div>
-                            <div className="flex items-center gap-2 bg-brand-bgLight border-2 border-brand-blue/10 rounded-lg px-2.5 py-1.5 focus-within:border-brand-lightBlue/30 mb-2">
+                            <div className="flex items-center gap-2 bg-brand-bgLight border-2 border-brand-blue/10 rounded-tl-lg rounded-br-lg px-2.5 py-1.5 focus-within:border-brand-lightBlue/30 mb-2">
                                 <Search size={12} className="text-brand-blue/30 flex-shrink-0" />
                                 <input
                                     autoFocus
@@ -83,7 +83,7 @@ export function MemberPanel({ channelId }: MemberPanelProps) {
                                         key={u._id}
                                         onClick={() => handleInvite(u._id)}
                                         disabled={inviting}
-                                        className="w-full flex items-center gap-2 px-1 py-1.5 rounded-lg hover:bg-brand-bgLight transition-colors disabled:opacity-50"
+                                        className="w-full flex items-center gap-2 px-1 py-1.5 rounded-tl-lg rounded-br-lg hover:bg-brand-bgLight transition-colors disabled:opacity-50"
                                     >
                                         <UserAvatar name={u.name} size="xs" />
                                         <div className="flex-1 min-w-0 text-left">
@@ -117,7 +117,7 @@ export function MemberPanel({ channelId }: MemberPanelProps) {
                 </p>
                 <div className="flex flex-col gap-0.5">
                     {members.map((m) => (
-                        <div key={m._id} className="flex items-center gap-2.5 px-1 py-1.5 rounded-lg hover:bg-brand-bgLight transition-colors">
+                        <div key={m._id} className="flex items-center gap-2.5 px-1 py-1.5 rounded-tl-lg rounded-br-lg hover:bg-brand-bgLight transition-colors">
                             <UserAvatar name={m.user?.name ?? "?"} size="sm" />
                             <div className="flex-1 min-w-0">
                                 <p className="text-xs font-medium text-brand-blue truncate">

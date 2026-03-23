@@ -47,13 +47,13 @@ export function InviteMembersModal({ channelId, onClose }: InviteMembersModalPro
                         <UserPlus size={15} className="text-brand-lightBlue" />
                         <h2 className="text-sm font-bold text-brand-blue">Add Members</h2>
                     </div>
-                    <button onClick={onClose} className="p-1.5 rounded-lg text-brand-blue/40 hover:bg-brand-bgLight transition-colors">
+                    <button onClick={onClose} className="p-1.5 rounded-tl-lg rounded-br-lg text-brand-blue/40 hover:bg-brand-bgLight transition-colors">
                         <X size={14} />
                     </button>
                 </div>
 
                 <div className="px-4 pt-3 pb-2 shrink-0">
-                    <div className="flex items-center gap-2 bg-brand-bgLight border-2 border-brand-blue/10 rounded-lg px-2.5 py-1.5 focus-within:border-brand-lightBlue/30">
+                    <div className="flex items-center gap-2 bg-brand-bgLight border-2 border-brand-blue/10 rounded-tl-lg rounded-br-lg px-2.5 py-1.5 focus-within:border-brand-lightBlue/30">
                         <Search size={13} className="text-brand-blue/30 flex-shrink-0" />
                         <input
                             autoFocus
@@ -84,7 +84,7 @@ export function InviteMembersModal({ channelId, onClose }: InviteMembersModalPro
                                     <button
                                         onClick={() => !isInvited && handleInvite(u._id, u.name)}
                                         disabled={isInvited || isLoading}
-                                        className={`p-1.5 rounded-lg transition-colors flex-shrink-0 ${
+                                        className={`p-1.5 rounded-tl-lg rounded-br-lg transition-colors flex-shrink-0 ${
                                             isInvited
                                                 ? "text-green-500 bg-green-50"
                                                 : "text-brand-lightBlue hover:bg-brand-lightBlue/8"

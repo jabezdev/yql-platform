@@ -144,7 +144,7 @@ export function CreateChannelModal({
                     <h2 className="text-sm font-bold text-brand-blue">Create Channel</h2>
                     <button
                         onClick={onClose}
-                        className="p-1 rounded-lg text-brand-blue/40 hover:text-brand-blue hover:bg-brand-bgLight transition-colors"
+                        className="p-1 rounded-tl-lg rounded-br-lg text-brand-blue/40 hover:text-brand-blue hover:bg-brand-bgLight transition-colors"
                     >
                         <X size={16} />
                     </button>
@@ -161,7 +161,7 @@ export function CreateChannelModal({
                                 <button
                                     key={t}
                                     onClick={() => handleTypeChange(t)}
-                                    className={`px-3 py-2 rounded-lg border-2 text-left transition-all ${
+                                    className={`px-3 py-2 rounded-tl-lg rounded-br-lg border-2 text-left transition-all ${
                                         type === t
                                             ? "border-brand-lightBlue bg-brand-lightBlue/5 text-brand-blue"
                                             : "border-brand-blue/10 text-brand-blue/50 hover:border-brand-lightBlue/30"
@@ -195,7 +195,7 @@ export function CreateChannelModal({
                                     onChange={(e) =>
                                         setParentId(e.target.value as Id<"chatChannels"> | "")
                                     }
-                                    className="w-full text-sm px-3 py-2 border-2 border-brand-blue/10 rounded-lg outline-none focus:border-brand-lightBlue/50 text-brand-blue bg-white"
+                                    className="w-full text-sm px-3 py-2 border-2 border-brand-blue/10 rounded-tl-lg rounded-br-lg outline-none focus:border-brand-lightBlue/50 text-brand-blue bg-white"
                                 >
                                     <option value="">Select parent…</option>
                                     {parentOptions.map((c) => (
@@ -228,7 +228,7 @@ export function CreateChannelModal({
                                     if (e.key === "Escape") onClose();
                                 }}
                                 placeholder="channel-name"
-                                className="w-full pl-8 pr-3 py-2 text-sm border-2 border-brand-blue/10 rounded-lg outline-none focus:border-brand-lightBlue/50 text-brand-blue"
+                                className="w-full pl-8 pr-3 py-2 text-sm border-2 border-brand-blue/10 rounded-tl-lg rounded-br-lg outline-none focus:border-brand-lightBlue/50 text-brand-blue"
                             />
                         </div>
                     </div>
@@ -246,7 +246,7 @@ export function CreateChannelModal({
                             onChange={(e) => setIcon(e.target.value)}
                             placeholder="🔵"
                             maxLength={4}
-                            className="w-20 text-center text-lg px-3 py-1.5 border-2 border-brand-blue/10 rounded-lg outline-none focus:border-brand-lightBlue/50"
+                            className="w-20 text-center text-lg px-3 py-1.5 border-2 border-brand-blue/10 rounded-tl-lg rounded-br-lg outline-none focus:border-brand-lightBlue/50"
                         />
                     </div>
 
@@ -263,7 +263,7 @@ export function CreateChannelModal({
                             onChange={(e) => setDescription(e.target.value)}
                             placeholder="What's this channel about?"
                             rows={2}
-                            className="w-full px-3 py-2 text-sm border-2 border-brand-blue/10 rounded-lg outline-none focus:border-brand-lightBlue/50 text-brand-blue resize-none"
+                            className="w-full px-3 py-2 text-sm border-2 border-brand-blue/10 rounded-tl-lg rounded-br-lg outline-none focus:border-brand-lightBlue/50 text-brand-blue resize-none"
                         />
                     </div>
 
@@ -274,14 +274,14 @@ export function CreateChannelModal({
                 <div className="flex gap-2 px-5 pb-5">
                     <button
                         onClick={onClose}
-                        className="flex-1 py-2 text-xs font-bold text-brand-blue/50 hover:text-brand-blue border-2 border-brand-blue/10 rounded-lg transition-colors"
+                        className="flex-1 py-2 text-xs font-bold text-brand-blue/50 hover:text-brand-blue border-2 border-brand-blue/10 rounded-tl-lg rounded-br-lg transition-colors"
                     >
                         Cancel
                     </button>
                     <button
                         onClick={handleSubmit}
                         disabled={submitting || !name.trim() || (needsParent && !parentId)}
-                        className="flex-1 py-2 text-xs font-bold bg-brand-blue text-white rounded-lg hover:bg-brand-lightBlue transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="flex-1 py-2 text-xs font-bold bg-brand-blue text-white rounded-tl-lg rounded-br-lg hover:bg-brand-lightBlue transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {submitting ? "Creating…" : "Create"}
                     </button>

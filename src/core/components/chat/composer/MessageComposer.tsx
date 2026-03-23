@@ -184,7 +184,7 @@ export function MessageComposer({
     }
 
     const btnClass = (active = false) =>
-        `p-1.5 rounded-lg transition-colors ${
+        `p-1.5 rounded-tl-lg rounded-br-lg transition-colors ${
             active
                 ? "bg-brand-lightBlue/15 text-brand-lightBlue"
                 : "text-brand-blue/35 hover:bg-brand-bgLight hover:text-brand-blue"

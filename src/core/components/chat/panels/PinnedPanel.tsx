@@ -56,7 +56,7 @@ export function PinnedPanel({ channelId }: PinnedPanelProps) {
                         <button
                             onClick={() => pinMessage({ messageId: msg._id })}
                             title="Unpin message"
-                            className="opacity-0 group-hover:opacity-100 [@media(hover:none)]:opacity-100 p-1.5 rounded-lg text-brand-blue/30 hover:text-brand-red hover:bg-brand-red/10 transition-all flex-shrink-0"
+                            className="opacity-0 group-hover:opacity-100 [@media(hover:none)]:opacity-100 p-1.5 rounded-tl-lg rounded-br-lg text-brand-blue/30 hover:text-brand-red hover:bg-brand-red/10 transition-all flex-shrink-0"
                         >
                             <Pin size={13} />
                         </button>

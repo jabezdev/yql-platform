@@ -80,7 +80,7 @@ export function MessageItem({ message, isGrouped = false }: MessageItemProps) {
             {/* Mobile-only: ··· button that toggles the action toolbar on tap */}
             {!message.isDeleted && !isEditing && (
                 <button
-                    className="flex lg:hidden absolute right-3 top-1.5 p-1.5 rounded-lg text-brand-blue/40 active:text-brand-blue active:bg-brand-bgLight transition-colors z-10"
+                    className="flex lg:hidden absolute right-3 top-1.5 p-1.5 rounded-tl-lg rounded-br-lg text-brand-blue/40 active:text-brand-blue active:bg-brand-bgLight transition-colors z-10"
                     onTouchEnd={(e) => { e.stopPropagation(); setShowActions((v) => !v); }}
                     onClick={(e) => { e.stopPropagation(); setShowActions((v) => !v); }}
                     aria-label="Message actions"
@@ -177,7 +177,7 @@ export function MessageItem({ message, isGrouped = false }: MessageItemProps) {
                                 <button
                                     key={r.emoji}
                                     onClick={() => handleReaction(r.emoji)}
-                                    className={`flex items-center gap-1 px-2 py-0.5 rounded-full border text-xs font-medium transition-all ${
+                                    className={`flex items-center gap-1 px-2 py-0.5 rounded-tl-lg rounded-br-lg border text-xs font-medium transition-all ${
                                         hasReacted
                                             ? "bg-brand-lightBlue/10 border-brand-lightBlue/40 text-brand-blue"
                                             : "bg-white border-brand-blue/15 text-brand-blue/60 hover:border-brand-lightBlue/30"
@@ -272,7 +272,7 @@ function ActionBtn({
         <button
             title={title}
             onClick={onClick}
-            className={`p-1.5 rounded-lg transition-colors ${
+            className={`p-1.5 rounded-tl-lg rounded-br-lg transition-colors ${
                 danger
                     ? "text-brand-wine/60 hover:bg-brand-wine/10 hover:text-brand-wine"
                     : "text-brand-blue/40 hover:bg-brand-bgLight hover:text-brand-blue"

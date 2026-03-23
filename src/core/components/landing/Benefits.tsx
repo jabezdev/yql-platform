@@ -22,7 +22,7 @@ export default function Benefits() {
                     {benefits.map((benefit, index) => (
                         <div
                             key={index}
-                            className="group relative bg-white border-2 border-brand-blue p-8 rounded-tl-2xl rounded-br-2xl shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] hover:shadow-[6px_6px_0px_0px_rgba(57,103,153,0.2)] hover:-translate-y-1 hover:-translate-x-0.5 transition-all duration-200"
+                            className="group relative bg-white border-2 border-brand-blue p-8 rounded-tl-2xl rounded-br-2xl shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] hover:shadow-[6px_6px_0px_0px_rgba(57,103,153,0.2)] hover:-translate-y-0.5 hover:-translate-x-0.5 transition-all duration-200"
                         >
                             <div className="relative z-10 flex flex-col items-center text-center">
                                 <div className="w-14 h-14 bg-brand-yellow/20 border-2 border-brand-blue/10 rounded-tl-xl rounded-br-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 text-brand-blue">

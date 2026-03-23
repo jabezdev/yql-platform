@@ -42,8 +42,8 @@ export default function About() {
 
                     <div className="relative flex flex-col gap-4">
                         <div className="rounded-tl-2xl rounded-br-2xl bg-brand-blue border-2 border-brand-blue shadow-[6px_6px_0px_0px_rgba(57,103,153,0.25)] p-8 relative overflow-hidden">
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-brand-yellow/10 rounded-bl-full" />
-                            <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-tr-full" />
+                            <div className="absolute top-0 right-0 w-24 h-24 bg-brand-yellow/10 rounded-tl-2xl" />
+                            <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-br-2xl" />
                             <div className="relative z-10">
                                 <h3 className="text-2xl font-display font-extrabold text-white mb-1">Build. Lead. Innovate.</h3>
                                 <p className="text-brand-bgLight/70 font-medium">Shape the Quantum Future of the Philippines.</p>

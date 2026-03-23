@@ -102,7 +102,7 @@ export function PollComposer({ channelId, threadRootMessageId, onClose }: PollCo
                                     value={opt.text}
                                     onChange={(e) => setOption(opt.uid, e.target.value)}
                                     placeholder={`Option ${i + 1}`}
-                                    className="flex-1 text-xs text-brand-blue placeholder-brand-blue/25 border-2 border-brand-blue/10 rounded-lg px-2.5 py-1.5 outline-none focus:border-brand-lightBlue/35 transition-colors"
+                                    className="flex-1 text-xs text-brand-blue placeholder-brand-blue/25 border-2 border-brand-blue/10 rounded-tl-lg rounded-br-lg px-2.5 py-1.5 outline-none focus:border-brand-lightBlue/35 transition-colors"
                                 />
                                 {options.length > 2 && (
                                     <button

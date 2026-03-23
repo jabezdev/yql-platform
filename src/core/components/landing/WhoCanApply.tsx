@@ -19,8 +19,8 @@ export default function WhoCanApply() {
                     <SectionTitle>Who Can Apply?</SectionTitle>
 
                     <div className="grid md:grid-cols-2 gap-6 mb-12">
-                        <div className="bg-white border-2 border-brand-blue rounded-tl-2xl rounded-br-2xl shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] p-8 relative overflow-hidden group hover:shadow-[6px_6px_0px_0px_rgba(57,103,153,0.2)] hover:-translate-y-0.5 transition-all duration-200">
-                            <div className="absolute top-0 right-0 w-24 h-24 bg-brand-yellow/20 rounded-bl-full" />
+                        <div className="bg-white border-2 border-brand-blue rounded-tl-2xl rounded-br-2xl shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] p-8 relative overflow-hidden group hover:shadow-[6px_6px_0px_0px_rgba(57,103,153,0.2)] hover:-translate-y-0.5 hover:-translate-x-0.5 transition-all duration-200">
+                            <div className="absolute top-0 right-0 w-24 h-24 bg-brand-yellow/20 rounded-tl-2xl" />
                             <h3 className="text-xl font-display font-extrabold mb-6 text-brand-blue relative z-10">We welcome:</h3>
                             <ul className="space-y-4 relative z-10">
                                 {audiences.map((item, index) => (
@@ -33,9 +33,8 @@ export default function WhoCanApply() {
                         </div>
 
                         <div className="bg-brand-blue text-white p-8 rounded-tl-2xl rounded-br-2xl shadow-[4px_4px_0px_0px_rgba(57,103,153,0.4)] flex flex-col justify-center relative overflow-hidden">
-                            {/* Decorative geometric corners */}
-                            <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-bl-full" />
-                            <div className="absolute bottom-0 left-0 w-24 h-24 bg-brand-yellow/10 rounded-tr-full" />
+                            <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-tl-2xl" />
+                            <div className="absolute bottom-0 left-0 w-24 h-24 bg-brand-yellow/10 rounded-br-2xl" />
 
                             <div className="relative z-10">
                                 <div className="w-12 h-12 bg-brand-yellow/20 border-2 border-brand-yellow/40 rounded-tl-xl rounded-br-xl flex items-center justify-center mb-4">

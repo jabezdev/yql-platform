@@ -37,6 +37,7 @@ import AboutPage from "./core/pages/AboutPage";
 import VolunteerMatrixPage from "./core/pages/VolunteerMatrixPage";
 import ChatPage from "./core/pages/ChatPage";
 import BrandingPage from "./core/pages/BrandingPage";
+import PosterCreatorPage from "./core/pages/PosterCreatorPage";
 
 function RootRedirector() {
   const { user } = useAuthContext();
@@ -96,6 +97,7 @@ function App() {
                 } />
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/branding" element={<BrandingPage />} />
+                <Route path="/poster" element={<PosterCreatorPage />} />
 
                 {/* Chat — own full-screen layout, staff+ */}
                 <Route path="/chat" element={

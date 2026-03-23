@@ -16,7 +16,7 @@ export function ChannelSearch({ value, onChange }: ChannelSearchProps) {
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
                 placeholder="Filter channels…"
-                className="w-full pl-7 pr-7 py-1.5 text-xs bg-brand-bgLight border border-brand-blue/10 rounded-lg outline-none focus:border-brand-lightBlue/40 text-brand-blue placeholder-brand-blue/30 transition-colors"
+                className="w-full pl-7 pr-7 py-1.5 text-xs bg-brand-bgLight border border-brand-blue/10 rounded-tl-lg rounded-br-lg outline-none focus:border-brand-lightBlue/40 text-brand-blue placeholder-brand-blue/30 transition-colors"
             />
             {value && (
                 <button

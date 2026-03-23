@@ -49,7 +49,7 @@ export function AttachmentPreview({ files, onRemove }: AttachmentPreviewProps) {
                         <button
                             type="button"
                             onClick={() => onRemove(sf.uid)}
-                            className="absolute top-1 right-1 p-0.5 rounded-full bg-brand-blue/15 text-brand-blue/60 hover:bg-red-100 hover:text-red-500 transition-colors"
+                            className="absolute top-1 right-1 p-0.5 rounded-tl-md rounded-br-md bg-brand-blue/15 text-brand-blue/60 hover:bg-brand-red/10 hover:text-brand-red transition-colors"
                         >
                             <X size={10} />
                         </button>

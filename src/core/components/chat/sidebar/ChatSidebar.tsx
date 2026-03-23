@@ -36,7 +36,7 @@ export function ChatSidebar() {
             <div className="flex gap-1 p-3 border-b-2 border-brand-blue/8 shrink-0">
                 <button
                     onClick={() => setSidebarTab("channels")}
-                    className={`flex-1 text-xs font-bold py-1.5 rounded-lg transition-all ${
+                    className={`flex-1 text-xs font-bold py-1.5 rounded-tl-lg rounded-br-lg transition-all ${
                         sidebarTab === "channels"
                             ? "bg-brand-blue text-white shadow-[2px_2px_0px_0px_rgba(10,22,48,0.25)]"
                             : "text-brand-blue/50 hover:bg-brand-bgLight"
@@ -46,7 +46,7 @@ export function ChatSidebar() {
                 </button>
                 <button
                     onClick={() => setSidebarTab("direct")}
-                    className={`flex-1 text-xs font-bold py-1.5 rounded-lg transition-all relative ${
+                    className={`flex-1 text-xs font-bold py-1.5 rounded-tl-lg rounded-br-lg transition-all relative ${
                         sidebarTab === "direct"
                             ? "bg-brand-blue text-white shadow-[2px_2px_0px_0px_rgba(10,22,48,0.25)]"
                             : "text-brand-blue/50 hover:bg-brand-bgLight"

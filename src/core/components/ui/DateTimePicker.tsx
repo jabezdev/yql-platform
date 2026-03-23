@@ -265,10 +265,12 @@ export function DateInput({ label, value, onChange, min, max, disabled, error, d
     const anchorStyle = useAnchorStyle(anchorRef as { current: HTMLElement | null }, open);
 
     // Sync display text when value changes externally
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     useEffect(() => { if (!isTyping) setTextVal(formatDateDisplay(value ?? '')); }, [value, isTyping]);
     // Sync calendar view to selected date
     useEffect(() => {
         const d = parseDate(value ?? '');
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         if (d) { setViewYear(d.getFullYear()); setViewMonth(d.getMonth()); }
     }, [value]);
     // Close on outside click
@@ -380,7 +382,9 @@ export function TimeInput({ label, value, onChange, disabled, error, dark, class
     const [selM,    setSelM]    = useState(p.m);
     const [selAmpm, setSelAmpm] = useState<'AM' | 'PM'>(p.ampm);
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     useEffect(() => { if (!isTyping) setTextVal(formatTimeDisplay(value ?? '')); }, [value, isTyping]);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     useEffect(() => { const q = parse12h(value ?? ''); setSelH(q.h); setSelM(q.m); setSelAmpm(q.ampm); }, [value]);
 
     // Scroll selected items into view
@@ -568,7 +572,9 @@ export function DateRangeInput({ label, startValue, endValue, onStartChange, onE
 
     const anchorStyle = useAnchorStyle(anchorRef as { current: HTMLElement | null }, open);
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     useEffect(() => { setStartText(formatDateDisplay(startValue ?? '')); }, [startValue]);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     useEffect(() => { setEndText(formatDateDisplay(endValue   ?? '')); }, [endValue]);
 
     useEffect(() => {
@@ -662,7 +668,7 @@ export function DateRangeInput({ label, startValue, endValue, onStartChange, onE
                 />
                 {/* Toggle */}
                 <button type="button"
-                    onMouseDown={e => { e.preventDefault(); open ? setOpen(false) : openForPhase(startValue ? 'end' : 'start'); }}
+                    onMouseDown={e => { e.preventDefault(); if (open) { setOpen(false); } else { openForPhase(startValue ? 'end' : 'start'); } }}
                     className={`pr-2.5 py-2.5 shrink-0 transition-colors ${chevCls}`}>
                     <ChevronDown size={13} className={`transition-transform duration-150 ${open ? 'rotate-180' : ''}`} />
                 </button>

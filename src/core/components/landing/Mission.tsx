@@ -40,7 +40,7 @@ export default function Mission() {
                     {missionPoints.map((point, index) => (
                         <div
                             key={index}
-                            className="bg-white border-2 border-brand-blue rounded-tl-2xl rounded-br-2xl shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] p-6 flex flex-col items-center text-center h-full hover:shadow-[6px_6px_0px_0px_rgba(57,103,153,0.2)] hover:-translate-y-0.5 transition-all duration-200"
+                            className="bg-white border-2 border-brand-blue rounded-tl-2xl rounded-br-2xl shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] p-6 flex flex-col items-center text-center h-full hover:shadow-[6px_6px_0px_0px_rgba(57,103,153,0.2)] hover:-translate-y-0.5 hover:-translate-x-0.5 transition-all duration-200"
                         >
                             <div className="w-12 h-12 bg-brand-lightBlue/10 border-2 border-brand-lightBlue/20 rounded-tl-xl rounded-br-xl flex items-center justify-center mb-4 text-brand-lightBlue">
                                 <point.icon size={24} />

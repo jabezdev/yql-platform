@@ -27,7 +27,7 @@ export function ConversationHeader({ channelId }: ConversationHeaderProps) {
         <button
             title={label}
             onClick={() => { toggleRightPanel(panel); setShowOverflow(false); }}
-            className={`p-2 rounded-lg transition-colors ${extraClass} ${
+            className={`p-2 rounded-tl-lg rounded-br-lg transition-colors ${extraClass} ${
                 rightPanel === panel
                     ? "bg-brand-lightBlue/15 text-brand-lightBlue"
                     : "text-brand-blue/40 hover:bg-brand-bgLight hover:text-brand-blue"
@@ -47,7 +47,7 @@ export function ConversationHeader({ channelId }: ConversationHeaderProps) {
                     <MessageSquare size={16} className="text-brand-blue/40 flex-shrink-0" />
                 )}
                 <div className="min-w-0">
-                    <h2 className="text-sm font-bold text-brand-blue truncate">
+                    <h2 className="text-sm font-display font-bold text-brand-blue truncate">
                         {channel.icon && <span className="mr-1">{channel.icon}</span>}
                         {channel.name}
                     </h2>
@@ -80,7 +80,7 @@ export function ConversationHeader({ channelId }: ConversationHeaderProps) {
                     <button
                         title="More options"
                         onClick={() => setShowOverflow((v) => !v)}
-                        className={`p-2 rounded-lg transition-colors ${
+                        className={`p-2 rounded-tl-lg rounded-br-lg transition-colors ${
                             showOverflow
                                 ? "bg-brand-lightBlue/15 text-brand-lightBlue"
                                 : "text-brand-blue/40 hover:bg-brand-bgLight hover:text-brand-blue"

@@ -11,7 +11,7 @@ export default function Footer() {
                     {/* Brand */}
                     <div className="flex flex-col items-center text-center md:items-start md:text-left max-w-xl">
                         <img src="/YQL_LOGO_WHITE.svg" alt="YQL Logo" className="h-16 w-auto mb-6" />
-                        <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight mb-2">
+                        <h2 className="text-2xl md:text-3xl font-display font-extrabold text-white tracking-tight mb-2">
                             Young Quantum Leaders Program
                         </h2>
                         <p className="text-brand-lightBlue/90 text-base md:text-lg font-medium">

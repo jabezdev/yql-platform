@@ -45,14 +45,14 @@ export default function HowItWorks() {
                         {steps.map((step, index) => (
                             <div key={index} className={`flex flex-col md:flex-row items-center gap-4 md:gap-8 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
                                 <div className="flex-1 w-full text-center md:text-left">
-                                    <div className={`p-6 bg-white border-2 border-brand-blue rounded-tl-2xl rounded-br-2xl shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] hover:shadow-[6px_6px_0px_0px_rgba(57,103,153,0.2)] hover:-translate-y-0.5 transition-all duration-200 ${index % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}>
+                                    <div className={`p-6 bg-white border-2 border-brand-blue rounded-tl-2xl rounded-br-2xl shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] hover:shadow-[6px_6px_0px_0px_rgba(57,103,153,0.2)] hover:-translate-y-0.5 hover:-translate-x-0.5 transition-all duration-200 ${index % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}>
                                         <h3 className="text-xl font-display font-extrabold text-brand-blue mb-2">{step.title}</h3>
                                         <p className="text-brand-blue/70 font-medium">{step.desc}</p>
                                     </div>
                                 </div>
 
                                 <div className="relative flex-shrink-0 order-first md:order-none">
-                                    <div className="w-12 h-12 bg-white rounded-full border-4 border-brand-blue flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(57,103,153,0.2)] relative z-10">
+                                    <div className="w-12 h-12 bg-white rounded-tl-xl rounded-br-xl border-2 border-brand-blue flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] relative z-10">
                                         <step.icon className="w-5 h-5 text-brand-blue" />
                                     </div>
                                 </div>

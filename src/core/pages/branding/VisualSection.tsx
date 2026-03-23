@@ -1,5 +1,5 @@
 import { Star, Ruler, Square, Sparkles, Users, Calendar, BookOpen, BarChart2, Search, Lock, FileText, Layers, Tag, Layout, Zap, Bell, MessageCircle, CheckCircle2, AlertCircle } from 'lucide-react';
-import { Section, Meta, Box, Grid, Callout, Row } from './shared';
+import { Section, Meta, Box, Grid, Callout } from './shared';
 
 // ─── Iconography ──────────────────────────────────────────────
 
