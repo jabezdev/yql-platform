@@ -25,6 +25,17 @@ export default defineConfig([
         { allowConstantExport: true },
       ],
       '@typescript-eslint/no-explicit-any': 'off',
+      // Enforce @/design as the single import path for UI components.
+      // Direct imports from the ui/ directory bypass the barrel and make
+      // refactoring harder — always use: import { X } from '@/design'
+      'no-restricted-imports': ['warn', {
+        patterns: [
+          {
+            group: ['**/core/components/ui', '**/core/components/ui/**'],
+            message: "Import from '@/design' instead of the ui/ directory directly.",
+          },
+        ],
+      }],
     },
   },
 ])

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { Save } from "lucide-react";
-import { Button } from "../ui/Button";
+import { Button } from "../ui/primitives/Button";
 
 interface ProfileEditorProps {
     initialData: {

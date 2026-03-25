@@ -1,7 +1,7 @@
 import { Target, Users, Zap, Globe, Lightbulb } from 'lucide-react';
-import { Section } from '../ui/Section';
-import { SectionTitle } from '../ui/SectionTitle';
-import { Container } from '../ui/Container';
+import { Section } from '../ui/layout/Section';
+import { SectionTitle } from '../ui/typography/SectionTitle';
+import { Container } from '../ui/layout/Container';
 
 export default function Mission() {
     const missionPoints = [

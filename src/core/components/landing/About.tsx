@@ -1,7 +1,7 @@
 import { CheckCircle2, Users, Layers, Calendar } from 'lucide-react';
-import { Section } from '../ui/Section';
-import { SectionTitle } from '../ui/SectionTitle';
-import { Container } from '../ui/Container';
+import { Section } from '../ui/layout/Section';
+import { SectionTitle } from '../ui/typography/SectionTitle';
+import { Container } from '../ui/layout/Container';
 
 export default function About() {
     const features = [

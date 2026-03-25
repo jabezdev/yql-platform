@@ -4,7 +4,7 @@ import { useAuthContext } from "../providers/AuthProvider";
 import { getAccessibleGroups } from "../constants/navigation";
 import { ChevronLeft, ChevronRight, Menu, Lock } from "lucide-react";
 import { ProfileSlideover } from "../components/profile/ProfileSlideover";
-import { PageErrorBoundary } from "../components/ui/PageErrorBoundary";
+import { PageErrorBoundary } from "../components/ui/error/PageErrorBoundary";
 import { useUser } from "@clerk/clerk-react";
 import { UserAvatar } from "../components/chat/shared/UserAvatar";
 

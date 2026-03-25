@@ -1,6 +1,6 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { Users, Activity, FormInput, BookOpen, Calendar as CalendarIcon } from "lucide-react";
-import { PageHeader } from "../components/ui/PageHeader";
+import { PageHeader } from "../components/ui/structure/PageHeader";
 
 export default function AdminLayout() {
     const location = useLocation();

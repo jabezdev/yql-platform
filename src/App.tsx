@@ -1,43 +1,43 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Authenticated, Unauthenticated, useConvexAuth } from "convex/react";
-import { PageErrorBoundary } from "./core/components/ui/PageErrorBoundary";
+import { PageErrorBoundary } from "./core/components/ui/error/PageErrorBoundary";
 
 // Auth & Pages
-import LoginPage from "./core/pages/LoginPage";
-import RegisterPage from "./core/pages/RegisterPage";
-import LandingPage from "./core/pages/LandingPage";
+import LoginPage from "./core/pages/auth/LoginPage";
+import RegisterPage from "./core/pages/auth/RegisterPage";
+import LandingPage from "./core/pages/public/LandingPage";
 
 import { AuthProvider, useAuthContext } from "./core/providers/AuthProvider";
 import { ToastProvider } from "./core/providers/ToastProvider";
-import { RoleGuard } from "./core/components/ui/RoleGuard";
+import { RoleGuard } from "./core/components/ui/auth/RoleGuard";
 
 import WorkspaceLayout from "./core/layouts/WorkspaceLayout";
 import ChatLayout from "./core/layouts/ChatLayout";
 import { getPrimaryWorkspacePath } from "./core/constants/navigation";
 
-import AdmissionsPortal from "./core/pages/AdmissionsPortal";
-import DashboardPage from "./core/pages/DashboardPage";
-import WeeklyHubPage from "./core/pages/WeeklyHubPage";
-import AdminControlRoom from "./core/pages/AdminControlRoom";
-import AdminRolesPage from "./core/pages/AdminRolesPage";
-import AdminFormsPage from "./core/pages/AdminFormsPage";
-import AdminCalendarPage from "./core/pages/AdminCalendarPage";
-import AdminOnboardingPage from "./core/pages/AdminOnboardingPage";
-import AdminCohortsPage from "./core/pages/AdminCohortsPage";
-import AdminRubricPage from "./core/pages/AdminRubricPage";
-import AdminFormBuilderPage from "./core/pages/AdminFormBuilderPage";
-import MyAvailabilityPage from "./core/pages/MyAvailabilityPage";
-import StaffOnboardingPage from "./core/pages/StaffOnboardingPage";
-import GlobalCalendarPage from "./core/pages/GlobalCalendarPage";
-import DirectoryPage from "./core/pages/DirectoryPage";
-import ResourceLibraryPage from "./core/pages/ResourceLibraryPage";
-import Quantum101Page from "./core/pages/Quantum101Page";
-import AboutPage from "./core/pages/AboutPage";
-import VolunteerMatrixPage from "./core/pages/VolunteerMatrixPage";
-import ChatPage from "./core/pages/ChatPage";
-import BrandingPage from "./core/pages/BrandingPage";
-import PosterCreatorPage from "./core/pages/PosterCreatorPage";
+import AdmissionsPortal from "./core/pages/admissions/AdmissionsPortal";
+import DashboardPage from "./core/pages/dashboard/DashboardPage";
+import WeeklyHubPage from "./core/pages/dashboard/WeeklyHubPage";
+import AdminControlRoom from "./core/pages/admin/AdminControlRoom";
+import AdminRolesPage from "./core/pages/admin/AdminRolesPage";
+import AdminFormsPage from "./core/pages/admin/AdminFormsPage";
+import AdminCalendarPage from "./core/pages/admin/AdminCalendarPage";
+import AdminOnboardingPage from "./core/pages/admin/AdminOnboardingPage";
+import AdminCohortsPage from "./core/pages/admin/AdminCohortsPage";
+import AdminRubricPage from "./core/pages/admin/AdminRubricPage";
+import AdminFormBuilderPage from "./core/pages/admin/AdminFormBuilderPage";
+import MyAvailabilityPage from "./core/pages/dashboard/MyAvailabilityPage";
+import StaffOnboardingPage from "./core/pages/dashboard/StaffOnboardingPage";
+import GlobalCalendarPage from "./core/pages/dashboard/GlobalCalendarPage";
+import DirectoryPage from "./core/pages/dashboard/DirectoryPage";
+import ResourceLibraryPage from "./core/pages/dashboard/ResourceLibraryPage";
+import Quantum101Page from "./core/pages/dashboard/Quantum101Page";
+import AboutPage from "./core/pages/dashboard/AboutPage";
+import VolunteerMatrixPage from "./core/pages/dashboard/VolunteerMatrixPage";
+import ChatPage from "./core/pages/chat/ChatPage";
+import BrandingPage from "./core/pages/tools/BrandingPage";
+import PosterCreatorPage from "./core/pages/tools/PosterCreatorPage";
 
 function RootRedirector() {
   const { user } = useAuthContext();

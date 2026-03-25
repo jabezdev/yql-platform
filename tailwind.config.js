@@ -18,11 +18,6 @@ export default {
         display: ['Space Grotesk', 'Outfit', 'sans-serif'],
       },
       colors: {
-        yql: {
-          blue: '#1E40AF',
-          red: '#DC2626',
-          dark: '#111827',
-        },
         brand: {
           // ── 3-token blue scale ──────────────────────────────
           // darkBlue  (#2f567f) → hover/press on brand-blue surfaces

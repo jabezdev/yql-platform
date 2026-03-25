@@ -1,8 +1,8 @@
-import { Section } from '../ui/Section';
-import { SectionTitle } from '../ui/SectionTitle';
-import { Container } from '../ui/Container';
+import { Section } from '../ui/layout/Section';
+import { SectionTitle } from '../ui/typography/SectionTitle';
+import { Container } from '../ui/layout/Container';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '../ui/Button';
+import { Button } from '../ui/primitives/Button';
 
 export default function Apply() {
     const navigate = useNavigate();

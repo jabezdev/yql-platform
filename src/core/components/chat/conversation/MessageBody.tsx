@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { generateHTML } from "@tiptap/core";
 import StarterKit from "@tiptap/starter-kit";
 import Mention from "@tiptap/extension-mention";
-import xss from "xss";
+import xss, { type IWhiteList } from "xss";
 
 interface MessageBodyProps {
     body: string; // TipTap JSON string
@@ -16,7 +16,7 @@ const EXTENSIONS = [
 ];
 
 // Strict allowlist: only the tags TipTap's StarterKit + Mention can produce.
-const XSS_OPTIONS: xss.IWhiteList = {
+const XSS_OPTIONS: IWhiteList = {
     p: [],
     strong: [],
     em: [],

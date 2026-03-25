@@ -4,7 +4,7 @@ import { api } from "../../../../convex/_generated/api";
 import type { Id } from "../../../../convex/_generated/dataModel";
 import type { UserProfile } from "../../providers/AuthProvider";
 import { useToast } from "../../providers/ToastProvider";
-import { Button } from "../ui/Button";
+import { Button } from "../ui/primitives/Button";
 import { Plus, Trash2, CalendarDays, X } from "lucide-react";
 
 interface Props {

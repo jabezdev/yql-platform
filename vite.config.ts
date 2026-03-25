@@ -1,8 +1,14 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
+import path from 'path'
 
 export default defineConfig(({ mode }) => ({
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
   plugins: [
     react(),
     VitePWA({
@@ -17,7 +23,7 @@ export default defineConfig(({ mode }) => ({
         short_name: 'YQL',
         description: 'The Young Quantum Leaders internal platform.',
         theme_color: '#0a1630',
-        background_color: '#f0f9ff',
+        background_color: '#f5f6f8',
         display: 'standalone',
         orientation: 'portrait',
         scope: '/',

@@ -6,7 +6,7 @@ import {
     LightBlueDiagonal,
     GreyQuarter,
     BlueQuarter,
-} from '../ui/GeometricShapes';
+} from '../ui/geometry/GeometricShapes';
 
 const SHAPE_SIZE = 80;
 
