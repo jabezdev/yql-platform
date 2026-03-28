@@ -1,6 +1,9 @@
 import { v, ConvexError } from "convex/values";
 import { query, mutation } from "./_generated/server";
 import { requireUser } from "./accessControl";
+import { assertCanReadChannel, canPostInChannel } from "./chat/lib/access";
+import { hasMinRole } from "./roleHierarchy";
+import type { Role } from "./roleHierarchy";
 
 // ── Queries ──────────────────────────────────────────────────────────────────
 
@@ -12,6 +15,7 @@ export const getPollWithVotes = query({
 
         const poll = await ctx.db.get(pollId);
         if (!poll) return null;
+        await assertCanReadChannel(ctx, user, poll.channelId);
 
         const votes = await ctx.db
             .query("chatPollVotes")
@@ -54,6 +58,11 @@ export const createPoll = mutation({
     },
     handler: async (ctx, args) => {
         const user = await requireUser(ctx);
+        await assertCanReadChannel(ctx, user, args.channelId);
+        const canPost = await canPostInChannel(ctx, user._id, args.channelId);
+        if (!canPost && !hasMinRole(user.role as Role, "T3")) {
+            throw new ConvexError({ code: "FORBIDDEN", message: "You cannot create polls in this channel" });
+        }
 
         if (args.question.trim().length === 0) {
             throw new ConvexError({ code: "BAD_REQUEST", message: "Poll question cannot be empty" });
@@ -113,6 +122,7 @@ export const vote = mutation({
 
         const poll = await ctx.db.get(pollId);
         if (!poll) throw new ConvexError({ code: "NOT_FOUND", message: "Poll not found" });
+        await assertCanReadChannel(ctx, user, poll.channelId);
         if (poll.closedAt) throw new ConvexError({ code: "FORBIDDEN", message: "This poll is closed" });
 
         // Validate option exists
@@ -160,6 +170,7 @@ export const closePoll = mutation({
 
         const poll = await ctx.db.get(pollId);
         if (!poll) throw new ConvexError({ code: "NOT_FOUND", message: "Poll not found" });
+        await assertCanReadChannel(ctx, user, poll.channelId);
         if (poll.closedAt) throw new ConvexError({ code: "BAD_REQUEST", message: "Poll is already closed" });
 
         const isCreator = poll.createdBy === user._id;

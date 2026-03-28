@@ -19,6 +19,8 @@ export default defineSchema({
         recommitmentStatus: v.optional(v.union(v.literal("pending"), v.literal("accepted"), v.literal("declined"))),
         bio: v.optional(v.string()),
         profileChip: v.optional(v.id("_storage")),
+        // Phase 3: Group Tags (for @group mentions)
+        groupTags: v.optional(v.array(v.string())), // e.g., ["marketing", "leadership"]
         // legacy fields kept for data compat
         favoriteShape: v.optional(v.union(v.literal("circle"), v.literal("square"), v.literal("triangle"), v.literal("hexagon"))),
         favoriteColor: v.optional(v.string()),
@@ -259,6 +261,9 @@ export default defineSchema({
         sortOrder: v.number(),
         icon: v.optional(v.string()),
         topic: v.optional(v.string()),
+        // Phase 1: Private/Gated Channels
+        isPrivate: v.optional(v.boolean()), // default false; only owners/invited members can see/join
+        requiresApproval: v.optional(v.boolean()), // default false; join requests queue for owner approval
     })
         .index("by_type", ["type"])
         .index("by_parentId", ["parentId"])
@@ -282,6 +287,12 @@ export default defineSchema({
             v.literal("mentions"),
             v.literal("none"),
         )),
+        // Phase 1: Read State Polish
+        lastSeenAt: v.optional(v.number()), // timestamp when user last appeared in channel
+        lastSeenMessageId: v.optional(v.id("chatMessages")), // last message user scrolled past
+        // Phase 2: Moderation
+        isHidden: v.optional(v.boolean()), // user cannot see/post, invisible to others
+        softBanUntil: v.optional(v.number()), // temporary mute until unix timestamp
     })
         .index("by_channelId", ["channelId"])
         .index("by_userId", ["userId"])
@@ -328,7 +339,10 @@ export default defineSchema({
             userIds: v.optional(v.array(v.id("users"))),
             roles: v.optional(v.array(v.string())),
             specialRoles: v.optional(v.array(v.string())),
-            everyone: v.optional(v.boolean()),
+            groupNames: v.optional(v.array(v.string())), // Phase 3: @group mentions
+            everyone: v.optional(v.boolean()), // @everyone
+            channel: v.optional(v.boolean()), // @channel (last 7 days)
+            here: v.optional(v.boolean()), // @here (last 5 minutes)
         })),
         isEdited: v.boolean(),
         editedAt: v.optional(v.number()),
@@ -345,6 +359,10 @@ export default defineSchema({
         pinnedBy: v.optional(v.id("users")),
         isSystem: v.optional(v.boolean()),
         systemType: v.optional(v.string()),
+        // Phase 1: Silent Messages
+        isSilent: v.optional(v.boolean()), // default false; send without notifications
+        // Phase 2: Search with Tokens
+        searchTokens: v.optional(v.array(v.string())), // pre-computed tokens for fast search
     })
         .index("by_channelId", ["channelId"])
         .index("by_threadRootMessageId", ["threadRootMessageId"])
@@ -421,5 +439,147 @@ export default defineSchema({
     })
         .index("by_userId", ["userId"])
         .index("by_userId_isRead", ["userId", "isRead"]),
+
+    // Phase 1: Channel Join Requests (for gated/approval-required channels)
+    chatChannelJoinRequests: defineTable({
+        channelId: v.id("chatChannels"),
+        userId: v.id("users"),
+        status: v.union(v.literal("pending"), v.literal("approved"), v.literal("rejected")),
+        requestedAt: v.number(),
+        respondedAt: v.optional(v.number()),
+        respondedBy: v.optional(v.id("users")),
+        reason: v.optional(v.string()),
+    })
+        .index("by_channelId", ["channelId"])
+        .index("by_userId", ["userId"])
+        .index("by_channelId_status", ["channelId", "status"])
+        .index("by_channelId_userId", ["channelId", "userId"]),
+
+    // ═══════════════════════════════════════════════════════════════
+    // PHASE 2: Notification Pipeline, Search, Rich Content, Moderation
+    // ═══════════════════════════════════════════════════════════════
+
+    // Phase 2: Notification Preferences (external delivery configuration)
+    chatNotificationPreferences: defineTable({
+        userId: v.id("users"),
+        emailDigestFrequency: v.union(v.literal("never"), v.literal("daily"), v.literal("weekly")),
+        pushNotificationsEnabled: v.boolean(),
+        createdAt: v.number(),
+        updatedAt: v.number(),
+    })
+        .index("by_userId", ["userId"]),
+
+    // Phase 2: Media Items (images, videos, links extracted from messages)
+    chatMediaItems: defineTable({
+        messageId: v.id("chatMessages"),
+        channelId: v.id("chatChannels"),
+        type: v.union(v.literal("image"), v.literal("video"), v.literal("link"), v.literal("file")),
+        url: v.string(),
+        title: v.optional(v.string()),
+        description: v.optional(v.string()),
+        previewUrl: v.optional(v.string()),
+        uploadedBy: v.id("users"),
+        uploadedAt: v.number(),
+    })
+        .index("by_channelId", ["channelId"])
+        .index("by_messageId", ["messageId"])
+        .index("by_type", ["type"])
+        .index("by_channelId_type", ["channelId", "type"]),
+
+    // Phase 2: Rate Limits (track message rate per user/channel)
+    chatRateLimits: defineTable({
+        userId: v.id("users"),
+        channelId: v.optional(v.id("chatChannels")),
+        messageType: v.string(), // "text", "attachment", "reaction", etc.
+        limit: v.number(), // max messages in window
+        windowMs: v.number(), // time window in milliseconds
+        createdAt: v.number(),
+    })
+        .index("by_userId", ["userId"])
+        .index("by_userId_channelId", ["userId", "channelId"])
+        .index("by_userId_messageType", ["userId", "messageType"]),
+
+    // Phase 2: Abuse Reports (user-flagged content)
+    chatAbuseReports: defineTable({
+        messageId: v.id("chatMessages"),
+        reportedBy: v.id("users"),
+        reason: v.string(),
+        status: v.union(v.literal("open"), v.literal("reviewed"), v.literal("resolved")),
+        reviewedBy: v.optional(v.id("users")),
+        notes: v.optional(v.string()),
+        reportedAt: v.number(),
+        reviewedAt: v.optional(v.number()),
+    })
+        .index("by_messageId", ["messageId"])
+        .index("by_reportedBy", ["reportedBy"])
+        .index("by_status", ["status"]),
+
+    // Phase 2: Audit Log (moderation actions)
+    chatAuditLog: defineTable({
+        type: v.string(), // "message_deleted", "user_muted", "user_hidden", etc.
+        actor: v.id("users"),
+        targetUserId: v.optional(v.id("users")),
+        targetMessageId: v.optional(v.id("chatMessages")),
+        channelId: v.optional(v.id("chatChannels")),
+        reason: v.optional(v.string()),
+        metadata: v.optional(v.any()), // additional context
+        createdAt: v.number(),
+    })
+        .index("by_type", ["type"])
+        .index("by_actor", ["actor"])
+        .index("by_channelId", ["channelId"])
+        .index("by_targetUserId", ["targetUserId"])
+        .index("by_createdAt", ["createdAt"]),
+
+    // ═══════════════════════════════════════════════════════════════
+    // PHASE 3: Scheduled Messages, Thread Subscriptions, Groups
+    // ═══════════════════════════════════════════════════════════════
+
+    chatScheduledMessages: defineTable({
+        channelId: v.id("chatChannels"),
+        authorId: v.id("users"),
+        body: v.string(),
+        bodyPlainText: v.string(),
+        mentions: v.optional(v.object({
+            userIds: v.optional(v.array(v.id("users"))),
+            roles: v.optional(v.array(v.string())),
+            specialRoles: v.optional(v.array(v.string())),
+            groupNames: v.optional(v.array(v.string())),
+            everyone: v.optional(v.boolean()),
+            channel: v.optional(v.boolean()),
+            here: v.optional(v.boolean()),
+        })),
+        attachments: v.optional(v.array(v.object({
+            storageId: v.id("_storage"),
+            filename: v.string(),
+            mimeType: v.string(),
+            size: v.number(),
+        }))),
+        sendAt: v.number(), // Unix timestamp when to send
+        status: v.union(v.literal("queued"), v.literal("sent"), v.literal("cancelled")),
+        createdAt: v.number(),
+        sentAt: v.optional(v.number()),
+        cancelledAt: v.optional(v.number()),
+    })
+        .index("by_authorId", ["authorId"])
+        .index("by_channelId", ["channelId"])
+        .index("by_sendAt", ["sendAt"])
+        .index("by_status", ["status"])
+        .index("by_sendAt_status", ["sendAt", "status"]),
+
+    chatThreadSubscriptions: defineTable({
+        userId: v.id("users"),
+        threadRootMessageId: v.id("chatMessages"),
+        channelId: v.id("chatChannels"),
+        subscribedAt: v.number(),
+        lastReadReplyId: v.optional(v.id("chatMessages")),
+        lastReadAt: v.optional(v.number()),
+    })
+        .index("by_userId", ["userId"])
+        .index("by_threadRootMessageId", ["threadRootMessageId"])
+        .index("by_userId_threadRootMessageId", ["userId", "threadRootMessageId"])
+        .index("by_channelId", ["channelId"]),
 });
+
+
 

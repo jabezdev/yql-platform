@@ -1,6 +1,7 @@
 import { v } from "convex/values";
 import { query, mutation, internalMutation } from "./_generated/server";
 import { requireUser } from "./accessControl";
+import { assertCanReadChannel } from "./chat/lib/access";
 
 const TYPING_EXPIRY_MS = 8000; // 8 seconds — client re-sends every ~4s
 
@@ -9,6 +10,7 @@ export const setTyping = mutation({
     args: { channelId: v.id("chatChannels") },
     handler: async (ctx, { channelId }) => {
         const user = await requireUser(ctx);
+        await assertCanReadChannel(ctx, user, channelId);
         const expiresAt = Date.now() + TYPING_EXPIRY_MS;
 
         // Upsert: update existing row or insert a new one
@@ -35,6 +37,7 @@ export const clearTyping = mutation({
     args: { channelId: v.id("chatChannels") },
     handler: async (ctx, { channelId }) => {
         const user = await requireUser(ctx);
+        await assertCanReadChannel(ctx, user, channelId);
 
         const existing = await ctx.db
             .query("chatTypingIndicators")
@@ -51,6 +54,7 @@ export const getTyping = query({
     args: { channelId: v.id("chatChannels") },
     handler: async (ctx, { channelId }) => {
         const user = await requireUser(ctx);
+        await assertCanReadChannel(ctx, user, channelId);
         const now = Date.now();
 
         const indicators = await ctx.db

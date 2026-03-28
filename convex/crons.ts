@@ -10,4 +10,11 @@ crons.interval(
     internal.chatTyping.cleanupExpired
 );
 
+// Deliver due scheduled chat messages every minute.
+crons.interval(
+    "send due scheduled chat messages",
+    { minutes: 1 },
+    internal.chatMessages.sendDueScheduledMessages
+);
+
 export default crons;
