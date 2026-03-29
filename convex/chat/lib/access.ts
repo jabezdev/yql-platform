@@ -6,8 +6,8 @@
 import { ConvexError } from "convex/values";
 import type { Doc, Id } from "../../_generated/dataModel";
 import type { MutationCtx, QueryCtx } from "../../_generated/server";
-import { hasMinRole } from "../../roleHierarchy";
-import type { Role } from "../../roleHierarchy";
+import { hasMinRole } from "../../org/roleHierarchy";
+import type { Role } from "../../org/roleHierarchy";
 
 type AnyCtx = QueryCtx | MutationCtx;
 type AccessUser = {

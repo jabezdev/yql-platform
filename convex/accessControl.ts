@@ -8,8 +8,8 @@ import {
     isSelfOrCanManage,
     isAdmin as checkAdmin,
     isStaff as checkStaff,
-} from "./roleHierarchy";
-import type { Role } from "./roleHierarchy";
+} from "./org/roleHierarchy";
+import type { Role } from "./org/roleHierarchy";
 
 type Ctx = QueryCtx | MutationCtx;
 

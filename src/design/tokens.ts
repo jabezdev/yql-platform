@@ -5,7 +5,7 @@
  * These values are mirrored in:
  *   - tailwind.config.js  (brand.* colors, font-display / font-sans)
  *   - src/index.css       (CSS custom properties)
- *   - src/core/components/ui/geometry/shape-utils.ts (BrandColors for SVG work)
+ *   - src/components/ui/geometry/shape-utils.ts (BrandColors for SVG work)
  *
  * Usage:
  *   import { colors, radius, shadow, duration } from '@/design/tokens';

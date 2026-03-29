@@ -1,26 +1,37 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
-import { requireStaff, requireMinRole } from "./accessControl";
-
-const canManage = async (ctx: any) => {
-    return await requireMinRole(ctx, "T3");
-};
+import { requireAdmin, requireUser, requireStaff } from "./accessControl";
+import { isStaff } from "./org/roleHierarchy";
+import type { Role } from "./org/roleHierarchy";
 
 export const getAnnouncements = query({
-    args: {},
-    handler: async (ctx) => {
-        await requireStaff(ctx);
-        const all = await ctx.db.query("announcements").collect();
+    args: { includeExpired: v.optional(v.boolean()) },
+    handler: async (ctx, args) => {
+        const user = await requireUser(ctx);
+        const isUserStaff = isStaff(user.role as Role);
+
+        let announcements = await ctx.db
+            .query("announcements")
+            .withIndex("by_pinned", (q) => q.eq("isPinned", true))
+            .collect();
+
+        const normal = await ctx.db
+            .query("announcements")
+            .withIndex("by_pinned", (q) => q.eq("isPinned", false))
+            .collect();
+
+        announcements = [...announcements, ...normal];
+
         const now = Date.now();
-        // Filter out expired ones
-        const active = all.filter((a) => !a.expiresAt || a.expiresAt > now);
-        // Sort: pinned first, then by creation time desc
-        active.sort((a, b) => {
-            if (a.isPinned && !b.isPinned) return -1;
-            if (!a.isPinned && b.isPinned) return 1;
-            return b._creationTime - a._creationTime;
+        return announcements.filter((a) => {
+            // Expiry check
+            if (!args.includeExpired && a.expiresAt && a.expiresAt < now) return false;
+            
+            // Staff-only check
+            if (a.staffOnly && !isUserStaff) return false;
+
+            return true;
         });
-        return active;
     },
 });
 
@@ -30,12 +41,14 @@ export const createAnnouncement = mutation({
         content: v.string(),
         isPinned: v.boolean(),
         expiresAt: v.optional(v.number()),
+        staffOnly: v.optional(v.boolean()),
     },
     handler: async (ctx, args) => {
-        const user = await canManage(ctx);
+        const user = await requireStaff(ctx);
         return await ctx.db.insert("announcements", {
             ...args,
             authorId: user._id,
+            staffOnly: args.staffOnly ?? false,
         });
     },
 });
@@ -47,9 +60,10 @@ export const updateAnnouncement = mutation({
         content: v.optional(v.string()),
         isPinned: v.optional(v.boolean()),
         expiresAt: v.optional(v.number()),
+        staffOnly: v.optional(v.boolean()),
     },
     handler: async (ctx, args) => {
-        await canManage(ctx);
+        await requireStaff(ctx);
         const { announcementId, ...updates } = args;
         return await ctx.db.patch(announcementId, updates);
     },
@@ -58,7 +72,7 @@ export const updateAnnouncement = mutation({
 export const deleteAnnouncement = mutation({
     args: { announcementId: v.id("announcements") },
     handler: async (ctx, args) => {
-        await canManage(ctx);
+        await requireAdmin(ctx);
         return await ctx.db.delete(args.announcementId);
     },
 });

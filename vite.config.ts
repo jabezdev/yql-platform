@@ -27,7 +27,7 @@ export default defineConfig(({ mode }) => ({
         display: 'standalone',
         orientation: 'portrait',
         scope: '/',
-        start_url: '/dashboard/overview',
+        start_url: '/',
         icons: [
           {
             src: '/YQL_LOGO.svg',

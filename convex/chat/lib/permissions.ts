@@ -44,7 +44,7 @@ export async function hasPendingJoinRequest(
         )
         .first();
 
-    return request?.status === "pending" ?? false;
+    return request?.status === "pending";
 }
 
 /**

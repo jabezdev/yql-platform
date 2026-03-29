@@ -172,6 +172,7 @@ export default defineSchema({
         authorId: v.id("users"),
         isPinned: v.boolean(),
         expiresAt: v.optional(v.number()),
+        staffOnly: v.optional(v.boolean()), // Phase 1: Staff-only vs Public
     }).index("by_pinned", ["isPinned"]),
 
     weeklyLogs: defineTable({
@@ -191,7 +192,7 @@ export default defineSchema({
     openTasks: defineTable({
         title: v.string(),
         description: v.optional(v.string()),
-        status: v.union(v.literal("open"), v.literal("in_progress"), v.literal("done")),
+        status: v.union(v.literal("open"), v.literal("in_progress"), v.literal("done"), v.literal("archived")),
         assignedTo: v.optional(v.id("users")),
         createdBy: v.id("users"),
         priority: v.union(v.literal("low"), v.literal("medium"), v.literal("high")),
@@ -579,6 +580,21 @@ export default defineSchema({
         .index("by_threadRootMessageId", ["threadRootMessageId"])
         .index("by_userId_threadRootMessageId", ["userId", "threadRootMessageId"])
         .index("by_channelId", ["channelId"]),
+
+    // ═══════════════════════════════════════════════════════════════
+    // NEW: RECRUITMENT HISTORY & AUDIT
+    // ═══════════════════════════════════════════════════════════════
+
+    applicationStatusHistory: defineTable({
+        applicationId: v.id("applications"),
+        oldStatus: v.optional(v.string()),
+        newStatus: v.string(),
+        changedBy: v.id("users"),
+        reason: v.optional(v.string()),
+        timestamp: v.number(),
+    })
+        .index("by_application", ["applicationId"])
+        .index("by_changedBy", ["changedBy"]),
 });
 
 

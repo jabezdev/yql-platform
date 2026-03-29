@@ -1,8 +1,8 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import { requireAdmin, requireUser } from "./accessControl";
-import { isStaff as checkStaff } from "./roleHierarchy";
-import type { Role } from "./roleHierarchy";
+import { isStaff as checkStaff } from "./org/roleHierarchy";
+import type { Role } from "./org/roleHierarchy";
 
 export const getFormForCohort = query({
     args: { cohortId: v.id("cohorts") },

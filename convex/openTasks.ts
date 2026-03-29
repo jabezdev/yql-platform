@@ -2,8 +2,8 @@ import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import { requireStaff, requireUser, requireMinRole } from "./accessControl";
 import type { Doc } from "./_generated/dataModel";
-import { isManager, hasMinRole } from "./roleHierarchy";
-import type { Role } from "./roleHierarchy";
+import { isManager, hasMinRole } from "./org/roleHierarchy";
+import type { Role } from "./org/roleHierarchy";
 
 const canManageTask = async (ctx: any) => {
     return await requireMinRole(ctx, "T3");
@@ -144,5 +144,13 @@ export const deleteTask = mutation({
             throw new Error("Only Super Admins or T1s can delete tasks");
         }
         return await ctx.db.delete(args.taskId);
+    },
+});
+
+export const archiveTask = mutation({
+    args: { taskId: v.id("openTasks") },
+    handler: async (ctx, args) => {
+        await requireMinRole(ctx, "T3");
+        return await ctx.db.patch(args.taskId, { status: "archived" });
     },
 });

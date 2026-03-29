@@ -12,4 +12,4 @@ export * as tokens from './tokens';
 export type { ColorToken, RadiusToken, ShadowToken } from './tokens';
 
 // ── UI components ─────────────────────────────────────────────────────────────
-export * from '../core/components/ui';
+export * from '../components/ui';
