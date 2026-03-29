@@ -159,10 +159,6 @@ nav {
     /* ── Accent Text ──────────────────────────────────────────────────────────*/
     .text-accent { @apply text-brand-wine; }
 
-    /*
-     * REMOVED: .btn-primary, .btn-secondary, .btn-wine, .card-minimal, .card-subtle
-     * All used symmetric rounded-lg/xl — use <Button> / <Card> from @/design.
-     */
 }
 
 /* =============================================================================
