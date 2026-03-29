@@ -50,7 +50,7 @@ function HeadersSection() {
                     <div className="rounded-tl-2xl rounded-br-2xl bg-white/8 border-2 border-white/15 px-5 py-5 min-h-[130px] flex flex-col justify-between">
                         <div className="flex items-start justify-between gap-4">
                             <div>
-                                <p className="text-[9px] font-extrabold uppercase tracking-widest text-white/45 mb-1">YQL Platform</p>
+                                <p className="text-[9px] font-extrabold uppercase tracking-widest text-white/65 mb-1">YQL Platform</p>
                                 <h2 className="font-display font-extrabold text-2xl text-white leading-tight">Dashboard Overview</h2>
                                 <p className="text-sm text-white/60 mt-1">Track team performance, events, and resources.</p>
                             </div>
@@ -59,42 +59,42 @@ function HeadersSection() {
                             </button>
                         </div>
                     </div>
-                    <p className="text-[10px] text-white/40 mt-2"><code className="font-mono bg-white/10 px-1 rounded">bg-white/8 border-white/15</code> card · yellow CTA · subtitle <code className="font-mono bg-white/10 px-1 rounded">text-white/60</code>.</p>
+                    <p className="text-[10px] text-white/60 mt-2"><code className="font-mono bg-white/10 px-1 rounded">bg-white/8 border-white/15</code> card · yellow CTA · subtitle <code className="font-mono bg-white/10 px-1 rounded">text-white/60</code>.</p>
                 </Box>
                 <Box dark>
                     <Meta light>card / sm — dark surface</Meta>
                     <div className="rounded-tl-2xl rounded-br-2xl bg-white/8 border-2 border-white/15 px-5 py-3.5 min-h-[96px] flex flex-col justify-between">
                         <div className="flex items-center justify-between gap-4">
                             <div>
-                                <p className="text-[9px] font-extrabold uppercase tracking-widest text-white/45 mb-0.5">Resource Library</p>
+                                <p className="text-[9px] font-extrabold uppercase tracking-widest text-white/65 mb-0.5">Resource Library</p>
                                 <h2 className="font-display font-extrabold text-lg text-white leading-tight">Resource Library</h2>
-                                <p className="text-sm text-white/55 mt-0.5">Browse and download shared materials.</p>
+                                <p className="text-sm text-white/70 mt-0.5">Browse and download shared materials.</p>
                             </div>
                             <button className="flex-shrink-0 px-3 py-1.5 border border-white/25 text-white/75 text-xs font-bold rounded-tl-lg rounded-br-lg hover:border-white/45 hover:text-white transition-colors whitespace-nowrap">
                                 Upload
                             </button>
                         </div>
                     </div>
-                    <p className="text-[10px] text-white/40 mt-2">sm card: <code className="font-mono bg-white/10 px-1 rounded">min-h-[96px]</code>. Outline action: <code className="font-mono bg-white/10 px-1 rounded">border-white/25</code>.</p>
+                    <p className="text-[10px] text-white/60 mt-2">sm card: <code className="font-mono bg-white/10 px-1 rounded">min-h-[96px]</code>. Outline action: <code className="font-mono bg-white/10 px-1 rounded">border-white/25</code>.</p>
                 </Box>
             </Grid>
             <Grid cols={2} className="mt-3">
                 <Box dark>
                     <Meta light>ghost / lg — dark surface</Meta>
                     <div className="pb-4 border-b-2 border-white/10">
-                        <p className="text-[9px] font-extrabold uppercase tracking-widest text-white/40 mb-1">Weekly Hub</p>
+                        <p className="text-[9px] font-extrabold uppercase tracking-widest text-white/60 mb-1">Weekly Hub</p>
                         <h2 className="font-display font-extrabold text-2xl text-white">Weekly Hub</h2>
-                        <p className="text-sm text-white/55 mt-1">Your weekly schedule and commitments.</p>
+                        <p className="text-sm text-white/70 mt-1">Your weekly schedule and commitments.</p>
                     </div>
-                    <p className="text-[10px] text-white/40 mt-3">Ghost on dark: no card chrome — use <code className="font-mono bg-white/10 px-1 rounded">border-b border-white/10</code> as section divider.</p>
+                    <p className="text-[10px] text-white/60 mt-3">Ghost on dark: no card chrome — use <code className="font-mono bg-white/10 px-1 rounded">border-b border-white/10</code> as section divider.</p>
                 </Box>
                 <Box dark>
                     <Meta light>ghost / sm — dark surface</Meta>
                     <div className="pb-3 border-b border-white/10">
-                        <p className="text-[9px] font-extrabold uppercase tracking-widest text-white/40 mb-0.5">Committee Settings</p>
+                        <p className="text-[9px] font-extrabold uppercase tracking-widest text-white/60 mb-0.5">Committee Settings</p>
                         <h2 className="font-display font-extrabold text-base text-white">Committee Settings</h2>
                     </div>
-                    <p className="text-[10px] text-white/40 mt-3">Ghost sm: compact heading, <code className="font-mono bg-white/10 px-1 rounded">text-base</code>. Use for sub-page headings inside panels.</p>
+                    <p className="text-[10px] text-white/60 mt-3">Ghost sm: compact heading, <code className="font-mono bg-white/10 px-1 rounded">text-base</code>. Use for sub-page headings inside panels.</p>
                 </Box>
             </Grid>
         </Section>
@@ -128,10 +128,10 @@ function EmptyLoadingSection() {
                 <Box dark className="flex flex-col items-center justify-center min-h-[180px]">
                     <div className="flex flex-col items-center text-center">
                         <div className="w-10 h-10 bg-white/10 border-2 border-white/20 rounded-tl-xl rounded-br-xl flex items-center justify-center mb-3">
-                            <Search size={18} className="text-white/50" aria-hidden="true" />
+                            <Search size={18} className="text-white/65" aria-hidden="true" />
                         </div>
                         <p className="font-display font-extrabold text-sm text-white mb-1">No results found</p>
-                        <p className="text-xs text-white/50 max-w-[180px] leading-relaxed">Try adjusting your search or removing filters.</p>
+                        <p className="text-xs text-white/65 max-w-[180px] leading-relaxed">Try adjusting your search or removing filters.</p>
                         <button className="mt-4 px-3 py-1.5 bg-white/10 border border-white/20 rounded-tl-lg rounded-br-lg text-xs font-bold text-white/75 hover:bg-white/15 hover:text-white transition-colors">
                             Clear filters
                         </button>
@@ -140,12 +140,12 @@ function EmptyLoadingSection() {
                 <Box dark className="flex flex-col items-center justify-center min-h-[180px]">
                     <div className="flex flex-col items-center text-center">
                         <div className="w-10 h-10 bg-white/10 border-2 border-white/20 rounded-tl-xl rounded-br-xl flex items-center justify-center mb-3">
-                            <Lock size={18} className="text-white/50" aria-hidden="true" />
+                            <Lock size={18} className="text-white/65" aria-hidden="true" />
                         </div>
                         <p className="font-display font-extrabold text-sm text-white mb-1">Access restricted</p>
-                        <p className="text-xs text-white/50 max-w-[180px] leading-relaxed">You need a higher role to view this content.</p>
+                        <p className="text-xs text-white/65 max-w-[180px] leading-relaxed">You need a higher role to view this content.</p>
                     </div>
-                    <p className="text-[10px] text-white/35 mt-4">Icon container: <code className="font-mono bg-white/10 px-1 rounded">bg-white/10 border-white/20</code>. Title: <code className="font-mono bg-white/10 px-1 rounded">text-white</code>. Body: <code className="font-mono bg-white/10 px-1 rounded">text-white/50</code>.</p>
+                    <p className="text-[10px] text-white/70 mt-4">Icon container: <code className="font-mono bg-white/10 px-1 rounded">bg-white/10 border-white/20</code>. Title: <code className="font-mono bg-white/10 px-1 rounded">text-white</code>. Body: <code className="font-mono bg-white/10 px-1 rounded">text-white/65</code>.</p>
                 </Box>
             </Grid>
 
@@ -187,7 +187,7 @@ function EmptyLoadingSection() {
                         role="status" aria-label="Loading"
                         className="w-12 h-12 border-4 border-white/15 border-t-white rounded-full motion-safe:animate-spin"
                     />
-                    <p className="text-xs font-extrabold uppercase tracking-widest text-white/50">Loading…</p>
+                    <p className="text-xs font-extrabold uppercase tracking-widest text-white/65">Loading…</p>
                 </Box>
                 <Box dark className="flex flex-col items-center justify-center gap-3 py-10 min-h-[160px]">
                     <Meta light>Pulse block on dark</Meta>
@@ -195,7 +195,7 @@ function EmptyLoadingSection() {
                         role="status" aria-label="Loading"
                         className="w-10 h-10 rounded-tl-2xl rounded-br-2xl bg-white/20 border-4 border-white/30 motion-safe:animate-pulse"
                     />
-                    <p className="text-sm font-semibold text-white/50 tracking-wide">Loading…</p>
+                    <p className="text-sm font-semibold text-white/65 tracking-wide">Loading…</p>
                 </Box>
                 <Box dark className="flex flex-col items-center justify-center gap-3 py-10 min-h-[160px]">
                     <Meta light>Inline on dark</Meta>

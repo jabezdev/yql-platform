@@ -24,14 +24,14 @@ function ButtonsSection() {
                     <div className="space-y-4">
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end">
                             <div className="sm:col-span-2">
-                                <p className="text-[10px] text-brand-blue/50 mb-2">lg — hero section</p>
+                                <p className="text-[10px] text-brand-blue/65 mb-2">lg — hero section</p>
                                 <Row>
                                     <Button variant="geometric-primary" size="lg">Apply Now →</Button>
                                     <Button variant="geometric-secondary" size="lg">Learn More</Button>
                                 </Row>
                             </div>
                             <div>
-                                <p className="text-[10px] text-brand-blue/50 mb-2">sm / disabled</p>
+                                <p className="text-[10px] text-brand-blue/65 mb-2">sm / disabled</p>
                                 <Row>
                                     <Button variant="geometric-primary" size="sm">Apply</Button>
                                     <Button variant="geometric-primary" size="sm" disabled>Disabled</Button>
@@ -45,7 +45,7 @@ function ButtonsSection() {
                 <Box>
                     <Meta>Workspace — primary · secondary · outline · ghost</Meta>
                     <div className="overflow-x-auto">
-                        <table className="w-full text-[10px] text-brand-blue/55 border-collapse">
+                        <table className="w-full text-[10px] text-brand-blue/70 border-collapse">
                             <thead>
                                 <tr>
                                     <th className="text-left font-extrabold uppercase tracking-widest pb-3 w-20">Size</th>
@@ -58,7 +58,7 @@ function ButtonsSection() {
                             <tbody>
                                 {(['md', 'sm'] as const).map(sz => (
                                     <tr key={sz} className="border-t border-brand-blue/5">
-                                        <td className="pt-3 pr-4 font-mono text-[10px] text-brand-blue/45 align-middle">{sz}</td>
+                                        <td className="pt-3 pr-4 font-mono text-[10px] text-brand-blue/65 align-middle">{sz}</td>
                                         <td className="pt-3 pr-4 align-middle"><Button variant="primary" size={sz}>Save</Button></td>
                                         <td className="pt-3 pr-4 align-middle"><Button variant="secondary" size={sz}>Cancel</Button></td>
                                         <td className="pt-3 pr-4 align-middle"><Button variant="outline" size={sz}><Star size={11} aria-hidden={true as any} /> Export</Button></td>
@@ -66,7 +66,7 @@ function ButtonsSection() {
                                     </tr>
                                 ))}
                                 <tr className="border-t border-brand-blue/5">
-                                    <td className="pt-3 pr-4 font-mono text-[10px] text-brand-blue/45 align-middle">dis.</td>
+                                    <td className="pt-3 pr-4 font-mono text-[10px] text-brand-blue/65 align-middle">dis.</td>
                                     <td className="pt-3 pr-4 align-middle"><Button variant="primary" size="md" disabled>Disabled</Button></td>
                                     <td className="pt-3 pr-4 align-middle"><Button variant="secondary" size="md" disabled>Disabled</Button></td>
                                     <td className="pt-3 pr-4 align-middle"><Button variant="outline" size="md" disabled>Disabled</Button></td>
@@ -111,7 +111,7 @@ function ButtonsSection() {
                     <div className="space-y-3">
                         {(['md', 'sm'] as const).map(sz => (
                             <div key={sz} className="flex items-center gap-3 flex-wrap">
-                                <span className="text-[10px] font-mono text-white/35 w-5">{sz}</span>
+                                <span className="text-[10px] font-mono text-white/55 w-5">{sz}</span>
                                 {/* primary → yellow on dark for contrast */}
                                 <button className={`font-bold rounded-tl-lg rounded-br-lg bg-brand-yellow text-brand-blue shadow-[2px_2px_0px_0px_rgba(0,0,0,0.35)] hover:bg-white transition-colors ${sz === 'md' ? 'px-4 py-2 text-xs' : 'px-3 py-1.5 text-xs'}`}>Save</button>
                                 {/* secondary → ghost white border */}
@@ -123,7 +123,7 @@ function ButtonsSection() {
                             </div>
                         ))}
                     </div>
-                    <p className="text-[10px] text-white/40 mt-3 leading-relaxed">Dark primary → <code className="font-mono bg-white/10 px-1 rounded">bg-brand-yellow text-brand-blue</code>. Secondary/outline → <code className="font-mono bg-white/10 px-1 rounded">border-white/25–30</code>. Ghost → no border, muted text.</p>
+                    <p className="text-[10px] text-white/60 mt-3 leading-relaxed">Dark primary → <code className="font-mono bg-white/10 px-1 rounded">bg-brand-yellow text-brand-blue</code>. Secondary/outline → <code className="font-mono bg-white/10 px-1 rounded">border-white/25–30</code>. Ghost → no border, muted text.</p>
                 </Box>
             </div>
         </Section>
@@ -187,7 +187,7 @@ function CardsSection() {
                         <p className="font-display font-bold text-white text-base mb-1.5">Quantum Leadership Guide</p>
                         <p className="text-sm text-white/65 leading-relaxed">A comprehensive overview of leadership principles for emerging youth leaders.</p>
                     </div>
-                    <p className="text-[10px] text-white/45 mt-3">Dark card: <code className="font-mono bg-white/10 px-1 rounded">bg-white/8</code> · <code className="font-mono bg-white/10 px-1 rounded">border-white/15</code> · white text hierarchy mirrors light.</p>
+                    <p className="text-[10px] text-white/65 mt-3">Dark card: <code className="font-mono bg-white/10 px-1 rounded">bg-white/8</code> · <code className="font-mono bg-white/10 px-1 rounded">border-white/15</code> · white text hierarchy mirrors light.</p>
                 </Box>
                 <Box dark>
                     <Meta light>Interactive card on dark — hover lift</Meta>
@@ -196,7 +196,7 @@ function CardsSection() {
                             <div className="w-8 h-8 bg-brand-yellow/20 border border-brand-yellow/40 rounded-tl-lg rounded-br-lg flex items-center justify-center">
                                 <Star size={14} className="text-brand-yellow" aria-hidden="true" />
                             </div>
-                            <span className="text-[9px] font-bold uppercase tracking-widest text-white/35">Hover me</span>
+                            <span className="text-[9px] font-bold uppercase tracking-widest text-white/55">Hover me</span>
                         </div>
                         <p className="font-display font-bold text-white text-sm">Interactive Dark Card</p>
                         <p className="text-xs text-white/60 mt-1">Lift: <code className="font-mono bg-white/10 px-0.5 rounded">hover:bg-white/12 -translate-x-0.5 -translate-y-0.5</code></p>
@@ -291,11 +291,11 @@ function CardsSection() {
                                 )}
                             </div>
                             <p className="text-2xl font-display font-extrabold text-white mt-3 leading-none">{value}</p>
-                            <p className="text-[10px] font-extrabold uppercase tracking-widest text-white/40 mt-1.5">{label}</p>
+                            <p className="text-[10px] font-extrabold uppercase tracking-widest text-white/60 mt-1.5">{label}</p>
                         </div>
                     ))}
                 </div>
-                <p className="text-[10px] text-white/40 mt-4 leading-relaxed">
+                <p className="text-[10px] text-white/60 mt-4 leading-relaxed">
                     Dark info card: <code className="font-mono bg-white/10 px-1 rounded">bg-white/8 border-white/12</code>. Icon bg: color at <code className="font-mono bg-white/10 px-1 rounded">/15 fill + /25 border</code>. Value always <code className="font-mono bg-white/10 px-1 rounded">text-white</code>.
                 </p>
             </Box>

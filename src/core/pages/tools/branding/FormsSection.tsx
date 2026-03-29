@@ -115,7 +115,7 @@ export default function FormsSection() {
                                 onChange={(c) => setToggleStates(prev => ({ ...prev, [label]: c }))}
                             />
                         ))}
-                        <p className="text-[10px] text-brand-blue/55 pt-2 border-t border-brand-blue/8 leading-relaxed">
+                        <p className="text-[10px] text-brand-blue/70 pt-2 border-t border-brand-blue/8 leading-relaxed">
                             On: <code className="font-mono bg-brand-bgLight px-1 rounded">bg-brand-blue</code> · Off: <code className="font-mono bg-brand-bgLight px-1 rounded">bg-brand-blue/20</code>.
                         </p>
                     </div>
@@ -154,7 +154,7 @@ export default function FormsSection() {
                             onStartChange={setRangeStart}
                             onEndChange={setRangeEnd}
                         />
-                        <p className="text-[10px] text-brand-blue/45 mt-2 leading-relaxed">
+                        <p className="text-[10px] text-brand-blue/65 mt-2 leading-relaxed">
                             Click start → click end on one calendar. Focuses the correct phase automatically.
                         </p>
                     </div>
@@ -180,7 +180,7 @@ export default function FormsSection() {
                         onStartChange={setDarkRangeStart}
                         onEndChange={setDarkRangeEnd}
                     />
-                    <p className="text-[10px] text-white/40 mt-2 leading-relaxed">
+                    <p className="text-[10px] text-white/60 mt-2 leading-relaxed">
                         Dark popovers: <code className="font-mono bg-white/10 px-1 rounded">bg-brand-blue</code> · selected uses <code className="font-mono bg-white/10 px-1 rounded">bg-brand-yellow text-brand-blue</code>. Range fill: <code className="font-mono bg-white/10 px-1 rounded">bg-brand-yellow/15</code>.
                     </p>
                 </Box>
@@ -195,7 +195,7 @@ export default function FormsSection() {
                     onChange={setSlot}
                     disabledSlots={BOOKED_SLOTS}
                 />
-                <p className="text-[10px] text-brand-blue/45 mt-3 leading-relaxed">
+                <p className="text-[10px] text-brand-blue/65 mt-3 leading-relaxed">
                     Selected: <code className="font-mono bg-brand-bgLight px-1 rounded">bg-brand-blue text-white</code>.
                     Booked/unavailable: <code className="font-mono bg-brand-bgLight px-1 rounded">line-through opacity-25</code>.
                     Available: standard outline style.
@@ -211,7 +211,7 @@ export default function FormsSection() {
                         <Input dark label="Full Name" placeholder="Enter your name…" />
                         {/* Dark textarea */}
                         <Textarea dark label="Bio" placeholder="Tell us about yourself…" rows={2} />
-                        <p className="text-[10px] text-white/45 leading-relaxed">
+                        <p className="text-[10px] text-white/65 leading-relaxed">
                             Dark inputs: <code className="font-mono bg-white/10 px-1 rounded">bg-white/10</code> · <code className="font-mono bg-white/10 px-1 rounded">border-white/20</code> · white text.
                         </p>
                     </div>
@@ -253,7 +253,7 @@ export default function FormsSection() {
                             className="w-full"
                         />
                     </div>
-                    <p className="text-[10px] text-white/45 leading-relaxed mt-3">
+                    <p className="text-[10px] text-white/65 leading-relaxed mt-3">
                         Dark checked: <code className="font-mono bg-white/10 px-1 rounded">border-brand-yellow</code> + yellow fill/dot. Toggle on: <code className="font-mono bg-white/10 px-1 rounded">bg-brand-yellow</code>.
                     </p>
                 </Box>

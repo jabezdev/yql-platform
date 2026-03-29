@@ -54,7 +54,7 @@ export default function BrandingPage() {
                     <div className="flex items-center gap-3">
                         <img src="/YQL_LOGO.svg" alt="YQL Logo" className="h-7 w-auto flex-shrink-0" />
                         <div>
-                            <p className="text-[9px] font-extrabold uppercase tracking-widest text-brand-blue/55 leading-none">YQL Platform</p>
+                            <p className="text-[9px] font-extrabold uppercase tracking-widest text-brand-blue/70 leading-none">YQL Platform</p>
                             <h1 className="text-base font-display font-extrabold text-brand-blue leading-tight">Design System</h1>
                         </div>
                     </div>
@@ -88,7 +88,7 @@ export default function BrandingPage() {
                                             onClick={() => { scrollTo(id); setMobileNavOpen(false); }}
                                             className={`px-3 py-1.5 text-xs font-bold rounded-tl-lg rounded-br-lg transition-all ${active === id
                                                 ? 'bg-brand-blue text-white'
-                                                : 'text-brand-blue/65 hover:text-brand-blue hover:bg-brand-bgLight'}`}>
+                                                : 'text-brand-blue/75 hover:text-brand-blue hover:bg-brand-bgLight'}`}>
                                             {label}
                                         </button>
                                     ))}
@@ -109,7 +109,7 @@ export default function BrandingPage() {
                                     <button key={groupLabel} onClick={() => scrollTo(items[0].id)}
                                         className={`px-4 py-2 text-xs font-bold border-b-2 -mb-px transition-all whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-inset ${isActive
                                             ? 'border-brand-blue text-brand-blue'
-                                            : 'border-transparent text-brand-blue/45 hover:text-brand-blue/75 hover:border-brand-blue/30'}`}>
+                                            : 'border-transparent text-brand-blue/65 hover:text-brand-blue hover:border-brand-blue/40'}`}>
                                         {groupLabel}
                                     </button>
                                 );
@@ -124,7 +124,7 @@ export default function BrandingPage() {
                                     <button key={id} onClick={() => scrollTo(id)}
                                         className={`px-3 py-1.5 text-[11px] font-bold border-b-2 transition-all whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-inset ${active === id
                                             ? 'border-brand-blue text-brand-blue'
-                                            : 'border-transparent text-brand-blue/45 hover:text-brand-blue/70 hover:border-brand-blue/25'}`}>
+                                            : 'border-transparent text-brand-blue/65 hover:text-brand-blue hover:border-brand-blue/35'}`}>
                                         {label}
                                     </button>
                                 ))}
@@ -151,9 +151,9 @@ export default function BrandingPage() {
                 <div className="border-t-2 border-brand-blue/10 pt-6 pb-16 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                         <img src="/YQL_LOGO.svg" alt="YQL Logo" className="h-5 w-auto" />
-                        <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/55">YQL Design System v1</p>
+                        <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/70">YQL Design System v1</p>
                     </div>
-                    <p className="text-[10px] font-mono text-brand-blue/45">{new Date().toISOString().split('T')[0]}</p>
+                    <p className="text-[10px] font-mono text-brand-blue/60">{new Date().toISOString().split('T')[0]}</p>
                 </div>
             </main>
         </div>

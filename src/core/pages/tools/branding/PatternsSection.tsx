@@ -1,8 +1,21 @@
 import { MessageCircle, AlignLeft, FileText, Star, Zap, Hash, Bell, Pin } from 'lucide-react';
-import { UserAvatar } from '../../../components/chat/shared/UserAvatar';
-import { MentionBadge } from '../../../components/chat/shared/MentionBadge';
 import { Alert } from '@/design';
 import { Section, Meta, Box, Grid, Callout } from './shared';
+
+// ── Inline demo-only components (self-contained, no deps) ──────
+
+const UA_COLORS = ["#3d8ccb","#bc594f","#10b981","#f59e0b","#8b5cf6","#06b6d4","#f97316","#ec4899"];
+function nameColor(name: string) {
+    let h = 0; for (let i = 0; i < name.length; i++) h = name.charCodeAt(i) + ((h << 5) - h);
+    return UA_COLORS[Math.abs(h) % UA_COLORS.length];
+}
+function UserAvatar({ name, size = "sm" }: { name: string; size?: "xs" | "sm" }) {
+    const sz = size === "xs" ? "w-6 h-6 text-[10px]" : "w-8 h-8 text-xs";
+    return <div style={{ backgroundColor: nameColor(name) }} className={`${sz} border-2 border-white/20 rounded-tl-lg rounded-br-lg flex items-center justify-center text-white font-bold flex-shrink-0`}>{name.charAt(0).toUpperCase()}</div>;
+}
+function MentionBadge({ label, dark = false }: { label: string; dark?: boolean }) {
+    return <span className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 border rounded-sm font-bold text-xs cursor-pointer transition-colors ${dark ? "bg-brand-yellow/20 border-brand-yellow/40 text-brand-yellow hover:bg-brand-yellow/30" : "bg-brand-lightBlue/15 border-brand-lightBlue/30 text-brand-lightBlue hover:bg-brand-lightBlue/25"}`}>@{label}</span>;
+}
 
 // ─── Chat System ──────────────────────────────────────────────
 
@@ -21,7 +34,7 @@ function ChatSection() {
                         <div className="flex items-start gap-2">
                             <UserAvatar name="Alice Johnson" size="xs" />
                             <div className="max-w-[80%]">
-                                <p className="text-[10px] font-bold text-brand-blue/55 mb-1">Alice Johnson</p>
+                                <p className="text-[10px] font-bold text-brand-blue/70 mb-1">Alice Johnson</p>
                                 <div className="px-3 py-2 bg-white border-2 border-brand-blue/15 rounded-tl-xl rounded-br-xl rounded-tr-xl shadow-[2px_2px_0px_0px_rgba(57,103,153,0.08)]">
                                     <p className="text-sm text-brand-blue/80 leading-relaxed">Hey! Are you coming to the workshop on Friday?</p>
                                 </div>
@@ -62,7 +75,7 @@ function ChatSection() {
                         <div className="flex items-start gap-2">
                             <UserAvatar name="Alice Johnson" size="xs" />
                             <div className="max-w-[80%]">
-                                <p className="text-[10px] font-bold text-white/45 mb-1">Alice Johnson</p>
+                                <p className="text-[10px] font-bold text-white/65 mb-1">Alice Johnson</p>
                                 <div className="px-3 py-2 bg-white/10 border border-white/15 rounded-tl-xl rounded-br-xl rounded-tr-xl">
                                     <p className="text-sm text-white/80 leading-relaxed">Hey! Are you coming to the workshop?</p>
                                 </div>
@@ -105,7 +118,7 @@ function ChatSection() {
                         {/* Channel sidebar */}
                         <div className="w-28 bg-brand-blue flex-shrink-0 flex flex-col">
                             <div className="px-3 py-2.5 border-b border-white/10">
-                                <p className="text-[9px] font-extrabold uppercase tracking-widest text-white/40">YQL Workspace</p>
+                                <p className="text-[9px] font-extrabold uppercase tracking-widest text-white/60">YQL Workspace</p>
                             </div>
                             <div className="flex-1 overflow-y-auto p-2 space-y-0.5">
                                 <p className="text-[8px] font-extrabold uppercase tracking-widest text-white/30 px-2 py-1">Channels</p>
@@ -116,7 +129,7 @@ function ChatSection() {
                                     { name: 'technical', active: false },
                                 ].map(({ name, active }) => (
                                     <div key={name} className={`flex items-center gap-1.5 px-2 py-1 rounded-tl-md rounded-br-md cursor-pointer transition-colors ${active ? 'bg-white/15 border-l-2 border-brand-yellow pl-[6px]' : 'hover:bg-white/8'}`}>
-                                        <Hash size={10} className={active ? 'text-brand-yellow' : 'text-white/40'} aria-hidden="true" />
+                                        <Hash size={10} className={active ? 'text-brand-yellow' : 'text-white/60'} aria-hidden="true" />
                                         <span className={`text-[10px] font-medium truncate ${active ? 'text-white' : 'text-white/55'}`}>{name}</span>
                                     </div>
                                 ))}
@@ -124,7 +137,7 @@ function ChatSection() {
                                 {['Alice J.', 'Bob C.'].map(name => (
                                     <div key={name} className="flex items-center gap-1.5 px-2 py-1 rounded-tl-md rounded-br-md cursor-pointer hover:bg-white/8">
                                         <span className="w-2 h-2 rounded-full bg-brand-green flex-shrink-0" />
-                                        <span className="text-[10px] text-white/50 truncate">{name}</span>
+                                        <span className="text-[10px] text-white/65 truncate">{name}</span>
                                     </div>
                                 ))}
                             </div>
@@ -133,9 +146,9 @@ function ChatSection() {
                         <div className="flex-1 flex flex-col min-w-0 bg-white">
                             {/* Channel header */}
                             <div className="px-3 py-2 border-b border-brand-blue/10 flex items-center gap-2 flex-shrink-0">
-                                <Hash size={13} className="text-brand-blue/40" aria-hidden="true" />
+                                <Hash size={13} className="text-brand-blue/60" aria-hidden="true" />
                                 <span className="text-xs font-bold text-brand-blue">general</span>
-                                <span className="text-[10px] text-brand-blue/40 ml-1 hidden sm:inline">Team-wide announcements and updates</span>
+                                <span className="text-[10px] text-brand-blue/60 ml-1 hidden sm:inline">Team-wide announcements and updates</span>
                                 <div className="ml-auto flex items-center gap-1.5">
                                     <Pin size={11} className="text-brand-blue/30" aria-hidden="true" />
                                     <Bell size={11} className="text-brand-blue/30" aria-hidden="true" />
@@ -190,14 +203,14 @@ function ChatSection() {
                                 ].map(({ name, active }) => (
                                     <div key={name} className={`flex items-center gap-1.5 px-2 py-1 rounded-tl-md rounded-br-md cursor-pointer transition-colors ${active ? 'bg-white/20 border-l-2 border-brand-yellow pl-[6px]' : 'hover:bg-white/8'}`}>
                                         <Hash size={10} className={active ? 'text-brand-yellow' : 'text-white/35'} aria-hidden="true" />
-                                        <span className={`text-[10px] font-medium truncate ${active ? 'text-white' : 'text-white/45'}`}>{name}</span>
+                                        <span className={`text-[10px] font-medium truncate ${active ? 'text-white' : 'text-white/65'}`}>{name}</span>
                                     </div>
                                 ))}
                                 <p className="text-[8px] font-extrabold uppercase tracking-widest text-white/25 px-2 py-1 pt-3">Direct</p>
                                 {['Alice J.', 'Bob C.'].map(name => (
                                     <div key={name} className="flex items-center gap-1.5 px-2 py-1 rounded-tl-md rounded-br-md cursor-pointer hover:bg-white/8">
                                         <span className="w-2 h-2 rounded-full bg-brand-green flex-shrink-0" />
-                                        <span className="text-[10px] text-white/40 truncate">{name}</span>
+                                        <span className="text-[10px] text-white/60 truncate">{name}</span>
                                     </div>
                                 ))}
                             </div>
@@ -261,7 +274,7 @@ function ChatSection() {
                             <div className="flex items-center gap-1.5">
                                 {[FileText, Star, Zap].map((Icon, i) => (
                                     <button key={i} className="w-7 h-7 rounded-tl-md rounded-br-md hover:bg-brand-bgLight flex items-center justify-center transition-colors">
-                                        <Icon size={13} className="text-brand-blue/40" aria-hidden="true" />
+                                        <Icon size={13} className="text-brand-blue/60" aria-hidden="true" />
                                     </button>
                                 ))}
                                 <button className="px-3 py-1.5 bg-brand-blue text-white text-xs font-bold rounded-tl-lg rounded-br-lg shadow-[2px_2px_0px_0px_rgba(10,22,48,0.4)] hover:bg-brand-darkBlue transition-colors ml-1">Send</button>
@@ -289,7 +302,7 @@ function ChatSection() {
                             </div>
                         </div>
                     </div>
-                    <p className="text-[10px] text-white/40 mt-3">Dark: own messages use <code className="font-mono bg-white/10 px-1 rounded">bg-brand-yellow</code> for contrast. Mentions swap to yellow chip. Composer send button: yellow.</p>
+                    <p className="text-[10px] text-white/60 mt-3">Dark: own messages use <code className="font-mono bg-white/10 px-1 rounded">bg-brand-yellow</code> for contrast. Mentions swap to yellow chip. Composer send button: yellow.</p>
                 </Box>
             </Grid>
         </Section>

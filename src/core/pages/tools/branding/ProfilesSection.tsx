@@ -68,15 +68,15 @@ function EditPanel() {
 
                 {/* Header bar */}
                 <div className="flex items-center justify-between px-5 py-4 border-b-2 border-brand-blue/8">
-                    <span className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/50">Edit Profile</span>
-                    <button className="w-7 h-7 flex items-center justify-center rounded-lg border-2 border-brand-blue/15 text-brand-blue/40 hover:text-brand-blue hover:bg-brand-bgLight transition-all">
+                    <span className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/65">Edit Profile</span>
+                    <button className="w-7 h-7 flex items-center justify-center rounded-lg border-2 border-brand-blue/15 text-brand-blue/60 hover:text-brand-blue hover:bg-brand-bgLight transition-all">
                         <X size={13} strokeWidth={2.5} />
                     </button>
                 </div>
 
                 {/* Photo */}
                 <div className="px-5 py-5 border-b-2 border-brand-blue/8">
-                    <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/45 mb-3">Photo</p>
+                    <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/65 mb-3">Photo</p>
                     <div className="flex items-center gap-4">
                         <div className="relative group cursor-pointer">
                             <Avatar name={name} size="lg" />
@@ -86,7 +86,7 @@ function EditPanel() {
                         </div>
                         <div>
                             <p className="text-sm font-bold text-brand-blue leading-tight">{name}</p>
-                            <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/45 mt-0.5">{role}</p>
+                            <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/65 mt-0.5">{role}</p>
                             <button className="text-[10px] font-bold text-brand-lightBlue mt-1.5 hover:underline transition-all">
                                 Change photo
                             </button>
@@ -97,8 +97,8 @@ function EditPanel() {
                 {/* Network Card (chip) */}
                 <div className="px-5 py-5 border-b-2 border-brand-blue/8 space-y-2.5">
                     <div>
-                        <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/45 mb-0.5">Network Card</p>
-                        <p className="text-[10px] text-brand-blue/40 leading-relaxed">3:1 image — shown as your card in the member directory.</p>
+                        <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/65 mb-0.5">Network Card</p>
+                        <p className="text-[10px] text-brand-blue/60 leading-relaxed">3:1 image — shown as your card in the member directory.</p>
                     </div>
                     <div className="relative aspect-[3/1] rounded-tl-xl rounded-br-xl overflow-hidden border-2 border-dashed border-brand-blue/25 bg-brand-bgLight cursor-pointer group hover:border-brand-lightBlue/50 transition-colors">
                         <ChipFallback name={name} role={role} />
@@ -115,7 +115,7 @@ function EditPanel() {
                 {/* Form fields */}
                 <div className="px-5 py-5 border-b-2 border-brand-blue/8 space-y-4">
                     <div>
-                        <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/45 mb-1.5">
+                        <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/65 mb-1.5">
                             Pronouns
                         </label>
                         <input
@@ -127,7 +127,7 @@ function EditPanel() {
                         />
                     </div>
                     <div>
-                        <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/45 mb-1.5">
+                        <label className="block text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/65 mb-1.5">
                             Bio
                         </label>
                         <textarea
@@ -181,7 +181,7 @@ function EditPanel() {
                         <span className="text-xs text-brand-blue/60 leading-relaxed">{desc}</span>
                     </div>
                 ))}
-                <p className="pt-3 text-[10px] text-brand-blue/40 leading-relaxed">
+                <p className="pt-3 text-[10px] text-brand-blue/60 leading-relaxed">
                     In production: <code className="font-mono bg-white px-1 py-0.5 rounded border border-brand-blue/10">fixed right-0 h-full max-w-sm border-l-4 border-brand-blue</code> · backdrop <code className="font-mono bg-white px-1 py-0.5 rounded border border-brand-blue/10">bg-brand-blue/70 backdrop-blur-sm</code> · enters via <code className="font-mono bg-white px-1 py-0.5 rounded border border-brand-blue/10">slide-in-from-right duration-300</code>.
                 </p>
             </div>
@@ -212,7 +212,7 @@ export default function ProfilesSection() {
                     ))}
                 </div>
 
-                <p className="text-[10px] text-brand-blue/45 leading-relaxed mt-3">
+                <p className="text-[10px] text-brand-blue/65 leading-relaxed mt-3">
                     Avatar colour: deterministic — <code className="font-mono bg-white px-1 py-0.5 rounded border border-brand-blue/10">name.charCodeAt(0) % 5</code> picks from a palette of 5 brand-harmonious colours. Consistent across every render without any user input.
                     Chip fallback: <code className="font-mono bg-white px-1 py-0.5 rounded border border-brand-blue/10">from-[#172b4d] via-brand-blue to-[#1e4a7a]</code> gradient with dot grid, diagonal accent, and watermark initial.
                 </p>
@@ -245,7 +245,7 @@ export default function ProfilesSection() {
                     }
                 />
 
-                <p className="text-[10px] text-brand-blue/45 leading-relaxed mt-3">
+                <p className="text-[10px] text-brand-blue/65 leading-relaxed mt-3">
                     Banner: <code className="font-mono bg-white px-1 py-0.5 rounded border border-brand-blue/10">aspect-[4/1]</code> on the profile page vs <code className="font-mono bg-white px-1 py-0.5 rounded border border-brand-blue/10">aspect-[3/1]</code> on the card — same image, different crop via <code className="font-mono bg-white px-1 py-0.5 rounded border border-brand-blue/10">object-cover</code>.
                     Avatar: <code className="font-mono bg-white px-1 py-0.5 rounded border border-brand-blue/10">w-16 h-16 -mt-8 ring-[3px] ring-white</code> — the white ring creates separation from the banner colour.
                 </p>

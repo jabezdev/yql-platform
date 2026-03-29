@@ -114,7 +114,7 @@ function IconographySection() {
                                         </div>
                                         <div className="min-w-0">
                                             <p className="text-[10px] font-mono font-bold text-brand-blue leading-tight">{name}</p>
-                                            <p className="text-[10px] text-brand-blue/55 leading-tight truncate">{label}</p>
+                                            <p className="text-[10px] text-brand-blue/70 leading-tight truncate">{label}</p>
                                         </div>
                                     </div>
                                 ))}
@@ -135,7 +135,7 @@ function IconographySection() {
                                     </div>
                                 ))}
                             </div>
-                            <p className="text-[10px] text-white/40 mt-4">Icon fill: <code className="font-mono bg-white/10 px-1 rounded">text-white/75</code>. Container: <code className="font-mono bg-white/10 px-1 rounded">bg-white/10</code>. Active/accent state: <code className="font-mono bg-white/10 px-1 rounded">text-brand-yellow</code>.</p>
+                            <p className="text-[10px] text-white/60 mt-4">Icon fill: <code className="font-mono bg-white/10 px-1 rounded">text-white/75</code>. Container: <code className="font-mono bg-white/10 px-1 rounded">bg-white/10</code>. Active/accent state: <code className="font-mono bg-white/10 px-1 rounded">text-brand-yellow</code>.</p>
                         </Box>
                     </Grid>
                 );
@@ -179,21 +179,21 @@ function SpacingSection() {
                                             <div className="bg-brand-lightBlue/30 rounded-sm h-4" />
                                         </div>
                                         <div>
-                                            <code className={`font-mono text-[10px] block ${star ? 'text-brand-blue font-bold' : 'text-brand-blue/55'}`}>{cls}</code>
-                                            <span className="text-[9px] text-brand-blue/35">{px}</span>
+                                            <code className={`font-mono text-[10px] block ${star ? 'text-brand-blue font-bold' : 'text-brand-blue/70'}`}>{cls}</code>
+                                            <span className="text-[9px] text-brand-blue/70">{px}</span>
                                         </div>
                                     </div>
                                 ))}
                             </div>
-                            <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/45 mb-2.5">Gap</p>
+                            <p className="text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/65 mb-2.5">Gap</p>
                             <div className="space-y-2.5">
                                 {GAPS.map(({ cls, note, star }) => (
                                     <div key={cls} className="flex items-center gap-3">
-                                        <code className={`font-mono text-[10px] w-12 flex-shrink-0 ${star ? 'font-bold text-brand-blue' : 'text-brand-blue/55'}`}>{cls}</code>
+                                        <code className={`font-mono text-[10px] w-12 flex-shrink-0 ${star ? 'font-bold text-brand-blue' : 'text-brand-blue/70'}`}>{cls}</code>
                                         <div className={`flex items-center ${cls}`}>
                                             {[...Array(4)].map((_, i) => <div key={i} className="w-4 h-4 bg-brand-blue/20 rounded-sm flex-shrink-0" />)}
                                         </div>
-                                        <span className="text-[10px] text-brand-blue/45">{note}</span>
+                                        <span className="text-[10px] text-brand-blue/65">{note}</span>
                                     </div>
                                 ))}
                             </div>
@@ -207,21 +207,21 @@ function SpacingSection() {
                                             <div className="bg-white/35 rounded-sm h-4" />
                                         </div>
                                         <div>
-                                            <code className={`font-mono text-[10px] block ${star ? 'text-brand-yellow font-bold' : 'text-white/45'}`}>{cls}</code>
-                                            <span className="text-[9px] text-white/30">{px}</span>
+                                            <code className={`font-mono text-[10px] block ${star ? 'text-brand-yellow font-bold' : 'text-white/65'}`}>{cls}</code>
+                                            <span className="text-[9px] text-white/50">{px}</span>
                                         </div>
                                     </div>
                                 ))}
                             </div>
-                            <p className="text-[10px] font-extrabold uppercase tracking-widest text-white/40 mb-2.5">Gap</p>
+                            <p className="text-[10px] font-extrabold uppercase tracking-widest text-white/60 mb-2.5">Gap</p>
                             <div className="space-y-2.5">
                                 {GAPS.map(({ cls, note, star }) => (
                                     <div key={cls} className="flex items-center gap-3">
-                                        <code className={`font-mono text-[10px] w-12 flex-shrink-0 ${star ? 'font-bold text-brand-yellow' : 'text-white/45'}`}>{cls}</code>
+                                        <code className={`font-mono text-[10px] w-12 flex-shrink-0 ${star ? 'font-bold text-brand-yellow' : 'text-white/65'}`}>{cls}</code>
                                         <div className={`flex items-center ${cls}`}>
                                             {[...Array(4)].map((_, i) => <div key={i} className="w-4 h-4 bg-white/25 rounded-sm flex-shrink-0" />)}
                                         </div>
-                                        <span className="text-[10px] text-white/40">{note}</span>
+                                        <span className="text-[10px] text-white/60">{note}</span>
                                     </div>
                                 ))}
                             </div>
@@ -289,7 +289,7 @@ function MotifSection() {
                         <div key={label} className="flex flex-col items-center gap-2">
                             <div className={`w-16 h-16 ${cls} bg-brand-yellow border-2 border-brand-blue`} />
                             <p className="text-[10px] font-mono text-brand-blue/65 text-center">{label}</p>
-                            <p className="text-[10px] text-brand-blue/55 text-center leading-tight">{usage}</p>
+                            <p className="text-[10px] text-brand-blue/70 text-center leading-tight">{usage}</p>
                         </div>
                     ))}
                 </div>
@@ -314,7 +314,7 @@ function MotifSection() {
                             <div key={label} className="flex flex-col items-center gap-2">
                                 <div className={`w-10 h-10 rounded-tl-xl rounded-br-xl bg-white border-2 border-brand-blue ${cls}`} />
                                 <p className="text-[10px] font-bold text-brand-blue/70 text-center leading-tight">{label}</p>
-                                <p className="text-[10px] text-brand-blue/50 text-center leading-tight">{desc}</p>
+                                <p className="text-[10px] text-brand-blue/65 text-center leading-tight">{desc}</p>
                             </div>
                         ))}
                     </div>
@@ -336,7 +336,7 @@ function MotifSection() {
                             <div key={label} className="flex flex-col items-center gap-2">
                                 <div className={`w-10 h-10 rounded-tl-xl rounded-br-xl bg-white/15 border border-white/30 ${cls}`} />
                                 <p className="text-[10px] font-bold text-white/70 text-center leading-tight">{label}</p>
-                                <p className="text-[10px] text-white/45 text-center leading-tight">{desc}</p>
+                                <p className="text-[10px] text-white/65 text-center leading-tight">{desc}</p>
                             </div>
                         ))}
                     </div>
@@ -401,7 +401,7 @@ function MotionSection() {
                         ].map(({ name, css, use }) => (
                             <div key={name} className="pb-3 border-b border-brand-blue/5 last:border-0 last:pb-0">
                                 <code className="font-mono text-[10px] text-brand-lightBlue bg-brand-bgLight px-1.5 py-0.5 rounded">{name}</code>
-                                <p className="text-[10px] font-mono text-brand-blue/50 mt-1">{css}</p>
+                                <p className="text-[10px] font-mono text-brand-blue/65 mt-1">{css}</p>
                                 <p className="text-[10px] text-brand-blue/70 mt-0.5">{use}</p>
                             </div>
                         ))}

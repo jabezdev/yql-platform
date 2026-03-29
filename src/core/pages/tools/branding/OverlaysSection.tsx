@@ -149,7 +149,7 @@ function TooltipsSection() {
                             </div>
                         ))}
                     </div>
-                    <p className="text-[10px] text-white/40">On dark surfaces, invert the tooltip: <code className="font-mono bg-white/10 px-1 rounded">bg-white text-brand-blue</code>. Shadow: <code className="font-mono bg-white/10 px-1 rounded">rgba(0,0,0,0.35)</code>.</p>
+                    <p className="text-[10px] text-white/60">On dark surfaces, invert the tooltip: <code className="font-mono bg-white/10 px-1 rounded">bg-white text-brand-blue</code>. Shadow: <code className="font-mono bg-white/10 px-1 rounded">rgba(0,0,0,0.35)</code>.</p>
                 </Box>
             </Grid>
 
@@ -170,11 +170,11 @@ function TooltipsSection() {
                             <Avatar name="Alice Johnson" size="sm" />
                             <div>
                                 <p className="text-xs font-bold text-brand-blue">Alice Johnson</p>
-                                <p className="text-[10px] text-brand-blue/55">Technical Committee Lead</p>
+                                <p className="text-[10px] text-brand-blue/70">Technical Committee Lead</p>
                             </div>
                         </div>
                         <div className="p-3 space-y-1.5">
-                            <p className="text-[10px] text-brand-blue/55 font-mono">alice@example.com</p>
+                            <p className="text-[10px] text-brand-blue/70 font-mono">alice@example.com</p>
                             <p className="text-[10px] text-brand-green font-bold">● Active</p>
                         </div>
                     </Popover>
@@ -198,16 +198,16 @@ function TooltipsSection() {
                                 <Avatar name="Alice Johnson" size="sm" />
                                 <div>
                                     <p className="text-xs font-bold text-white">Alice Johnson</p>
-                                    <p className="text-[10px] text-white/55">Technical Committee Lead</p>
+                                    <p className="text-[10px] text-white/70">Technical Committee Lead</p>
                                 </div>
                             </div>
                             <div className="p-3 space-y-1.5">
-                                <p className="text-[10px] text-white/45 font-mono">alice@example.com</p>
+                                <p className="text-[10px] text-white/65 font-mono">alice@example.com</p>
                                 <p className="text-[10px] text-brand-green font-bold">● Active</p>
                             </div>
                         </Popover>
                     </div>
-                    <p className="text-[10px] text-white/40">Dark popover: <code className="font-mono bg-white/10 px-1 rounded">bg-white/12 border-white/15</code>. Title: <code className="font-mono bg-white/10 px-1 rounded">text-white</code>. Sub: <code className="font-mono bg-white/10 px-1 rounded">text-white/55</code>. Shadow: <code className="font-mono bg-white/10 px-1 rounded">rgba(0,0,0,0.35)</code>.</p>
+                    <p className="text-[10px] text-white/60">Dark popover: <code className="font-mono bg-white/10 px-1 rounded">bg-white/12 border-white/15</code>. Title: <code className="font-mono bg-white/10 px-1 rounded">text-white</code>. Sub: <code className="font-mono bg-white/10 px-1 rounded">text-white/70</code>. Shadow: <code className="font-mono bg-white/10 px-1 rounded">rgba(0,0,0,0.35)</code>.</p>
                 </Box>
             </Grid>
         </Section>
@@ -253,7 +253,7 @@ function ToastsSection() {
                         <Toast variant="error" title="Error" message="Failed to save. Try again." dark />
                         <Toast variant="info" title="Info" message="New resources available." dark />
                     </div>
-                    <p className="text-[10px] text-white/40 mt-2">Dark toasts: colored bg fill (<code className="font-mono bg-white/10 px-1 rounded">/12–15</code>) + strong border (<code className="font-mono bg-white/10 px-1 rounded">/50–55</code>) for clear type distinction.</p>
+                    <p className="text-[10px] text-white/60 mt-2">Dark toasts: colored bg fill (<code className="font-mono bg-white/10 px-1 rounded">/12–15</code>) + strong border (<code className="font-mono bg-white/10 px-1 rounded">/50–55</code>) for clear type distinction.</p>
                 </Box>
                 <Box dark>
                     <Meta light>Inline alerts — dark surface</Meta>
@@ -263,7 +263,7 @@ function ToastsSection() {
                         <Alert variant="error" message="Some fields have errors." dark />
                         <Alert variant="info" message="Review period closes March 31." dark />
                     </div>
-                    <p className="text-[10px] text-white/40 mt-3">Dark alerts: <code className="font-mono bg-white/10 px-1 rounded">bg-color/12–15</code> fill + <code className="font-mono bg-white/10 px-1 rounded">border-color/45–50</code>. Body: <code className="font-mono bg-white/10 px-1 rounded">text-white/75</code>. Info uses neutral white.</p>
+                    <p className="text-[10px] text-white/60 mt-3">Dark alerts: <code className="font-mono bg-white/10 px-1 rounded">bg-color/12–15</code> fill + <code className="font-mono bg-white/10 px-1 rounded">border-color/45–50</code>. Body: <code className="font-mono bg-white/10 px-1 rounded">text-white/75</code>. Info uses neutral white.</p>
                 </Box>
             </Grid>
         </Section>

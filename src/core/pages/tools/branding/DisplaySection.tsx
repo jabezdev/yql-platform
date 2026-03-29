@@ -62,7 +62,7 @@ function BadgesSection() {
                         <TrendBadge direction="down" value="−5%" dark />
                         <TrendBadge direction="flat" value="flat" dark />
                     </Row>
-                    <p className="text-[10px] text-white/40 mt-4">Trend on dark: <code className="font-mono bg-white/10 px-1 rounded">/25</code> fill + <code className="font-mono bg-white/10 px-1 rounded">/55</code> border for higher contrast. Neutral: <code className="font-mono bg-white/10 px-1 rounded">bg-white/10 text-white/65</code>.</p>
+                    <p className="text-[10px] text-white/60 mt-4">Trend on dark: <code className="font-mono bg-white/10 px-1 rounded">/25</code> fill + <code className="font-mono bg-white/10 px-1 rounded">/55</code> border for higher contrast. Neutral: <code className="font-mono bg-white/10 px-1 rounded">bg-white/10 text-white/65</code>.</p>
                 </Box>
             </Grid>
 
@@ -99,11 +99,11 @@ function BadgesSection() {
                                     <span className="w-1.5 h-1.5 rounded-full bg-current flex-shrink-0" />
                                     {label}
                                 </span>
-                                <span className="text-xs text-white/50">on brand-blue</span>
+                                <span className="text-xs text-white/65">on brand-blue</span>
                             </div>
                         ))}
                     </div>
-                    <p className="text-[10px] text-white/40 mt-3">Dark: <code className="font-mono bg-white/10 px-1 rounded">/25</code> fill, <code className="font-mono bg-white/10 px-1 rounded">/55</code> border for stronger contrast. Pending text flips to <code className="font-mono bg-white/10 px-1 rounded">text-brand-yellow</code>.</p>
+                    <p className="text-[10px] text-white/60 mt-3">Dark: <code className="font-mono bg-white/10 px-1 rounded">/25</code> fill, <code className="font-mono bg-white/10 px-1 rounded">/55</code> border for stronger contrast. Pending text flips to <code className="font-mono bg-white/10 px-1 rounded">text-brand-yellow</code>.</p>
                 </Box>
             </Grid>
         </Section>
@@ -125,7 +125,7 @@ function TablesSection() {
                         <thead>
                             <tr className="border-b-2 border-brand-blue/10">
                                 {['Name', 'Role', 'Committee', 'Status', ''].map(col => (
-                                    <th key={col} className="px-3 py-3 text-left text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/55 whitespace-nowrap">{col}</th>
+                                    <th key={col} className="px-3 py-3 text-left text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/70 whitespace-nowrap">{col}</th>
                                 ))}
                             </tr>
                         </thead>
@@ -161,17 +161,17 @@ function TablesSection() {
                     <div className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-widest text-brand-blue cursor-pointer hover:text-brand-blue/80 mb-3">
                         Name <span>↑</span>
                     </div>
-                    <div className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/45 cursor-pointer hover:text-brand-blue/70">
+                    <div className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-widest text-brand-blue/65 cursor-pointer hover:text-brand-blue/70">
                         Role <span className="text-brand-blue/25">↕</span>
                     </div>
-                    <p className="text-[10px] text-brand-blue/55 mt-3">Active: full opacity + ↑/↓. Inactive: /45 + ↕ ghost.</p>
+                    <p className="text-[10px] text-brand-blue/70 mt-3">Active: full opacity + ↑/↓. Inactive: /45 + ↕ ghost.</p>
                 </Box>
                 <Box dark>
                     <Meta light>Table row — on dark background</Meta>
                     <div className="overflow-hidden rounded-tl-lg rounded-br-lg border border-white/10">
                         <div className="border-b border-white/10 grid grid-cols-3 px-3 py-2">
                             {['Name', 'Role', 'Status'].map(col => (
-                                <p key={col} className="text-[9px] font-extrabold uppercase tracking-widest text-white/40">{col}</p>
+                                <p key={col} className="text-[9px] font-extrabold uppercase tracking-widest text-white/60">{col}</p>
                             ))}
                         </div>
                         {[
@@ -180,12 +180,12 @@ function TablesSection() {
                         ].map((row, i) => (
                             <div key={i} className="grid grid-cols-3 items-center px-3 py-2.5 border-b border-white/8 last:border-0 hover:bg-white/5 transition-colors">
                                 <span className="text-xs font-medium text-white/80 truncate">{row.name.split(' ')[0]}</span>
-                                <span className="text-xs text-white/50">{row.role}</span>
+                                <span className="text-xs text-white/65">{row.role}</span>
                                 <span className={`text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-sm border w-fit ${row.badge.cls}`}>{row.badge.label}</span>
                             </div>
                         ))}
                     </div>
-                    <p className="text-[10px] text-white/40 mt-2">Header: <code className="font-mono bg-white/10 px-1 rounded">text-white/40</code>. Body: <code className="font-mono bg-white/10 px-1 rounded">text-white/80</code>. Hover: <code className="font-mono bg-white/10 px-1 rounded">bg-white/5</code>.</p>
+                    <p className="text-[10px] text-white/60 mt-2">Header: <code className="font-mono bg-white/10 px-1 rounded">text-white/60</code>. Body: <code className="font-mono bg-white/10 px-1 rounded">text-white/80</code>. Hover: <code className="font-mono bg-white/10 px-1 rounded">bg-white/5</code>.</p>
                 </Box>
             </Grid>
         </Section>
@@ -227,7 +227,7 @@ function ProgressSection() {
                             <ProgressBar key={label} value={value} label={label} color={color} dark />
                         ))}
                     </div>
-                    <p className="text-[10px] text-white/40 mt-3">Track: <code className="font-mono bg-white/10 px-1 rounded">bg-white/10</code>. Fill colors stay the same — green/yellow/blue pop on dark.</p>
+                    <p className="text-[10px] text-white/60 mt-3">Track: <code className="font-mono bg-white/10 px-1 rounded">bg-white/10</code>. Fill colors stay the same — green/yellow/blue pop on dark.</p>
                 </Box>
             </Grid>
 
@@ -237,7 +237,7 @@ function ProgressSection() {
                     steps={['Application', 'Review', 'Interview', 'Decision']} 
                     current={2} 
                 />
-                <p className="text-[10px] text-brand-blue/55 mt-4">Completed: filled brand-blue. Current: brand-yellow. Future: white fill, /20 border.</p>
+                <p className="text-[10px] text-brand-blue/70 mt-4">Completed: filled brand-blue. Current: brand-yellow. Future: white fill, /20 border.</p>
             </Box>
         </Section>
     );
@@ -256,7 +256,7 @@ function AvatarsSection() {
                             <div key={size} className="flex flex-col items-center gap-2">
                                 <Avatar name="Alice Johnson" size={size} />
                                 <p className="text-[10px] font-mono text-brand-blue/60">{size}</p>
-                                <p className="text-[10px] text-brand-blue/55">{
+                                <p className="text-[10px] text-brand-blue/70">{
                                     { xs: 'w-6 h-6', sm: 'w-8 h-8', md: 'w-10 h-10', lg: 'w-16 h-16' }[size]
                                 }</p>
                             </div>
@@ -274,12 +274,12 @@ function AvatarsSection() {
                 </Box>
                 <Box dark>
                     <Meta light>Avatars on dark background</Meta>
-                    <p className="text-[10px] text-white/50 mb-4">White border ring ensures separation from the dark surface.</p>
+                    <p className="text-[10px] text-white/65 mb-4">White border ring ensures separation from the dark surface.</p>
                     <Row className="mb-5">
                         {(['xs', 'sm', 'md', 'lg'] as const).map(size => (
                             <div key={size} className="flex flex-col items-center gap-2">
                                 <Avatar name="Alice Johnson" size={size} border />
-                                <p className="text-[9px] font-mono text-white/40">{size}</p>
+                                <p className="text-[9px] font-mono text-white/60">{size}</p>
                             </div>
                         ))}
                     </Row>
@@ -288,7 +288,7 @@ function AvatarsSection() {
                             <Avatar key={name} name={name} size="md" border />
                         ))}
                     </Row>
-                    <p className="text-[10px] text-white/45 mt-4">Component applies <code className="font-mono bg-white/10 px-1 rounded">ring-2 ring-white/30</code> automatically on dark surfaces.</p>
+                    <p className="text-[10px] text-white/65 mt-4">Component applies <code className="font-mono bg-white/10 px-1 rounded">ring-2 ring-white/30</code> automatically on dark surfaces.</p>
                 </Box>
             </Grid>
         </Section>

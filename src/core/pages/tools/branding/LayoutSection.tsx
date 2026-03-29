@@ -20,7 +20,7 @@ export default function LayoutSection() {
                         ].map(({ prefix, px, use }) => (
                             <div key={prefix} className="flex items-center gap-3 pb-2 border-b border-brand-blue/5 last:border-0 last:pb-0">
                                 <code className="font-mono text-[10px] text-brand-lightBlue bg-brand-bgLight px-1.5 py-0.5 rounded w-8 text-center flex-shrink-0">{prefix}:</code>
-                                <span className="font-mono text-[10px] text-brand-blue/55 w-14 flex-shrink-0">{px}</span>
+                                <span className="font-mono text-[10px] text-brand-blue/70 w-14 flex-shrink-0">{px}</span>
                                 <span className="text-[11px] text-brand-blue/65">{use}</span>
                             </div>
                         ))}
@@ -41,7 +41,7 @@ export default function LayoutSection() {
                             <div key={z} className="flex items-center gap-3 pb-1.5 border-b border-brand-blue/5 last:border-0 last:pb-0">
                                 <code className="font-mono text-[10px] text-brand-lightBlue bg-brand-bgLight px-1.5 py-0.5 rounded w-10 text-center flex-shrink-0">z-{z}</code>
                                 <span className="text-[11px] font-semibold text-brand-blue/75 w-16 flex-shrink-0">{name}</span>
-                                <span className="text-[11px] text-brand-blue/55">{use}</span>
+                                <span className="text-[11px] text-brand-blue/70">{use}</span>
                             </div>
                         ))}
                     </div>
@@ -80,11 +80,11 @@ export default function LayoutSection() {
                         </div>
                         <div className="grid grid-cols-2 border-t border-brand-blue/10 divide-x divide-brand-blue/10">
                             <div className="p-2.5 text-center">
-                                <p className="text-[9px] font-mono text-brand-blue/45">Sidebar</p>
+                                <p className="text-[9px] font-mono text-brand-blue/65">Sidebar</p>
                                 <p className="text-[10px] font-bold text-brand-blue">256px · 320px expanded</p>
                             </div>
                             <div className="p-2.5 text-center">
-                                <p className="text-[9px] font-mono text-brand-blue/45">Content</p>
+                                <p className="text-[9px] font-mono text-brand-blue/65">Content</p>
                                 <p className="text-[10px] font-bold text-brand-blue">max-w-6xl · px-4 sm:px-6</p>
                             </div>
                         </div>
@@ -123,11 +123,11 @@ export default function LayoutSection() {
                         </div>
                         <div className="grid grid-cols-2 border-t border-white/10 divide-x divide-white/10">
                             <div className="p-2.5 text-center">
-                                <p className="text-[9px] font-mono text-white/35">Sidebar</p>
+                                <p className="text-[9px] font-mono text-white/55">Sidebar</p>
                                 <p className="text-[10px] font-bold text-white">bg-black/25 overlay</p>
                             </div>
                             <div className="p-2.5 text-center">
-                                <p className="text-[9px] font-mono text-white/35">Content</p>
+                                <p className="text-[9px] font-mono text-white/55">Content</p>
                                 <p className="text-[10px] font-bold text-white">bg-white/5 surface</p>
                             </div>
                         </div>

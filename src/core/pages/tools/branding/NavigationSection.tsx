@@ -18,7 +18,7 @@ function NavigationSection() {
                         <div className="p-4 border-b border-white/10 flex items-center gap-2.5">
                             <img src="/YQL_LOGO_WHITE.svg" alt="YQL Logo" className="h-7 w-auto flex-shrink-0" />
                             <div>
-                                <p className="text-[9px] font-extrabold uppercase tracking-widest text-white/50 leading-none">YQL Platform</p>
+                                <p className="text-[9px] font-extrabold uppercase tracking-widest text-white/65 leading-none">YQL Platform</p>
                                 <p className="text-sm font-display font-extrabold text-white leading-tight">Workspace</p>
                             </div>
                         </div>
@@ -49,7 +49,7 @@ function NavigationSection() {
                                     <Layout size={13} aria-hidden="true" className={`${textCls} flex-shrink-0`} />
                                     <span className={`text-sm ${textCls}`}>{label}</span>
                                 </div>
-                                <p className="text-[10px] text-white/35 mt-1 pl-3">{note}</p>
+                                <p className="text-[10px] text-white/55 mt-1 pl-3">{note}</p>
                             </div>
                         ))}
                     </div>
@@ -79,7 +79,7 @@ function BreadcrumbsSection() {
                 <Box dark>
                     <Meta light>Simple breadcrumb — dark</Meta>
                     <Breadcrumbs dark items={[{ label: 'Dashboard' }, { label: 'Directory' }, { label: 'Alice Johnson' }]} />
-                    <p className="text-[10px] text-white/40 mt-3">Links: <code className="font-mono bg-white/10 px-1 rounded">text-white/55</code> → <code className="font-mono bg-white/10 px-1 rounded">text-white</code>. Current: <code className="font-mono bg-white/10 px-1 rounded">text-white font-bold</code>. Separator: <code className="font-mono bg-white/10 px-1 rounded">text-white/25</code>.</p>
+                    <p className="text-[10px] text-white/60 mt-3">Links: <code className="font-mono bg-white/10 px-1 rounded">text-white/55</code> → <code className="font-mono bg-white/10 px-1 rounded">text-white</code>. Current: <code className="font-mono bg-white/10 px-1 rounded">text-white font-bold</code>. Separator: <code className="font-mono bg-white/10 px-1 rounded">text-white/25</code>.</p>
                 </Box>
                 <Box dark>
                     <Meta light>Truncated — dark</Meta>
@@ -110,7 +110,7 @@ function TabsSection() {
                             ))}
                         </TabsList>
                     </Tabs>
-                    <p className="text-[10px] text-brand-blue/55">Active: <code className="font-mono bg-brand-bgLight px-1 rounded">border-brand-blue</code> + full opacity text. Disabled: /30 + pointer-events-none.</p>
+                    <p className="text-[10px] text-brand-blue/70">Active: <code className="font-mono bg-brand-bgLight px-1 rounded">border-brand-blue</code> + full opacity text. Disabled: /30 + pointer-events-none.</p>
                 </Box>
                 <Box>
                     <Meta>Pill tabs — interactive</Meta>
@@ -123,7 +123,7 @@ function TabsSection() {
                             ))}
                         </TabsList>
                     </Tabs>
-                    <p className="text-[10px] text-brand-blue/55">Active pill: white bg + subtle shadow + border. Container: brand-bgLight with large asymmetric radius.</p>
+                    <p className="text-[10px] text-brand-blue/70">Active pill: white bg + subtle shadow + border. Container: brand-bgLight with large asymmetric radius.</p>
                 </Box>
             </Grid>
 
@@ -139,7 +139,7 @@ function TabsSection() {
                             ))}
                         </TabsList>
                     </Tabs>
-                    <p className="text-[10px] text-white/40">Active: <code className="font-mono bg-white/10 px-1 rounded">border-white text-white</code>. Inactive: <code className="font-mono bg-white/10 px-1 rounded">text-white/45</code>. Disabled: <code className="font-mono bg-white/10 px-1 rounded">text-white/25</code>.</p>
+                    <p className="text-[10px] text-white/60">Active: <code className="font-mono bg-white/10 px-1 rounded">border-white text-white</code>. Inactive: <code className="font-mono bg-white/10 px-1 rounded">text-white/65</code>. Disabled: <code className="font-mono bg-white/10 px-1 rounded">text-white/25</code>.</p>
                 </Box>
                 <Box dark>
                     <Meta light>Pill tabs — dark</Meta>
@@ -152,7 +152,7 @@ function TabsSection() {
                             ))}
                         </TabsList>
                     </Tabs>
-                    <p className="text-[10px] text-white/40">Container: <code className="font-mono bg-white/10 px-1 rounded">bg-white/8</code>. Active pill: <code className="font-mono bg-white/10 px-1 rounded">bg-white/20 border-white/25</code>. Inactive: <code className="font-mono bg-white/10 px-1 rounded">text-white/45</code>.</p>
+                    <p className="text-[10px] text-white/60">Container: <code className="font-mono bg-white/10 px-1 rounded">bg-white/8</code>. Active pill: <code className="font-mono bg-white/10 px-1 rounded">bg-white/20 border-white/25</code>. Inactive: <code className="font-mono bg-white/10 px-1 rounded">text-white/65</code>.</p>
                 </Box>
             </Grid>
         </Section>
@@ -168,12 +168,12 @@ function PaginationSection({ page, setPage }: { page: number; setPage: (p: numbe
                 <Box>
                     <Meta>Standard pagination — interactive</Meta>
                     <Pagination page={page} totalPages={10} onPageChange={setPage} className="mb-4" />
-                    <p className="text-xs text-brand-blue/55">Active: filled brand-blue + white text + ink shadow. Prev/Next: bordered. Ellipsis: plain text.</p>
+                    <p className="text-xs text-brand-blue/70">Active: filled brand-blue + white text + ink shadow. Prev/Next: bordered. Ellipsis: plain text.</p>
                 </Box>
                 <Box dark>
                     <Meta light>Pagination — dark surface</Meta>
                     <Pagination page={page} totalPages={10} onPageChange={setPage} dark className="mb-4" />
-                    <p className="text-[10px] text-white/40">Active: <code className="font-mono bg-white/10 px-1 rounded">bg-brand-yellow text-brand-blue</code>. Default: <code className="font-mono bg-white/10 px-1 rounded">bg-white/10 border-white/15</code>.</p>
+                    <p className="text-[10px] text-white/60">Active: <code className="font-mono bg-white/10 px-1 rounded">bg-brand-yellow text-brand-blue</code>. Default: <code className="font-mono bg-white/10 px-1 rounded">bg-white/10 border-white/15</code>.</p>
                 </Box>
             </Grid>
         </Section>
@@ -190,7 +190,7 @@ function SearchSection({ searchOpen, setSearchOpen, searchVal, setSearchVal }: {
                     <Meta>Search bar + result dropdown — light</Meta>
                     <div className="relative">
                         <div className={`flex items-center gap-2 px-3 py-2.5 border-2 rounded-tl-lg rounded-br-lg bg-white transition-[border-color,box-shadow] duration-150 ${searchOpen ? 'border-brand-lightBlue ring-2 ring-brand-blue/20' : 'border-brand-blue/25'}`}>
-                            <Search size={14} className="text-brand-blue/40 flex-shrink-0" aria-hidden="true" />
+                            <Search size={14} className="text-brand-blue/60 flex-shrink-0" aria-hidden="true" />
                             <input
                                 type="search"
                                 placeholder="Search members, events, resources…"
@@ -208,7 +208,7 @@ function SearchSection({ searchOpen, setSearchOpen, searchVal, setSearchVal }: {
                             <div id="search-result-list" role="listbox"
                                 className="absolute top-full mt-1 w-full bg-white border-2 border-brand-blue/15 rounded-tl-xl rounded-br-xl shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] overflow-hidden z-10">
                                 <div className="px-3 pt-2.5 pb-1">
-                                    <p className="text-[9px] font-extrabold uppercase tracking-widest text-brand-blue/40">Members</p>
+                                    <p className="text-[9px] font-extrabold uppercase tracking-widest text-brand-blue/60">Members</p>
                                 </div>
                                 {['Alice Johnson', 'Aiden Lee', 'Amara Obi']
                                     .filter(n => !searchVal || n.toLowerCase().includes(searchVal.toLowerCase()))
@@ -230,13 +230,13 @@ function SearchSection({ searchOpen, setSearchOpen, searchVal, setSearchVal }: {
                     <Meta light>Search — dark surface</Meta>
                     <div>
                         <div className="flex items-center gap-2 px-3 py-2.5 border border-white/20 rounded-tl-lg rounded-br-lg bg-white/10 ring-2 ring-white/15 mb-1">
-                            <Search size={14} className="text-white/40 flex-shrink-0" aria-hidden="true" />
-                            <span className="flex-1 text-sm text-white/35">Search members, events…</span>
+                            <Search size={14} className="text-white/60 flex-shrink-0" aria-hidden="true" />
+                            <span className="flex-1 text-sm text-white/55">Search members, events…</span>
                             <kbd className="text-[9px] font-mono text-white/25 bg-white/8 px-1.5 py-0.5 rounded border border-white/15 hidden sm:inline">⌘K</kbd>
                         </div>
                         <div className="bg-white/10 border border-white/15 rounded-tl-xl rounded-br-xl overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)]">
                             <div className="px-3 pt-2.5 pb-1">
-                                <p className="text-[9px] font-extrabold uppercase tracking-widest text-white/35">Members</p>
+                                <p className="text-[9px] font-extrabold uppercase tracking-widest text-white/55">Members</p>
                             </div>
                             {['Alice Johnson', 'Aiden Lee'].map((name, i) => (
                                 <div key={name} className={`flex items-center gap-2.5 px-3 py-2 ${i === 0 ? 'bg-white/10' : ''}`}>
@@ -245,10 +245,10 @@ function SearchSection({ searchOpen, setSearchOpen, searchVal, setSearchVal }: {
                                 </div>
                             ))}
                             <div className="px-3 py-2 border-t border-white/10">
-                                <p className="text-xs text-white/45 font-medium">See all results →</p>
+                                <p className="text-xs text-white/65 font-medium">See all results →</p>
                             </div>
                         </div>
-                        <p className="text-[10px] text-white/40 mt-3">Input: <code className="font-mono bg-white/10 px-1 rounded">bg-white/10 border-white/20</code>. Focused ring: <code className="font-mono bg-white/10 px-1 rounded">ring-white/15</code>. Dropdown: <code className="font-mono bg-white/10 px-1 rounded">bg-white/10 border-white/15</code>. Selected row: <code className="font-mono bg-white/10 px-1 rounded">bg-white/10</code>.</p>
+                        <p className="text-[10px] text-white/60 mt-3">Input: <code className="font-mono bg-white/10 px-1 rounded">bg-white/10 border-white/20</code>. Focused ring: <code className="font-mono bg-white/10 px-1 rounded">ring-white/15</code>. Dropdown: <code className="font-mono bg-white/10 px-1 rounded">bg-white/10 border-white/15</code>. Selected row: <code className="font-mono bg-white/10 px-1 rounded">bg-white/10</code>.</p>
                     </div>
                 </Box>
             </Grid>

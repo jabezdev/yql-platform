@@ -40,7 +40,7 @@ export const opacity = {
   primary:   100, // headings, labels
   body:       80, // body text (preferred)
   secondary:  70, // secondary text
-  tertiary:   55, // metadata labels — minimum for readable text on white
+  tertiary:   65, // metadata labels — minimum for readable text on white
   border:     25, // input borders
   cardBorder: 15, // card borders
   divider:    10, // dividers / subtle backgrounds

@@ -40,7 +40,7 @@ export function Section({ id, title, icon: Icon, children }: {
 }
 
 export function Meta({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
-    return <p className={`text-[10px] font-extrabold uppercase tracking-widest mb-3 ${light ? 'text-white/60' : 'text-brand-blue/55'}`}>{children}</p>;
+    return <p className={`text-[10px] font-extrabold uppercase tracking-widest mb-3 ${light ? 'text-white/70' : 'text-brand-blue/70'}`}>{children}</p>;
 }
 
 export function Box({ children, className = '', dark = false }: { children: React.ReactNode; className?: string; dark?: boolean }) {
@@ -73,7 +73,7 @@ export function Callout({ children, variant = 'info' }: { children: React.ReactN
     };
     return (
         <div className={`mb-5 p-4 border-2 rounded-tl-lg rounded-br-lg ${styles[variant]}`}>
-            <p className="text-xs text-brand-blue/75 font-medium leading-relaxed">{children}</p>
+            <p className="text-xs text-brand-blue/80 font-medium leading-relaxed">{children}</p>
         </div>
     );
 }

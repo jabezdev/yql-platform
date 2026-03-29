@@ -14,7 +14,7 @@ function PrinciplesSection() {
                 {[
                     { n: '01', title: 'Geometric Identity', body: 'The diagonal corner cut (top-left + bottom-right) is our visual signature. It signals structure, precision, and purpose. Never apply standard rounded corners to brand surfaces — asymmetric radius is non-negotiable.' },
                     { n: '02', title: 'Blue as Foundation', body: 'Brand-blueDark (#396799) is the primary ink for all text, borders, and fills. Yellow is the accent that draws attention. Blue holds the system together — never let yellow or wine dominate a surface.' },
-                    { n: '03', title: 'Hierarchy Through Weight', body: 'font-extrabold for headings and labels, font-medium for body. Opacity communicates tier — 100% for primary, 70–80% for body, 55% for tertiary metadata. Never go below /55 for readable text on white.' },
+                    { n: '03', title: 'Hierarchy Through Weight', body: 'font-extrabold for headings and labels, font-medium for body. Opacity communicates tier — 100% for primary, 70–80% for body, 65% for tertiary metadata. Never go below /65 for readable text on white.' },
                     { n: '04', title: 'Purposeful Restraint', body: 'Shadows are reserved for interactive elements. Animation is functional, not decorative. Every border, shadow, and color choice must have a reason. If you can remove it without losing meaning, remove it.' },
                 ].map(({ n, title, body }) => (
                     <div key={n} className="p-6 bg-white border-2 border-brand-blue/15 rounded-tl-2xl rounded-br-2xl shadow-[2px_2px_0px_0px_rgba(57,103,153,0.08)] flex flex-col">
@@ -44,7 +44,7 @@ function LogoSection() {
                         <img src="/YQL_LOGO.svg" alt="YQL Logo" className="h-16 w-auto" />
                     </div>
                     <div className="flex items-center justify-between">
-                        <p className="text-[10px] font-mono text-brand-blue/55">src="/YQL_LOGO.svg" · default usage</p>
+                        <p className="text-[10px] font-mono text-brand-blue/70">src="/YQL_LOGO.svg" · default usage</p>
                         <a href="/YQL_LOGO.svg" download="YQL_LOGO.svg"
                             className="flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-wider text-brand-lightBlue hover:text-brand-darkBlue transition-colors px-2 py-1 border border-brand-blue/15 rounded hover:bg-brand-blue/5">
                             ↓ SVG
@@ -78,7 +78,7 @@ function LogoSection() {
                             <img src="/YQL_LOGO.svg" alt="YQL Logo" className={`${h} w-auto`} />
                             <div className="text-center">
                                 <p className="text-[10px] font-mono font-bold text-brand-blue">{h} · {px}</p>
-                                <p className="text-[10px] text-brand-blue/50">{where}</p>
+                                <p className="text-[10px] text-brand-blue/65">{where}</p>
                             </div>
                         </div>
                     ))}
@@ -91,8 +91,8 @@ function LogoSection() {
                     <div className="flex items-center justify-center py-4 mb-3">
                         <div className="relative p-6 border-2 border-dashed border-brand-blue/20 rounded">
                             <img src="/YQL_LOGO.svg" alt="YQL Logo" className="h-10 w-auto" />
-                            <span className="absolute top-1 left-1/2 -translate-x-1/2 text-[8px] font-mono text-brand-blue/40">min 16px</span>
-                            <span className="absolute left-1 top-1/2 -translate-y-1/2 text-[8px] font-mono text-brand-blue/40" style={{ writingMode: 'vertical-rl' }}>min 16px</span>
+                            <span className="absolute top-1 left-1/2 -translate-x-1/2 text-[8px] font-mono text-brand-blue/60">min 16px</span>
+                            <span className="absolute left-1 top-1/2 -translate-y-1/2 text-[8px] font-mono text-brand-blue/60" style={{ writingMode: 'vertical-rl' }}>min 16px</span>
                         </div>
                     </div>
                     <p className="text-[10px] text-brand-blue/65 leading-relaxed">Maintain at least <strong>16px clearspace</strong> on all sides.</p>
@@ -149,11 +149,11 @@ function ColorsSection() {
                             <div className="flex items-center justify-between gap-2 mb-0.5">
                                 <p className="text-[10px] font-mono font-bold text-brand-blue leading-tight">{token}</p>
                                 <button onClick={() => copy(token, token + '-name')} aria-label={`Copy ${token}`}
-                                    className="text-brand-blue/45 hover:text-brand-blue/70 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brand-blue rounded flex-shrink-0">
+                                    className="text-brand-blue/65 hover:text-brand-blue/70 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brand-blue rounded flex-shrink-0">
                                     {copiedKey === token + '-name' ? <CheckCheck size={10} aria-hidden={true as any} /> : <Copy size={10} aria-hidden={true as any} />}
                                 </button>
                             </div>
-                            <p className="text-[10px] font-mono text-brand-blue/50 mb-1.5">{hex}</p>
+                            <p className="text-[10px] font-mono text-brand-blue/65 mb-1.5">{hex}</p>
                             <p className="text-[10px] text-brand-blue/65 leading-tight mt-auto">{usage}</p>
                         </div>
                     </div>
@@ -223,8 +223,8 @@ function ColorsSection() {
                             <div className="p-2.5 bg-white">
                                 <div className="flex items-start justify-between gap-2 mb-1.5">
                                     <div className="min-w-0">
-                                        <p className="text-[9px] font-mono text-brand-blue/55 truncate">bg: {bgLabel}</p>
-                                        <p className="text-[9px] font-mono text-brand-blue/55 truncate">text: {textLabel}</p>
+                                        <p className="text-[9px] font-mono text-brand-blue/70 truncate">bg: {bgLabel}</p>
+                                        <p className="text-[9px] font-mono text-brand-blue/70 truncate">text: {textLabel}</p>
                                     </div>
                                     {ok ? <Check size={12} className="text-brand-green flex-shrink-0 mt-0.5" aria-hidden={true as any} /> : <X size={12} className="text-brand-red flex-shrink-0 mt-0.5" aria-hidden={true as any} />}
                                 </div>
@@ -244,7 +244,8 @@ function ColorsSection() {
                         { n: 10, use: 'dividers, subtle bg' },
                         { n: 15, use: 'card borders' },
                         { n: 25, use: 'input borders' },
-                        { n: 55, use: 'metadata labels ★ min for text' },
+                        { n: 55, use: 'de-emphasised UI only' },
+                        { n: 65, use: 'metadata labels ★ min for text' },
                         { n: 70, use: 'secondary text' },
                         { n: 80, use: 'body text preferred' },
                         { n: 100, use: 'headings, labels' },
@@ -252,12 +253,12 @@ function ColorsSection() {
                         <div key={n} className="flex flex-col items-center gap-1.5">
                             <div className="w-10 h-10 rounded-tl-lg rounded-br-lg" style={{ backgroundColor: `rgba(57,103,153,${n / 100})` }} />
                             <p className="text-[10px] font-mono text-brand-blue/65">/{n}</p>
-                            <p className="text-[10px] text-brand-blue/55 text-center max-w-[64px] leading-tight">{use}</p>
+                            <p className="text-[10px] text-brand-blue/70 text-center max-w-[64px] leading-tight">{use}</p>
                         </div>
                     ))}
                 </div>
                 <div className="mt-4 pt-4 border-t border-brand-blue/10">
-                    <p className="text-xs text-brand-blue/75"><strong className="text-brand-blue">Rule:</strong> Never use opacity below /55 for text content. Values /10–/25 are structural only (borders, backgrounds).</p>
+                    <p className="text-xs text-brand-blue/80"><strong className="text-brand-blue">Rule:</strong> Never use opacity below /65 for readable text. Values /55 are for de-emphasised UI (disabled states, decorative). Values /10–/25 are structural only (borders, backgrounds).</p>
                 </div>
             </Box>
         </Section>
@@ -280,15 +281,15 @@ function TypographySection() {
             <Grid cols={2} className="mb-4">
                 <Box>
                     <Meta>font-display · Space Grotesk</Meta>
-                    <p className="text-[10px] font-mono text-brand-blue/55 mb-4">Headings · labels · badges · stat values</p>
+                    <p className="text-[10px] font-mono text-brand-blue/70 mb-4">Headings · labels · badges · stat values</p>
                     <p className="font-display font-extrabold text-5xl text-brand-blue leading-none mb-3">Aa</p>
                     <p className="font-display font-extrabold text-2xl text-brand-blue mb-2">Young Quantum Leader</p>
                     <p className="font-display font-bold text-base text-brand-blue/75">Dashboard Overview</p>
-                    <p className="font-display font-extrabold text-[10px] uppercase tracking-widest text-brand-blue/55 mt-2">SECTION · BADGE · META</p>
+                    <p className="font-display font-extrabold text-[10px] uppercase tracking-widest text-brand-blue/70 mt-2">SECTION · BADGE · META</p>
                 </Box>
                 <Box>
                     <Meta>font-sans · Inter</Meta>
-                    <p className="text-[10px] font-mono text-brand-blue/55 mb-4">Body · paragraphs · inputs · descriptions</p>
+                    <p className="text-[10px] font-mono text-brand-blue/70 mb-4">Body · paragraphs · inputs · descriptions</p>
                     <p className="font-sans font-bold text-5xl text-brand-blue leading-none mb-3">Aa</p>
                     <p className="font-sans font-medium text-base text-brand-blue leading-relaxed mb-2">Join the premier youth leadership program.</p>
                     <p className="font-sans text-sm text-brand-blue/70 leading-relaxed">Secondary body copy for descriptions and supporting information.</p>
@@ -317,7 +318,7 @@ function TypographySection() {
                 <Meta>Weight scale — Space Grotesk · Inter</Meta>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                     <div>
-                        <p className="text-[10px] font-mono text-brand-blue/55 mb-3">Space Grotesk · font-display</p>
+                        <p className="text-[10px] font-mono text-brand-blue/70 mb-3">Space Grotesk · font-display</p>
                         <div className="space-y-3">
                             {([
                                 { w: 'font-medium', label: 'Medium · 500', use: 'Body, inputs' },
@@ -327,15 +328,15 @@ function TypographySection() {
                                 <div key={w} className="flex items-baseline justify-between border-b border-brand-blue/5 pb-2.5 last:border-0 last:pb-0">
                                     <p className={`font-display ${w} text-xl text-brand-blue`}>Quantum</p>
                                     <div className="text-right">
-                                        <p className="text-[10px] font-mono text-brand-blue/55">{label}</p>
-                                        <p className="text-[10px] text-brand-blue/40">{use}</p>
+                                        <p className="text-[10px] font-mono text-brand-blue/70">{label}</p>
+                                        <p className="text-[10px] text-brand-blue/60">{use}</p>
                                     </div>
                                 </div>
                             ))}
                         </div>
                     </div>
                     <div>
-                        <p className="text-[10px] font-mono text-brand-blue/55 mb-3">Inter · font-sans</p>
+                        <p className="text-[10px] font-mono text-brand-blue/70 mb-3">Inter · font-sans</p>
                         <div className="space-y-3">
                             {([
                                 { w: 'font-medium', label: 'Medium · 500', use: 'Body text, descriptions' },
@@ -345,8 +346,8 @@ function TypographySection() {
                                 <div key={w} className="flex items-baseline justify-between border-b border-brand-blue/5 pb-2.5 last:border-0 last:pb-0">
                                     <p className={`font-sans ${w} text-xl text-brand-blue`}>Quantum</p>
                                     <div className="text-right">
-                                        <p className="text-[10px] font-mono text-brand-blue/55">{label}</p>
-                                        <p className="text-[10px] text-brand-blue/40">{use}</p>
+                                        <p className="text-[10px] font-mono text-brand-blue/70">{label}</p>
+                                        <p className="text-[10px] text-brand-blue/60">{use}</p>
                                     </div>
                                 </div>
                             ))}
@@ -372,8 +373,8 @@ function TypographySection() {
                     ].map(({ cls, label, ctx }) => (
                         <div key={cls} className="grid grid-cols-2 items-center py-2.5 border-b border-brand-blue/5 last:border-0">
                             <div className="flex flex-col items-end pr-5 border-r border-brand-blue/8">
-                                <span className="text-[10px] font-mono text-brand-blue/55 leading-snug">{label}</span>
-                                <span className="text-[10px] text-brand-blue/45 leading-snug">{ctx}</span>
+                                <span className="text-[10px] font-mono text-brand-blue/70 leading-snug">{label}</span>
+                                <span className="text-[10px] text-brand-blue/65 leading-snug">{ctx}</span>
                             </div>
                             <div className="pl-5 min-w-0 overflow-hidden">
                                 <p className={`font-display font-extrabold text-brand-blue leading-none ${cls}`}>Quantum</p>
@@ -389,30 +390,30 @@ function TypographySection() {
                 <div className="space-y-4">
                     <div className="flex items-center gap-4 pb-4 border-b border-brand-blue/5">
                         <div className="flex-shrink-0 min-w-[140px]">
-                            <p className="font-sans font-extrabold text-[10px] uppercase tracking-widest text-brand-blue/55">Section Label</p>
+                            <p className="font-sans font-extrabold text-[10px] uppercase tracking-widest text-brand-blue/70">Section Label</p>
                         </div>
-                        <code className="text-[10px] font-mono text-brand-blue/45 leading-relaxed">font-sans font-extrabold text-[10px] uppercase tracking-widest text-brand-blue/55</code>
+                        <code className="text-[10px] font-mono text-brand-blue/65 leading-relaxed">font-sans font-extrabold text-[10px] uppercase tracking-widest text-brand-blue/70</code>
                     </div>
                     <div className="flex items-center gap-4 pb-4 border-b border-brand-blue/5">
                         <div className="flex-shrink-0 min-w-[140px]">
                             <p className="font-display font-extrabold text-[10px] uppercase tracking-widest text-brand-yellow">Accent Label</p>
                         </div>
-                        <code className="text-[10px] font-mono text-brand-blue/45 leading-relaxed">font-display font-extrabold text-[10px] uppercase tracking-widest text-brand-yellow</code>
+                        <code className="text-[10px] font-mono text-brand-blue/65 leading-relaxed">font-display font-extrabold text-[10px] uppercase tracking-widest text-brand-yellow</code>
                     </div>
                     <div className="flex items-center gap-4 pb-4 border-b border-brand-blue/5">
                         <div className="flex-shrink-0 min-w-[140px]">
                             <code className="font-mono text-sm text-brand-lightBlue bg-brand-bgLight border border-brand-blue/10 px-2 py-1 rounded">brand-blue</code>
                         </div>
-                        <code className="text-[10px] font-mono text-brand-blue/45">font-mono text-sm — token references, inline code</code>
+                        <code className="text-[10px] font-mono text-brand-blue/65">font-mono text-sm — token references, inline code</code>
                     </div>
                     <div className="flex items-start gap-4">
                         <div className="flex-shrink-0 min-w-[140px]">
                             <p className="text-sm text-brand-blue/70 leading-relaxed">Body copy uses<br />leading-relaxed<br />for readability.</p>
                         </div>
                         <div>
-                            <code className="text-[10px] font-mono text-brand-blue/45 block">leading-relaxed (1.625) — body paragraphs</code>
-                            <code className="text-[10px] font-mono text-brand-blue/45 block mt-1">leading-tight — headings, badges, stat values</code>
-                            <code className="text-[10px] font-mono text-brand-blue/45 block mt-1">leading-none — large display numbers (stat values)</code>
+                            <code className="text-[10px] font-mono text-brand-blue/65 block">leading-relaxed (1.625) — body paragraphs</code>
+                            <code className="text-[10px] font-mono text-brand-blue/65 block mt-1">leading-tight — headings, badges, stat values</code>
+                            <code className="text-[10px] font-mono text-brand-blue/65 block mt-1">leading-none — large display numbers (stat values)</code>
                         </div>
                     </div>
                 </div>
