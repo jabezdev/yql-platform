@@ -595,6 +595,52 @@ export default defineSchema({
     })
         .index("by_application", ["applicationId"])
         .index("by_changedBy", ["changedBy"]),
+
+    // ═══════════════════════════════════════════════════════════════
+    // POSTER CREATOR / DESIGN STUDIO
+    // ═══════════════════════════════════════════════════════════════
+
+    // Design Studio: folders (nested via parentId)
+    posterFolders: defineTable({
+        userId: v.id("users"),
+        name: v.string(),
+        parentId: v.optional(v.id("posterFolders")),
+        color: v.optional(v.string()), // hex color for folder icon
+        createdAt: v.number(),
+        updatedAt: v.number(),
+    })
+        .index("by_userId", ["userId"])
+        .index("by_userId_parentId", ["userId", "parentId"])
+        .index("by_parentId", ["parentId"]),
+
+    // Design Studio: designs
+    posterDesigns: defineTable({
+        userId: v.id("users"),
+        title: v.string(),
+        state: v.any(),           // serialized PosterState JSON
+        thumbnail: v.optional(v.string()), // base64 JPEG thumbnail (~320x320)
+        isPrivate: v.boolean(),
+        folderId: v.optional(v.id("posterFolders")), // null = root
+        slug: v.optional(v.string()), // unique human-readable share URL token
+        likesCount: v.number(),
+        createdAt: v.number(),
+        updatedAt: v.number(),
+    })
+        .index("by_userId", ["userId"])
+        .index("by_userId_updatedAt", ["userId", "updatedAt"])
+        .index("by_userId_folderId", ["userId", "folderId"])
+        .index("by_slug", ["slug"])
+        .index("by_isPrivate", ["isPrivate"]),
+
+    // Design Studio: likes
+    posterLikes: defineTable({
+        designId: v.id("posterDesigns"),
+        userId: v.id("users"),
+        createdAt: v.number(),
+    })
+        .index("by_designId", ["designId"])
+        .index("by_userId", ["userId"])
+        .index("by_userId_designId", ["userId", "designId"]),
 });
 
 

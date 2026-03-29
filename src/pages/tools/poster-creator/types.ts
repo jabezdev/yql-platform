@@ -1,7 +1,7 @@
 export type BlockType = "text" | "tag" | "cta" | "divider" | "stat" | "quote-mark" | "bullet" | "logo" | "bg-rect";
 export type AlignH = "left" | "center" | "right";
 export type FontFamily = "display" | "sans";
-export type TabId = "layers" | "background" | "templates";
+export type TabId = "layers" | "background" | "templates" | "designs";
 
 export interface Block {
     id: string;

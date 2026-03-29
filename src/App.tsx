@@ -1,5 +1,6 @@
+import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { Authenticated, Unauthenticated } from "convex/react";
+import { Authenticated, Unauthenticated, useConvexAuth } from "convex/react";
 import { PageErrorBoundary } from "./components/ui/error/PageErrorBoundary";
 
 import ConvexClientProvider from "./providers/ConvexClientProvider";
@@ -10,9 +11,24 @@ import LandingPage from "./pages/public/LandingPage";
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import BrandingPage from "./pages/tools/BrandingPage";
-import PosterCreatorPage from "./pages/tools/PosterCreatorPage";
+import DesignDashboard from "./pages/design/DesignDashboard";
+import DesignStudio from "./pages/design/DesignStudio";
+import DesignSharePage from "./pages/design/DesignSharePage";
 
-// Auth routes wrapped in providers — Clerk/Convex only load for these paths
+function DesignRoute({ children }: { children: React.ReactNode }) {
+    const { isAuthenticated, isLoading } = useConvexAuth();
+    if (isLoading) {
+        return (
+            <div className="h-screen w-screen flex items-center justify-center bg-[#0d1825]">
+                <div className="w-6 h-6 border-2 border-brand-blue/30 border-t-brand-blue rounded-full animate-spin" />
+            </div>
+        );
+    }
+    if (!isAuthenticated) return <Navigate to="/login" replace />;
+    return <>{children}</>;
+}
+
+// Auth routes — Clerk/Convex only load for these paths
 function AuthRoutes() {
     return (
         <ConvexClientProvider>
@@ -31,6 +47,14 @@ function AuthRoutes() {
                                 <Unauthenticated><RegisterPage /></Unauthenticated>
                             </>
                         } />
+                        {/* Public share page — must come before /design/* wildcard */}
+                        <Route path="/design/s/:slug" element={<DesignSharePage />} />
+                        {/* Design Studio — requires auth */}
+                        <Route path="/design" element={<DesignRoute><DesignDashboard /></DesignRoute>} />
+                        <Route path="/design/new" element={<DesignRoute><DesignStudio /></DesignRoute>} />
+                        <Route path="/design/edit/:id" element={<DesignRoute><DesignStudio /></DesignRoute>} />
+                        {/* Legacy redirect */}
+                        <Route path="/poster/*" element={<Navigate to="/design" replace />} />
                         <Route path="*" element={<Navigate to="/" replace />} />
                     </Routes>
                 </ToastProvider>
@@ -47,7 +71,6 @@ function App() {
                     {/* Public routes — render instantly, no auth provider */}
                     <Route path="/" element={<LandingPage />} />
                     <Route path="/branding" element={<BrandingPage />} />
-                    <Route path="/poster" element={<PosterCreatorPage />} />
 
                     {/* Auth routes — Clerk + Convex only initialize here */}
                     <Route path="/*" element={<AuthRoutes />} />
