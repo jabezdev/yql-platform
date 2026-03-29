@@ -1,55 +1,70 @@
 import { Container, GeometricPattern } from '../ui';
 import { Mail, Globe, Linkedin, Facebook } from 'lucide-react';
 
+const socials = [
+    { icon: Mail,     label: "yql@qcsp.ph",       href: "mailto:yql@qcsp.ph" },
+    { icon: Globe,    label: "qcsp.ph",             href: "https://qcsp.ph" },
+    { icon: Linkedin, label: "/company/qcsp",       href: "https://linkedin.com/company/qcsp" },
+    { icon: Facebook, label: "/qcsp.ph",            href: "https://fb.com/qcsp.ph" },
+];
+
 export default function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="bg-brand-blue text-white pt-12 pb-0 overflow-hidden relative">
-            <Container className="mb-12">
-                <div className="flex flex-col md:flex-row justify-between items-center gap-12">
+        <footer className="bg-brand-blue text-white overflow-hidden relative">
+            <Container className="pt-14 pb-10">
+                <div className="grid md:grid-cols-[1fr_auto] gap-12 items-start">
                     {/* Brand */}
-                    <div className="flex flex-col items-center text-center md:items-start md:text-left max-w-xl">
-                        <img src="/YQL_LOGO_WHITE.svg" alt="YQL Logo" className="h-16 w-auto mb-6" />
-                        <h2 className="text-2xl md:text-3xl font-display font-extrabold text-white tracking-tight mb-2">
+                    <div className="max-w-md">
+                        <img
+                            src="/YQL_LOGO_WHITE.svg"
+                            alt="YQL Logo"
+                            className="h-14 w-auto mb-6"
+                        />
+                        <h2 className="text-2xl font-display font-extrabold text-white tracking-tight leading-snug mb-2">
                             Young Quantum Leaders Program
                         </h2>
-                        <p className="text-brand-lightBlue/90 text-base md:text-lg font-medium">
+                        <p className="text-white/40 text-sm font-medium leading-relaxed">
                             Empowering the next generation of quantum leaders in the Philippines.
                         </p>
                     </div>
 
                     {/* Links */}
-                    <div className="flex flex-col items-center md:items-start gap-4 text-white/80 mt-4 md:mt-0">
-                        <a href="mailto:hr@qcsp.ph" className="flex items-center gap-3 hover:text-white transition-colors">
-                            <Mail className="w-5 h-5" />
-                            <span>yql@qcsp.ph</span>
-                        </a>
-                        <a href="https://qcsp.ph" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white transition-colors">
-                            <Globe className="w-5 h-5" />
-                            <span>qcsp.ph</span>
-                        </a>
-                        <a href="https://linkedin.com/company/qcsp" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white transition-colors">
-                            <Linkedin className="w-5 h-5" />
-                            <span>/company/qcsp</span>
-                        </a>
-                        <a href="https://fb.com/qcsp.ph" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-white transition-colors">
-                            <Facebook className="w-5 h-5" />
-                            <span>/qcsp.ph</span>
-                        </a>
+                    <div className="flex flex-col gap-3 md:pt-1">
+                        <p className="text-[9px] font-display font-extrabold uppercase tracking-[0.3em] text-white/25 mb-1">
+                            Contact
+                        </p>
+                        {socials.map(({ icon: Icon, label, href }) => (
+                            <a
+                                key={href}
+                                href={href}
+                                target={href.startsWith('http') ? '_blank' : undefined}
+                                rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                                className="group flex items-center gap-3 text-white/50 hover:text-white transition-colors duration-150"
+                            >
+                                <div className="w-7 h-7 rounded-tl-md rounded-br-md bg-white/8 flex items-center justify-center flex-shrink-0 group-hover:bg-white/15 transition-colors duration-150">
+                                    <Icon size={13} />
+                                </div>
+                                <span className="text-sm font-medium">{label}</span>
+                            </a>
+                        ))}
                     </div>
                 </div>
 
-                {/* Bottom Bar: Copyright Only */}
-                <div className="mt-8 pt-8 border-t border-white/10 text-center">
-                    <p className="text-sm font-medium text-white/60">
+                {/* Divider + copyright */}
+                <div className="mt-10 pt-8 border-t border-white/8 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <p className="text-[11px] font-medium text-white/30">
                         © {currentYear} Quantum Computing Society of the Philippines. All rights reserved.
+                    </p>
+                    <p className="text-[10px] font-display font-extrabold uppercase tracking-[0.25em] text-white/20">
+                        YQL Platform
                     </p>
                 </div>
             </Container>
 
-            {/* Continuous Geometric Footer Strip */}
-            <div className="w-full mt-auto opacity-80">
+            {/* Geometric footer strip */}
+            <div className="w-full opacity-60">
                 <GeometricPattern variant="footer-strip" size={60} className="w-full" />
             </div>
         </footer>

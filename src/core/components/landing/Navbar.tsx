@@ -29,20 +29,20 @@ export default function Navbar() {
 
     return (
         <nav
-            className={`fixed w-full z-50 h-[72px] flex items-center bg-white border-b-4 border-brand-blue transition-all duration-300 ${scrolled ? 'shadow-[0px_4px_0px_0px_rgba(57,103,153,0.12)]' : ''}`}
+            className={`fixed w-full z-50 h-[68px] flex items-center bg-white border-b-2 border-brand-blue/20 transition-all duration-300 ${scrolled ? 'border-brand-blue/40 shadow-[0px_3px_0px_0px_rgba(57,103,153,0.08)]' : ''}`}
         >
             <Container className="flex justify-between items-center w-full">
                 <a href="/" className="flex items-center gap-2">
-                    <img src="/YQL_LOGO.svg" alt="YQL Logo" className="h-10 w-auto" />
+                    <img src="/YQL_LOGO.svg" alt="YQL Logo" className="h-9 w-auto" />
                 </a>
 
                 {/* Desktop Menu */}
-                <div className="hidden md:flex items-center space-x-8">
+                <div className="hidden md:flex items-center gap-7">
                     {NAV_LINKS.map((link) => (
                         <a
                             key={link.name}
                             href={link.href}
-                            className="text-brand-blue hover:text-brand-wine transition-colors text-sm font-display font-bold"
+                            className="text-brand-blue/70 hover:text-brand-blue transition-colors text-[13px] font-display font-bold tracking-wide"
                         >
                             {link.name}
                         </a>
@@ -50,8 +50,7 @@ export default function Navbar() {
                     <Button
                         onClick={handleAuthClick}
                         variant="geometric-primary"
-                        size="md"
-                        className="py-2"
+                        size="sm"
                     >
                         {isAuthenticated ? 'Dashboard' : 'Log in'}
                     </Button>
@@ -69,12 +68,12 @@ export default function Navbar() {
 
             {/* Mobile Menu */}
             {isOpen && (
-                <div className="md:hidden absolute top-full left-0 w-full bg-brand-bgLight border-t-2 border-brand-blue p-6 flex flex-col space-y-4 shadow-[0px_4px_0px_0px_rgba(57,103,153,0.15)]">
+                <div className="md:hidden absolute top-full left-0 w-full bg-white border-t border-brand-blue/15 p-6 flex flex-col gap-5 shadow-[0px_4px_12px_rgba(57,103,153,0.12)]">
                     {NAV_LINKS.map((link) => (
                         <a
                             key={link.name}
                             href={link.href}
-                            className="text-brand-blue hover:text-brand-wine text-lg font-display font-bold"
+                            className="text-brand-blue/75 hover:text-brand-blue text-base font-display font-bold tracking-wide"
                             onClick={closeMenu}
                         >
                             {link.name}
@@ -83,7 +82,7 @@ export default function Navbar() {
                     <Button
                         fullWidth
                         variant="geometric-primary"
-                        size="lg"
+                        size="md"
                         onClick={() => {
                             closeMenu();
                             handleAuthClick();

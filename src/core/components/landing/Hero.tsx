@@ -116,26 +116,34 @@ export default function Hero() {
                 />
 
                 <div className="max-w-4xl mx-auto py-20 relative">
+                    {/* Eyebrow label */}
+                    <div className="flex items-center justify-center gap-2 mb-7">
+                        <span className="inline-block w-6 h-px bg-brand-wine/50" />
+                        <span className="text-[10px] font-display font-extrabold tracking-[0.3em] uppercase text-brand-wine/80">
+                            QCSP Youth Leadership Program
+                        </span>
+                        <span className="inline-block w-6 h-px bg-brand-wine/50" />
+                    </div>
+
                     {/* Main Heading */}
-                    {/* Main Heading (Swapped Emphasis) */}
-                    <h1 className="text-3xl md:text-5xl font-display font-extrabold mb-4 tracking-tight leading-tight text-brand-blue">
+                    <h1 className="text-[2rem] md:text-5xl font-display font-extrabold mb-3 tracking-tight leading-tight text-brand-blue">
                         Join our Team, Be a
                     </h1>
 
-                    {/* Subheading (Swapped Emphasis - Now Larger) */}
-                    <h2 className="text-5xl md:text-7xl mb-12 font-display font-extrabold tracking-tight text-brand-wine">
-                        Young Quantum Leader
+                    {/* Program name */}
+                    <h2 className="text-5xl md:text-7xl mb-10 font-display font-extrabold tracking-tight text-brand-wine leading-none">
+                        Young Quantum<br className="hidden sm:block" /> Leader
                     </h2>
 
                     {/* Description */}
-                    <p className="text-lg md:text-xl text-brand-blue/70 max-w-2xl mx-auto mb-12 leading-relaxed font-medium">
-                        Join the premier youth leadership program by the Quantum Computing
-                        Society of the Philippines. Lead, innovate, and inspire the next
-                        generation of quantum pioneers.
+                    <p className="text-base md:text-lg text-brand-blue/60 max-w-xl mx-auto mb-10 leading-relaxed font-medium">
+                        The premier youth leadership program by the Quantum Computing
+                        Society of the Philippines — lead, innovate, and inspire the
+                        next generation of quantum pioneers.
                     </p>
 
                     {/* CTA Buttons */}
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Button
                             as="a"
                             href="#about"

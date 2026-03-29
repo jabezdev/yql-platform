@@ -1,68 +1,103 @@
 import { UserPlus, Briefcase, Lightbulb, Users, Flag } from 'lucide-react';
-import { Section } from '../ui/layout/Section';
-import { SectionTitle } from '../ui/typography/SectionTitle';
 import { Container } from '../ui/layout/Container';
 
+const steps = [
+    {
+        icon: UserPlus,
+        number: "01",
+        title: "Join a Functional Committee",
+        desc: "Choose a committee aligned with your interests and skills.",
+    },
+    {
+        icon: Briefcase,
+        number: "02",
+        title: "Contribute to Ongoing Work",
+        desc: "Help execute current programs and get familiarized with QCSP.",
+    },
+    {
+        icon: Lightbulb,
+        number: "03",
+        title: "Propose New Ideas",
+        desc: "Pitch and lead new projects that matter to the community.",
+    },
+    {
+        icon: Users,
+        number: "04",
+        title: "Self-Organized Teams",
+        desc: "Form small autonomous teams to launch your own initiatives.",
+    },
+    {
+        icon: Flag,
+        number: "05",
+        title: "Leadership Opportunities",
+        desc: "Become a project or committee lead on major national events.",
+    },
+];
+
 export default function HowItWorks() {
-    const steps = [
-        {
-            icon: UserPlus,
-            title: "1. Join a Functional Committee",
-            desc: "Applicants choose a committee aligned with their interests."
-        },
-        {
-            icon: Briefcase,
-            title: "2. Contribute to Ongoing Work",
-            desc: "Members help execute current programs and initiatives and get familiarized with QCSP."
-        },
-        {
-            icon: Lightbulb,
-            title: "3. Propose New Ideas",
-            desc: "Members pitch and lead new projects."
-        },
-        {
-            icon: Users,
-            title: "4. Self-Organized Teams",
-            desc: "YQL members can form small teams to launch initiatives."
-        },
-        {
-            icon: Flag,
-            title: "5. Leadership Opportunities",
-            desc: "Active members can become project or committee leads on major and flagship national events."
-        }
-    ];
-
     return (
-        <Section variant="gray" id="how-it-works">
-            <Container>
-                <SectionTitle>How the Program Works</SectionTitle>
+        <section id="how-it-works" className="bg-brand-bgLight py-20 md:py-24 overflow-hidden relative">
+            {/* Ghost background text */}
+            <div className="absolute inset-0 pointer-events-none select-none overflow-hidden" aria-hidden>
+                <span className="absolute -bottom-4 -right-6 text-[180px] font-display font-extrabold text-brand-blue/[0.04] leading-none">
+                    PROGRAM
+                </span>
+            </div>
 
-                <div className="relative">
-                    {/* Connecting line for desktop */}
-                    <div className="hidden md:block absolute left-1/2 top-4 bottom-4 w-0.5 bg-brand-blue/20 transform -translate-x-1/2" />
+            <Container className="relative z-10">
+                {/* Header */}
+                <div className="mb-12">
+                    <span className="text-[10px] font-display font-extrabold tracking-[0.3em] uppercase text-brand-wine mb-4 block">
+                        04 — The Process
+                    </span>
+                    <h2 className="text-4xl md:text-5xl font-display font-extrabold text-brand-blue leading-[1.1] tracking-tight">
+                        How the Program Works
+                    </h2>
+                </div>
 
-                    <div className="space-y-8 md:space-y-12 relative z-10">
-                        {steps.map((step, index) => (
-                            <div key={index} className={`flex flex-col md:flex-row items-center gap-4 md:gap-8 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-                                <div className="flex-1 w-full text-center md:text-left">
-                                    <div className={`p-6 bg-white border-2 border-brand-blue rounded-tl-2xl rounded-br-2xl shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] hover:shadow-[6px_6px_0px_0px_rgba(57,103,153,0.2)] hover:-translate-y-0.5 hover:-translate-x-0.5 transition-all duration-200 ${index % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}>
-                                        <h3 className="text-xl font-display font-extrabold text-brand-blue mb-2">{step.title}</h3>
-                                        <p className="text-brand-blue/70 font-medium">{step.desc}</p>
-                                    </div>
-                                </div>
+                {/* Steps list */}
+                <div className="space-y-3">
+                    {steps.map((step, index) => (
+                        <div
+                            key={index}
+                            className="group flex items-center gap-5 md:gap-8 bg-white border-2 border-brand-blue/12 rounded-tl-xl rounded-br-xl px-6 py-5 hover:border-brand-blue hover:shadow-[4px_4px_0px_0px_rgba(57,103,153,0.14)] hover:-translate-y-[1px] hover:-translate-x-[1px] transition-all duration-200"
+                        >
+                            {/* Large decorative number */}
+                            <span className="text-4xl md:text-5xl font-display font-extrabold text-brand-blue/8 tabular-nums flex-shrink-0 group-hover:text-brand-blue/18 transition-colors duration-200 w-14 text-center leading-none select-none">
+                                {step.number}
+                            </span>
 
-                                <div className="relative flex-shrink-0 order-first md:order-none">
-                                    <div className="w-12 h-12 bg-white rounded-tl-xl rounded-br-xl border-2 border-brand-blue flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] relative z-10">
-                                        <step.icon className="w-5 h-5 text-brand-blue" />
-                                    </div>
-                                </div>
-
-                                <div className="flex-1 w-full hidden md:block"></div>
+                            {/* Icon badge */}
+                            <div className="w-10 h-10 rounded-tl-lg rounded-br-lg bg-brand-blue flex items-center justify-center flex-shrink-0 text-white shadow-[2px_2px_0px_0px_rgba(10,22,48,0.28)] group-hover:bg-brand-darkBlue transition-colors duration-200">
+                                <step.icon size={18} />
                             </div>
-                        ))}
-                    </div>
+
+                            {/* Text */}
+                            <div className="flex-1 min-w-0">
+                                <h3 className="text-[15px] font-display font-extrabold text-brand-blue leading-snug">
+                                    {step.title}
+                                </h3>
+                                <p className="text-brand-blue/50 text-sm font-medium mt-0.5 leading-snug">
+                                    {step.desc}
+                                </p>
+                            </div>
+
+                            {/* Trail arrow / final badge */}
+                            <div className="hidden md:flex items-center flex-shrink-0">
+                                {index < steps.length - 1 ? (
+                                    <span className="text-brand-blue/18 font-display font-extrabold text-lg group-hover:text-brand-blue/35 transition-colors duration-200">
+                                        →
+                                    </span>
+                                ) : (
+                                    <span className="text-[10px] font-display font-extrabold uppercase tracking-[0.2em] bg-brand-yellow text-brand-blue px-3 py-1.5 rounded-tl-lg rounded-br-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,0.1)]">
+                                        YQL!
+                                    </span>
+                                )}
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </Container>
-        </Section>
+        </section>
     );
 }

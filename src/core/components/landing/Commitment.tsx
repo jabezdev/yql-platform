@@ -1,62 +1,83 @@
-import { Clock, Laptop, Target, BarChart, TrendingUp } from 'lucide-react';
-import { Section } from '../ui/layout/Section';
-import { SectionTitle } from '../ui/typography/SectionTitle';
+import { Clock, Laptop, Target, BarChart, ArrowUpRight } from 'lucide-react';
 import { Container } from '../ui/layout/Container';
 
+const commitments = [
+    { icon: Clock,    text: "Flexible and project-based" },
+    { icon: Laptop,   text: "Remote-first" },
+    { icon: Target,   text: "Output-focused, not time-based" },
+    { icon: BarChart, text: "Members choose how much to take on" },
+];
+
+const pathways = [
+    { title: "Project Leads",              detail: "Own and drive individual initiatives" },
+    { title: "Committee Leads",            detail: "Oversee entire functional areas" },
+    { title: "National Initiative Leads",  detail: "Spearhead flagship programs" },
+    { title: "Mentors for new cohorts",    detail: "Guide and shape incoming members" },
+    { title: "Core QCSP leadership roles", detail: "Define the organization's direction" },
+];
+
 export default function Commitment() {
-    const commitments = [
-        { icon: Clock, text: "Flexible and project-based" },
-        { icon: Laptop, text: "Remote-first" },
-        { icon: Target, text: "Output-focused rather than time-based" },
-        { icon: BarChart, text: "Members choose how much to take on" }
-    ];
-
-    const pathways = [
-        "Project Leads",
-        "Committee Leads",
-        "National Initiative Leads",
-        "Mentors for new cohorts",
-        "Core QCSP leadership roles"
-    ];
-
     return (
-        <Section variant="gray" id="commitment">
+        <section id="commitment" className="bg-brand-bgLight py-20 md:py-24">
             <Container>
                 <div className="grid lg:grid-cols-2 gap-16">
+                    {/* Commitment */}
                     <div>
-                        <SectionTitle centered={false}>Commitment</SectionTitle>
-                        <div className="grid sm:grid-cols-2 gap-5">
+                        <span className="text-[10px] font-display font-extrabold tracking-[0.3em] uppercase text-brand-wine mb-4 block">
+                            06 — Your Time
+                        </span>
+                        <h2 className="text-4xl font-display font-extrabold text-brand-blue leading-[1.1] tracking-tight mb-10">
+                            Commitment
+                        </h2>
+                        <div className="grid grid-cols-2 gap-3">
                             {commitments.map((item, index) => (
                                 <div
                                     key={index}
-                                    className="flex flex-col gap-3 p-5 bg-white border-2 border-brand-blue/30 rounded-tl-xl rounded-br-xl shadow-[3px_3px_0px_0px_rgba(57,103,153,0.1)] hover:border-brand-blue hover:shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] transition-all duration-200"
+                                    className="group bg-white border-2 border-brand-blue/12 rounded-tl-xl rounded-br-xl p-5 hover:border-brand-blue hover:shadow-[3px_3px_0px_0px_rgba(57,103,153,0.14)] transition-all duration-200"
                                 >
-                                    <item.icon className="text-brand-blue w-8 h-8" />
-                                    <span className="font-extrabold text-brand-blue font-display">{item.text}</span>
+                                    <div className="w-9 h-9 rounded-tl-lg rounded-br-lg bg-brand-bgLight border-2 border-brand-blue/10 flex items-center justify-center mb-4 text-brand-blue group-hover:bg-brand-blue group-hover:text-white group-hover:border-brand-blue transition-all duration-200 shadow-none">
+                                        <item.icon size={15} />
+                                    </div>
+                                    <p className="font-display font-bold text-brand-blue text-sm leading-snug">
+                                        {item.text}
+                                    </p>
                                 </div>
                             ))}
                         </div>
                     </div>
 
+                    {/* Growth Pathways */}
                     <div>
-                        <SectionTitle centered={false}>Growth Pathways</SectionTitle>
-                        <div className="bg-brand-blue text-white p-8 rounded-tl-2xl rounded-br-2xl shadow-[6px_6px_0px_0px_rgba(57,103,153,0.3)] relative overflow-hidden">
-                            <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-tl-2xl" />
-                            <div className="absolute bottom-0 left-0 w-16 h-16 bg-brand-yellow/10 rounded-br-2xl" />
-
-                            <h3 className="text-xl font-display font-extrabold mb-6 relative z-10">Members can grow into:</h3>
-                            <ul className="space-y-4 relative z-10">
-                                {pathways.map((path, index) => (
-                                    <li key={index} className="flex items-center gap-3">
-                                        <TrendingUp className="text-brand-yellow w-5 h-5 flex-shrink-0" />
-                                        <span className="text-lg font-medium text-brand-bgLight/90">{path}</span>
-                                    </li>
-                                ))}
-                            </ul>
+                        <span className="text-[10px] font-display font-extrabold tracking-[0.3em] uppercase text-brand-wine mb-4 block">
+                            07 — Your Path
+                        </span>
+                        <h2 className="text-4xl font-display font-extrabold text-brand-blue leading-[1.1] tracking-tight mb-10">
+                            Growth Pathways
+                        </h2>
+                        <div className="border-t-2 border-brand-blue/10">
+                            {pathways.map((path, index) => (
+                                <div
+                                    key={index}
+                                    className="group flex items-start justify-between gap-4 py-[15px] border-b border-brand-blue/8 hover:border-brand-yellow transition-colors duration-150"
+                                >
+                                    <div>
+                                        <p className="font-display font-extrabold text-brand-blue text-[15px] group-hover:text-brand-wine transition-colors duration-150">
+                                            {path.title}
+                                        </p>
+                                        <p className="text-brand-blue/45 text-xs mt-0.5 font-medium">
+                                            {path.detail}
+                                        </p>
+                                    </div>
+                                    <ArrowUpRight
+                                        size={15}
+                                        className="text-brand-blue/18 group-hover:text-brand-wine flex-shrink-0 mt-1 transition-colors duration-150"
+                                    />
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
             </Container>
-        </Section>
+        </section>
     );
 }
