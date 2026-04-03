@@ -46,7 +46,7 @@ export class PageErrorBoundary extends Component<Props, State> {
                         <RefreshCw size={16} strokeWidth={2.5} /> Try Again
                     </button>
                     <Link
-                        to="/dashboard/overview"
+                        to="/me"
                         className="flex items-center gap-2 px-5 py-2.5 bg-brand-blue text-white border-2 border-brand-blue font-bold rounded-tl-xl rounded-br-xl shadow-[3px_3px_0px_0px_rgba(10,22,48,0.45)] hover:-translate-y-0.5 transition-transform text-sm"
                     >
                         <Home size={16} strokeWidth={2.5} /> Go Home

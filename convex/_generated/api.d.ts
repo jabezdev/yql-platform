@@ -15,6 +15,7 @@ import type * as calendar from "../calendar.js";
 import type * as chat_bookmarks from "../chat/bookmarks.js";
 import type * as chat_channels from "../chat/channels.js";
 import type * as chat_directMessages from "../chat/directMessages.js";
+import type * as chat_drafts from "../chat/drafts.js";
 import type * as chat_lib_access from "../chat/lib/access.js";
 import type * as chat_lib_enrich from "../chat/lib/enrich.js";
 import type * as chat_lib_moderation from "../chat/lib/moderation.js";
@@ -65,6 +66,7 @@ declare const fullApi: ApiFromModules<{
   "chat/bookmarks": typeof chat_bookmarks;
   "chat/channels": typeof chat_channels;
   "chat/directMessages": typeof chat_directMessages;
+  "chat/drafts": typeof chat_drafts;
   "chat/lib/access": typeof chat_lib_access;
   "chat/lib/enrich": typeof chat_lib_enrich;
   "chat/lib/moderation": typeof chat_lib_moderation;

@@ -34,7 +34,7 @@ export default function UnauthorizedPage() {
                     >
                         <ChevronLeft size={20} strokeWidth={3} /> Go Back
                     </Button>
-                    <Link to="/dashboard/overview" className="w-full sm:w-auto">
+                    <Link to="/me" className="w-full sm:w-auto">
                         <Button
                             variant="geometric-primary"
                             className="w-full px-8 py-4 flex items-center gap-2 justify-center"

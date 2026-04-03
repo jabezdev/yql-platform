@@ -39,20 +39,23 @@ export function PageHeader({
 
     let containerStyles: string;
     if (isCard) {
-        containerStyles = dark
-            ? `bg-white/8 border-2 border-white/15 rounded-tl-2xl rounded-br-2xl px-5 py-5 flex flex-col justify-between ${isLarge ? 'min-h-[130px]' : 'min-h-[96px]'}`
-            : `bg-white border-2 border-brand-blue shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] rounded-tl-2xl rounded-br-2xl p-6 sm:p-8 flex flex-col justify-center ${isLarge ? 'min-h-[130px]' : 'min-h-[96px]'}`;
+        containerStyles = `rounded-tl-2xl rounded-br-2xl flex flex-col justify-between border-2 transition-all duration-200 
+            ${dark 
+                ? `bg-white/8 border-white/15 px-5 py-5 ${isLarge ? 'min-h-[130px]' : 'min-h-[96px]'}` 
+                : `bg-white border-brand-blue shadow-[4px_4px_0px_0px_rgba(57,103,153,0.15)] p-6 sm:p-8 
+                   dark:bg-white/8 dark:border-white/15 dark:shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)]
+                   ${isLarge ? 'min-h-[130px]' : 'min-h-[96px]'}`}`;
     } else {
-        containerStyles = dark ? 'pb-4 border-b-2 border-white/10' : 'py-2';
+        containerStyles = dark ? 'pb-4 border-b-2 border-white/10' : 'py-2 border-b-2 border-brand-blue/10 dark:border-white/10';
     }
 
-    const eyebrowCls = dark ? 'text-white/45 mb-1' : 'text-brand-blue/45 mb-1.5';
+    const eyebrowCls = dark ? 'text-white/45 mb-1' : 'text-brand-blue/45 dark:text-white/45 mb-1.5';
     const titleStyles = isLarge
-        ? `text-4xl sm:text-5xl font-extrabold font-display leading-tight ${dark ? 'text-white' : 'text-brand-blue'}`
-        : `text-2xl md:text-3xl font-display font-extrabold ${dark ? 'text-white' : 'text-brand-blue'}`;
+        ? `text-4xl sm:text-5xl font-extrabold font-display leading-tight ${dark ? 'text-white' : 'text-brand-blue dark:text-white'}`
+        : `text-2xl md:text-3xl font-display font-extrabold ${dark ? 'text-white' : 'text-brand-blue dark:text-white'}`;
     const subStyles = isLarge
-        ? `mt-2 font-medium text-lg ${dark ? 'text-white/60' : 'text-brand-darkBlue/70'}`
-        : `mt-1 font-medium ${dark ? 'text-white/55' : 'text-brand-darkBlue/70'}`;
+        ? `mt-2 font-medium text-lg ${dark ? 'text-white/60' : 'text-brand-darkBlue/70 dark:text-white/60'}`
+        : `mt-1 font-medium ${dark ? 'text-white/55' : 'text-brand-darkBlue/70 dark:text-white/55'}`;
 
     return (
         <div className={`${containerStyles} ${className}`}>
@@ -85,6 +88,15 @@ interface DashboardPageProps {
     className?: string;
 }
 
+export function DashboardSectionTitle({ children, action, className = '' }: { children: ReactNode, action?: ReactNode, className?: string }) {
+    return (
+        <div className={`flex items-center justify-between mb-8 border-b-2 border-brand-blue/15 dark:border-white/10 pb-2 transition-colors ${className}`}>
+            <h3 className="text-xl font-bold text-brand-blue dark:text-white font-display uppercase tracking-tight">{children}</h3>
+            {action && <div className="flex items-center gap-2">{action}</div>}
+        </div>
+    );
+}
+
 export function DashboardPage({
     children,
     className = '',
@@ -95,6 +107,7 @@ export function DashboardPage({
         </div>
     );
 }
+
 
 // ============================================
 // Status Badge Component
@@ -111,14 +124,15 @@ interface StatusBadgeProps {
      * fill at `/25`, border at `/55`. Pending (warning) text flips to `text-brand-yellow`.
      */
     dark?: boolean;
+    className?: string;
 }
 
 const badgeStyles: Record<BadgeVariant, string> = {
-    success: 'bg-brand-green/10 text-brand-green border-brand-green/30',
-    warning: 'bg-brand-yellow/20 text-brand-blue border-brand-yellow/40',
-    error: 'bg-brand-red/10 text-brand-red border-brand-red/30',
-    info: 'bg-brand-lightBlue/10 text-brand-lightBlue border-brand-lightBlue/30',
-    neutral: 'bg-brand-bgLight text-brand-blue/60 border-brand-blue/15',
+    success: 'bg-brand-green/10 text-brand-green border-brand-green/30 dark:bg-brand-green/25 dark:border-brand-green/55',
+    warning: 'bg-brand-yellow/20 text-brand-blue border-brand-yellow/40 dark:text-brand-yellow dark:border-brand-yellow/50',
+    error: 'bg-brand-red/10 text-brand-red border-brand-red/30 dark:bg-brand-red/25 dark:border-brand-red/55',
+    info: 'bg-brand-lightBlue/10 text-brand-lightBlue border-brand-lightBlue/30 dark:bg-brand-lightBlue/20 dark:border-brand-lightBlue/45',
+    neutral: 'bg-brand-bgLight text-brand-blue/60 border-brand-blue/15 dark:bg-white/10 dark:text-white/65 dark:border-white/25',
 };
 
 const badgeStylesDark: Record<BadgeVariant, string> = {
@@ -129,14 +143,18 @@ const badgeStylesDark: Record<BadgeVariant, string> = {
     neutral: 'bg-white/10 text-white/65 border-white/25',
 };
 
-export function StatusBadge({ status, variant = 'neutral', size = 'sm', dark = false }: StatusBadgeProps) {
+export function StatusBadge({ status, variant = 'neutral', size = 'sm', dark = false, className = '' }: StatusBadgeProps) {
     const sizeStyles = size === 'sm'
         ? 'px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-widest'
         : 'px-3 py-1 text-xs font-bold uppercase tracking-wider';
-    const colorStyles = dark ? badgeStylesDark[variant] : badgeStyles[variant];
+    
+    // Automatically apply dark styles if global dark mode is active, 
+    // but honor the 'dark' prop as an override for manual dark surface rendering.
+    const baseStyles = badgeStyles[variant];
+    const surfaceStyles = dark ? badgeStylesDark[variant] : baseStyles;
 
     return (
-        <span className={`inline-flex items-center gap-1 rounded-sm border ${colorStyles} ${sizeStyles}`}>
+        <span className={`inline-flex items-center gap-1 rounded-sm border transition-colors ${surfaceStyles} ${sizeStyles} ${className}`}>
             {status}
         </span>
     );
@@ -160,25 +178,28 @@ interface EmptyStateProps {
 }
 
 export function EmptyState({ icon: Icon, title, description, action, dark = false }: EmptyStateProps) {
-    const iconContainerCls = dark
-        ? 'bg-white/10 border-2 border-white/20 rounded-tl-xl rounded-br-xl'
-        : 'bg-brand-yellow/20 border-2 border-brand-blue/15 rounded-tl-2xl rounded-br-2xl';
-    const iconCls = dark ? 'text-white/50' : 'text-brand-blue/50';
-    const titleCls = dark ? 'text-white' : 'text-brand-blue';
-    const descCls = dark ? 'text-white/50' : 'text-brand-blue/50';
+    const iconContainerCls = `w-10 h-10 flex items-center justify-center mx-auto mb-3 rounded-tl-xl rounded-br-xl border-2 transition-all 
+        ${dark 
+            ? 'bg-white/10 border-white/20' 
+            : 'bg-brand-yellow/20 border-brand-blue/15 dark:bg-white/10 dark:border-white/20'}`;
+    
+    const iconCls = dark ? 'text-white/50' : 'text-brand-blue/55 dark:text-white/50';
+    const titleCls = dark ? 'text-white' : 'text-brand-blue dark:text-white';
+    const descCls = dark ? 'text-white/55' : 'text-brand-blue/50 dark:text-white/50';
 
     return (
-        <div className="text-center py-12 px-6">
+        <div className="text-center py-12 px-6 animate-in fade-in zoom-in duration-500">
             {Icon && (
-                <div className={`w-10 h-10 ${iconContainerCls} flex items-center justify-center mx-auto mb-3`}>
+                <div className={iconContainerCls}>
                     <Icon size={20} className={iconCls} aria-hidden="true" />
                 </div>
             )}
-            <h3 className={`text-sm font-display font-extrabold ${titleCls} mb-1`}>{title}</h3>
+            <h3 className={`text-sm font-display font-extrabold uppercase tracking-tight ${titleCls} mb-1`}>{title}</h3>
             {description && (
-                <p className={`text-xs font-medium ${descCls} max-w-[180px] mx-auto leading-relaxed`}>{description}</p>
+                <p className={`text-xs font-medium ${descCls} max-w-[200px] mx-auto leading-relaxed`}>{description}</p>
             )}
-            {action && <div className="mt-4">{action}</div>}
+            {action && <div className="mt-6">{action}</div>}
         </div>
     );
 }
+

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useConvexAuth } from "convex/react";
 import { Container, Button } from '../ui';
 import { NAV_LINKS } from '../../constants';
 
@@ -8,6 +9,7 @@ export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const navigate = useNavigate();
+    const { isAuthenticated } = useConvexAuth();
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 8);
@@ -16,7 +18,11 @@ export default function Navbar() {
     }, []);
 
     const handleAuthClick = () => {
-        navigate('/login');
+        if (isAuthenticated) {
+            navigate('/me');
+        } else {
+            navigate('/login');
+        }
     };
 
     const closeMenu = () => setIsOpen(false);
@@ -47,7 +53,7 @@ export default function Navbar() {
                             variant="geometric-primary"
                             size="sm"
                         >
-                            Log in
+                            {isAuthenticated ? 'Dashboard' : 'Log in'}
                         </Button>
                     </div>
                 </div>
@@ -84,7 +90,7 @@ export default function Navbar() {
                             handleAuthClick();
                         }}
                     >
-                        Log in
+                        {isAuthenticated ? 'Dashboard' : 'Log in'}
                     </Button>
                 </div>
             )}

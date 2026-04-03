@@ -30,7 +30,7 @@ export default function RegisterPage() {
                     <SignUp
                         routing="path"
                         path="/register"
-                        fallbackRedirectUrl="/dashboard/overview"
+                        fallbackRedirectUrl="/me"
                         signInUrl="/login"
                         appearance={{
                             elements: {

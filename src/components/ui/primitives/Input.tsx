@@ -18,36 +18,21 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
     ({ className = '', label, error, icon: Icon, fullWidth = true, dark = false, ...props }, ref) => {
 
-        const labelCls = dark
-            ? 'block text-[10px] font-extrabold uppercase tracking-widest text-white/55 mb-1.5'
-            : 'block text-sm font-display font-medium text-brand-blue mb-1.5';
-        const iconCls = dark ? 'h-5 w-5 text-white/40' : 'h-5 w-5 text-brand-blue/40';
+        const labelCls = `block text-[10px] font-extrabold uppercase tracking-widest mb-1.5 
+            ${dark ? 'text-white/55' : 'text-brand-blue/70 dark:text-white/55'}`;
+        const iconCls = `h-5 w-5 ${dark ? 'text-white/40' : 'text-brand-blue/40 dark:text-white/40'}`;
 
-        const inputCls = dark
-            ? `block w-full rounded-tl-lg rounded-br-lg font-sans
-              border-2 bg-white/10 px-4 py-2.5
-              text-white placeholder:text-white/30
-              transition-all duration-200
-              focus:outline-none focus:ring-0
-              ${Icon ? 'pl-10' : ''}
-              ${error
-                    ? 'border-brand-wine focus:border-brand-wine shadow-[0_0_0_3px_rgba(188,89,79,0.12)]'
-                    : 'border-white/20 focus:border-white/40 focus:shadow-[0_0_0_3px_rgba(255,255,255,0.12)]'
-                }
-              ${props.disabled ? 'opacity-60 cursor-not-allowed bg-white/5' : ''}
-              ${className}`
-            : `block w-full rounded-tl-lg rounded-br-lg font-sans
-              border-2 bg-white px-4 py-2.5
-              text-brand-blue placeholder:text-brand-blue/30
-              transition-all duration-200
-              focus:outline-none focus:ring-0
-              ${Icon ? 'pl-10' : ''}
-              ${error
-                    ? 'border-brand-wine focus:border-brand-wine shadow-[0_0_0_3px_rgba(188,89,79,0.12)]'
-                    : 'border-brand-blue/25 focus:border-brand-lightBlue focus:shadow-[0_0_0_3px_rgba(57,103,153,0.12)]'
-                }
-              ${props.disabled ? 'opacity-60 cursor-not-allowed bg-brand-bgLight' : ''}
-              ${className}`;
+        const inputCls = `block w-full rounded-tl-lg rounded-br-lg font-sans border-2 px-4 py-2.5 transition-all duration-200 focus:outline-none focus:ring-0
+            ${Icon ? 'pl-10' : ''}
+            ${dark || 'dark:bg-white/10 dark:text-white dark:placeholder:text-white/30 dark:border-white/20 dark:focus:border-white/40 dark:focus:shadow-[0_0_0_3px_rgba(255,255,255,0.12)]'}
+            ${dark 
+                ? `bg-white/10 text-white placeholder:text-white/30 border-white/20 focus:border-white/40 focus:shadow-[0_0_0_3px_rgba(255,255,255,0.12)]`
+                : error 
+                    ? 'bg-white border-brand-wine text-brand-blue placeholder:text-brand-blue/30 focus:border-brand-wine shadow-[0_0_0_3px_rgba(188,89,79,0.12)]' 
+                    : 'bg-white border-brand-blue/25 text-brand-blue placeholder:text-brand-blue/30 focus:border-brand-lightBlue focus:shadow-[0_0_0_3px_rgba(57,103,153,0.12)]'
+            }
+            ${props.disabled ? 'opacity-60 cursor-not-allowed bg-brand-bgLight dark:bg-white/5' : ''}
+            ${className}`;
 
         return (
             <div className={`${fullWidth ? 'w-full' : 'inline-block'}`}>

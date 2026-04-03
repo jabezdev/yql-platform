@@ -362,13 +362,19 @@ export default defineSchema({
         systemType: v.optional(v.string()),
         // Phase 1: Silent Messages
         isSilent: v.optional(v.boolean()), // default false; send without notifications
-        // Phase 2: Search with Tokens
+        // Phase 2: Search with Tokens (Legacy)
         searchTokens: v.optional(v.array(v.string())), // pre-computed tokens for fast search
+        // Phase 3: Native Search Index
+        searchContent: v.optional(v.string()), // Indexed content (body + filenames)
     })
         .index("by_channelId", ["channelId"])
         .index("by_threadRootMessageId", ["threadRootMessageId"])
         .index("by_authorId", ["authorId"])
-        .index("by_channelId_isPinned", ["channelId", "isPinned"]),
+        .index("by_channelId_isPinned", ["channelId", "isPinned"])
+        .searchIndex("by_body", {
+            searchField: "searchContent",
+            filterFields: ["channelId", "isDeleted"],
+        }),
 
     chatReactions: defineTable({
         messageId: v.id("chatMessages"),
@@ -580,6 +586,16 @@ export default defineSchema({
         .index("by_threadRootMessageId", ["threadRootMessageId"])
         .index("by_userId_threadRootMessageId", ["userId", "threadRootMessageId"])
         .index("by_channelId", ["channelId"]),
+
+    chatDrafts: defineTable({
+        userId: v.id("users"),
+        channelId: v.id("chatChannels"),
+        body: v.string(),
+        updatedAt: v.number(),
+    })
+        .index("by_userId", ["userId"])
+        .index("by_channelId", ["channelId"])
+        .index("by_userId_channelId", ["userId", "channelId"]),
 
     // ═══════════════════════════════════════════════════════════════
     // NEW: RECRUITMENT HISTORY & AUDIT

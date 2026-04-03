@@ -16,13 +16,12 @@
  * Import via: import { SidebarItem, SidebarLabel } from '@/design'
  */
 
-import { type LucideIcon } from 'lucide-react';
 import { type ReactNode } from 'react';
 
 // ── SidebarItem ────────────────────────────────────────────────
 
 interface SidebarItemProps {
-    icon: LucideIcon;
+    icon: React.ElementType;
     label: string;
     /** When true, renders the active state: white fill + yellow left border. */
     active?: boolean;

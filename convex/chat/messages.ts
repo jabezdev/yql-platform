@@ -261,6 +261,15 @@ export const canSendInChannel = query({
     },
 });
 
+// ── Search Helpers ───────────────────────────────────────────────────────────
+
+// ── Search Helpers ───────────────────────────────────────────────────────────
+
+function getSearchContent(body: string, attachments?: { filename: string }[]): string {
+    const filenames = attachments?.map((a) => a.filename).join(" ") ?? "";
+    return `${body} ${filenames}`.trim().toLowerCase();
+}
+
 // ── Mutations ────────────────────────────────────────────────────────────────
 
 export const sendMessage = mutation({
@@ -298,6 +307,8 @@ export const sendMessage = mutation({
             }
         }
 
+        const searchContent = getSearchContent(args.bodyPlainText, args.attachments);
+
         const messageId = await ctx.db.insert("chatMessages", {
             channelId: args.channelId,
             authorId: user._id,
@@ -309,6 +320,7 @@ export const sendMessage = mutation({
             isEdited: false,
             isDeleted: false,
             isPinned: false,
+            searchContent,
         });
 
         // Update thread counters if this is a thread reply
@@ -388,12 +400,15 @@ export const editMessage = mutation({
         };
         const editHistory = [...(message.editHistory ?? []), previousEntry];
 
+        const searchContent = getSearchContent(bodyPlainText, message.attachments);
+
         await ctx.db.patch(messageId, {
             body,
             bodyPlainText,
             isEdited: true,
             editedAt: Date.now(),
             editHistory,
+            searchContent,
         });
     },
 });
@@ -417,6 +432,7 @@ export const deleteMessage = mutation({
             isDeleted: true,
             deletedAt: Date.now(),
             deletedBy: user._id,
+            searchContent: undefined, // Remove from search index
         });
 
         // Clean up attachments from storage
@@ -557,6 +573,8 @@ export const sendSilentMessage = mutation({
             throw new ConvexError({ code: "FORBIDDEN", message: "You cannot send messages in this channel" });
         }
 
+        const searchContent = getSearchContent(args.bodyPlainText, args.attachments);
+
         const messageId = await ctx.db.insert("chatMessages", {
             channelId: args.channelId,
             authorId: user._id,
@@ -569,6 +587,7 @@ export const sendSilentMessage = mutation({
             isDeleted: false,
             isPinned: false,
             isSilent: true,
+            searchContent,
         });
 
         // Update thread counters if this is a thread reply
@@ -593,7 +612,6 @@ export const sendSilentMessage = mutation({
             )
             .first();
 
-        if (!membership) {
             await ctx.db.insert("chatChannelMembers", {
                 channelId: args.channelId,
                 userId: user._id,
@@ -601,7 +619,6 @@ export const sendSilentMessage = mutation({
                 role: "member",
                 isMuted: false,
             });
-        }
 
         return messageId;
     },
@@ -784,81 +801,61 @@ export const sendMessageWithTokens = mutation({
     },
 });
 
+// ═════════════════════════════════════════════════════════════════════════
+// PHASE 3: Native Search
+// ═════════════════════════════════════════════════════════════════════════
+
 /**
- * Search messages by pre-computed tokens.
- * Much faster than text scan; works across or within channels.
+ * Search messages using native Convex searchIndex.
+ * Optimized for full-text search with filtering.
  */
 export const searchMessages = query({
     args: {
         channelId: v.optional(v.id("chatChannels")),
-        tokens: v.array(v.string()),
-        paginationOpts: paginationOptsValidator,
+        query: v.string(),
     },
-    handler: async (ctx, { channelId, tokens, paginationOpts }) => {
+    handler: async (ctx, { channelId, query: searchQuery }) => {
         const user = await requireUser(ctx);
+        if (!searchQuery.trim()) return [];
 
-        if (!tokens.length) return { page: [], hasMore: false };
+        let search = ctx.db
+            .query("chatMessages")
+            .withSearchIndex("by_body", (q) => {
+                let searchQ = q.search("searchContent", searchQuery);
+                if (channelId) {
+                    searchQ = searchQ.eq("channelId", channelId);
+                }
+                return searchQ;
+            });
 
-        let allMessages: any[] = [];
-        if (channelId) {
-            await assertCanReadChannel(ctx, user, channelId);
-            allMessages = await ctx.db
-                .query("chatMessages")
-                .withIndex("by_channelId", (q) => q.eq("channelId", channelId))
-                .collect();
-        } else {
+        const results = await search.take(50);
+
+        // Filter based on channel access if global search
+        let filtered = results;
+        if (!channelId) {
             const memberships = await ctx.db
                 .query("chatChannelMembers")
                 .withIndex("by_userId", (q) => q.eq("userId", user._id))
                 .collect();
-            const visibleChannelIds = memberships
-                .filter((m) => !m.isHidden)
-                .map((m) => m.channelId);
-
-            const messagePages = await Promise.all(
-                visibleChannelIds.map((id) =>
-                    ctx.db
-                        .query("chatMessages")
-                        .withIndex("by_channelId", (q) => q.eq("channelId", id))
-                        .collect()
-                )
-            );
-            allMessages = messagePages.flat();
+            const visibleIds = new Set(memberships.filter(m => !m.isHidden).map(m => m.channelId));
+            filtered = results.filter(msg => visibleIds.has(msg.channelId));
         }
 
-        // Filter by token match + not deleted
-        const stemmedTokens = tokens.map((t) => t.toLowerCase());
-        const filtered = allMessages.filter(
-            (msg) =>
-                !msg.isDeleted &&
-                msg.searchTokens &&
-                msg.searchTokens.some((msgToken: string) =>
-                    stemmedTokens.some((searchToken) => msgToken.includes(searchToken))
-                )
-        );
+        // Final filter for soft-deleted messages
+        filtered = filtered.filter(msg => !msg.isDeleted);
 
-        // Manual pagination
-        const pageStart = paginationOpts.cursor ? parseInt(paginationOpts.cursor as string, 10) : 0;
-        const pageSize = paginationOpts.numItems ?? 20;
-        const page = filtered.slice(pageStart, pageStart + pageSize);
-        const hasMore = pageStart + pageSize < filtered.length;
-
-        // Enrich with author info
-        const enriched = await Promise.all(
-            page.map(async (msg) => {
-                const author = (await ctx.db.get(msg.authorId as any)) as any;
+        // Enrich with author and channel info
+        return Promise.all(
+            filtered.map(async (msg) => {
+                const author = await ctx.db.get(msg.authorId);
+                const channel = await ctx.db.get(msg.channelId);
                 return {
                     ...msg,
                     author: author ? { _id: author._id, name: author.name } : null,
+                    channelName: channel?.name || "Unknown",
                 };
             })
         );
-
-        return {
-            page: enriched,
-            hasMore,
-            cursor: hasMore ? (pageStart + pageSize).toString() : undefined,
-        };
     },
 });
 
