@@ -13,7 +13,7 @@ interface ThreadPanelProps {
     onClose: () => void;
 }
 
-export function ThreadPanel({ threadId, userId, onClose }: ThreadPanelProps) {
+export function ActiveThreadPanel({ threadId, userId, onClose }: ThreadPanelProps) {
     const scrollRef = useRef<HTMLDivElement>(null);
     const toggleReaction = useMutation(api.chat.reactions.toggleReaction);
     
@@ -38,21 +38,21 @@ export function ThreadPanel({ threadId, userId, onClose }: ThreadPanelProps) {
     };
 
     return (
-        <div className="h-full flex flex-col bg-white dark:bg-[#0d1825]">
+        <div className="h-full flex flex-col bg-[var(--color-bg)]">
             {/* Header */}
-            <div className="flex-shrink-0 h-16 border-b-2 border-brand-blue/[0.03] px-6 flex items-center justify-between bg-white/80 dark:bg-[#0d1825]/80 backdrop-blur-xl z-10">
+            <div className="flex-shrink-0 h-16 border-b-2 border-[var(--color-border)] px-6 flex items-center justify-between bg-[var(--color-bg)] z-10 transition-colors">
                 <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-brand-blue/5 rounded-lg flex items-center justify-center border-2 border-brand-blue/10">
-                        <MessageSquare size={16} className="text-brand-blue" />
+                    <div className="w-8 h-8 bg-brand-blue/5 dark:bg-white/5 rounded-lg flex items-center justify-center border-2 border-brand-blue/10 dark:border-white/10 shadow-sm">
+                        <MessageSquare size={16} className="text-brand-blue dark:text-brand-yellow" />
                     </div>
                     <div>
-                        <h2 className="text-sm font-black text-brand-blue leading-none mb-0.5">Thread</h2>
-                        <p className="text-[10px] font-black uppercase tracking-widest text-brand-blue/30">Secure Sub-channel</p>
+                        <h2 className="text-sm font-black text-[var(--text-primary)] leading-none mb-0.5">Thread</h2>
+                        <p className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Secure Sub-channel</p>
                     </div>
                 </div>
                 <button 
                     onClick={onClose}
-                    className="p-2 text-brand-blue/30 hover:text-brand-blue hover:bg-brand-blue/5 rounded-xl transition-all"
+                    className="p-2 text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--color-surface)] rounded-xl transition-all border border-transparent hover:border-[var(--color-border)]"
                 >
                     <X size={18} />
                 </button>
@@ -65,7 +65,7 @@ export function ThreadPanel({ threadId, userId, onClose }: ThreadPanelProps) {
             >
                 {/* Root Message */}
                 {rootMessage && (
-                    <div className="border-b-2 border-brand-blue/[0.03] mb-4 pb-4">
+                    <div className="border-b-2 border-[var(--color-border)] mb-4 pb-4">
                         <MessageItem 
                             msg={rootMessage} 
                             compact={false} 
@@ -78,10 +78,10 @@ export function ThreadPanel({ threadId, userId, onClose }: ThreadPanelProps) {
 
                 {/* Replies Divider */}
                 <div className="px-6 mb-4 flex items-center gap-4">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-brand-blue/20 whitespace-nowrap">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] whitespace-nowrap">
                         {results.length} REPLIES
                     </span>
-                    <div className="flex-1 h-px bg-brand-blue/[0.05]" />
+                    <div className="flex-1 h-px bg-[var(--color-border)]" />
                 </div>
 
                 {/* Replies Feed */}
@@ -100,7 +100,7 @@ export function ThreadPanel({ threadId, userId, onClose }: ThreadPanelProps) {
                     {status === "CanLoadMore" && (
                         <button 
                             onClick={() => loadMore(20)}
-                            className="mx-6 my-4 py-2 text-[10px] font-black uppercase tracking-widest text-brand-blue/30 hover:text-brand-blue transition-all"
+                            className="mx-6 my-4 py-2 text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-all border border-[var(--color-border)] rounded-lg"
                         >
                             Load previous replies
                         </button>
@@ -108,15 +108,15 @@ export function ThreadPanel({ threadId, userId, onClose }: ThreadPanelProps) {
 
                     {status === "LoadingMore" && (
                         <div className="px-6 py-4 animate-pulse">
-                            <div className="h-4 w-24 bg-brand-blue/5 rounded mb-2" />
-                            <div className="h-12 w-full bg-brand-blue/[0.02] rounded" />
+                            <div className="h-4 w-24 bg-[var(--color-border)] rounded mb-2" />
+                            <div className="h-12 w-full bg-[var(--color-border)] opacity-50 rounded" />
                         </div>
                     )}
                 </div>
             </div>
 
             {/* Composer */}
-            <div className="flex-shrink-0 p-4 border-t-2 border-brand-blue/[0.03] bg-brand-blue/[0.01]">
+            <div className="flex-shrink-0 p-4 border-t-2 border-[var(--color-border)] bg-[var(--color-bg-light)]">
                 {rootMessage && (
                     <Composer 
                         channelId={rootMessage.channelId}

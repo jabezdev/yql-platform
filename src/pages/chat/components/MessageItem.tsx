@@ -7,6 +7,7 @@ import type { Id } from "../../../../convex/_generated/dataModel";
 import type { EnrichedMessage } from "../types";
 import { formatTime, parseContent } from "../utils";
 import { useToast } from "../../../providers/ToastProvider";
+import { PollItem } from "./PollItem";
 
 interface ActionBtnProps {
     icon: React.ElementType;
@@ -133,28 +134,28 @@ export function MessageItem({
             {compact ? (
                 <div className="w-10 flex-shrink-0 flex justify-end items-start pt-1">
                     {hover ? (
-                        <span className="text-[9px] font-black tabular-nums text-brand-blue/20 dark:text-white/20 whitespace-nowrap">
+                        <span className="text-[9px] font-black tabular-nums text-[var(--text-muted)] whitespace-nowrap">
                             {formatTime(msg._creationTime).replace(/ (AM|PM)/, "")}
                         </span>
                     ) : (
-                        <div className="w-1 h-1 rounded-full bg-brand-blue/5 dark:bg-white/5 mt-2" />
+                        <div className="w-1 h-1 rounded-full bg-[var(--color-border)] mt-2" />
                     )}
                 </div>
             ) : (
                 <div className="flex-shrink-0 relative">
-                    <Avatar name={msg.author?.name ?? "?"} size="md" className="ring-2 ring-brand-blue/5" />
-                    {isMine && <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-brand-blue rounded-full border-2 border-white dark:border-[#0d1825]" />}
+                    <Avatar name={msg.author?.name ?? "?"} size="md" className="ring-2 ring-[var(--color-border)]" />
+                    {isMine && <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-[var(--color-accent)] rounded-full border-2 border-[var(--color-bg)] shadow-sm" />}
                 </div>
             )}
 
             <div className="flex-1 min-w-0">
                 {!compact && (
                     <div className="flex items-center gap-2 mb-1 flex-wrap">
-                        <span className={`text-[13px] font-black tracking-tight ${isMine ? "text-brand-blue" : "text-slate-900 dark:text-white"}`}>
+                        <span className={`text-[13px] font-black tracking-tight ${isMine ? "text-[var(--color-accent)]" : "text-[var(--text-primary)]"}`}>
                             {msg.author?.name ?? "Unknown Identity"}
                         </span>
                         {msg.author?.role && <RoleBadge role={msg.author.role} />}
-                        <span className="text-[10px] font-black uppercase tracking-tighter text-brand-blue/30 dark:text-white/20 tabular-nums">
+                        <span className="text-[10px] font-black uppercase tracking-tighter text-[var(--text-muted)] tabular-nums">
                             {formatTime(msg._creationTime)}
                         </span>
                         {msg.isPinned && (
@@ -179,12 +180,21 @@ export function MessageItem({
                         </div>
                     </div>
                 ) : (
-                    <div className="text-sm text-brand-blue/80 dark:text-white/70 leading-relaxed break-words font-medium">
-                        {parseContent(msg.bodyPlainText)}
-                        {msg.isEdited && (
-                            <span className="text-[10px] font-black uppercase tracking-tighter text-brand-blue/20 dark:text-white/10 ml-2">(edited)</span>
+                    <>
+                        <div className="text-sm text-brand-blue/80 dark:text-white/70 leading-relaxed break-words font-medium">
+                            {parseContent(msg.bodyPlainText)}
+                            {msg.isEdited && (
+                                <span className="text-[10px] font-black uppercase tracking-tighter text-brand-blue/20 dark:text-white/10 ml-2">(edited)</span>
+                            )}
+                        </div>
+
+                        {msg.poll && (
+                            <PollItem 
+                                pollId={msg.poll._id}
+                                userId={userId}
+                            />
                         )}
-                    </div>
+                    </>
                 )}
 
                 {msg.attachments && msg.attachments.length > 0 && !isEditing && (

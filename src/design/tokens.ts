@@ -29,6 +29,10 @@ export const colors = {
   // Surfaces
   white:   '#ffffff',
   bgLight: '#f5f6f8', // default page background
+  
+  // Functional (Mapped to custom properties in index.css)
+  border:  'var(--color-border)',
+  accent:  'var(--color-accent)',
 } as const;
 
 export type ColorToken = keyof typeof colors;
@@ -44,6 +48,20 @@ export const opacity = {
   border:     25, // input borders
   cardBorder: 15, // card borders
   divider:    10, // dividers / subtle backgrounds
+} as const;
+
+// ── Semantic Tokens (Theme Aware) ─────────────────────────────────────────────
+
+export const text = {
+  primary:   'text-[var(--text-primary)]',
+  secondary: 'text-[var(--text-secondary)]',
+  muted:     'text-[var(--text-muted)]',
+} as const;
+
+export const surfaces = {
+  bg:      'bg-[var(--color-bg)]',
+  light:   'bg-[var(--color-bg-light)]',
+  surface: 'bg-[var(--color-surface)]',
 } as const;
 
 // ── Geometric motif (asymmetric corner cuts) ──────────────────────────────────
@@ -168,14 +186,14 @@ export const layout = {
   wrapper: 'max-w-6xl mx-auto px-4 sm:px-6',
 } as const;
 
-// ── Sidebar palette (blue background) ────────────────────────────────────────
+// ── Sidebar palette (Theme Aware) ──────────────────────────────────────────
 
 export const sidebar = {
-  bg:           'bg-brand-blue',
+  bg:           'bg-brand-blue dark:bg-[var(--color-bg)]',
   itemBase:     'flex items-center gap-2.5 px-3 py-2 rounded-tl-lg rounded-br-lg transition-colors duration-150',
-  itemDefault:  'text-white/65 hover:bg-white/8 hover:text-white/85',
-  itemActive:   'bg-white/15 border-l-2 border-brand-yellow text-white font-bold',
-  itemDisabled: 'text-white/30 pointer-events-none',
-  iconDefault:  'text-white/55',
+  itemDefault:  'text-white/65 dark:text-white/50 hover:bg-white/8 hover:text-white/85 dark:hover:text-white/90',
+  itemActive:   'bg-white/15 dark:bg-white/10 border-l-2 border-brand-yellow text-white font-bold',
+  itemDisabled: 'text-white/30 dark:text-white/20 pointer-events-none',
+  iconDefault:  'text-white/55 dark:text-white/40',
   iconActive:   'text-brand-yellow',
 } as const;

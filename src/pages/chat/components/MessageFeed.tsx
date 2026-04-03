@@ -65,7 +65,7 @@ export function MessageFeed({
     return (
         <div
             ref={feedRef}
-            className="flex-1 overflow-y-auto"
+            className="flex-1 overflow-y-auto min-h-0 h-0 custom-scrollbar"
             onScroll={handleScroll}
         >
             {status === "CanLoadMore" && (

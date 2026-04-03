@@ -4,7 +4,9 @@ import { Avatar, Button, GeometricPattern } from "@/design";
 import type { Id } from "../../../../convex/_generated/dataModel";
 import { MessageFeed } from "./MessageFeed";
 import { Composer } from "./Composer";
-import { ThreadPanel } from "./ThreadPanel";
+import { 
+    ActiveThreadPanel 
+} from "./ActiveThreadPanel";
 import { useQuery } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { useToast } from "../../../providers/ToastProvider";
@@ -67,9 +69,9 @@ export function ChatMain({
 
     return (
         <main className="flex-1 flex overflow-hidden bg-white dark:bg-[#0d1825] relative">
-            <div className={`flex-1 flex flex-col min-w-0 transition-all duration-500 ${activeThreadId ? "pr-0 lg:pr-[400px]" : ""}`}>
-                <header className="flex-shrink-0 h-16 border-b-2 border-brand-blue/[0.03] px-6 flex items-center gap-4 bg-white/90 dark:bg-[#0d1825]/90 backdrop-blur-xl z-20">
-                    <div className="flex items-center gap-3 flex-1 min-w-0">
+            <div className={`flex-1 flex flex-col min-w-0 min-h-0 transition-all duration-500 ${activeThreadId ? "pr-0 lg:pr-[400px]" : ""}`}>
+                <header className="flex-shrink-0 h-16 border-b-4 border-brand-blue/10 dark:border-white/5 px-6 flex items-center justify-between bg-[var(--color-surface)] shadow-[0px_4px_10px_rgba(0,0,0,0.05)] dark:shadow-[0px_4px_15px_rgba(0,0,0,0.2)] z-20">
+                    <div className="flex items-center gap-3 min-w-0">
                         <div className="flex-shrink-0">
                             {isDM ? (
                                 <Avatar name={displayName ?? "?"} size="md" className="ring-2 ring-brand-blue/5" />
@@ -80,7 +82,7 @@ export function ChatMain({
                             )}
                         </div>
                         <div className="flex flex-col min-w-0">
-                            <h1 className="text-base font-black text-brand-blue truncate leading-none mb-1">
+                            <h1 className="text-base font-black text-brand-blue dark:text-brand-yellow truncate leading-none mb-1">
                                 {displayName}
                             </h1>
                             {channelTopic ? (
@@ -110,7 +112,7 @@ export function ChatMain({
                     </div>
                 </header>
 
-                <div className="flex-1 min-h-0 bg-white/50 dark:bg-transparent overflow-hidden">
+                <div className="flex-1 flex flex-col min-h-0 overflow-hidden relative">
                     <MessageFeed 
                         channelId={channelId} 
                         userId={userId} 
@@ -119,8 +121,8 @@ export function ChatMain({
                     />
                 </div>
 
-                <div className="p-4 sm:p-6 bg-gradient-to-t from-white via-white/80 to-transparent dark:from-[#0d1825] dark:via-[#0d1825]/80 pointer-events-none z-10">
-                    <div className="pointer-events-auto max-w-4xl mx-auto w-full">
+                <div className="p-2 sm:p-3 bg-gradient-to-t from-white via-white/80 to-transparent dark:from-[#0d1825] dark:via-[#0d1825]/80 pointer-events-none z-10">
+                    <div className="pointer-events-auto w-full max-w-none">
                         <Composer
                             channelId={channelId}
                             placeholder={isDM ? `Send a secure message to ${displayName ?? ""}…` : `Enter message in #${displayName}…`}
@@ -132,7 +134,7 @@ export function ChatMain({
             {/* Thread Sidebar Panel */}
             {activeThreadId && (
                 <div className="absolute top-0 right-0 bottom-0 w-full lg:w-[400px] bg-white dark:bg-[#0d1825] border-l-2 border-brand-blue/5 shadow-2xl z-30 animate-in slide-in-from-right duration-300">
-                    <ThreadPanel 
+                    <ActiveThreadPanel 
                         threadId={activeThreadId} 
                         userId={userId}
                         onClose={() => setActiveThreadId(null)} 

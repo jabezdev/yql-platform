@@ -30,7 +30,7 @@ export default function WorkspaceDashboard() {
                     label="Calendar" 
                     description="Weekly syncs, hybrid sessions, and deadlines."
                     color="yellow"
-                    badge={<span className="text-[10px] font-black uppercase text-brand-blue/50 dark:text-white/40">Next: 2h</span>}
+                    badge={<span className="text-[10px] font-black uppercase text-[var(--text-muted)]">Next: 2h</span>}
                 />
                 <InfoCard 
                     icon={Users} 
@@ -51,17 +51,17 @@ export default function WorkspaceDashboard() {
                     value="12 New" 
                     color="yellow"
                 />
-                <DashboardCard variant="stat" className="flex flex-col justify-center items-center text-center p-4 border-dashed border-brand-blue/20 dark:border-white/20">
-                    <Button variant="ghost" size="sm" className="w-full h-full flex flex-col gap-2 opacity-60 hover:opacity-100">
-                        <ArrowUpRight size={24} className="text-brand-blue/30 dark:text-white/30" />
-                        <span className="text-[10px] font-black uppercase tracking-widest dark:text-white/60">Connect App</span>
+                <DashboardCard variant="stat" className="flex flex-col justify-center items-center text-center p-4 border-dashed border-brand-blue/20 dark:border-white/10">
+                    <Button variant="ghost" size="sm" className="w-full h-full flex flex-col gap-2 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-all">
+                        <ArrowUpRight size={24} className="opacity-50 group-hover:opacity-100" />
+                        <span className="text-[10px] font-black uppercase tracking-widest">Connect App</span>
                     </Button>
                 </DashboardCard>
             </div>
 
             <section className="mt-12">
                 <div className="relative group p-1 bg-gradient-to-br from-brand-blue/20 via-transparent to-brand-yellow/20 rounded-tl-2xl rounded-br-2xl">
-                    <DashboardCard noPadding variant="static" className="border-2 border-brand-blue dark:border-white/20 shadow-[8px_8px_0px_0px_rgba(57,103,153,0.1)] dark:shadow-[8px_8px_0px_0px_rgba(0,0,0,0.3)] overflow-hidden">
+                    <DashboardCard noPadding variant="static" className="border-2 border-brand-blue/10 dark:border-white/10 shadow-[8px_8px_0px_0px_rgba(57,103,153,0.1)] dark:shadow-[8px_8px_0px_0px_rgba(0,0,0,0.4)] overflow-hidden">
                         <div className="grid grid-cols-1 lg:grid-cols-3">
                             <div className="lg:col-span-2 p-8 sm:p-12 relative overflow-hidden">
                                 {/* Subtle decorative element */}
@@ -72,18 +72,18 @@ export default function WorkspaceDashboard() {
                                         <Layout className="text-white dark:text-brand-blue" size={24} />
                                     </div>
                                     <div>
-                                        <h3 className="text-2xl font-display font-black text-brand-blue dark:text-white">Workspace Pulse</h3>
-                                        <p className="text-[10px] font-black uppercase tracking-widest text-brand-blue/40 dark:text-white/40">Real-time Operational Health</p>
+                                        <h3 className="text-2xl font-display font-black text-[var(--text-primary)]">Workspace Pulse</h3>
+                                        <p className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Real-time Operational Health</p>
                                     </div>
                                 </div>
-                                <p className="text-lg font-medium text-brand-blue/70 dark:text-white/70 mb-8 max-w-xl leading-relaxed relative z-10">
+                                <p className="text-lg font-medium text-[var(--text-secondary)] mb-8 max-w-xl leading-relaxed relative z-10">
                                     Systems are performing at optimal velocity. No major blockers or critical incidents reported across active project boards in the last 24 hours.
                                 </p>
                                 <div className="flex flex-wrap gap-4 relative z-10">
                                     <Button variant="geometric-primary">
                                         View Deep Analytics
                                     </Button>
-                                    <Button variant="ghost" className="border-brand-blue/10 dark:border-white/10 dark:text-white/60 dark:hover:text-white transition-colors">
+                                    <Button variant="ghost" className="border-brand-blue/10 dark:border-white/10 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
                                         Board Settings
                                     </Button>
                                 </div>
@@ -96,7 +96,7 @@ export default function WorkspaceDashboard() {
                                         { label: "Pending Reviews", value: "04", status: "warning" }
                                     ].map((stat, i) => (
                                         <div key={i} className="flex items-center justify-between group/item">
-                                            <span className="text-[10px] font-black uppercase tracking-widest text-brand-blue/40 dark:text-white/40 group-hover/item:text-brand-blue/60 dark:group-hover/item:text-white/60 transition-colors">{stat.label}</span>
+                                            <span className="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] group-hover/item:text-[var(--text-secondary)] transition-colors">{stat.label}</span>
                                             <span className={`text-sm font-black transition-transform group-hover/item:scale-110 ${
                                                 stat.status === 'success' ? 'text-brand-green' : 'text-brand-blue dark:text-brand-lightBlue'
                                             }`}>{stat.value}</span>
@@ -104,7 +104,7 @@ export default function WorkspaceDashboard() {
                                     ))}
                                 </div>
                                 <div className="mt-8 pt-6 border-t border-brand-blue/5 dark:border-white/5">
-                                    <div className="flex items-center justify-between text-[9px] font-black uppercase tracking-tighter text-brand-blue/30 dark:text-white/30">
+                                    <div className="flex items-center justify-between text-[9px] font-black uppercase tracking-tighter text-[var(--text-muted)]">
                                         <span>Last Sync</span>
                                         <span>Just Now</span>
                                     </div>

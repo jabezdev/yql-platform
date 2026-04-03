@@ -98,15 +98,15 @@ export function Modal({
     if (!open) return null;
 
     const panelCls = dark
-        ? 'bg-white/12 border border-white/20 shadow-[6px_6px_0px_0px_rgba(0,0,0,0.45)]'
+        ? 'bg-[#1a2d40] border border-white/10 shadow-[6px_6px_0px_0px_rgba(0,0,0,0.45)]'
         : 'bg-white border-2 border-brand-blue/15 shadow-[6px_6px_0px_0px_rgba(10,22,48,0.25)]';
-    const headerBorderCls = dark ? 'border-white/10' : 'border-brand-blue/8';
+    const headerBorderCls = dark ? 'border-white/5' : 'border-brand-blue/8';
     const titleCls = dark ? 'text-white' : 'text-brand-blue';
     const closeCls = dark
         ? 'text-white/35 hover:text-white/70 transition-colors'
         : 'text-brand-blue/40 hover:text-brand-blue transition-colors';
     const footerCls = dark
-        ? 'border-white/10 bg-white/5'
+        ? 'border-white/5 bg-[#0d1825]'
         : 'border-brand-blue/8 bg-brand-bgLight';
 
     return (
@@ -216,15 +216,15 @@ export function Drawer({
     if (!open) return null;
 
     const panelCls = dark
-        ? 'bg-white/10 border-l border-white/15'
+        ? 'bg-[#0d1825] border-l border-white/10'
         : 'bg-white border-l-2 border-brand-blue/15';
-    const headerBorderCls = dark ? 'border-white/10' : 'border-brand-blue/8';
+    const headerBorderCls = dark ? 'border-white/5' : 'border-brand-blue/8';
     const titleCls = dark ? 'text-white' : 'text-brand-blue';
     const closeCls = dark
         ? 'text-white/35 hover:text-white/70 transition-colors'
         : 'text-brand-blue/40 hover:text-brand-blue transition-colors';
     const footerCls = dark
-        ? 'border-white/10 bg-white/5'
+        ? 'border-white/5 bg-[#1a2d40]'
         : 'border-brand-blue/8 bg-brand-bgLight';
 
     return (

@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { 
-    Smile, Paperclip, Bold, Italic, Code, AtSign, Send, X, Terminal
+    Smile, Paperclip, Bold, Italic, Code, AtSign, Send, X
 } from "lucide-react";
 import { useToast } from "../../../providers/ToastProvider";
 import type { Id } from "../../../../convex/_generated/dataModel";
@@ -57,10 +57,15 @@ export function Composer({
     useEffect(() => {
         const el = textareaRef.current;
         if (el) {
+            // Force single-line height for empty state
+            if (!draft) {
+                el.style.height = "38px";
+                return;
+            }
             el.style.height = "auto";
-            el.style.height = `${Math.min(el.scrollHeight, 180)}px`;
+            el.style.height = `${Math.min(el.scrollHeight, 120)}px`;
         }
-    }, [draft]);
+    }, [draft, channelId]);
 
     // Persist draft to database (debounced, skip if in thread)
     const persistDraft = useCallback((text: string) => {
@@ -184,10 +189,10 @@ export function Composer({
             )}
 
             <div
-                className={`relative overflow-hidden bg-white/80 dark:bg-[#0d1825]/90 backdrop-blur-xl transition-all duration-300 ${
+                className={`relative overflow-hidden bg-white dark:bg-[#080d12] backdrop-blur-xl transition-[border-color,box-shadow,transform] duration-300 ${
                     focused 
-                        ? "border-2 border-brand-blue ring-4 ring-brand-blue/5 shadow-[8px_8px_0px_0px_rgba(57,103,153,0.1)] -translate-y-1" 
-                        : "border-2 border-brand-blue/10 shadow-[4px_4px_0px_0px_rgba(57,103,153,0.05)]"
+                        ? "border-2 border-brand-blue ring-4 ring-brand-blue/25 shadow-[8px_8px_0px_0px_rgba(57,103,153,0.2)] -translate-y-1" 
+                        : "border-2 border-brand-blue/40 shadow-[4px_4px_0px_0px_rgba(57,103,153,0.1)]"
                 } rounded-tl-3xl rounded-br-3xl`}
                 onFocus={() => setFocused(true)}
                 onBlur={(e) => {
@@ -200,30 +205,24 @@ export function Composer({
                 }}
             >
                 {/* Formatting Toolbar */}
-                <div className="flex items-center justify-between px-3 py-1 border-b-2 border-brand-blue/[0.03] bg-brand-blue/[0.02]">
+                <div className="flex items-center justify-between px-2 py-0.5 border-b-2 border-brand-blue/[0.05] bg-brand-blue/[0.03]">
                     <div className="flex items-center">
-                        <button onClick={() => applyFormat("**")} title="Bold" className="p-2 rounded-lg text-brand-blue/40 hover:text-brand-blue hover:bg-brand-blue/10 transition-all active:scale-90">
+                        <button onClick={() => applyFormat("**")} title="Bold" className="p-2 rounded-lg text-brand-blue/50 hover:text-brand-blue hover:bg-brand-blue/10 transition-all active:scale-90">
                             <Bold size={15} />
                         </button>
-                        <button onClick={() => applyFormat("*")} title="Italic" className="p-2 rounded-lg text-brand-blue/40 hover:text-brand-blue hover:bg-brand-blue/10 transition-all active:scale-90">
+                        <button onClick={() => applyFormat("*")} title="Italic" className="p-2 rounded-lg text-brand-blue/50 hover:text-brand-blue hover:bg-brand-blue/10 transition-all active:scale-90">
                             <Italic size={15} />
                         </button>
-                        <button onClick={() => applyFormat("`")} title="Code" className="p-2 rounded-lg text-brand-blue/40 hover:text-brand-blue hover:bg-brand-blue/10 transition-all active:scale-90">
+                        <button onClick={() => applyFormat("`")} title="Code" className="p-2 rounded-lg text-brand-blue/50 hover:text-brand-blue hover:bg-brand-blue/10 transition-all active:scale-90">
                             <Code size={15} />
                         </button>
-                        <div className="w-px h-4 bg-brand-blue/10 mx-2" />
-                        <button onClick={ComingSoon("Mentions")} title="Mention Operator" className="p-2 rounded-lg text-brand-blue/40 hover:text-brand-blue hover:bg-brand-blue/10 transition-all active:scale-90">
+                        <div className="w-px h-4 bg-brand-blue/15 mx-2" />
+                        <button onClick={ComingSoon("Mentions")} title="Mention Operator" className="p-2 rounded-lg text-brand-blue/50 hover:text-brand-blue hover:bg-brand-blue/10 transition-all active:scale-90">
                             <AtSign size={15} />
                         </button>
-                        <button onClick={() => setShowEmoji(!showEmoji)} title="Insert Emoji" className={`p-2 rounded-lg transition-all active:scale-90 ${showEmoji ? "text-brand-blue bg-brand-blue/10" : "text-brand-blue/40 hover:text-brand-blue hover:bg-brand-blue/10"}`}>
+                        <button onClick={() => setShowEmoji(!showEmoji)} title="Insert Emoji" className={`p-2 rounded-lg transition-all active:scale-90 ${showEmoji ? "text-brand-blue bg-brand-blue/10" : "text-brand-blue/50 hover:text-brand-blue hover:bg-brand-blue/10"}`}>
                             <Smile size={15} />
                         </button>
-                    </div>
-                    
-                    <div className="flex items-center gap-1">
-                        <span className="text-[10px] font-black uppercase tracking-widest text-brand-blue/20 mr-2 flex items-center gap-1.5">
-                            <Terminal size={10} /> Secure Node
-                        </span>
                     </div>
                 </div>
 
@@ -242,11 +241,11 @@ export function Composer({
                     </div>
                 )}
 
-                <div className="flex items-end gap-3 p-4">
+                <div className="flex items-end gap-2 px-2 py-2">
                     <button 
                         onClick={() => fileInputRef.current?.click()} 
                         title="Attach Documents" 
-                        className={`mb-1 p-2 rounded-xl border-2 border-brand-blue/10 text-brand-blue/40 hover:text-brand-blue hover:bg-brand-blue/5 hover:border-brand-blue/20 transition-all active:scale-95 ${isUploading ? "animate-pulse" : ""}`}
+                        className={`mb-1 p-2 rounded-xl border-2 border-brand-blue/20 text-brand-blue/50 hover:text-brand-blue hover:bg-brand-blue/5 hover:border-brand-blue/30 transition-all active:scale-95 ${isUploading ? "animate-pulse" : ""}`}
                     >
                         <Paperclip size={18} />
                     </button>
@@ -269,8 +268,7 @@ export function Composer({
                         }}
                         placeholder={placeholder}
                         rows={1}
-                        className="flex-1 text-[14px] text-brand-blue dark:text-white placeholder-brand-blue/20 dark:placeholder-white/20 resize-none outline-none leading-relaxed bg-transparent py-2.5 font-medium"
-                        style={{ scrollbarWidth: "none" }}
+                        className="flex-1 text-[13px] text-brand-blue dark:text-white placeholder-brand-blue/50 dark:placeholder-white/40 resize-none outline-none leading-relaxed bg-transparent py-1.5 font-medium no-scrollbar min-h-[38px]"
                     />
                     
                     <Button
@@ -284,22 +282,6 @@ export function Composer({
                 </div>
             </div>
 
-            <div className="flex items-center justify-between mt-3 px-2">
-                <div className="flex items-center gap-4">
-                    <p className="text-[10px] font-black uppercase tracking-tighter text-brand-blue/30">
-                        <kbd className="bg-brand-blue/5 border border-brand-blue/10 px-1.5 py-0.5 rounded text-[9px] mr-1">Enter</kbd> to broadcast
-                    </p>
-                    <p className="text-[10px] font-black uppercase tracking-tighter text-brand-blue/30">
-                        <kbd className="bg-brand-blue/5 border border-brand-blue/10 px-1.5 py-0.5 rounded text-[9px] mr-1">Shift+Enter</kbd> break
-                    </p>
-                </div>
-                <button 
-                    onClick={ComingSoon("Shortcuts")}
-                    className="text-[10px] font-black uppercase tracking-widest text-brand-blue/20 hover:text-brand-blue transition-colors"
-                >
-                    View Encryption Protocol
-                </button>
-            </div>
         </div>
     );
 }

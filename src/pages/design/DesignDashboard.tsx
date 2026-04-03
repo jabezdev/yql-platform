@@ -261,7 +261,7 @@ export default function DesignDashboard() {
 
                     {/* Folder tree (only shown in "mine" section) */}
                     {activeSection === "mine" && (
-                        <div className="flex-1 overflow-y-auto p-2.5">
+                        <div className="flex-1 overflow-y-auto p-2.5 custom-scrollbar">
                             <FolderTree
                                 folders={folderTree}
                                 activeFolderId={activeFolderParam}
@@ -288,7 +288,7 @@ export default function DesignDashboard() {
                 </aside>
 
                 {/* ── Main content ──────────────────────────────────────── */}
-                <main className="flex-1 overflow-y-auto bg-[#f7f9fc]">
+                <main className="flex-1 overflow-y-auto bg-[#f7f9fc] custom-scrollbar">
                     {activeSection === "mine" ? (
                         <div className="p-6">
                             {/* Section header */}

@@ -44,7 +44,7 @@ export function SidebarSearch({ onSearch, onClose, isMobile }: SidebarSearchProp
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Search communications…"
+                    placeholder="Search"
                     className="w-full bg-white/10 hover:bg-white/15 focus:bg-white/20 text-white text-[12px] font-medium rounded-tl-lg rounded-br-lg pl-10 pr-10 py-2 transition-all outline-none border-2 border-transparent focus:border-brand-yellow/30 placeholder:text-white/20"
                 />
                 {query ? (

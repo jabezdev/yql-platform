@@ -71,7 +71,7 @@ export default function HQDashboard() {
                 {/* HQ Tools */}
                 <div className="space-y-6">
                     <DashboardSectionTitle>Admin Pulse</DashboardSectionTitle>
-                    <DashboardCard variant="static" className="relative group overflow-hidden h-full">
+                    <DashboardCard variant="static" className="relative group overflow-hidden h-full border-2 border-brand-blue/5 dark:border-white/5">
                         {/* Geometric Decoration */}
                         <div className="absolute top-0 right-0 opacity-10 pointer-events-none">
                             <GeometricPattern variant="corner-tr" size={80} />
@@ -83,9 +83,9 @@ export default function HQDashboard() {
                                     <div className="p-2.5 rounded-tl-lg rounded-br-lg bg-brand-blue/10 dark:bg-white/10 border-2 border-brand-blue/20 dark:border-white/20 transition-colors">
                                         <Shield size={20} className="text-brand-blue dark:text-brand-lightBlue" />
                                     </div>
-                                    <h4 className="text-sm font-black text-brand-blue dark:text-white uppercase tracking-tight">Access Control</h4>
+                                    <h4 className="text-sm font-black text-[var(--text-primary)] uppercase tracking-tight">Access Control</h4>
                                 </div>
-                                <p className="text-xs font-medium text-brand-blue/60 dark:text-white/60 leading-relaxed max-w-[220px]">
+                                <p className="text-xs font-medium text-[var(--text-secondary)] leading-relaxed max-w-[220px]">
                                     Secure auditing of administrative activity, permission escalation logs, and credential management.
                                 </p>
                             </div>
@@ -93,14 +93,14 @@ export default function HQDashboard() {
                             <div className="space-y-3">
                                 <div className="p-3 bg-brand-blue/5 dark:bg-white/5 rounded-lg border border-brand-blue/10 dark:border-white/10">
                                     <div className="flex items-center justify-between mb-1">
-                                        <span className="text-[9px] font-black uppercase text-brand-blue/40 dark:text-white/40">Security Status</span>
+                                        <span className="text-[9px] font-black uppercase text-[var(--text-muted)]">Security Status</span>
                                         <span className="text-[9px] font-black uppercase text-brand-green">Nominal</span>
                                     </div>
                                     <div className="w-full h-1 bg-brand-blue/10 dark:bg-white/10 rounded-full overflow-hidden">
                                         <div className="w-full h-full bg-brand-green" />
                                     </div>
                                 </div>
-                                <Button variant="ghost" fullWidth className="justify-between px-3 border-2 border-brand-blue/10 dark:border-white/10 hover:border-brand-blue/30 dark:hover:border-white/30 hover:bg-white dark:hover:bg-white/5 bg-transparent">
+                                <Button variant="ghost" fullWidth className="justify-between px-3 border-2 border-brand-blue/10 dark:border-white/10 text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-brand-blue/30 dark:hover:border-white/30 hover:bg-white dark:hover:bg-white/5 bg-transparent">
                                     Launch Management Panel <Zap size={14} className="fill-brand-yellow text-brand-yellow" />
                                 </Button>
                             </div>

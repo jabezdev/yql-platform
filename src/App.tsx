@@ -15,7 +15,6 @@ import BrandingPage from "./pages/tools/BrandingPage";
 import DesignDashboard from "./pages/design/DesignDashboard";
 import DesignStudio from "./pages/design/DesignStudio";
 import DesignSharePage from "./pages/design/DesignSharePage";
-import ChatPage from "./pages/chat/ChatPage";
 
 import GlobalLayout from "./components/layout/GlobalLayout";
 import MeDashboard from "./pages/me/MeDashboard";
@@ -73,60 +72,36 @@ function AuthRoutes() {
             } />
             {/* Public share page — must come before /design/* wildcard */}
             <Route path="/design/s/:slug" element={<DesignSharePage />} />
-            {/* Chat */}
-            <Route path="/chat" element={<ProtectedRoute><ChatPage /></ProtectedRoute>} />
+            <Route path="/design/s/:slug" element={<DesignSharePage />} />
             
             {/* Domain App Architecture nested under GlobalLayout */}
             <Route element={<ProtectedRoute><GlobalLayout /></ProtectedRoute>}>
                 <Route path="/me">
-                    <Route index element={<Navigate to="/me/dashboard" replace />} />
-                    <Route path="dashboard" element={<MeDashboard />} />
+                    <Route index element={<MeDashboard />} />
                     <Route path="application" element={<EmptyState icon={FileText} title="My Application" description="Track your YQL Cohort journey and status here." />} />
                     <Route path="tasks" element={<EmptyState icon={CheckSquare} title="Personal Tasks" description="Manage your individual action items and goals." />} />
                     <Route path="hr" element={<EmptyState icon={Briefcase} title="HR Hub" description="Access your employment forms and personal records." />} />
                 </Route>
 
                 <Route path="/academy">
-                    <Route index element={<Navigate to="/academy/dashboard" replace />} />
-                    <Route path="dashboard" element={<AcademyDashboard />} />
+                    <Route index element={<AcademyDashboard />} />
                     <Route path="onboarding" element={<EmptyState icon={Zap} title="Onboarding Modules" description="Your step-by-step guide to mastering the platform." />} />
                     <Route path="resources" element={<EmptyState icon={FileText} title="Resource Vault" description="Templates, assets, and documentation library." />} />
                 </Route>
 
                 <Route path="/workspace">
-                    <Route index element={<Navigate to="/workspace/dashboard" replace />} />
-                    <Route 
-                        path="*" 
-                        element={
-                            <ProtectedRoute allowedRoles={["Super Admin", "T1", "T2", "T3", "T4", "T5"]}>
-                                <Routes>
-                                    <Route path="dashboard" element={<WorkspaceDashboard />} />
-                                    <Route path="tasks" element={<EmptyState icon={CheckSquare} title="Global Task Board" description="Collaborative project management for the entire team." />} />
-                                    <Route path="calendar" element={<EmptyState icon={Calendar} title="Global Calendar" description="Sync hybrid sessions and platform-wide events." />} />
-                                    <Route path="posters" element={<Navigate to="/design" replace />} />
-                                    <Route path="directory" element={<EmptyState icon={Users} title="Staff Directory" description="Connect with every member of the YQL collective." />} />
-                                    <Route path="hr" element={<EmptyState icon={Briefcase} title="Weekly Logs Portal" description="Submit and review weekly professional logs." />} />
-                                </Routes>
-                            </ProtectedRoute>
-                        } 
-                    />
+                    <Route index element={<WorkspaceDashboard />} />
+                    <Route path="tasks" element={<ProtectedRoute allowedRoles={["Super Admin", "T1", "T2", "T3", "T4", "T5"]}><EmptyState icon={CheckSquare} title="Global Task Board" description="Collaborative project management for the entire team." /></ProtectedRoute>} />
+                    <Route path="calendar" element={<ProtectedRoute allowedRoles={["Super Admin", "T1", "T2", "T3", "T4", "T5"]}><EmptyState icon={Calendar} title="Global Calendar" description="Sync hybrid sessions and platform-wide events." /></ProtectedRoute>} />
+                    <Route path="directory" element={<ProtectedRoute allowedRoles={["Super Admin", "T1", "T2", "T3", "T4", "T5"]}><EmptyState icon={Users} title="Staff Directory" description="Connect with every member of the YQL collective." /></ProtectedRoute>} />
+                    <Route path="hr" element={<ProtectedRoute allowedRoles={["Super Admin", "T1", "T2", "T3", "T4", "T5"]}><EmptyState icon={Briefcase} title="Weekly Logs Portal" description="Submit and review weekly professional logs." /></ProtectedRoute>} />
                 </Route>
 
                 <Route path="/hq">
-                    <Route index element={<Navigate to="/hq/dashboard" replace />} />
-                    <Route 
-                        path="*" 
-                        element={
-                            <ProtectedRoute allowedRoles={["Super Admin", "T1", "T2", "T3"]}>
-                                <Routes>
-                                    <Route path="dashboard" element={<HQDashboard />} />
-                                    <Route path="recruitment" element={<EmptyState icon={Users} title="Recruitment Command" description="Manage the applicant funnel and interview pipeline." />} />
-                                    <Route path="staff" element={<EmptyState icon={Construction} title="Staff Command" description="Administrative oversight and performance metrics." />} />
-                                    <Route path="access" element={<EmptyState icon={ShieldAlert} title="Access Control" description="Manage elevated permissions and security logs." />} />
-                                </Routes>
-                            </ProtectedRoute>
-                        } 
-                    />
+                    <Route index element={<HQDashboard />} />
+                    <Route path="recruitment" element={<ProtectedRoute allowedRoles={["Super Admin", "T1", "T2", "T3"]}><EmptyState icon={Users} title="Recruitment Command" description="Manage the applicant funnel and interview pipeline." /></ProtectedRoute>} />
+                    <Route path="staff" element={<ProtectedRoute allowedRoles={["Super Admin", "T1", "T2", "T3"]}><EmptyState icon={Construction} title="Staff Command" description="Administrative oversight and performance metrics." /></ProtectedRoute>} />
+                    <Route path="access" element={<ProtectedRoute allowedRoles={["Super Admin", "T1", "T2", "T3"]}><EmptyState icon={ShieldAlert} title="Access Control" description="Manage elevated permissions and security logs." /></ProtectedRoute>} />
                 </Route>
             </Route>
 
